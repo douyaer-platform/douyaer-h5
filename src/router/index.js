@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 // 首页
 import home from '@/pages/home';
+import link from '@/pages/home/link';
 // 我的订单
 import order from '@/pages/order';
 // 个人中心
@@ -17,7 +18,7 @@ export default new Router({
         // 首页
         path: '/',
         name: 'default',
-        redirect: '/home'
+        component: link
     }, {
         // 首页
         path: '/home',
