@@ -1,0 +1,60 @@
+/*-------------------------------------
+ * 引入字体图标
+-------------------------------------*/
+
+@import "./../fontcustom/fontcustom.css";
+
+
+/*-------------------------------------
+ * 通用颜色
+-------------------------------------*/
+
+@primary-color: #1890FF;
+@warning-bg-color:#FFFBE6;
+@warning-color:#FAAD14;
+
+@text-color-main: #000000;
+@text-color-gray: #666;
+@text-color-normal: #8B8B8D;
+@text-color-disable: #BBBBBB;
+
+/*-------------------------------------
+ * 通用样式
+-------------------------------------*/
+body{ color: @text-color-main;}
+.content{ background-color: #fff;}
+header.bar-nav{ background-color: @primary-color;
+	h1.title{ font-size: 0.9rem; color: #fff;}
+}
+nav.bar-tab{ background-color: #fff;
+	.tab-item{
+		&.router-link-active{ color: @primary-color;}
+	}
+}
+.topTips{ padding: 0 .5rem; line-height: 1.4rem; font-size: .6rem; color: @text-color-gray;
+	i{ margin-right: .25rem;}
+	&.warning{ background-color: @warning-bg-color; 
+		i{ color: @warning-color; }
+	}
+}
+
+.main-box{
+	.box-hd{ height: 2.2rem; padding: 0 .75rem; line-height: 2.2rem; background-color: #fafafa;
+		span.text{ font-size: .75rem; color: @text-color-disable;}
+	}
+	.box-bd{}
+}
+
+/*-------------------------------------
+ * 首页频道样式
+-------------------------------------*/
+.idx-description{ padding: .75rem; font-size: .75rem; color: @text-color-disable;}
+
+/*-------------------------------------
+ * 我的订单
+-------------------------------------*/
+
+
+/*-------------------------------------
+ * 个人中心
+-------------------------------------*/
