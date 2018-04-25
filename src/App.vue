@@ -1,6 +1,8 @@
 <template>
-    <div id="app">
-        <router-view/>
+    <div class="page-group" id="app">
+        <transition>
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 <script>

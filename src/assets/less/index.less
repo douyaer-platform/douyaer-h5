@@ -3,36 +3,31 @@
 -------------------------------------*/
 
 @import "./../fontcustom/fontcustom.css";
-
-
-/*-------------------------------------
- * 通用颜色
--------------------------------------*/
-
-@primary-color: #1890FF;
-@warning-bg-color:#FFFBE6;
-@warning-color:#FAAD14;
-
-@text-color-main: #000000;
-@text-color-gray: #666;
-@text-color-normal: #8B8B8D;
-@text-color-disable: #BBBBBB;
-@text-color-orange: #FF7A45;
+@import "color.less";
+@import "element.less";
 
 /*-------------------------------------
  * 重置样式
 -------------------------------------*/
 ul{ padding: 0; margin: 0;}
 li{ list-style-type: none;}
+input::-webkit-input-placeholder{ color: @text-color-disable;}
+textarea::-webkit-input-placeholder{ color: @text-color-disable;}
 /*-------------------------------------
  * 通用样式
 -------------------------------------*/
-body{ color: @text-color-normal;}
+body{  background-color: #fff; color: @text-color-normal;}
 .content{ background-color: #fff;}
 
 // 顶部导航条
 header.bar-nav{ background-color: @primary-color;
 	h1.title{ font-size: 0.9rem; color: #fff;}
+	& ~ .bar-header-secondary-home{ top: 2.15rem;
+		& ~ .content{ top: 6.45rem;}
+		& ~ .topTips{ top: 6.45rem;
+			& ~ .content{ top: 7.85rem; }
+		}
+	}
 	& ~ .topTips{ top: 2.2rem;
 		& ~ .content{ top: 3.6rem;}
 	}
@@ -62,7 +57,43 @@ nav.bar-tab{ background-color: #fff;
 	.box-hd{ height: 2.2rem; padding: 0 .75rem; line-height: 2.2rem; background-color: #fafafa;
 		span.text{ font-size: .75rem; color: @text-color-disable;}
 	}
-	.box-bd{}
+	.box-bd{
+		.list-block{ margin: 0;
+			.item-title.label{ color: @text-color-main; font-size: .85rem;}
+		}
+
+	}
+}
+
+// 表单
+.list-block{
+	.el-radio-group{
+		.el-radio{ margin-left: .75rem;
+			&:first-child{ margin-left: 0;}
+		}
+	}
+}
+// 省份多选
+.province-wrap{
+	.el-checkbox-group{ padding: 0 .75rem .5rem; overflow: hidden;
+		.el-checkbox{ float: left; width: 33%; margin: .4rem 0;}
+		.half .el-checkbox{ width: 50%;}
+		.all .el-checkbox{ width: 100%;}
+	}
+}
+
+/*-------------------------------------
+ * 首页频道样式
+-------------------------------------*/
+// 顶部选择模板，邀请好友 tab 切换
+.bar-header-secondary-home{ height: 4.25rem; padding: 0;  display: -webkit-box; display: -webkit-flex; display: flex; position: absolute; left: 0; right: 0; top: 0;
+	a{ -webkit-flex: 1; flex: 1; -webkit-box-flex: 1; height: 4.25rem; background-color: @primary-color; text-align: center; color: #fff; }
+	.icon{ display: block; margin-top: .75rem; padding: 0; font-size: 1.6rem;}
+	.tab-label{ display: block; margin-top: .2rem; line-height: 1.5; font-size: .7rem;}
+	& ~ .content{ top: 4.25rem;}
+	& ~ .topTips{ top: 4.25rem;
+		& ~ .content{ top: 5.65rem;}
+	}
 }
 
 // 产品列表-左右布局
@@ -71,7 +102,7 @@ nav.bar-tab{ background-color: #fff;
 		&:after{ display: inline-block; content: ''; width:100%; height: 1px; background-color: #e7e7e7; transform: scaleY(0.5); position: absolute; bottom: 0; left: 0;}
 	}
 	.img-wrap{ float: left; width: 6.25rem; height: 6.25rem; overflow: hidden;
-		img{ width: 100%;}
+		img{ display: block; width: 100%;}
 	}
 	.inner{
 		.name{ height: 2.1rem; font-size: .7rem; color: @text-color-main;}
@@ -95,10 +126,39 @@ nav.bar-tab{ background-color: #fff;
 	}
 }
 
-/*-------------------------------------
- * 首页频道样式
--------------------------------------*/
-
+// 产品列表-模板一行两列布局
+.tmpl-list{
+	.item{ float: left; width: 50%; padding: .5rem; position: relative;
+		&.active{
+			.mask{ display: block;}
+		}
+	}
+	.inner{ position: relative;
+		.checkbox{ width: .9rem; height: .9rem; border: 1px solid @border-color; border-radius: 50%; position: absolute;  top: .75rem; right: .75rem;
+			&.is-checked{ border-color: @primary-color; background-color: @primary-color;
+				&:after{ display: block; content: ""; width: .2rem; height: .45rem; border-right: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg) scaleY(1); position: absolute; right: .25rem; top: .05rem;}
+			}
+		} 
+	}
+	.img-wrap{ height: 8.5rem; overflow: hidden;
+		img{ display: block;; width: 100%;}
+	}
+	.name{ height: 1.8rem; font-size: .6rem; color: @text-color-main;}
+	.ctrl{ position: relative;
+		.money{height: 1.05rem; line-height: 1.05rem; color: @text-color-orange; font-size: .7rem;
+			i{ font-size: .4rem;}
+		}
+		a{ height: 1.05rem; line-height: 1.05rem; position: absolute; right: .5rem; top: .1rem;
+			.icon-more{ color: #888;}
+		} 
+	}
+	.mask{ display: none; width: 100%; height: 100%; padding:.8rem 0; background-color: rgba(0,0,0,.5); text-align: center; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+		a{ display: block; width: 3rem; height: 3rem; margin: .8rem auto; border-radius: 50%; text-align: center; line-height: 3rem; color: #fff;
+			&.edit-btn{ background: -webkit-linear-gradient(#fad25c, #f76e1e);  background: linear-gradient(#fad25c, #f76e1e);}
+			&.del-btn{ background: -webkit-linear-gradient(#67bfff, #42aaff);  background: linear-gradient(#67bfff, #42aaff);}
+		}
+	}
+}
 
 /*-------------------------------------
  * 我的订单

@@ -1,17 +1,16 @@
 <!--
 * @moduleName:
 * @Author: weiberzeng
-* @Date:   2018-04-23 21:58:14
+* @Date:   2018-04-25 14:59:26
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-04-25 14:38:52
+* @Last Modified time: 2018-04-25 15:18:00
 -->
 <template>
     <router-view></router-view>
 </template>
 <script>
-import bottomBar from '@/components/bottomBar';
 export default {
-    name: 'home',
+    name: 'account',
     data() {
         return {};
     },
@@ -21,9 +20,6 @@ export default {
         // this.$router.replace({
         //     path: '/home/buyer'
         // });
-    },
-    components: {
-        bottomBar
     }
 };
 
