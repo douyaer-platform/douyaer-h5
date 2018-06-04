@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import http from '@/javascript/http';
 import {
     Checkbox,
     CheckboxGroup,
@@ -24,6 +25,7 @@ Vue.use(RadioGroup);
 new Vue({
     el: '#app',
     router,
+    http,
     components: { App },
     template: '<App/>'
 });

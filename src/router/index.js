@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import link from '@/pages/home/link';
 // 首页
 import home from '@/pages/home';
 import homeSeller from '@/pages/home/seller';
@@ -31,8 +30,7 @@ export default new Router({
     routes: [{
         // 缺省页
         path: '/',
-        name: 'default',
-        component: link
+        redirect: '/home'
     }, {
         // 首页
         path: '/home',

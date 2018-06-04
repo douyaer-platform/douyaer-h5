@@ -16,7 +16,7 @@ textarea::-webkit-input-placeholder{ color: @text-color-disable;}
 /*-------------------------------------
  * 通用样式
 -------------------------------------*/
-body{  background-color: #fff; color: @text-color-normal;}
+body{  background-color: #fff; color: @text-color-normal; font-size: .75rem;}
 .content{ background-color: #fff;}
 
 // 顶部导航条
@@ -80,6 +80,30 @@ nav.bar-tab{ background-color: #fff;
 		.half .el-checkbox{ width: 50%;}
 		.all .el-checkbox{ width: 100%;}
 	}
+}
+
+/*-------------------------------------
+ * 账号模块
+-------------------------------------*/
+.loginWrap{ height: 100%; position: relative;
+	.list-block { margin: 0;
+		ul:before{ display: none; }
+		ul:after{ left:0.5rem; }
+		.item-title.label{ width: 4rem; color: #000; }
+	}
+	.seeBtn{ width: 2.15rem; height: 2.15rem; line-height: 2.15rem; text-align: center; color: #bbb; position: absolute; right: .25rem; top: 0; 
+		&.active{ color: @primary-color; }
+	}
+}
+
+.submitWrap{ margin-top: 1.5rem; padding: 0 .5rem;
+	.button{}
+}
+.forgetLink{ margin-top: .5rem; text-align: center;
+	a{ color: #bbb; }
+}
+.regLink{ text-align: center; position: absolute; bottom: 1rem; left: 0; right: 0;
+	a{ color: #bbb; }
 }
 
 /*-------------------------------------
