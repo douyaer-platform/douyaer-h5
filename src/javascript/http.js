@@ -2,13 +2,12 @@
  * @Author: weiberzeng
  * @Date:   2018-06-04 19:21:25
  * @Last Modified by:   weiberzeng
- * @Last Modified time: 2018-06-04 20:09:16
+ * @Last Modified time: 2018-06-04 21:20:31
  */
 import Vue from 'vue';
 import VueResource from 'vue-resource';
-let $ = window.$;
 Vue.use(VueResource);
-// 请求拦截器
+
 Vue.http.interceptors.push((request, next) => {
     // 使用 formdata 传值
     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
@@ -18,9 +17,6 @@ Vue.http.interceptors.push((request, next) => {
     // 请求返回拦截器
     next((response) => {
         console.log('response>>', response.data);
-        if (!response.data.success) {
-            $.alert('接口调用错误！');
-        }
         // 请求返回特殊状态的统一处理
         switch (status) {
             case 401:

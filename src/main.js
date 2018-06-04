@@ -5,6 +5,7 @@ import App from './App';
 import router from './router';
 import http from '@/javascript/http';
 import {
+    Input,
     Checkbox,
     CheckboxGroup,
     Radio,
@@ -16,6 +17,7 @@ import '@/assets/less/index.less';
 
 Vue.config.productionTip = false;
 
+Vue.use(Input);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(Radio);

@@ -3,13 +3,13 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-04 20:59:32
+* @Last Modified time: 2018-06-04 21:37:12
 -->
 <template>
     <div class="page page-current">
         <div class="content">
             <div class="loginWrap">
-                <div></div>
+                <div class="userPhoto"></div>
                 <div class="list-block">
                     <ul>
                         <li>
@@ -17,7 +17,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">账号</div>
                                     <div class="item-input">
-                                        <input type="text" placeholder="请输入账号" autocomplete="off">
+                                        <el-input v-model="form.account" placeholder="请输入账号" autofocus></el-input>
                                     </div>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">密码</div>
                                     <div class="item-input">
-                                        <input :type="canSee?'text':'password'" placeholder="请输入密码" autocomplete="off">
+                                        <el-input v-model="form.password" :type="canSee?'text':'password'" placeholder="请输入密码"></el-input>
                                     </div>
                                     <a href="javascript:;" @click.stop="canSeeChangeFun" :class="canSee?'seeBtn active':'seeBtn'">
                                         <i class="icon-see"></i>
@@ -38,7 +38,7 @@
                     </ul>
                 </div>
                 <div class="submitWrap">
-                    <a href="javascript:;" class="button button-big button-fill">登录</a>
+                    <a href="javascript:;" @click.stop="loginFun" class="button button-big button-fill">登录</a>
                 </div>
                 <div class="forgetLink">
                     <a href="javascript:;">忘记密码？</a>
@@ -51,27 +51,88 @@
     </div>
 </template>
 <script>
+import utils from '@/javascript/utils';
+let $ = window.$;
 export default {
     name: 'accountLogin',
     data() {
         return {
+            form: {
+                account: '',
+                password: ''
+            },
+            validate: {
+                account: false,
+                password: false
+            },
             canSee: false
         };
     },
     created() {
-        this.$http.post('/user/doLogin', {
-            account: '15989485025',
-            password: '123456'
-        }).then((response) => {
-            if (response.data.success) {
-                localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
-            }
-        });
+        // 进入登录页，删除已有的用户信息
+        localStorage.removeItem('userInfo');
+    },
+    watch: {
+        'form.account': 'validateAccount',
+        'form.password': 'validatePassword'
     },
     methods: {
+        validateAccount(to, from) {
+            if (to.length < 11) {
+                this.validate.account = false;
+            } else {
+                this.validate.account = (to.length) > 0 && (/^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/).test(utils.trim(to));
+            }
+        },
+        validatePassword(to, from) {
+            if (to) this.validate.password = true;
+        },
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-04
+         * @lastTime    2018-06-04
+         * @description 密码是否可见
+         */
         canSeeChangeFun() {
-            console.log(this.canSee);
             this.canSee = !this.canSee;
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-04
+         * @lastTime    2018-06-04
+         * @description 登录
+         */
+        loginFun() {
+            if (!this.validate.account) {
+                $.toast('请输入用户名！');
+                return;
+            }
+            if (!this.validate.password) {
+                $.toast('请输入密码！');
+                return;
+            }
+            this.$http.post('/user/doLogin', this.form).then((response) => {
+                if (response.data.success) {
+                    localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
+                    // 根据登录信息跳转
+                    let userInfo = response.data.data.user;
+                    // 刷手跳转到刷手页面
+                    if (userInfo && userInfo.userRole === 'brushhand') {
+                        this.$router.replace({
+                            path: '/home/seller'
+                        });
+                    }
+                    // 商家跳转到商家页面
+                    if (userInfo && userInfo.userRole === 'business') {
+                        this.$router.replace({
+                            path: '/home/buyer'
+                        });
+                    }
+                } else {
+                    $.alert(response.data.message);
+                }
+            });
         }
     }
 };
