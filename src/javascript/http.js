@@ -2,12 +2,11 @@
  * @Author: weiberzeng
  * @Date:   2018-06-04 19:21:25
  * @Last Modified by:   weiberzeng
- * @Last Modified time: 2018-06-04 21:20:31
+ * @Last Modified time: 2018-06-04 22:12:08
  */
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
-
 Vue.http.interceptors.push((request, next) => {
     // 使用 formdata 传值
     request.headers.set('Content-Type', 'application/x-www-form-urlencoded');

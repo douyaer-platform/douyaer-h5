@@ -3,12 +3,12 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-04 21:56:40
+* @Last Modified time: 2018-06-04 23:42:18
 -->
 <template>
     <div class="page page-current">
         <div class="content">
-            <div class="loginWrap">
+            <div class="accountWrap">
                 <div class="userPhoto"></div>
                 <div class="list-block">
                     <ul>
@@ -27,7 +27,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">密码</div>
                                     <div class="item-input">
-                                        <el-input v-model="form.password" :type="canSee?'text':'password'" placeholder="请输入密码"></el-input>
+                                        <el-input v-model="form.password" maxlength="12" :type="canSee?'text':'password'" placeholder="请输入密码"></el-input>
                                     </div>
                                     <a href="javascript:;" @click.stop="canSeeChangeFun" :class="canSee?'seeBtn active':'seeBtn'">
                                         <i class="icon-see"></i>
@@ -40,10 +40,10 @@
                 <div class="submitWrap">
                     <a href="javascript:;" @click.stop="loginFun" class="button button-big button-fill">登录</a>
                 </div>
-                <div class="forgetLink">
+                <div class="linkWrap">
                     <router-link to="/account/forget">忘记密码？</router-link>
                 </div>
-                <div class="regLink">
+                <div class="linkWrap bottom">
                     <router-link to="/account/reg">还没有账号？</router-link>
                 </div>
             </div>
@@ -68,15 +68,17 @@ export default {
             canSee: false
         };
     },
-    created() {
-        // 进入登录页，删除已有的用户信息
-        localStorage.removeItem('userInfo');
-    },
     watch: {
         'form.account': 'validateAccount',
         'form.password': 'validatePassword'
     },
     methods: {
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-04
+         * @lastTime    2018-06-04
+         * @description 验证函数
+         */
         validateAccount(to, from) {
             if (to.length < 11) {
                 this.validate.account = false;
@@ -85,12 +87,15 @@ export default {
             }
         },
         validatePassword(to, from) {
-            if (to) {
-                this.validate.password = true;
-            } else {
+            if (to.length < 6) {
                 this.validate.password = false;
+            } else if (to.length > 12) {
+                this.validate.password = false;
+            } else {
+                this.validate.password = true;
             }
         },
+
         /**
          * @Author      weiberZeng
          * @DateTime    2018-06-04
@@ -113,10 +118,12 @@ export default {
                 return;
             }
             if (!this.validate.password) {
-                $.toast('请输入密码！');
+                $.toast('请输入6-12位密码！');
                 return;
             }
+            $.showPreloader();
             this.$http.post('/user/doLogin', this.form).then((response) => {
+                $.hidePreloader();
                 if (response.data.success) {
                     localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
                     // 根据登录信息跳转
@@ -136,6 +143,8 @@ export default {
                 } else {
                     $.alert(response.data.message);
                 }
+            }).catch(() => {
+                $.hidePreloader();
             });
         }
     }

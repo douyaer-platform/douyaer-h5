@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 21:54:33
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-04 20:20:43
+* @Last Modified time: 2018-06-04 23:44:38
 -->
 <template>
     <router-view></router-view>
@@ -38,7 +38,6 @@ export default {
                             path: '/home/buyer'
                         });
                     }
-                    console.log('userInfo>>', userInfo);
                 } else {
                     // 未登录，跳转到登录页
                     this.$router.replace({

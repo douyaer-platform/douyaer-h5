@@ -13,6 +13,7 @@ import orderBuyer from '@/pages/order/buyer';
 // 账户中心
 import account from '@/pages/account';
 import accountReg from '@/pages/account/reg';
+import accountForget from '@/pages/account/forget';
 import accountLogin from '@/pages/account/login';
 // 认证
 import auth from '@/pages/auth';
@@ -64,9 +65,14 @@ export default new Router({
             component: accountLogin
         }, {
             // 注册
-            path: ' reg',
+            path: 'reg',
             name: 'accountReg',
             component: accountReg
+        }, {
+            // 忘记密码
+            path: 'forget',
+            name: 'accountForget',
+            component: accountForget
         }]
     }, {
         // 认证

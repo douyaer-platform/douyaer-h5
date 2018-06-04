@@ -13,6 +13,10 @@ ul{ padding: 0; margin: 0;}
 li{ list-style-type: none;}
 input::-webkit-input-placeholder{ color: @text-color-disable;}
 textarea::-webkit-input-placeholder{ color: @text-color-disable;}
+
+.modal-button{
+	&.cancel{ color: @text-color-main; }
+}
 /*-------------------------------------
  * 通用样式
 -------------------------------------*/
@@ -85,9 +89,9 @@ nav.bar-tab{ background-color: #fff;
 /*-------------------------------------
  * 账号模块
 -------------------------------------*/
-.loginWrap{ height: 100%; padding-top: 1rem; position: relative;
+.accountWrap{ height: 100%; padding-top: 1rem; position: relative;
 	.userPhoto{ width: 4.5rem; height: 4.5rem; margin: 0 auto; background-color: @primary-color; border-radius: .75rem; }
-	.list-block { margin: 2rem 0 0 0; overflow: hidden;
+	.list-block { margin: 0; overflow: hidden;
 		ul:before{ display: none; }
 		ul:after{ left:0.5rem; }
 		.item-title.label{ width: 4rem; color: #000; }
@@ -95,16 +99,22 @@ nav.bar-tab{ background-color: #fff;
 	.seeBtn{ width: 2.15rem; height: 2.15rem; line-height: 2.15rem; text-align: center; color: #bbb; position: absolute; right: .25rem; top: 0; 
 		&.active{ color: @primary-color; }
 	}
+	.codeBtn{ display: inline-block; height: 1.35rem; padding: 0 .5rem; border-radius: .25rem; background-color: @primary-color; line-height: 1.35rem; color: #fff; font-size: .75rem; position: absolute; right: .5rem; top: 0.45rem;
+		&.done{ background-color: transparent; color: #999; }
+	 }
+	.userPhoto ~ .list-block{ margin-top: 2rem; }
 }
 
 .submitWrap{ margin-top: 1.5rem; padding: 0 .5rem;
-	.button{}
+	.button{ margin-bottom: .5rem; 
+		&:last-child{ margin-bottom: 0; }
+	}
 }
-.forgetLink{ margin-top: .5rem; text-align: center;
-	a{ color: #bbb; }
-}
-.regLink{ text-align: center; position: absolute; bottom: 1rem; left: 0; right: 0;
-	a{ color: #bbb; }
+.linkWrap{ margin-top: .5rem; text-align: center;
+	a{ color: #bbb; 
+		span{ color: @primary-color; }
+	}
+	&.bottom{  position: absolute; bottom: 1rem; left: 0; right: 0;}
 }
 
 /*-------------------------------------

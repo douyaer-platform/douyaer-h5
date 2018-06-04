@@ -1274,7 +1274,14 @@ Device/OS Detection
         var buttonsHTML = '';
         if (params.buttons && params.buttons.length > 0) {
             for (var i = 0; i < params.buttons.length; i++) {
-                buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold' : '') + '">' + params.buttons[i].text + '</span>';
+                console.log(params.buttons[i].type);
+                if (params.buttons[i].type === 'cancel') {
+                    buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold cancel' : ' cancel') + '">' + params.buttons[i].text + '</span>';
+                } else if (params.buttons[i].type === 'ok') {
+                    buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold ok'  : ' ok') + '">' + params.buttons[i].text + '</span>';
+                } else{
+                    buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold' : '') + '">' + params.buttons[i].text + '</span>';
+                }
             }
         }
         var extraClass = params.extraClass || '';
@@ -1313,7 +1320,7 @@ Device/OS Detection
             buttons: [ {text: defaults.modalButtonOk, bold: true, onClick: callbackOk} ]
         });
     };
-    $.confirm = function (text, title, callbackOk, callbackCancel) {
+    $.confirm = function (text, title, callbackOk, callbackCancel, okText, cancelText) {
         if (typeof title === 'function') {
             callbackCancel = arguments[2];
             callbackOk = arguments[1];
@@ -1323,8 +1330,8 @@ Device/OS Detection
             text: text || '',
             title: typeof title === 'undefined' ? defaults.modalTitle : title,
             buttons: [
-                {text: defaults.modalButtonCancel, onClick: callbackCancel},
-                {text: defaults.modalButtonOk, bold: true, onClick: callbackOk}
+                {text: cancelText || defaults.modalButtonCancel, onClick: callbackCancel, type: 'cancel'},
+                {text: okText || defaults.modalButtonOk, bold: true, onClick: callbackOk, type: 'ok'}
             ]
         });
     };

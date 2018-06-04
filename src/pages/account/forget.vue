@@ -1,9 +1,9 @@
 <!--
-* @moduleName: 注册页面
+* @moduleName: 忘记密码
 * @Author: weiberzeng
-* @Date:   2018-04-23 20:41:10
+* @Date:   2018-06-04 23:31:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-04 23:42:08
+* @Last Modified time: 2018-06-04 23:44:14
 -->
 <template>
     <div class="page page-current">
@@ -37,7 +37,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">密码</div>
                                     <div class="item-input">
-                                        <el-input v-model="form.password" maxlength="12" type="password" placeholder="请设置6-12位登录密码"></el-input>
+                                        <el-input v-model="form.newPassword" maxlength="12" type="password" placeholder="请设置6-12位登录密码"></el-input>
                                     </div>
                                 </div>
                             </div>
@@ -45,10 +45,8 @@
                     </ul>
                 </div>
                 <div class="submitWrap">
-                    <a href="javascript:;" @click.stop="regFun('business')" class="button button-big button-fill">商家注册</a>
-                    <a href="javascript:;" @click.stop="regFun('brushhand')" class="button button-big button-light">刷手注册</a>
+                    <a href="javascript:;" @click.stop="resetFun" class="button button-big button-fill">重置密码</a>
                 </div>
-                <div class="description">豆芽网是一个专业的邀请亲友互助，让亲友赚取佣金的平台，注册后请严格遵守豆芽网的操作规则，恶意违规者一律封号处理</div>
                 <div class="linkWrap bottom">
                     <router-link to="/account/login">已有账号，直接<span>登录</span></router-link>
                 </div>
@@ -60,27 +58,26 @@
 import utils from '@/javascript/utils';
 let $ = window.$;
 export default {
-    name: 'accountReg',
+    name: 'accountForget',
     data() {
         return {
             count: 0,
             authCodeText: '发送验证码',
             form: {
                 phone: '',
-                password: '',
-                authCode: '',
-                userRole: ''
+                newPassword: '',
+                authCode: ''
             },
             validate: {
                 phone: false,
-                password: false,
+                newPassword: false,
                 authCode: false
             }
         };
     },
     watch: {
         'form.phone': 'validatePhone',
-        'form.password': 'validatePassword',
+        'form.newPassword': 'validatePassword',
         'form.authCode': 'validateAuthCode'
     },
     methods: {
@@ -106,11 +103,11 @@ export default {
         },
         validatePassword(to, from) {
             if (to.length < 6) {
-                this.validate.password = false;
+                this.validate.newPassword = false;
             } else if (to.length > 12) {
-                this.validate.password = false;
+                this.validate.newPassword = false;
             } else {
-                this.validate.password = true;
+                this.validate.newPassword = true;
             }
         },
 
@@ -144,7 +141,7 @@ export default {
 
             this.$http.post('/authCode/send', {
                 phone: this.form.phone,
-                authCodeEvent: 'register'
+                authCodeEvent: 'forget_password'
             }).then((response) => {
                 if (response.data.success) {
                     $.toast('验证码发送成功！');
@@ -160,7 +157,7 @@ export default {
          * @lastTime    2018-06-04
          * @description 注册
          */
-        regFun(type) {
+        resetFun() {
             if (!this.validate.phone) {
                 $.toast('请输入正确手机号！');
                 return;
@@ -169,49 +166,18 @@ export default {
                 $.toast('请输入6位验证码！');
                 return;
             }
-            if (!this.validate.password) {
+            if (!this.validate.newPassword) {
                 $.toast('请输入6-12位密码！');
                 return;
             }
-
-            let title;
-            let text;
-            let ok;
-            let _that = this;
-            if (type === 'brushhand') {
-                title = '确认注册成为刷手';
-                text = '选择注册为刷手后将无法更改';
-                ok = '注册刷手';
-            }
-            if (type === 'business') {
-                title = '确认注册成为商家';
-                text = '选择注册为商家后将无法更改';
-                ok = '注册商家';
-            }
-
-            $.confirm(text, title, function() {
-                _that._regFun(type);
-            }, function() {}, ok, '重新选择');
-        },
-        _regFun(type) {
             $.showPreloader();
-            this.form.userRole = type;
             this.$http.post('/user/register', this.form).then((response) => {
                 $.hidePreloader();
                 if (response.data.success) {
                     localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
-                    // 刷手跳转到刷手页面
-                    if (type === 'brushhand') {
-                        this.$router.replace({
-                            path: '/home/seller'
-                        });
-                    }
-                    // 商家跳转到商家页面
-                    if (type === 'business') {
-                        this.$router.replace({
-                            path: '/home/buyer'
-                        });
-                    }
+                    this.$router.replace({
+                        path: '/account/login'
+                    });
                 } else {
                     $.alert(response.data.message);
                 }
