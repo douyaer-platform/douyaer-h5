@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-04 21:37:12
+* @Last Modified time: 2018-06-04 21:56:40
 -->
 <template>
     <div class="page page-current">
@@ -17,7 +17,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">账号</div>
                                     <div class="item-input">
-                                        <el-input v-model="form.account" placeholder="请输入账号" autofocus></el-input>
+                                        <el-input v-model="form.account" maxlength="11" placeholder="请输入账号" autofocus></el-input>
                                     </div>
                                 </div>
                             </div>
@@ -41,10 +41,10 @@
                     <a href="javascript:;" @click.stop="loginFun" class="button button-big button-fill">登录</a>
                 </div>
                 <div class="forgetLink">
-                    <a href="javascript:;">忘记密码？</a>
+                    <router-link to="/account/forget">忘记密码？</router-link>
                 </div>
                 <div class="regLink">
-                    <a href="javascript:;">还没有账号？</a>
+                    <router-link to="/account/reg">还没有账号？</router-link>
                 </div>
             </div>
         </div>
@@ -85,7 +85,11 @@ export default {
             }
         },
         validatePassword(to, from) {
-            if (to) this.validate.password = true;
+            if (to) {
+                this.validate.password = true;
+            } else {
+                this.validate.password = false;
+            }
         },
         /**
          * @Author      weiberZeng
@@ -105,7 +109,7 @@ export default {
          */
         loginFun() {
             if (!this.validate.account) {
-                $.toast('请输入用户名！');
+                $.toast('请输入正确手机号！');
                 return;
             }
             if (!this.validate.password) {
