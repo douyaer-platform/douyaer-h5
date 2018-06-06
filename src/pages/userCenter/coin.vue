@@ -3,27 +3,45 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:30:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-04-25 15:32:32
+* @Last Modified time: 2018-06-06 14:18:06
 -->
 <template>
     <div class="page page-current">
         <header class="bar bar-nav">
-            <h1 class="title">金币</h1>
+            <router-link to="/uc/default" class="button button-link button-nav pull-left"><span class="icon icon-left"></span> 返回</router-link>
+            <h1 class="title">我的金币</h1>
         </header>
-        <bottomBar></bottomBar>
-        <div class="content">
+        <div class="content gray">
+            <div class="list-block">
+                <ul>
+                    <li class="item-content item-link">
+                        <router-link to="/uc/pay">
+                            <div class="item-media"><i class="icon icon-flow"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">充值</div>
+                                <div class="item-after"></div>
+                            </div>
+                        </router-link>
+                    </li>
+                    <li class="item-content item-link">
+                        <router-link to="/uc/cash">
+                            <div class="item-media"><i class="icon icon-coin"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">提现</div>
+                                <div class="item-after"></div>
+                            </div>
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
 <script>
-import bottomBar from '@/components/bottomBar';
 export default {
-    name: 'ucCoin',
+    name: 'userCenterIndex',
     data() {
         return {};
-    },
-    components: {
-        bottomBar
     }
 };
 

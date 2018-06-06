@@ -4,12 +4,12 @@
 
 @font-face {
   font-family: "fontcustom";
-  src: url("./fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.eot");
-  src: url("./fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.eot?#iefix") format("embedded-opentype"),
-       url("./fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.woff2") format("woff2"),
-       url("./fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.woff") format("woff"),
-       url("./fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.ttf") format("truetype"),
-       url("./fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.svg#fontcustom") format("svg");
+  src: url("./fontcustom_a8db70bed06dd6afab549517c99a6183.eot");
+  src: url("./fontcustom_a8db70bed06dd6afab549517c99a6183.eot?#iefix") format("embedded-opentype"),
+       url("./fontcustom_a8db70bed06dd6afab549517c99a6183.woff2") format("woff2"),
+       url("./fontcustom_a8db70bed06dd6afab549517c99a6183.woff") format("woff"),
+       url("./fontcustom_a8db70bed06dd6afab549517c99a6183.ttf") format("truetype"),
+       url("./fontcustom_a8db70bed06dd6afab549517c99a6183.svg#fontcustom") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -17,17 +17,20 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "fontcustom";
-    src: url("./fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.svg#fontcustom") format("svg");
+    src: url("./fontcustom_a8db70bed06dd6afab549517c99a6183.svg#fontcustom") format("svg");
   }
 }
 
 [data-icon]:before { content: attr(data-icon); }
 
 [data-icon]:before,
+.icon-coin:before,
+.icon-flow:before,
 .icon-home:before,
 .icon-more:before,
 .icon-order:before,
 .icon-see:before,
+.icon-tel:before,
 .icon-uc:before,
 .icon-warning:before {
   display: inline-block;
@@ -44,9 +47,12 @@
   font-smoothing: antialiased;
 }
 
+.icon-coin:before { content: "\f106"; }
+.icon-flow:before { content: "\f107"; }
 .icon-home:before { content: "\f100"; }
 .icon-more:before { content: "\f104"; }
 .icon-order:before { content: "\f101"; }
 .icon-see:before { content: "\f105"; }
+.icon-tel:before { content: "\f108"; }
 .icon-uc:before { content: "\f102"; }
 .icon-warning:before { content: "\f103"; }

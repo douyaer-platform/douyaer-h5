@@ -21,9 +21,11 @@ import authSeller from '@/pages/auth/seller';
 import authBuyer from '@/pages/auth/buyer';
 // 个人中心
 import userCenter from '@/pages/userCenter';
+import ucDefault from '@/pages/userCenter/default';
 import ucPay from '@/pages/userCenter/pay';
 import ucCash from '@/pages/userCenter/cash';
 import ucCoin from '@/pages/userCenter/coin';
+import ucFlow from '@/pages/userCenter/flow';
 
 Vue.use(Router);
 
@@ -111,7 +113,18 @@ export default new Router({
         path: '/uc',
         name: 'userCenter',
         component: userCenter,
+        redirect: '/uc/default',
         children: [{
+            // 个人中心首页
+            path: 'default',
+            name: 'ucDefault',
+            component: ucDefault
+        }, {
+            // 我的金币
+            path: 'coin',
+            name: 'ucCoin',
+            component: ucCoin
+        }, {
             // 充值
             path: 'pay',
             name: 'ucPay',
@@ -122,10 +135,10 @@ export default new Router({
             name: 'ucCash',
             component: ucCash
         }, {
-            // 我的金币
-            path: 'coin',
-            name: 'ucCoin',
-            component: ucCoin
+            // 资金流水
+            path: 'flow',
+            name: 'ucFlow',
+            component: ucFlow
         }]
     }]
 });

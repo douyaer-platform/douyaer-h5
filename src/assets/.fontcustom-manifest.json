@@ -1,16 +1,24 @@
 {
   "checksum": {
-    "previous": "2f0697e42a7c2333aa1a6ecf7f3fb3bd0f4cfd4deb62f09b29c0bfa83033dbbe",
-    "current": "2f0697e42a7c2333aa1a6ecf7f3fb3bd0f4cfd4deb62f09b29c0bfa83033dbbe"
+    "previous": "a8db70bed06dd6afab549517c99a6183fa8e5852254cf6b6289e1525d5652e24",
+    "current": "a8db70bed06dd6afab549517c99a6183fa8e5852254cf6b6289e1525d5652e24"
   },
   "fonts": [
-    "fontcustom/fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.ttf",
-    "fontcustom/fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.svg",
-    "fontcustom/fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.woff",
-    "fontcustom/fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.eot",
-    "fontcustom/fontcustom_2f0697e42a7c2333aa1a6ecf7f3fb3bd.woff2"
+    "fontcustom/fontcustom_a8db70bed06dd6afab549517c99a6183.ttf",
+    "fontcustom/fontcustom_a8db70bed06dd6afab549517c99a6183.svg",
+    "fontcustom/fontcustom_a8db70bed06dd6afab549517c99a6183.woff",
+    "fontcustom/fontcustom_a8db70bed06dd6afab549517c99a6183.eot",
+    "fontcustom/fontcustom_a8db70bed06dd6afab549517c99a6183.woff2"
   ],
   "glyphs": {
+    "coin": {
+      "codepoint": 61702,
+      "source": "font/coin.svg"
+    },
+    "flow": {
+      "codepoint": 61703,
+      "source": "font/flow.svg"
+    },
     "home": {
       "codepoint": 61696,
       "source": "font/home.svg"
@@ -26,6 +34,10 @@
     "see": {
       "codepoint": 61701,
       "source": "font/see.svg"
+    },
+    "tel": {
+      "codepoint": 61704,
+      "source": "font/tel.svg"
     },
     "uc": {
       "codepoint": 61698,
