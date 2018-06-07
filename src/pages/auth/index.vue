@@ -3,23 +3,31 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 21:58:14
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-04-25 15:18:08
+* @Last Modified time: 2018-06-08 00:07:20
 -->
 <template>
     <router-view></router-view>
 </template>
 <script>
 export default {
-    name: 'home',
+    name: 'auth',
     data() {
-        return {};
+        return {
+            userInfo: this.$store.state.userInfo
+        };
     },
     created() {
-        // TODO
-        // 根据用户返回的类型，跳转到刷手认证或者商家认证
-        // this.$router.replace({
-        //     path: '/home/buyer'
-        // });
+        if (this.userInfo.userRole === 'brushhand') {
+            this.$router.replace({
+                path: '/auth/seller'
+            });
+        }
+        // 商家跳转到商家页面
+        if (this.userInfo.userRole === 'business') {
+            this.$router.replace({
+                path: '/auth/buyer'
+            });
+        }
     }
 };
 

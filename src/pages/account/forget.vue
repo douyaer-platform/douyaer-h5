@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-06-04 23:31:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-04 23:44:14
+* @Last Modified time: 2018-06-08 00:05:24
 -->
 <template>
     <div class="page page-current">
@@ -175,6 +175,7 @@ export default {
                 $.hidePreloader();
                 if (response.data.success) {
                     localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
+                    this.$store.state.userInfo = response.data.data.user;
                     this.$router.replace({
                         path: '/account/login'
                     });

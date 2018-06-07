@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-04 23:42:18
+* @Last Modified time: 2018-06-08 00:06:38
 -->
 <template>
     <div class="page page-current">
@@ -126,8 +126,8 @@ export default {
                 $.hidePreloader();
                 if (response.data.success) {
                     localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
-                    // 根据登录信息跳转
-                    let userInfo = response.data.data.user;
+
+                    let userInfo = this.$store.state.userInfo = response.data.data.user;
                     // 刷手跳转到刷手页面
                     if (userInfo && userInfo.userRole === 'brushhand') {
                         this.$router.replace({
