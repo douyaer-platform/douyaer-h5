@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-08 00:17:59
+* @Last Modified time: 2018-06-08 11:41:22
 -->
 <template>
     <div class="page page-current">
@@ -158,7 +158,6 @@ export default {
                         _that.uploadResult = 'fail';
                         $.toast(response.message);
                     }
-                    console.log('response>>', response);
                 },
                 onProgress(progress) {
                     _that.uploadResult = 'progress';
