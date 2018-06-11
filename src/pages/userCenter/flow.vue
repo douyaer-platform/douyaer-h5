@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-06-06 11:02:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-06 14:25:04
+* @Last Modified time: 2018-06-11 16:54:10
 -->
 <template>
     <div class="page page-current">
@@ -16,10 +16,34 @@
     </div>
 </template>
 <script>
+let $ = window.$;
 export default {
     name: 'ucFlow',
     data() {
-        return {};
+        return {
+            listData: [],
+            total: 0
+        };
+    },
+    created() {
+        // 获取资金流水
+        $.showPreloader();
+        this.$http.get('/coin/list', {
+            params: {
+                pageIndex: 1,
+                pageSize: 10
+            }
+        }).then((response) => {
+            $.hidePreloader();
+            if (response.data.success) {
+                this.listData = response.data.data.list;
+                this.total = response.data.data.total;
+            } else {
+                $.alert(response.data.message);
+            }
+        }).catch(() => {
+            $.hidePreloader();
+        });
     }
 };
 

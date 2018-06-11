@@ -2,7 +2,7 @@
  * @Author: weiberzeng
  * @Date:   2018-06-04 19:21:25
  * @Last Modified by:   weiberzeng
- * @Last Modified time: 2018-06-06 10:35:39
+ * @Last Modified time: 2018-06-11 16:38:41
  */
 import Vue from 'vue';
 import VueResource from 'vue-resource';

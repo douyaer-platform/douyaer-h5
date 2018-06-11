@@ -11,12 +11,20 @@ export default {
     created() {
         // 获取用户是否登录
         this.$http.get('/user/loginStatus').then((response) => {
-            if (!response.data.success || !response.data.data.loginStatus || !this.$store.state.userInfo) {
+            if (!response.data.success || !response.data.data.loginStatus) {
                 // 未登录，跳转到登录页
                 this.$router.replace({
                     path: '/account/login'
                 });
-            }
+            } else if (!this.$store.state.userInfo) {
+                // 已登录，无用户信息，获取用户信息
+                this.$http.post('/user/get').then((response) => {
+                    if (response.data.success) {
+                        localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
+                        this.$store.state.userInfo = response.data.data.user;
+                    }
+                });
+            };
         });
     }
 };

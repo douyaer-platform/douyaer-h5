@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-08 00:07:40
+* @Last Modified time: 2018-06-11 17:16:44
 -->
 <template>
     <div class="page page-current">
@@ -201,7 +201,6 @@ export default {
                 if (response.data.success) {
                     localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
                     this.$store.state.userInfo = response.data.data.user;
-
                     // 刷手跳转到刷手页面
                     if (type === 'brushhand') {
                         this.$router.replace({
