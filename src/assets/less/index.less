@@ -85,7 +85,7 @@ nav.bar-tab{ background-color: #fff;
 // 表单
 .list-block{ margin: .75rem 0;
 	.item-title.label{ color: @text-color-main; font-size: .85rem;}
-	.item-inner{ align-items: baseline; }
+	.item-inner{ }
 	.el-radio-group{
 		.el-radio{ margin-left: .75rem;
 			&:first-child{ margin-left: 0;}
@@ -106,7 +106,7 @@ nav.bar-tab{ background-color: #fff;
 	.item-money{
 		.item-inner{ padding-top: 2.4rem; position: relative;
 			.item-title{ height: 2.4rem; margin: 0; line-height: 2.4rem; position: absolute; top: 0; }
-			.unit{ height: 2.15rem; margin-right: 1rem; line-height: 2.15rem; font-size: 1.8rem; color: #000;}
+			.unit{ height: 2.15rem; margin-right: 1rem; line-height: 2.15rem; font-size: 1.6rem; color: #000;}
 			.item-input input{ font-size: 1.6rem; }
 		}
 	}
@@ -277,7 +277,7 @@ nav.bar-tab{ background-color: #fff;
 		.val{ float: right; }
 	}
 }
-
+// 二维码
 .concat-wrap{ background-color: #fff;
 	.pf-wrap{ background-color: #fff;
 		.inner{ color: #000;
@@ -291,3 +291,24 @@ nav.bar-tab{ background-color: #fff;
 		.sub{ margin-top: .5rem; }
 	}
 }
+// 资金流水列表
+.flow-list-block{
+	.item-content{ display: block; 
+		.item-inner:after{ display: none;}
+		.item-title, .item-after{ color: #000; }
+		.footer{ padding-bottom: .4rem; font-size: .6rem; }
+		&:after{ content: '';  position: absolute; left: 0; bottom: 0; right: auto; top: auto; height: 1px; width: 100%; background-color: #e7e7e7; display: block; z-index: 15; -webkit-transform-origin: 50% 100%; transform-origin: 50% 100%; }
+	}
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.flow-list-block .item-content:after {
+	    -webkit-transform: scaleY(0.5);
+	    transform: scaleY(0.5);
+	}
+}
+// 我的金币
+.coin-card-wrap{ padding: 1rem 0 0.5rem 1rem; background-color: @primary-color; color: #fff;
+	.name{ opacity: .8; }
+	.val{ font-size: 2rem; }
+}
+.coin-card-wrap + .list-block{ margin-top: 0; }

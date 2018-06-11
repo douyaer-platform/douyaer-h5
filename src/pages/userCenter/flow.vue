@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-06-06 11:02:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-11 16:54:10
+* @Last Modified time: 2018-06-11 19:49:51
 -->
 <template>
     <div class="page page-current">
@@ -12,6 +12,31 @@
             <h1 class="title">资金流水</h1>
         </header>
         <div class="content">
+            <div class="flow-list-block list-block">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">充值</div>
+                            <div class="item-after">+2000</div>
+                        </div>
+                        <div class="footer">2018-05-05 12:22</div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">提现</div>
+                            <div class="item-after">-2000</div>
+                        </div>
+                        <div class="footer">2018-05-05 12:22</div>
+                    </li>
+                     <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">支付</div>
+                            <div class="item-after">-10000</div>
+                        </div>
+                        <div class="footer">2018-05-05 12:22</div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -38,8 +63,6 @@ export default {
             if (response.data.success) {
                 this.listData = response.data.data.list;
                 this.total = response.data.data.total;
-            } else {
-                $.alert(response.data.message);
             }
         }).catch(() => {
             $.hidePreloader();

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:30:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-06 14:37:25
+* @Last Modified time: 2018-06-11 20:09:19
 -->
 <template>
     <div class="page page-current">
@@ -12,6 +12,10 @@
             <h1 class="title">我的金币</h1>
         </header>
         <div class="content gray">
+            <li class="coin-card-wrap">
+                <div class="name">金币数量</div>
+                <div class="val">{{userInfo.coin}}</div>
+            </li>
             <div class="list-block">
                 <ul>
                     <li class="item-content item-link">
@@ -41,7 +45,9 @@
 export default {
     name: 'ucCoin',
     data() {
-        return {};
+        return {
+            userInfo: this.$store.state.userInfo
+        };
     }
 };
 

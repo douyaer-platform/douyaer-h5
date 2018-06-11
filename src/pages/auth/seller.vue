@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-09 17:32:01
+* @Last Modified time: 2018-06-11 18:06:11
 -->
 <template>
     <div class="page page-current">
@@ -79,7 +79,7 @@
                 <div class="box-bd">
                 </div>
                 <div class="submit-wrap">
-                    <a href="javascript:;" @click.stop="submitFun" class="button button-big button-fill">提交商家认证</a>
+                    <a href="javascript:;" @click.stop="submitFun" class="button button-big button-fill">提交刷手认证</a>
                 </div>
             </div>
         </div>
