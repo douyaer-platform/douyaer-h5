@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-11 20:39:16
+* @Last Modified time: 2018-06-12 00:09:16
 -->
 <template>
     <div class="page page-current">
@@ -12,7 +12,7 @@
         </header>
         <bottomBar></bottomBar>
         <div class="content">
-            <div class="main-box">
+            <div class="main-box" v-if="total>0">
                 <div class="box-hd">
                     <span class="text">待完成</span>
                 </div>
@@ -33,17 +33,6 @@
                                     <span>￥</span>398
                                 </div>
                             </div>
-                            <!-- <div class="detail">
-                                <span class="text">共计：</span>
-                                <span class="attr">
-                                    <span class="name">放单量</span>
-                                    <span class="val">3</span>
-                                </span>
-                                <span class="attr">
-                                    <span class="name">佣金</span>
-                                    <span class="val">3</span>
-                                </span>
-                            </div> -->
                             <div class="ctrl">
                                 <a href="javascipt:;" class="button">立即投诉</a>
                                 <a href="javascipt:;" class="button">去完成</a>
@@ -53,15 +42,53 @@
                     </ul>
                 </div>
             </div>
+            <div class="no-tmpl" v-else>
+                <router-link to="/home">
+                    <span class="icon"><i class="icon-addtmpl"></i></span>
+                    <span class="text">尝试添加第一笔订单</span>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
 <script>
 import bottomBar from '@/components/bottomBar';
+let $ = window.$;
 export default {
     name: 'orderSeller',
     data() {
-        return {};
+        return {
+            listData: [],
+            total: ''
+        };
+    },
+    created() {
+        this.getOrderListFun();
+    },
+    methods: {
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-11
+         * @lastTime    2018-06-11
+         * @description 获取订单列表
+         */
+        getOrderListFun() {
+            $.showPreloader();
+            this.$http.get('/task/list', {
+                params: {
+                    pageIndex: 1,
+                    pageSize: 10
+                }
+            }).then((response) => {
+                $.hidePreloader();
+                if (response.data.success) {
+                    this.listData = response.data.data.list;
+                    this.total = response.data.data.total;
+                }
+            }).catch(() => {
+                $.hidePreloader();
+            });
+        }
     },
     components: {
         bottomBar

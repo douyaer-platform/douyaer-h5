@@ -2,7 +2,7 @@
  * @Author: weiberzeng
  * @Date:   2018-06-04 19:21:25
  * @Last Modified by:   weiberzeng
- * @Last Modified time: 2018-06-11 19:43:31
+ * @Last Modified time: 2018-06-12 20:46:44
  */
 import Vue from 'vue';
 import VueResource from 'vue-resource';
@@ -19,10 +19,10 @@ Vue.http.interceptors.push((request, next) => {
     next((response) => {
         console.log('response>>', response.data);
         // 请求返回特殊状态的统一处理
-        switch (response.data.code) {
-            case -100:
+        switch (response.status) {
+            case 401:
                 $.alert('登录失效', function() {
-                   window.location.href = '#/account/login';
+                   window.location.href = '/#/account/login';
                 });
                 break;
             default:

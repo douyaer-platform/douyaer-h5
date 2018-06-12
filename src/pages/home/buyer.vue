@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-04-25 14:32:59
+* @Last Modified time: 2018-06-11 23:15:22
 -->
 <template>
     <div class="page page-current">
@@ -11,16 +11,16 @@
             <h1 class="title">首页</h1>
         </header>
         <div class="bar bar-header-secondary-home">
-            <a href="javascipt:;">
+            <router-link to="/home/create">
                 <span class="icon icon-home"></span>
                 <span class="tab-label">创建模板</span>
-            </a>
+            </router-link>
             <a href="javascipt:;">
                 <span class="icon icon-home"></span>
                 <span class="tab-label">邀请好友</span>
             </a>
         </div>
-        <div class="topTips warning"><i class="icon-warning"></i>重要通知：关于对某某账户的违规操作处理。</div>
+        <!-- <div class="topTips warning"><i class="icon-warning"></i>重要通知：关于对某某账户的违规操作处理。</div> -->
         <bottomBar></bottomBar>
         <div class="content">
             <!-- 商家首页 -->
@@ -33,7 +33,7 @@
                 <div class="box-hd">
                     <span class="text">选择模板</span></div>
                 <div class="box-bd">
-                    <ul v-if="false" class="tmpl-list clearfix">
+                    <ul class="tmpl-list clearfix" v-if="templateTotal>0">
                         <li class="item active">
                             <div class="inner">
                                 <div class="img-wrap">
@@ -86,9 +86,11 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="no-data">
-                        <span class="icon"><i class=" icon-notmpl"></i></span>
-                        <span class="text">尝试添加新的模板</span>
+                    <div class="no-tmpl" v-else>
+                        <router-link to="/home/create">
+                            <span class="icon"><i class="icon-addtmpl"></i></span>
+                            <span class="text">尝试添加新的模板</span>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -230,18 +232,56 @@ export default {
             checkedCities: [],
             cities: cityOptions,
             isIndeterminate: true,
-            radio2: 3
+            radio2: 3,
+            templateData: [],
+            templateTotal: 0
         };
     },
+    created() {
+        this.getTemplateFun();
+    },
     methods: {
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-11
+         * @lastTime    2018-06-11
+         * @description 选择不限城市
+         */
         handleCheckAllChange(val) {
             this.checkedCities = val ? cityOptions : [];
             this.isIndeterminate = false;
         },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-11
+         * @lastTime    2018-06-11
+         * @description 选择单个城市
+         */
         handleCheckedCitiesChange(value) {
             let checkedCount = value.length;
             this.checkAll = checkedCount === this.cities.length;
             this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-11
+         * @lastTime    2018-06-11
+         * @description 获取模板列表
+         */
+        getTemplateFun() {
+            this.$http.get('/tasktemplate/list', {
+                params: {
+                    pageIndex: 1,
+                    pageSize: 10
+                }
+            }).then((response) => {
+                if (response.data.success) {
+                    this.templateData = response.data.data.list;
+                    this.templateTotal = response.data.data.total;
+                }
+            });
         }
     },
     components: {

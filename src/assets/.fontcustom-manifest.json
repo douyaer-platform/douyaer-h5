@@ -1,16 +1,20 @@
 {
   "checksum": {
-    "previous": "ed5dac9664fa037c2b9d56d6e984b384b066a6c41fe736273c8a58ffae30d597",
-    "current": "ed5dac9664fa037c2b9d56d6e984b384b066a6c41fe736273c8a58ffae30d597"
+    "previous": "bba735828d7f6a84716d6c36c632c8b48d1b35cca63ae9d85c8524da397a8133",
+    "current": "bba735828d7f6a84716d6c36c632c8b48d1b35cca63ae9d85c8524da397a8133"
   },
   "fonts": [
-    "fontcustom/fontcustom_ed5dac9664fa037c2b9d56d6e984b384.ttf",
-    "fontcustom/fontcustom_ed5dac9664fa037c2b9d56d6e984b384.svg",
-    "fontcustom/fontcustom_ed5dac9664fa037c2b9d56d6e984b384.woff",
-    "fontcustom/fontcustom_ed5dac9664fa037c2b9d56d6e984b384.eot",
-    "fontcustom/fontcustom_ed5dac9664fa037c2b9d56d6e984b384.woff2"
+    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.ttf",
+    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.svg",
+    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.woff",
+    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.eot",
+    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.woff2"
   ],
   "glyphs": {
+    "addtmpl": {
+      "codepoint": 61707,
+      "source": "font/addtmpl.svg"
+    },
     "cash": {
       "codepoint": 61705,
       "source": "font/cash.svg"

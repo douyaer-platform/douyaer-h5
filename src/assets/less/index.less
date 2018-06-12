@@ -30,7 +30,7 @@ body{  background-color: #ffffff; color: @text-color-normal; font-size: .75rem;}
 // 顶部导航条
 header.bar-nav{ background-color: @primary-color;
 	h1.title{ font-size: 0.9rem; color: #ffffff;}
-	& ~ .bar-header-secondary-home{ top: 2.15rem;
+	& ~ .bar-header-secondary-home{ top: 2.2rem;
 		& ~ .content{ top: 6.45rem;}
 		& ~ .topTips{ top: 6.45rem;
 			& ~ .content{ top: 7.85rem; }
@@ -59,6 +59,7 @@ nav.bar-tab{ background-color: #fff;
 
 // 说明模块
 .description{ padding: .75rem; font-size: .75rem; color: @text-color-disable;}
+.newUser{ height: 1.4rem; padding: 0 .3rem; border-radius: .2rem; border: 1px solid @text-color-orange; line-height: 1.4rem; white-space: nowrap; text-overflow:ellipsis; color: @text-color-orange; font-size: .6rem; background: url(../images/check.png) no-repeat right bottom; background-size:.7rem .7rem;}
 
 // 顶部警告提示
 .topTips{ padding: 0 .5rem; line-height: 1.4rem; font-size: .6rem; color: @text-color-gray; position: absolute; right: 0; left: 0; top:0;
@@ -84,10 +85,24 @@ nav.bar-tab{ background-color: #fff;
 
 // 表单
 .list-block{ margin: .75rem 0;
-	.item-title.label{ color: @text-color-main; font-size: .85rem;}
-	.item-inner{ }
+	.item-title.label{ color: @text-color-main; font-size: .85rem;
+		.sub{ font-size: .7rem; }
+		.red{ margin-left: .35rem; color: #F5222D; }
+	}
+	.item-inner{ 
+		&.noflex{ display: block;
+			.item-input{ margin-top: 0; position: relative; 
+				&:after{content: ''; position: absolute; left: 0; bottom: 0; right: auto; top: auto; height: 1px; width: 100%; background-color: #e7e7e7;display: block; z-index: 15; -webkit-transform-origin: 50% 100%; transform-origin: 50% 100%;}
+				&:last-child:after{ display: none; }
+			}
+			.el-radio-group{ padding: .35rem 0;
+				.el-radio{ display: block; height: 1.5rem; line-height: 1.5rem; }
+				.el-radio + .el-radio{ margin-left: 0; }
+			}
+		}
+	}
 	.el-radio-group{
-		.el-radio{ margin-left: .75rem;
+		.el-radio{ margin-left: .75rem; color: #666666;
 			&:first-child{ margin-left: 0;}
 		}
 	}
@@ -239,6 +254,11 @@ nav.bar-tab{ background-color: #fff;
 	}
 }
 
+// 没有模板
+.no-tmpl{ padding: 1rem 0;
+	.icon{ display: block; width: 2.5rem; height: 2.5rem; margin: 0 auto; line-height: 2.5rem; text-align: center; font-size: 2rem; color: #888;}
+	.text{ display: block; text-align: center; font-size: .75rem; color: #888;}
+}
 /*-------------------------------------
  * 我的订单
 -------------------------------------*/
@@ -318,15 +338,17 @@ nav.bar-tab{ background-color: #fff;
 		&:after{ content: '';  position: absolute; left: 0; bottom: 0; right: auto; top: auto; height: 1px; width: 100%; background-color: #e7e7e7; display: block; z-index: 15; -webkit-transform-origin: 50% 100%; transform-origin: 50% 100%; }
 	}
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 2) {
-	.flow-list-block .item-content:after {
-	    -webkit-transform: scaleY(0.5);
-	    transform: scaleY(0.5);
-	}
-}
 // 我的金币
 .coin-card-wrap{ padding: 1rem 0 0.5rem 1rem; background-color: @primary-color; color: #fff;
 	.name{ opacity: .8; }
 	.val{ font-size: 2rem; }
 }
 .coin-card-wrap + .list-block{ margin-top: 0; }
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.flow-list-block .item-content:after,
+	.list-block .item-inner.noflex .item-input:after{
+	    -webkit-transform: scaleY(0.5);
+	    transform: scaleY(0.5);
+	}
+}
