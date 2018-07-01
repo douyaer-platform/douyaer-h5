@@ -6,6 +6,7 @@ import home from '@/pages/home';
 import homeSeller from '@/pages/home/seller';
 import homeBuyer from '@/pages/home/buyer';
 import homeCreate from '@/pages/home/create';
+import homeFriend from '@/pages/home/friend';
 // 我的订单
 import order from '@/pages/order';
 import orderSeller from '@/pages/order/seller';
@@ -54,6 +55,11 @@ export default new Router({
             path: 'create',
             name: 'homeCreate',
             component: homeCreate
+        }, {
+            // 商家-邀请好友
+            path: 'friend',
+            name: 'homeFriend',
+            component: homeFriend
         }]
     }, {
         // 账号中心

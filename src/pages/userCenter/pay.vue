@@ -42,7 +42,7 @@
                             </li>
                             <li>
                                 <div class="item-content">
-                                    <div class="item-inner">
+                                    <div class="item-inner lt">
                                         <div class="item-title label">备注</div>
                                         <div class="item-input">
                                             <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="备注"></el-input>

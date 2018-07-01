@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-06-06 11:02:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-11 19:49:51
+* @Last Modified time: 2018-07-01 13:01:34
 -->
 <template>
     <div class="page page-current">
@@ -12,30 +12,20 @@
             <h1 class="title">资金流水</h1>
         </header>
         <div class="content">
-            <div class="flow-list-block list-block">
+            <div class="flow-list-block list-block" v-if="total>0">
                 <ul>
-                    <li class="item-content">
+                    <li v-for="item in listData" :key="item.id" class="item-content">
                         <div class="item-inner">
                             <div class="item-title">充值</div>
                             <div class="item-after">+2000</div>
                         </div>
                         <div class="footer">2018-05-05 12:22</div>
                     </li>
-                    <li class="item-content">
-                        <div class="item-inner">
-                            <div class="item-title">提现</div>
-                            <div class="item-after">-2000</div>
-                        </div>
-                        <div class="footer">2018-05-05 12:22</div>
-                    </li>
-                     <li class="item-content">
-                        <div class="item-inner">
-                            <div class="item-title">支付</div>
-                            <div class="item-after">-10000</div>
-                        </div>
-                        <div class="footer">2018-05-05 12:22</div>
-                    </li>
                 </ul>
+            </div>
+            <div class="no-tmpl" v-else>
+                    <span class="icon"><i class="icon-addtmpl"></i></span>
+                    <span class="text">暂无数据</span>
             </div>
         </div>
     </div>

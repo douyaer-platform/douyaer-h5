@@ -14,7 +14,7 @@
         <div class="content gray">
             <div class="description wihte">提现说明
                 <br> （1）让精准标签的人参与当天的活动形成精准标签，有效成交带来更多符合精准人群的展现和流量
-                <br> （2）配合模特试客回购活动，实现让模特试客1 5天后回购，从而打散轨迹，拒绝批量化行为</div>
+                <br> （2）配合模特试客回购活动，实现让模特试客15天后回购，从而打散轨迹，拒绝批量化行为</div>
             <div class="main-box mt10">
                 <div class="box-bd">
                     <div class="list-block">
@@ -42,7 +42,7 @@
                             </li>
                             <li>
                                 <div class="item-content">
-                                    <div class="item-inner">
+                                    <div class="item-inner lt">
                                         <div class="item-title label">备注</div>
                                         <div class="item-input">
                                             <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="备注"></el-input>

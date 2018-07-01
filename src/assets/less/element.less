@@ -106,3 +106,34 @@
 .el-checkbox-button--mini .el-checkbox-button__inner { padding: 7px 15px; font-size: 12px; border-radius: 0 }
 .el-checkbox-button--mini .el-checkbox-button__inner.is-round { padding: 7px 15px }
 .el-checkbox-group { font-size: 0 }
+
+/* 城市选项*/
+.citypick{
+    input{}
+}
+.citypic-wrap{ display: flex;  height: 13rem; background-color: #fff; position:fixed; bottom:0; left: 0; right: 0; z-index: 1000;
+    &:before{ content: ''; position: absolute; left: 0; top: 0; bottom: auto; right: auto; height: 1px; width: 100%; background-color: #e7e7e7; display: block; z-index: 15; -webkit-transform-origin: 50% 0%; transform-origin: 50% 0%;}
+    .item-wrap{ flex:1; height: 100%; overflow-y: auto;
+        ul{ padding: 0;}
+        li{ height: 2.2rem; padding-left: .75rem; line-height: 2.2rem; color: #000; font-size: .75rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+        &:first-child{
+            li{ background-color: #f7f7f7;
+                &.active{ background-color: #ffff;}
+            }
+        }
+        &:nth-child(2){
+            ul{ padding-left: .75rem;}
+            li{ padding-left: 0; position: relative;
+                &:after{ content: ''; position: absolute; left: 0; top: auto; bottom: 0; right: auto; height: 1px; width: 100%; background-color: #e7e7e7; display: block; z-index: 15; -webkit-transform-origin: 50% 0%; transform-origin: 50% 0%;}
+                &.active{ color: @primary-color;}
+            }
+        }
+    }
+    &.hide{ display: none;}
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.citypic-wrap:before{
+	    -webkit-transform: scaleY(0.5);
+	    transform: scaleY(0.5);
+	}
+}

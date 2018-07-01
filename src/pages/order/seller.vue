@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-12 00:09:16
+* @Last Modified time: 2018-07-01 12:58:40
 -->
 <template>
     <div class="page page-current">
@@ -18,12 +18,12 @@
                 </div>
                 <div class="box-bd">
                     <ul class="order-list">
-                        <li class="item clearfix">
+                        <li v-for="item in cancelOrderFun" :key="item.id" class="item clearfix">
                             <div class="img-wrap">
                                 <img src="/static/demo/demo.jpg" alt="">
                             </div>
                             <div class="inner">
-                                <div class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</div>
+                                <div class="name">{{item.name}}</div>
                                 <div class="state">
                                     <span>加收藏后3-4天付款</span>
                                     <span>假聊</span>
@@ -36,7 +36,7 @@
                             <div class="ctrl">
                                 <a href="javascipt:;" class="button">立即投诉</a>
                                 <a href="javascipt:;" class="button">去完成</a>
-                                <a href="javascipt:;" class="button">取消订单</a>
+                                <a href="javascipt:;" class="button" @click.stop="cancelOrderFun(item)">取消订单</a>
                             </div>
                         </li>
                     </ul>
@@ -74,7 +74,7 @@ export default {
          */
         getOrderListFun() {
             $.showPreloader();
-            this.$http.get('/task/list', {
+            this.$http.get('/order/list', {
                 params: {
                     pageIndex: 1,
                     pageSize: 10
@@ -84,6 +84,28 @@ export default {
                 if (response.data.success) {
                     this.listData = response.data.data.list;
                     this.total = response.data.data.total;
+                }
+            }).catch(() => {
+                $.hidePreloader();
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-07-01
+         * @lastTime    2018-07-01
+         * @description 刷手取消订单
+         */
+        cancelOrderFun(item) {
+            $.showPreloader();
+            this.$http.post('/order/cancel', {
+                id: item.id
+            }).then((response) => {
+                $.hidePreloader();
+                if (response.data.success) {
+                    $.toast('取消成功！');
+                } else {
+                    $.alert(response.data.message);
                 }
             }).catch(() => {
                 $.hidePreloader();

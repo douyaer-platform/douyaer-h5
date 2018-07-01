@@ -1,9 +1,9 @@
 <template>
-    <div class="page-group" id="app">
-        <transition>
-            <router-view></router-view>
-        </transition>
-    </div>
+<div class="page-group" id="app">
+    <transition>
+        <router-view></router-view>
+    </transition>
+</div>
 </template>
 <script>
 export default {
@@ -16,9 +16,9 @@ export default {
                 this.$router.replace({
                     path: '/account/login'
                 });
-            } else if (!this.$store.state.userInfo) {
-                // 已登录，无用户信息，获取用户信息
-                this.$http.post('/user/get').then((response) => {
+            } else {
+                // 已登录，重新获取用户信息
+                this.$http.get('/user/get').then((response) => {
                     if (response.data.success) {
                         localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
                         this.$store.state.userInfo = response.data.data.user;
@@ -28,5 +28,4 @@ export default {
         });
     }
 };
-
 </script>

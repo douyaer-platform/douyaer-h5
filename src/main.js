@@ -11,7 +11,10 @@ import {
     CheckboxGroup,
     Radio,
     RadioGroup
-} from 'element-ui';
+}
+from 'element-ui';
+import myCityPick from '@/components/myCityPick';
+
 // 引入 css
 import '@/assets/less/index.less';
 
@@ -32,12 +35,15 @@ const store = new Vuex.Store({
     actions: {}
 });
 
+Vue.use(myCityPick);
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,
     store,
     http,
-    components: { App },
+    components: {
+        App
+    },
     template: '<App/>'
 });
