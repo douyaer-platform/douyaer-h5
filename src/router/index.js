@@ -56,6 +56,11 @@ export default new Router({
             name: 'homeCreate',
             component: homeCreate
         }, {
+            // 商家-创建模板
+            path: 'modify',
+            name: 'homeModify',
+            component: homeCreate
+        }, {
             // 商家-邀请好友
             path: 'friend',
             name: 'homeFriend',

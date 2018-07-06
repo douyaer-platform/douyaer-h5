@@ -34,55 +34,21 @@
                 <span class="text">选择模板</span></div>
             <div class="box-bd">
                 <ul class="tmpl-list clearfix" v-if="templateTotal>0">
-                    <li class="item active">
+                    <li class="item" :key="item.templateId" :class="{active:item.showMore}" v-for="item in templateData">
                         <div class="inner">
                             <div class="img-wrap">
-                                <img src="/static/demo/demo.jpg" alt="">
+                                <img :src="item.goodsPicUrl" alt="">
                             </div>
-                            <div class="name">曼秀雷敦（Menthonlatum）新碧清透防晒乳 水凝乳 50…</div>
+                            <div class="name">{{item.storeName}}--{{item.showMore}}</div>
                             <div class="ctrl">
-                                <span class="money"><i>￥</i>398</span>
-                                <a href="javascipt:;"><i class="icon-more"></i></a>
+                                <span class="money"><i>￥</i>{{item.goodsPrice}}</span>
+                                <a href="javascipt:;" @click.stop="showMoreFun(item)"><i class="icon-more"></i></a>
                             </div>
                             <span class="checkbox is-checked"></span>
                         </div>
                         <div class="mask">
-                            <a href="javascipt:;" class="edit-btn">编辑</a>
-                            <a href="javascipt:;" class="del-btn">删除</a>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <div class="inner">
-                            <div class="img-wrap">
-                                <img src="/static/demo/demo.jpg" alt="">
-                            </div>
-                            <div class="name">曼秀雷敦（Menthonlatum）新碧清透防晒乳 水凝乳 50…</div>
-                            <div class="ctrl">
-                                <span class="money"><i>￥</i>398</span>
-                                <a href="javascipt:;"><i class="icon-more"></i></a>
-                            </div>
-                            <span class="checkbox"></span>
-                        </div>
-                        <div class="mask">
-                            <a href="javascipt:;" class="edit-btn">编辑</a>
-                            <a href="javascipt:;" class="del-btn">删除</a>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <div class="inner">
-                            <div class="img-wrap">
-                                <img src="/static/demo/demo.jpg" alt="">
-                            </div>
-                            <div class="name">曼秀雷敦（Menthonlatum）新碧清透防晒乳 水凝乳 50…</div>
-                            <div class="ctrl">
-                                <span class="money"><i>￥</i>398</span>
-                                <a href="javascipt:;"><i class="icon-more"></i></a>
-                            </div>
-                            <span class="checkbox is-checked"></span>
-                        </div>
-                        <div class="mask">
-                            <a href="javascipt:;" class="edit-btn">编辑</a>
-                            <a href="javascipt:;" class="del-btn">删除</a>
+                            <a href="javascipt:;" class="edit-btn" @click.stop="delTempFun(item)">编辑</a>
+                            <a href="javascipt:;" class="del-btn" @click.stop="modifyTempFun(item)">删除</a>
                         </div>
                     </li>
                 </ul>
@@ -216,11 +182,13 @@
                 </div>
             </div>
         </div>
+        <br>
     </div>
 </div>
 </template>
 <script>
 import bottomBar from '@/components/bottomBar';
+let $ = window.$;
 // 城市列表
 const cityOptions = ['河北', '山西', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '海南', '四川', '贵州', '云南', '陕西', '甘肃', '青海', '内蒙古自治区', '广西壮族自治区', '西藏自治区', '宁夏回族自治区', '新疆维吾尔族自治区', '北京', '天津', '上海', '重庆', '香港', '澳门'];
 
@@ -274,13 +242,65 @@ export default {
             this.$http.get('/tasktemplate/list', {
                 params: {
                     pageIndex: 1,
-                    pageSize: 10
+                    pageSize: 1000
                 }
             }).then((response) => {
                 if (response.data.success) {
-                    this.templateData = response.data.data.list;
+                    let data = response.data.data.list;
+                    for (let i in data) {
+                        data[i].showMore = false;
+                    }
+                    this.templateData = data;
                     this.templateTotal = response.data.data.total;
                 }
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-11
+         * @lastTime    2018-06-11
+         * @description 显示更多
+         */
+        showMoreFun(item) {
+            for (let i in this.templateData) {
+                this.templateData[i].showMore = false;
+            }
+            item.showMore = true;
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-11
+         * @lastTime    2018-06-11
+         * @description 删除模板
+         */
+        delTempFun(item) {
+            $.showPreloader();
+            this.$http.post('/tasktemplate/delete', {
+                templateId: item.templateId
+            }).then((response) => {
+                $.hidePreloader();
+                if (response.data.success) {
+                    $.toast('删除成功！');
+                    this.getTemplateFun();
+                } else {
+                    $.alert(response.data.message);
+                }
+            }).catch(() => {
+                $.hidePreloader();
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-11
+         * @lastTime    2018-06-11
+         * @description 修改模板
+         */
+        modifyTempFun() {
+            this.$router.replace({
+                path: '/home/modify'
             });
         }
     },
