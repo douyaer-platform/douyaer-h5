@@ -35,20 +35,20 @@
             <div class="box-bd">
                 <ul class="tmpl-list clearfix" v-if="templateTotal>0">
                     <li class="item" :key="item.templateId" :class="{active:item.showMore}" v-for="item in templateData">
-                        <div class="inner">
+                        <div class="inner" @click.stop="checkedFun(item)">
                             <div class="img-wrap">
                                 <img :src="item.goodsPicUrl" alt="">
                             </div>
-                            <div class="name">{{item.storeName}}--{{item.showMore}}</div>
+                            <div class="name">{{item.storeName}}</div>
                             <div class="ctrl">
                                 <span class="money"><i>￥</i>{{item.goodsPrice}}</span>
                                 <a href="javascipt:;" @click.stop="showMoreFun(item)"><i class="icon-more"></i></a>
                             </div>
-                            <span class="checkbox is-checked"></span>
+                            <span class="checkbox" :class="{'is-checked':item.checked}"></span>
                         </div>
-                        <div class="mask">
-                            <a href="javascipt:;" class="edit-btn" @click.stop="delTempFun(item)">编辑</a>
-                            <a href="javascipt:;" class="del-btn" @click.stop="modifyTempFun(item)">删除</a>
+                        <div class="mask" @click.stop="item.showMore=false">
+                            <a href="javascipt:;" class="edit-btn" @click.stop="modifyTempFun(item)">编辑</a>
+                            <a href="javascipt:;" class="del-btn" @click.stop="delTempFun(item)">删除</a>
                         </div>
                     </li>
                 </ul>
@@ -249,6 +249,7 @@ export default {
                     let data = response.data.data.list;
                     for (let i in data) {
                         data[i].showMore = false;
+                        data[i].checked = false;
                     }
                     this.templateData = data;
                     this.templateTotal = response.data.data.total;
@@ -273,12 +274,27 @@ export default {
          * @Author      weiberZeng
          * @DateTime    2018-06-11
          * @lastTime    2018-06-11
+         * @description 选择模板
+         */
+        checkedFun(item) {
+            for (let i in this.templateData) {
+                this.templateData[i].checked = false;
+            }
+            item.checked = true;
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-11
+         * @lastTime    2018-06-11
          * @description 删除模板
          */
         delTempFun(item) {
             $.showPreloader();
-            this.$http.post('/tasktemplate/delete', {
-                templateId: item.templateId
+            this.$http.get('/tasktemplate/delete', {
+                params: {
+                    templateId: item.templateId
+                }
             }).then((response) => {
                 $.hidePreloader();
                 if (response.data.success) {
@@ -298,9 +314,9 @@ export default {
          * @lastTime    2018-06-11
          * @description 修改模板
          */
-        modifyTempFun() {
+        modifyTempFun(item) {
             this.$router.replace({
-                path: '/home/modify'
+                path: '/home/modify/' + item.templateId
             });
         }
     },

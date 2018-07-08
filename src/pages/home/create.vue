@@ -9,15 +9,15 @@
 <div class="page page-current">
     <header class="bar bar-nav">
         <router-link to="/home/buyer" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
-        <h1 class="title">创建模板</h1>
+        <h1 class="title">{{title}}</h1>
     </header>
     <div class="footer-submit">
         <div class="tips">
             <div class="main">
-                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> 398</span>
+                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> --</span>
             </div>
             <div class="sub">
-                另需平台服务费￥2
+                另需平台服务费￥--
             </div>
         </div>
         <div class="submit">
@@ -176,8 +176,10 @@ export default {
     name: 'homeCreate',
     data() {
         return {
+            title: '创建模板',
             tags: [],
             form: {
+                templateId: '',
                 storeName: '',
                 goodsUrl: '',
                 goodsPicUrl: '',
@@ -206,9 +208,55 @@ export default {
         };
     },
     created() {
-
+        if (this.$route.name === 'homeModify') {
+            let id = this.$route.params.id;
+            this.title = '修改模板';
+            this.getDetailFun(id);
+        }
     },
     methods: {
+        getDetailFun(id) {
+            this.$http.get('/tasktemplate/get', {
+                params: {
+                    templateId: id
+                }
+            }).then((response) => {
+                if (response.data.success) {
+                    let data = response.data.data.taskTemplate;
+                    for (let i in this.form) {
+                        switch (i) {
+                            case 'tags':
+                                this.form[i] = data[i];
+                                if (data[i]) {
+                                    this.tags = data[i].split(',');
+                                }
+                                break;
+                            case 'goodsPicUrl':
+                                this.form[i] = data[i] || '';
+                                if (data[i]) {
+                                    this.tmp1.imageUrl = data[i];
+                                }
+                                break;
+                            case 'searchPicUrl':
+                                this.form[i] = data[i] || '';
+                                if (data[i]) {
+                                    this.tmp2.imageUrl = data[i];
+                                }
+                                break;
+                            case 'conditionPicUrl':
+                                this.form[i] = data[i] || '';
+                                if (data[i]) {
+                                    this.tmp3.imageUrl = data[i];
+                                }
+                                break;
+                            default:
+                                this.form[i] = data[i];
+                                break;
+                        }
+                    }
+                }
+            });
+        },
         /**
          * @Author      weiberZeng
          * @DateTime    2018-06-07
@@ -287,11 +335,21 @@ export default {
             }
             this.form.tags = tags.join(',');
 
+            let url;
+            if (this.$route.name === 'homeModify') {
+                url = '/tasktemplate/update';
+            } else {
+                url = '/tasktemplate/add';
+            }
+
             $.showPreloader();
-            this.$http.post('/tasktemplate/add', this.form).then((response) => {
+            this.$http.post(url, this.form).then((response) => {
                 $.hidePreloader();
                 if (response.data.success) {
                     $.toast('保存成功！');
+                    this.$router.replace({
+                        path: '/home/buyer'
+                    });
                 } else {
                     $.alert(response.data.message);
                 }

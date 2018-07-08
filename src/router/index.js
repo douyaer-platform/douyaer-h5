@@ -57,7 +57,7 @@ export default new Router({
             component: homeCreate
         }, {
             // 商家-创建模板
-            path: 'modify',
+            path: 'modify/:id',
             name: 'homeModify',
             component: homeCreate
         }, {
