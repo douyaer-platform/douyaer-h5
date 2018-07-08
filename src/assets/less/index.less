@@ -56,6 +56,10 @@ nav.bar-tab{ background-color: #fff;
 	.tab-item{
 		&.router-link-active{ color: @primary-color;}
 	}
+	& ~ .content{ bottom: 2.5rem;}
+	& ~ .footer-submit { bottom: 2.5rem;
+		& ~ .content{ bottom: 4.9rem;}
+	}
 }
 
 .footer-submit{ display: flex; height:2.4rem;  background-color: #fff; position: fixed; bottom:0; left:0; right:0;
@@ -103,7 +107,7 @@ nav.bar-tab{ background-color: #fff;
 		.sub{ font-size: .7rem; }
 		.red{ margin-left: .35rem; color: #F5222D; }
 	}
-	.item-inner{
+	.item-inner{ align-items: flex-start;
 		&.noflex{ display: block;
 			.item-input{ margin-top: 0; position: relative;
 				&:after{content: ''; position: absolute; left: 0; bottom: 0; right: auto; top: auto; height: 1px; width: 100%; background-color: #e7e7e7;display: block; z-index: 15; -webkit-transform-origin: 50% 100%; transform-origin: 50% 100%;}
@@ -146,8 +150,8 @@ nav.bar-tab{ background-color: #fff;
 
 // 省份多选
 .province-wrap{
-	.el-checkbox-group{ padding: 0 .75rem .5rem; overflow: hidden;
-		.el-checkbox{ float: left; width: 33%; margin: .4rem 0;}
+	.el-checkbox-group{ display: flex; width:100%; padding: 0 .75rem .5rem; overflow: hidden; flex-wrap: wrap;
+		.el-checkbox{ min-width: 33%; margin: .4rem 0; padding-right: 1rem;}
 		.half .el-checkbox{ width: 50%;}
 		.all .el-checkbox{ width: 100%;}
 	}

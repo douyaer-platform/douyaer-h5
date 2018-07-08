@@ -22,6 +22,19 @@
     </div>
     <!-- <div class="topTips warning"><i class="icon-warning"></i>重要通知：关于对某某账户的违规操作处理。</div> -->
     <bottomBar></bottomBar>
+    <div class="footer-submit">
+        <div class="tips">
+            <div class="main">
+                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> --</span>
+            </div>
+            <div class="sub">
+                另需平台服务费￥--
+            </div>
+        </div>
+        <div class="submit">
+            <a href="javascipt:;" @click.stop="submitFun">确认放单</a>
+        </div>
+    </div>
     <div class="content">
         <!-- 商家首页 -->
         <div class="description">建立当天活动功能介绍
@@ -71,10 +84,10 @@
                                 <div class="item-inner">
                                     <div class="item-title label">性别</div>
                                     <div class="item-input">
-                                        <el-radio-group v-model="radio2">
-                                            <el-radio :label="3">不限</el-radio>
-                                            <el-radio :label="6">男</el-radio>
-                                            <el-radio :label="9">女</el-radio>
+                                        <el-radio-group v-model="form.brushhandSex">
+                                            <el-radio label="">不限</el-radio>
+                                            <el-radio label="male">男</el-radio>
+                                            <el-radio label="female">女</el-radio>
                                         </el-radio-group>
                                     </div>
                                 </div>
@@ -104,31 +117,9 @@
                 </div>
                 <div class="province-wrap">
                     <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-                        <div class="clearfix">
-                            <template v-for="(city,index) in cities" v-if="index<=21">
-                                    <el-checkbox :label="city" :key="city">{{city}}</el-checkbox>
-                                </template>
-                        </div>
-                        <div class="clearfix half">
-                            <template v-for="(city,index) in cities" v-if="index>21&&index<=25">
-                                    <el-checkbox :label="city" :key="city">{{city}}</el-checkbox>
-                                </template>
-                        </div>
-                        <div class="clearfix all">
-                            <template v-for="(city,index) in cities" v-if="index===26">
-                                    <el-checkbox :label="city" :key="city">{{city}}</el-checkbox>
-                                </template>
-                        </div>
-                        <div class="clearfix">
-                            <template v-for="(city,index) in cities" v-if="index>26&&index<=30">
-                                    <el-checkbox :label="city" :key="city">{{city}}</el-checkbox>
-                                </template>
-                        </div>
-                        <div class="clearfix">
-                            <template v-for="(city,index) in cities" v-if="index>30">
-                                    <el-checkbox :label="city" :key="city">{{city}}</el-checkbox>
-                                </template>
-                        </div>
+                        <template v-for="item in citys">
+                            <el-checkbox :label="item.id" :key="item.id">{{item.name}}</el-checkbox>
+                        </template>
                     </el-checkbox-group>
                 </div>
             </div>
@@ -144,7 +135,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">订单数量</div>
                                     <div class="item-input">
-                                        <input type="text" placeholder="请输入订单数量">
+                                        <el-input v-model="form.orderCount" placeholder="请输入订单数量" autofocus></el-input>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +145,8 @@
                                 <div class="item-inner">
                                     <div class="item-title label">任务有效期</div>
                                     <div class="item-input">
-                                        <input type="text" placeholder="请输入任务有效期">
+                                        <input id="datetime-picker-start" type="text" placeholder="请输入任务起始时间">
+                                        <input id="datetime-picker-end" type="text" placeholder="请输入任务终止时间">
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +165,7 @@
                             <div class="item-content">
                                 <div class="item-inner">
                                     <div class="item-input">
-                                        <textarea placeholder="任务说明"></textarea>
+                                        <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="任务说明"></el-input>
                                     </div>
                                 </div>
                             </div>
@@ -189,26 +181,57 @@
 <script>
 import bottomBar from '@/components/bottomBar';
 let $ = window.$;
-// 城市列表
-const cityOptions = ['河北', '山西', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '海南', '四川', '贵州', '云南', '陕西', '甘肃', '青海', '内蒙古自治区', '广西壮族自治区', '西藏自治区', '宁夏回族自治区', '新疆维吾尔族自治区', '北京', '天津', '上海', '重庆', '香港', '澳门'];
 
 export default {
     name: 'homeBuyer',
     data() {
         return {
             checkAll: false,
+            // 已选择城市
             checkedCities: [],
-            cities: cityOptions,
+            // 城市列表
+            citys: [],
             isIndeterminate: true,
             radio2: 3,
             templateData: [],
-            templateTotal: 0
+            templateTotal: 0,
+            form: {
+                templateId: '',
+                brushhandSex: '',
+                provinces: '',
+                orderCount: '',
+                remark: '',
+                startTime: '',
+                endTime: ''
+            }
         };
     },
     created() {
+        this.getCitysFun();
         this.getTemplateFun();
     },
+    mounted() {
+        let _that = this;
+        $('#datetime-picker-start').calendar({
+            onClose: function (picker) {
+                _that.form.startTime = dateFormatter(picker.value[0]);
+            }
+        });
+        $('#datetime-picker-end').calendar({
+            onClose: function (picker) {
+                _that.form.endTime = dateFormatter(picker.value[0]);
+            }
+        });
+    },
     methods: {
+        getCitysFun(id, type) {
+            this.$http.get('/sys/listCitys').then((response) => {
+                if (response.data.success) {
+                    this.citys = response.data.data.citys;
+                }
+            });
+        },
+
         /**
          * @Author      weiberZeng
          * @DateTime    2018-06-11
@@ -216,8 +239,14 @@ export default {
          * @description 选择不限城市
          */
         handleCheckAllChange(val) {
-            this.checkedCities = val ? cityOptions : [];
+            let allCitys = [];
+            for (let i in this.citys) {
+                allCitys.push(this.citys[i].id);
+            }
+            this.checkedCities = val ? allCitys : [];
             this.isIndeterminate = false;
+
+            this.form.provinces = this.checkedCities.join(',');
         },
 
         /**
@@ -228,8 +257,10 @@ export default {
          */
         handleCheckedCitiesChange(value) {
             let checkedCount = value.length;
-            this.checkAll = checkedCount === this.cities.length;
-            this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+            this.checkAll = checkedCount === this.citys.length;
+            this.isIndeterminate = checkedCount > 0 && checkedCount < this.citys.length;
+
+            this.form.provinces = this.checkedCities.join(',');
         },
 
         /**
@@ -281,6 +312,8 @@ export default {
                 this.templateData[i].checked = false;
             }
             item.checked = true;
+
+            this.form.templateId = item.templateId;
         },
 
         /**
@@ -318,10 +351,57 @@ export default {
             this.$router.replace({
                 path: '/home/modify/' + item.templateId
             });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-27
+         * @lastTime    2018-06-27
+         * @description 提交认证
+         */
+        submitFun() {
+            $.showPreloader();
+            this.$http.post('/task/add', this.form).then((response) => {
+                $.hidePreloader();
+                if (response.data.success) {
+                    $.toast('保存成功！');
+                } else {
+                    $.alert(response.data.message);
+                }
+            }).catch(() => {
+                $.hidePreloader();
+            });
         }
     },
     components: {
         bottomBar
+    }
+};
+
+let dateFormatter = function (date, format) {
+    if (date) {
+        let str = format || 'yyyy-MM-dd hh:mm:ss';
+        try {
+            let d = new Date(date);
+            let o = {
+                'M+': d.getMonth() + 1,
+                'd+': d.getDate(),
+                'h+': d.getHours(),
+                'm+': d.getMinutes(),
+                's+': d.getSeconds(),
+                'q+': Math.floor((d.getMonth() + 3) / 3),
+                'S': d.getMilliseconds()
+            };
+            if (/(y+)/.test(str)) str = str.replace(RegExp.$1, (d.getFullYear() + '').substr(4 - RegExp.$1.length));
+            for (let k in o) {
+                if (new RegExp('(' + k + ')').test(str)) str = str.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+            }
+            return str;
+        } catch (e) {
+            return '';
+        }
+    } else {
+        return '';
     }
 };
 </script>

@@ -32,7 +32,11 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## 商家
 
+添加任务  ，添加失败
 
+订单列表，无数据
+
+个人中心，无校验
 
 
 
