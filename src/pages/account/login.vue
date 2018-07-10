@@ -6,52 +6,54 @@
 * @Last Modified time: 2018-06-11 17:16:28
 -->
 <template>
-    <div class="page page-current">
-        <div class="content">
-            <div class="accountWrap">
-                <div class="userPhoto"></div>
-                <div class="list-block">
-                    <ul>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">账号</div>
-                                    <div class="item-input">
-                                        <el-input v-model="form.account" maxlength="11" placeholder="请输入账号" autofocus></el-input>
-                                    </div>
+<div class="page page-current">
+    <div class="content">
+        <div class="accountWrap">
+            <div class="userPhoto"></div>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">账号</div>
+                                <div class="item-input">
+                                    <el-input v-model="form.account" maxlength="11" placeholder="请输入账号" autofocus></el-input>
                                 </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">密码</div>
-                                    <div class="item-input">
-                                        <el-input v-model="form.password" maxlength="12" :type="canSee?'text':'password'" placeholder="请输入密码"></el-input>
-                                    </div>
-                                    <a href="javascript:;" @click.stop="canSeeChangeFun" :class="canSee?'seeBtn active':'seeBtn'">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title label">密码</div>
+                                <div class="item-input">
+                                    <el-input v-model="form.password" maxlength="12" :type="canSee?'text':'password'" placeholder="请输入密码"></el-input>
+                                </div>
+                                <a href="javascript:;" @click.stop="canSeeChangeFun" :class="canSee?'seeBtn active':'seeBtn'">
                                         <i class="icon-see"></i>
                                     </a>
-                                </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="submitWrap">
-                    <a href="javascript:;" @click.stop="loginFun" class="button button-big button-fill">登录</a>
-                </div>
-                <div class="linkWrap">
-                    <router-link to="/account/forget">忘记密码？</router-link>
-                </div>
-                <div class="linkWrap bottom">
-                    <router-link to="/account/reg">还没有账号？</router-link>
-                </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="submitWrap">
+                <a href="javascript:;" @click.stop="loginFun" class="button button-big button-fill">登录</a>
+            </div>
+            <div class="linkWrap">
+                <router-link to="/account/forget">忘记密码？</router-link>
+            </div>
+            <div class="linkWrap bottom">
+                <router-link to="/account/reg">还没有账号？</router-link>
             </div>
         </div>
     </div>
+</div>
 </template>
 <script>
-import utils from '@/javascript/utils';
+import {
+    trim
+} from '@/javascript/utils';
 let $ = window.$;
 export default {
     name: 'accountLogin',
@@ -83,7 +85,7 @@ export default {
             if (to.length < 11) {
                 this.validate.account = false;
             } else {
-                this.validate.account = (to.length) > 0 && (/^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/).test(utils.trim(to));
+                this.validate.account = (to.length) > 0 && (/^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/).test(trim(to));
             }
         },
         validatePassword(to, from) {
@@ -148,5 +150,4 @@ export default {
         }
     }
 };
-
 </script>

@@ -24,9 +24,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## 刷手
 
-任务列表（有数据的列表渲染） 无数据
+任务列表 （状态只有回购和假聊，无垫付，用户可以重复接单待确认）
 
-订单列表（有数据的列表渲染，各种进度，待完成，已完成等） 无数据
+订单列表（各种进度列表未开发，无立即投诉的投诉页面的设计稿，无去完成订单设计稿，接单10分钟后无取消订单按钮，列表为返回对应状态匹配）
 
 个人中心 （认证输入的校验）（数据回显，资金流水）无数据 （我的金币，充值，提现，认证回显）后台审核无效
 
@@ -37,6 +37,3 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 订单列表，无数据
 
 个人中心，无校验
-
-
-

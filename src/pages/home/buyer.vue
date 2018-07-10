@@ -24,11 +24,8 @@
     <bottomBar></bottomBar>
     <div class="footer-submit">
         <div class="tips">
-            <div class="main">
-                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> --</span>
-            </div>
-            <div class="sub">
-                另需平台服务费￥--
+            <div class="one">
+                合计金额 <span class="money"> <span class="unit">￥</span> --</span>
             </div>
         </div>
         <div class="submit">
@@ -140,7 +137,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
+                        <li class="multi">
                             <div class="item-content">
                                 <div class="item-inner">
                                     <div class="item-title label">任务有效期</div>
@@ -161,7 +158,7 @@
             <div class="box-bd">
                 <div class="list-block">
                     <ul>
-                        <li>
+                        <li class="multi">
                             <div class="item-content">
                                 <div class="item-inner">
                                     <div class="item-input">
@@ -246,7 +243,7 @@ export default {
             this.checkedCities = val ? allCitys : [];
             this.isIndeterminate = false;
 
-            this.form.provinces = this.checkedCities.join(',');
+            this.form.provinces = '';
         },
 
         /**
@@ -260,7 +257,7 @@ export default {
             this.checkAll = checkedCount === this.citys.length;
             this.isIndeterminate = checkedCount > 0 && checkedCount < this.citys.length;
 
-            this.form.provinces = this.checkedCities.join(',');
+            this.form.provinces = this.checkAll ? '' : this.checkedCities.join(',');
         },
 
         /**

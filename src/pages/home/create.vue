@@ -14,10 +14,10 @@
     <div class="footer-submit">
         <div class="tips">
             <div class="main">
-                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> --</span>
+                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> {{commission||''}}</span>
             </div>
             <div class="sub">
-                另需平台服务费￥--
+                另需平台服务费￥2
             </div>
         </div>
         <div class="submit">
@@ -178,6 +178,7 @@ export default {
         return {
             title: '创建模板',
             tags: [],
+            commission: 0,
             form: {
                 templateId: '',
                 storeName: '',
@@ -212,6 +213,11 @@ export default {
             let id = this.$route.params.id;
             this.title = '修改模板';
             this.getDetailFun(id);
+        }
+    },
+    watch: {
+        'form.buyBackType': function (to, from) {
+            console.log('to,from', to, from);
         }
     },
     methods: {
