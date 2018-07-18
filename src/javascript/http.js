@@ -17,12 +17,11 @@ Vue.http.interceptors.push((request, next) => {
     request.url = '/douyaer-api' + request.url;
     // 请求返回拦截器
     next((response) => {
-        console.log('response>>', response.data);
         // 请求返回特殊状态的统一处理
         switch (response.status) {
             case 401:
                 $.alert('登录失效', function() {
-                   window.location.href = '/#/account/login';
+                    window.location.href = '/#/account/login';
                 });
                 break;
             default:

@@ -22,22 +22,24 @@
             <div class="box-bd">
                 <ul class="pro-list" v-if="taskTotal>0">
                     <li v-for="item in taskList" :key="item.taskId" class="item clearfix">
-                        <div class="img-wrap">
-                            <img :src="item.goodsPicUrl" alt="">
-                        </div>
-                        <div class="inner">
-                            <div class="name">{{item.storeName}}</div>
-                            <div class="state">
-                                <span>{{item.buyBackText}}</span>
-                                <span v-if="item.needAlitm==1">假聊</span>
+                        <div class="main clearfix">
+                            <div class="img-wrap">
+                                <img :src="item.goodsPicUrl" alt="">
                             </div>
-                            <div class="info">
-                                <span class="attr"><span class="money"><i>￥</i>{{item.goodsPrice}}</span></span>
-                                <!-- <span class="attr">每笔佣金：3</span> -->
-                            </div>
-                            <div class="ctrl">
-                                <span class="stock">剩余单数：{{item.orderCount-item.finishScalpingCount}}</span>
-                                <a href="javascipt:;" class="button" @click.stop="getOrderFun(item)">我要接单</a>
+                            <div class="inner">
+                                <div class="name">{{item.storeName}}</div>
+                                <div class="state">
+                                    <span>{{item.buyBackText}}</span>
+                                    <span v-if="item.needAlitm==1">假聊</span>
+                                </div>
+                                <div class="info">
+                                    <span class="attr"><span class="money"><i>￥</i>{{item.goodsPrice}}</span></span>
+                                    <!-- <span class="attr">每笔佣金：3</span> -->
+                                </div>
+                                <div class="ctrl">
+                                    <span class="stock">剩余单数：{{item.orderCount-item.finishScalpingCount}}</span>
+                                    <a href="javascipt:;" class="button" @click.stop="getOrderFun(item)">我要接单</a>
+                                </div>
                             </div>
                         </div>
                     </li>

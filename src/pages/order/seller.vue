@@ -33,8 +33,9 @@
                             </div>
                         </div>
                         <div class="ctrl">
-                            <!-- <a href="javascipt:;" class="button">立即投诉</a> -->
-                            <!-- <a href="javascipt:;" class="button">去完成</a> -->
+                            <a href="javascipt:;" class="button" @click.stop="complainOrderFun(item)">立即投诉</a>
+                            <a href="javascipt:;" class="button" @click.stop="completeOrderFun(item)">去完成</a>
+                            <a href="javascipt:;" class="button" @click.stop="evaluateOrderFun(item)">立即评价</a>
                             <a href="javascipt:;" class="button" @click.stop="cancelOrderFun(item)">取消订单</a>
                         </div>
                     </li>
@@ -115,6 +116,52 @@ export default {
                 }
             }).catch(() => {
                 $.hidePreloader();
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-07-01
+         * @lastTime    2018-07-01
+         * @description 刷手投诉订单
+         */
+        complainOrderFun(item) {
+            $.showPreloader();
+            this.$http.post('/order/complain', {
+                orderId: item.orderId
+            }).then((response) => {
+                $.hidePreloader();
+                if (response.data.success) {
+                    $.toast('投诉成功！');
+                } else {
+                    $.alert(response.data.message);
+                }
+            }).catch(() => {
+                $.hidePreloader();
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-07-01
+         * @lastTime    2018-07-01
+         * @description 刷手立即评价订单
+         */
+        evaluateOrderFun(item) {
+            this.$router.replace({
+                path: '/order/evaluate/' + item.orderId
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-07-01
+         * @lastTime    2018-07-01
+         * @description 刷手完成订单
+         */
+        completeOrderFun(item) {
+            this.$router.replace({
+                path: '/order/complete/' + item.orderId
             });
         }
     },

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-06-06 11:02:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-01 13:01:34
+* @Last Modified time: 2018-07-17 00:02:30
 -->
 <template>
     <div class="page page-current">
@@ -17,9 +17,9 @@
                     <li v-for="item in listData" :key="item.id" class="item-content">
                         <div class="item-inner">
                             <div class="item-title">充值</div>
-                            <div class="item-after">+2000</div>
+                            <div class="item-after">{{item.count}}</div>
                         </div>
-                        <div class="footer">2018-05-05 12:22</div>
+                        <div class="footer">{{item.ctime}}</div>
                     </li>
                 </ul>
             </div>
@@ -46,7 +46,7 @@ export default {
         this.$http.get('/coin/list', {
             params: {
                 pageIndex: 1,
-                pageSize: 10
+                pageSize: 1000
             }
         }).then((response) => {
             $.hidePreloader();

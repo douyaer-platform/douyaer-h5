@@ -11,6 +11,8 @@ import homeFriend from '@/pages/home/friend';
 import order from '@/pages/order';
 import orderSeller from '@/pages/order/seller';
 import orderBuyer from '@/pages/order/buyer';
+import orderComplete from '@/pages/order/complete';
+import orderEvaluate from '@/pages/order/evaluate';
 // 账户中心
 import account from '@/pages/account';
 import accountReg from '@/pages/account/reg';
@@ -118,6 +120,16 @@ export default new Router({
             path: 'buyer',
             name: 'orderBuyer',
             component: orderBuyer
+        }, {
+            // 刷手完成订单
+            path: 'complete/:id',
+            name: 'orderComplete',
+            component: orderComplete
+        }, {
+            // 刷手评价订单
+            path: 'evaluate/:id',
+            name: 'orderEvaluate',
+            component: orderEvaluate
         }]
     }, {
         // 个人中心

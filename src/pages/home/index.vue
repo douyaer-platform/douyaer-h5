@@ -16,8 +16,10 @@ export default {
         return {};
     },
     watch: {
-        '$route': function () {
-            this.gotoFun();
+        '$route': function (to) {
+            if (to.path === '/home') {
+                this.gotoFun();
+            }
         }
     },
     created() {

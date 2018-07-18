@@ -6,7 +6,7 @@
 * @Last Modified time: 2018-06-08 00:32:54
 -->
 <template>
-    <router-view></router-view>
+<router-view></router-view>
 </template>
 <script>
 export default {
@@ -16,19 +16,30 @@ export default {
             userInfo: this.$store.state.userInfo
         };
     },
-    created() {
-        if (this.userInfo.userRole === 'brushhand') {
-            this.$router.replace({
-                path: '/order/seller'
-            });
+    watch: {
+        '$route': function (to) {
+            if (to.path === '/order') {
+                this.gotoFun();
+            }
         }
-        // 商家跳转到商家页面
-        if (this.userInfo.userRole === 'business') {
-            this.$router.replace({
-                path: '/order/buyer'
-            });
+    },
+    created() {
+        this.gotoFun();
+    },
+    methods: {
+        gotoFun() {
+            if (this.userInfo.userRole === 'brushhand') {
+                this.$router.replace({
+                    path: '/order/seller'
+                });
+            }
+            // 商家跳转到商家页面
+            if (this.userInfo.userRole === 'business') {
+                this.$router.replace({
+                    path: '/order/buyer'
+                });
+            }
         }
     }
 };
-
 </script>

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-11 17:16:44
+* @Last Modified time: 2018-07-16 23:29:28
 -->
 <template>
     <div class="page page-current">
@@ -57,7 +57,7 @@
     </div>
 </template>
 <script>
-import utils from '@/javascript/utils';
+import { trim } from '@/javascript/utils';
 let $ = window.$;
 export default {
     name: 'accountReg',
@@ -94,7 +94,7 @@ export default {
             if (to.length < 11) {
                 this.validate.phone = false;
             } else {
-                this.validate.phone = (to.length) > 0 && (/^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/).test(utils.trim(to));
+                this.validate.phone = (to.length) > 0 && (/^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/).test(trim(to));
             }
         },
         validateAuthCode(to, from) {
