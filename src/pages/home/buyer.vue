@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-11 23:15:22
+* @Last Modified time: 2018-07-20 00:37:39
 -->
 <template>
 <div class="page page-current">
@@ -132,7 +132,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">订单数量</div>
                                     <div class="item-input">
-                                        <el-input v-model="form.orderCount" placeholder="请输入订单数量" autofocus></el-input>
+                                        <el-input v-model="form.orderCount" placeholder="请输入订单数量"></el-input>
                                     </div>
                                 </div>
                             </div>

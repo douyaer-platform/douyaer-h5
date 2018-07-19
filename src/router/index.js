@@ -82,7 +82,10 @@ export default new Router({
             // 注册
             path: 'reg',
             name: 'accountReg',
-            component: accountReg
+            component: accountReg,
+            children: [{
+                path: ':id'
+            }]
         }, {
             // 忘记密码
             path: 'forget',

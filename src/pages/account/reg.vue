@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-16 23:29:28
+* @Last Modified time: 2018-07-20 01:10:46
 -->
 <template>
     <div class="page page-current">
@@ -69,7 +69,8 @@ export default {
                 phone: '',
                 password: '',
                 authCode: '',
-                userRole: ''
+                userRole: '',
+                inviteId: ''
             },
             validate: {
                 phone: false,
@@ -82,6 +83,9 @@ export default {
         'form.phone': 'validatePhone',
         'form.password': 'validatePassword',
         'form.authCode': 'validateAuthCode'
+    },
+    created() {
+        this.inviteId = this.$route.params.id;
     },
     methods: {
         /**

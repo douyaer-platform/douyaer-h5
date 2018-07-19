@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-12 20:48:08
+* @Last Modified time: 2018-07-19 23:42:54
 -->
 <template>
 <div class="page page-current">
@@ -14,7 +14,7 @@
     <div class="footer-submit">
         <div class="tips">
             <div class="main">
-                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> {{commission||''}}</span>
+                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> {{commission}}</span>
             </div>
             <div class="sub">
                 另需平台服务费￥2
