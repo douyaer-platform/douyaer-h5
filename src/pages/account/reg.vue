@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-20 01:10:46
+* @Last Modified time: 2018-07-22 02:43:13
 -->
 <template>
     <div class="page page-current">
@@ -85,7 +85,20 @@ export default {
         'form.authCode': 'validateAuthCode'
     },
     created() {
-        this.inviteId = this.$route.params.id;
+        this.form.inviteId = this.$route.params.id || '';
+        this.$http.get('/userInvite/checkInviteId', {
+            params: {
+                inviteId: this.form.inviteId
+            }
+        }).then((response) => {
+            if (response.data.success) {
+                if (response.data.data.status !== 0) {
+                    $.alert('请联系商家或平台管理人员重新发', '注册链接已失效');
+                }
+            } else {
+                $.alert(response.data.message);
+            }
+        });
     },
     methods: {
         /**
@@ -165,6 +178,7 @@ export default {
          * @description 注册
          */
         regFun(type) {
+            console.log(this.form);
             if (!this.validate.phone) {
                 $.toast('请输入正确手机号！');
                 return;

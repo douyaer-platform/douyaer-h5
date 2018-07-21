@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-20 01:30:50
+* @Last Modified time: 2018-07-22 02:45:55
 -->
 <template>
     <div class="page page-current">
@@ -72,7 +72,8 @@ export default {
     data() {
         return {
             url: '',
-            listData: []
+            listData: [],
+            total: 0
         };
     },
     created() {
@@ -118,7 +119,19 @@ export default {
          * @description 获取邀请好友列表
          */
         getDataFun() {
-            // TODO
+            this.$http.get('/userInvite/list', {
+                params: {
+                    pageIndex: 1,
+                    pageSize: 1000
+                }
+            }).then((response) => {
+                if (response.data.success) {
+                    let data = response.data.data.list;
+
+                    this.listData = data;
+                    this.total = response.data.data.total;
+                }
+            });
         }
     }
 };
