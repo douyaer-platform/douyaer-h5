@@ -25,7 +25,7 @@
                                     <div class="item-title label">充值金额</div>
                                     <span class="unit">￥</span>
                                     <div class="item-input">
-                                        <el-input v-model="form.totalFee" placeholder="输入充值金额" autofocus></el-input>
+                                        <el-input type="number" v-model="form.totalFee" placeholder="输入充值金额" autofocus></el-input>
                                     </div>
                                 </div>
                             </div>

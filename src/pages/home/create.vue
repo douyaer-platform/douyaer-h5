@@ -14,7 +14,7 @@
     <div class="footer-submit">
         <div class="tips">
             <div class="main">
-                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> {{commission}}</span>
+                此模板将消耗金币 <span class="money"> <span class="unit">￥</span> {{templatePrice}}</span>
             </div>
             <div class="sub">
                 另需平台服务费￥2
@@ -54,7 +54,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">宝贝链接</div>
                                     <div class="item-input">
-                                        <el-input v-model="form.goodsUrl" placeholder="请填写正确的宝贝链接"></el-input>
+                                        <el-input type="url" v-model="form.goodsUrl" placeholder="请填写正确的宝贝链接"></el-input>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label" style="width:7.5rem">产品价格 <span class="sub">(包含运费)</span><span class="red">*</span></div>
                                     <div class="item-input">
-                                        <el-input v-model="form.goodsPrice" placeholder="请输入价格"></el-input>
+                                        <el-input type="number" v-model="form.goodsPrice" placeholder="请输入价格"></el-input>
                                     </div>
                                 </div>
                             </div>
@@ -171,6 +171,10 @@
 </template>
 <script>
 import upload from '@/javascript/upload';
+import {
+    validateNumber,
+    validateRequire
+} from '@/javascript/utils';
 let $ = window.$;
 export default {
     name: 'homeCreate',
@@ -178,7 +182,7 @@ export default {
         return {
             title: '创建模板',
             tags: [],
-            commission: 0,
+            templatePrice: 0,
             form: {
                 templateId: '',
                 storeName: '',
@@ -205,6 +209,12 @@ export default {
                 imageUrl: '/static/image/tmp-bg.png',
                 uploadResult: 'wait',
                 progress: '0'
+            },
+            validate: {
+                storeName: false,
+                goodsUrl: false,
+                goodsPrice: false,
+                goodsPicUrl: false
             }
         };
     },
@@ -216,11 +226,31 @@ export default {
         }
     },
     watch: {
-        'form.buyBackType': function (to, from) {
-            console.log('to,from', to, from);
-        }
+        'form.goodsPrice': 'getFeeFun',
+        'form.buyBackType': 'getFeeFun',
+        'form.needAlitm': 'getFeeFun',
+        'form.storeName': 'validateStoreName',
+        'form.goodsUrl': 'validateGoodsUrl',
+        'form.goodsPicUrl': 'validateGoodsPicUrl'
     },
     methods: {
+        // 校验店铺名称
+        validateStoreName(to, from) {
+            this.validate.storeName = validateRequire(to, from);
+        },
+        // 校验宝贝链接
+        validateGoodsUrl(to, from) {
+            this.validate.goodsUrl = validateRequire(to, from);
+        },
+        // 校验宝贝价格
+        validateGoodsPrice(to, from) {
+            this.validate.goodsPrice = validateNumber(to, from);
+        },
+        // 校验主图
+        validateGoodsPicUrl(to, from) {
+            this.validate.goodsPicUrl = validateRequire(to, from);
+        },
+        // 获取模板详情
         getDetailFun(id) {
             this.$http.get('/tasktemplate/get', {
                 params: {
@@ -330,9 +360,48 @@ export default {
          * @Author      weiberZeng
          * @DateTime    2018-06-27
          * @lastTime    2018-06-27
+         * @description 获取模板费用
+         */
+        getFeeFun(to, from) {
+            this.validateGoodsPrice(to, from);
+            if (!this.validate.goodsPrice) return;
+            this.$http.get('/tasktemplate/queryPrice', {
+                params: {
+                    goodsPrice: this.form.goodsPrice,
+                    buyBackType: this.form.buyBackType,
+                    needAlitm: this.form.needAlitm
+                }
+            }).then((response) => {
+                if (response.data.success) {
+                    this.templatePrice = response.data.data.templatePrice;
+                }
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-06-27
+         * @lastTime    2018-06-27
          * @description 提交认证
          */
         submitFun() {
+            if (!this.validate.storeName) {
+                $.toast('请输入正确的店铺名称！');
+                return;
+            }
+            if (!this.validate.goodsUrl) {
+                $.toast('请输入正确的宝贝链接！');
+                return;
+            }
+            if (!this.validate.goodsPrice) {
+                $.toast('请输入正确的产品价格！');
+                return;
+            }
+            if (!this.validate.goodsPicUrl) {
+                $.toast('请选择产品主图！');
+                return;
+            }
+
             let tags = [];
             for (var i = 0; i < this.tags.length; i++) {
                 if (this.tags[i]) {
@@ -340,6 +409,11 @@ export default {
                 }
             }
             this.form.tags = tags.join(',');
+
+            if (!this.form.tags) {
+                $.toast('请最少输入一个搜索关键词！');
+                return;
+            }
 
             let url;
             if (this.$route.name === 'homeModify') {
