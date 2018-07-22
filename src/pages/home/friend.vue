@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-22 02:45:55
+* @Last Modified time: 2018-07-22 15:28:55
 -->
 <template>
     <div class="page page-current">
@@ -45,16 +45,16 @@
                             <li class="item-content header">
                                 <div class="item-inner">
                                     <div class="item-title">被邀请人</div>
-                                    <div class="item-after">积分</div>
+                                    <!-- <div class="item-after">积分</div> -->
                                 </div>
                             </li>
                             <!-- todo -->
                             <li class="item-content" v-for="item in listData" :key="item.id">
                                 <div class="item-inner">
-                                    <div class="item-title">王丽丽</div>
-                                    <div class="item-after">+2000</div>
+                                    <div class="item-title">{{item.descUserName}}</div>
+                                    <!-- <div class="item-after">+2000</div> -->
                                 </div>
-                                <div class="footer">2018-05-05 12:22</div>
+                                <div class="footer">{{item.receiveCtime}}</div>
                             </li>
                             <!-- todo end -->
                         </ul>
@@ -78,6 +78,7 @@ export default {
     },
     created() {
         this.getUrlFun();
+        this.getDataFun();
     },
     mounted() {
         this.copyUrlFun();
@@ -102,7 +103,7 @@ export default {
          * @Author      weiberZeng
          * @DateTime    2018-07-20
          * @lastTime    2018-07-20
-         * @description 复制邀请链接
+         * @description 挂载复制事件到复制邀请链接
          */
         copyUrlFun() {
             var clipboard = new window.ClipboardJS('#copyBtn');
