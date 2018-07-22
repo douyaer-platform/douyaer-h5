@@ -28,7 +28,9 @@ import ucDefault from '@/pages/userCenter/default';
 import ucPay from '@/pages/userCenter/pay';
 import ucCash from '@/pages/userCenter/cash';
 import ucCoin from '@/pages/userCenter/coin';
+import ucPoints from '@/pages/userCenter/points';
 import ucFlow from '@/pages/userCenter/flow';
+import ucConcat from '@/pages/userCenter/concat';
 
 Vue.use(Router);
 
@@ -151,6 +153,11 @@ export default new Router({
             name: 'ucCoin',
             component: ucCoin
         }, {
+            // 我的积分
+            path: 'points',
+            name: 'ucPoints',
+            component: ucPoints
+        }, {
             // 充值
             path: 'pay',
             name: 'ucPay',
@@ -165,6 +172,11 @@ export default new Router({
             path: 'flow',
             name: 'ucFlow',
             component: ucFlow
+        }, {
+            // 联系客服
+            path: 'concat',
+            name: 'ucConcat',
+            component: ucConcat
         }]
     }]
 });

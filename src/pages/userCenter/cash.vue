@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-11 17:50:22
+* @Last Modified time: 2018-07-22 18:31:12
 -->
 <template>
 <div class="page page-current" v-if="!success">
@@ -77,16 +77,16 @@
             <div class="pf-wrap">
                 <div class="img-wrap"> <img src="/static/demo/photo.png" alt=""></div>
                 <div class="inner">
-                    <p>豆芽儿平台管理员</p>
+                    <p>{{groupName}}</p>
                     <div class="attr-item">
                         <span class="attr-name">工作时间</span>
-                        <span class="attr-val">7*24</span>
+                        <span class="attr-val">{{workTime}}</span>
                     </div>
                 </div>
             </div>
             <div class="code-wrap">
                 <div class="code-img">
-                    <img src="/static/demo/photo.png" alt="">
+                    <img src="/static/config/cashcode.png" alt="">
                 </div>
                 <div class="sub">扫码添加平台管理员微信</div>
             </div>
@@ -95,11 +95,18 @@
 </div>
 </template>
 <script>
+import {
+    validateNumber,
+    validateRequire
+} from '@/javascript/utils';
 let $ = window.$;
+
 export default {
     name: 'ucCash',
     data() {
         return {
+            groupName: window.config.text.groupName,
+            workTime: window.config.text.workTime,
             success: false,
             applyId: '',
             userInfo: this.$store.state.userInfo,
@@ -108,10 +115,27 @@ export default {
                 totalFee: '',
                 wechatName: '',
                 remark: ''
+            },
+            validate: {
+                totalFee: false,
+                wechatName: false
             }
         };
     },
+    watch: {
+        'form.totalFee': 'validateTotalFee',
+        'form.wechatName': 'validateWechatName'
+    },
     methods: {
+        // 校验金额是否为正整数
+        validateTotalFee(to, from) {
+            this.validate.totalFee = validateNumber(to, from);
+        },
+        // 校验微信名必填
+        validateWechatName(to, from) {
+            this.validate.wechatName = validateRequire(to, from);
+        },
+
         /**
          * @Author      weiberZeng
          * @DateTime    2018-06-11
@@ -119,6 +143,15 @@ export default {
          * @description 提交提现
          */
         submitFun() {
+            if (!this.validate.totalFee) {
+                $.toast('请输入正确的金额！');
+                return;
+            }
+            if (!this.validate.wechatName) {
+                $.toast('请输入微信名！');
+                return;
+            }
+
             $.showPreloader();
             this.$http.post('/coin/exchange', this.form).then((response) => {
                 $.hidePreloader();

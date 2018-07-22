@@ -288,7 +288,10 @@ nav.bar-tab{ background-color: #fff;
 	}
 }
 // 我的金币
-.coin-card-wrap{ padding: 1rem 0 0.5rem 1rem; background-color: @primary-color; color: #fff;
+.coin-card-wrap{ padding: 1rem 0 0.5rem 0; background-color: @primary-color; color: #fff; display: flex;
+	.coni-card-item{ flex: 1; text-align: center;
+		&.single{ padding-left: 1rem; text-align: left;}
+	}
 	.name{ opacity: .8; }
 	.val{ font-size: 2rem; }
 }

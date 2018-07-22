@@ -1,62 +1,66 @@
 {
   "checksum": {
-    "previous": "bba735828d7f6a84716d6c36c632c8b48d1b35cca63ae9d85c8524da397a8133",
-    "current": "bba735828d7f6a84716d6c36c632c8b48d1b35cca63ae9d85c8524da397a8133"
+    "previous": "c05e37d9182683ab3267f8d1560557ff0a27c625760a21c49820e13f846e4537",
+    "current": "c05e37d9182683ab3267f8d1560557ff0a27c625760a21c49820e13f846e4537"
   },
   "fonts": [
-    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.ttf",
-    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.svg",
-    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.woff",
-    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.eot",
-    "fontcustom/fontcustom_bba735828d7f6a84716d6c36c632c8b4.woff2"
+    "fontcustom/fontcustom_c05e37d9182683ab3267f8d1560557ff.ttf",
+    "fontcustom/fontcustom_c05e37d9182683ab3267f8d1560557ff.svg",
+    "fontcustom/fontcustom_c05e37d9182683ab3267f8d1560557ff.woff",
+    "fontcustom/fontcustom_c05e37d9182683ab3267f8d1560557ff.eot",
+    "fontcustom/fontcustom_c05e37d9182683ab3267f8d1560557ff.woff2"
   ],
   "glyphs": {
     "addtmpl": {
-      "codepoint": 61707,
+      "codepoint": 61696,
       "source": "font/addtmpl.svg"
     },
     "cash": {
-      "codepoint": 61705,
+      "codepoint": 61697,
       "source": "font/cash.svg"
     },
     "coin": {
-      "codepoint": 61702,
+      "codepoint": 61698,
       "source": "font/coin.svg"
     },
     "flow": {
-      "codepoint": 61703,
+      "codepoint": 61699,
       "source": "font/flow.svg"
     },
     "home": {
-      "codepoint": 61696,
+      "codepoint": 61700,
       "source": "font/home.svg"
     },
     "more": {
-      "codepoint": 61700,
+      "codepoint": 61701,
       "source": "font/more.svg"
     },
     "order": {
-      "codepoint": 61697,
+      "codepoint": 61702,
       "source": "font/order.svg"
     },
     "pay": {
-      "codepoint": 61706,
+      "codepoint": 61703,
       "source": "font/pay.svg"
     },
+    "points": {
+      "codepoint": 61704,
+      "source": "font/points.svg"
+    },
     "see": {
-      "codepoint": 61701,
+      "codepoint": 61705,
       "source": "font/see.svg"
     },
     "tel": {
-      "codepoint": 61704,
+      "codepoint": 61706,
       "source": "font/tel.svg"
     },
     "uc": {
-      "codepoint": 61698,
+      "codepoint": 61707,
       "source": "font/uc.svg"
     },
     "warning": {
-      "codepoint": 61699,
+      "codepoint": 61708,
       "source": "font/warning.svg"
     }
   },
