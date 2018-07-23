@@ -34,11 +34,11 @@
                                 </div>
                                 <div class="info">
                                     <span class="attr"><span class="money"><i>￥</i>{{item.goodsPrice}}</span></span>
-                                    <!-- <span class="attr">每笔佣金：3</span> -->
+                                    <span class="attr">每笔佣金：3</span>
                                 </div>
                                 <div class="ctrl">
                                     <span class="stock">剩余单数：{{item.orderCount-item.finishScalpingCount}}</span>
-                                    <a href="javascipt:;" class="button" @click.stop="getOrderFun(item)">我要接单</a>
+                                    <a href="javascipt:;" class="button" @click.stop="getOrderFun(item)" v-if="item.orderCount-item.finishScalpingCount>0">我要接单</a>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@ export default {
             this.$http.get('/task/list', {
                 params: {
                     pageIndex: 1,
-                    pageSize: 1000
+                    pageSize: 10000
                 }
             }).then((response) => {
                 if (response.data.success) {

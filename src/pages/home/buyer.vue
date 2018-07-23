@@ -307,7 +307,7 @@ export default {
             this.$http.get('/tasktemplate/list', {
                 params: {
                     pageIndex: 1,
-                    pageSize: 1000
+                    pageSize: 10000
                 }
             }).then((response) => {
                 if (response.data.success) {

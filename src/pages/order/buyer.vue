@@ -27,7 +27,7 @@
                             <div class="state">
                                 <span v-if="item.buyBackText">{{item.buyBackText}}</span>
                                 <span v-if="item.needAlitm==1">假聊</span>
-                                <!-- <span class="right">垫付</span> -->
+                                <span class="right">垫付</span>
                             </div>
                             <div class="money">
                                 <span>￥</span>{{item.goodsPrice}}
@@ -37,12 +37,12 @@
                             <span class="text">共计：</span>
                             <span class="attr">
                                 <span class="name">放单量</span>
-                                <span class="val">{{item.orderCount}}</span>
+                            <span class="val">{{item.orderCount}}</span>
                             </span>
-                           <!--  <span class="attr">
+                            <span class="attr">
                                 <span class="name">佣金</span>
-                                <span class="val">3</span>
-                            </span> -->
+                            <span class="val">3</span>
+                            </span>
                         </div>
                         <div class="ctrl">
                             <a href="javascipt:;" class="button">立即投诉</a>

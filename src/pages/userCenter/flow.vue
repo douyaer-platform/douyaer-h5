@@ -6,29 +6,29 @@
 * @Last Modified time: 2018-07-17 00:02:30
 -->
 <template>
-    <div class="page page-current">
-        <header class="bar bar-nav">
-            <router-link to="/uc/default" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
-            <h1 class="title">资金流水</h1>
-        </header>
-        <div class="content">
-            <div class="flow-list-block list-block" v-if="total>0">
-                <ul>
-                    <li v-for="item in listData" :key="item.id" class="item-content">
-                        <div class="item-inner">
-                            <div class="item-title">充值</div>
-                            <div class="item-after">{{item.count}}</div>
-                        </div>
-                        <div class="footer">{{item.ctime}}</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="no-tmpl" v-else>
-                    <span class="icon"><i class="icon-addtmpl"></i></span>
-                    <span class="text">暂无数据</span>
-            </div>
+<div class="page page-current">
+    <header class="bar bar-nav">
+        <router-link to="/uc/default" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
+        <h1 class="title">资金流水</h1>
+    </header>
+    <div class="content">
+        <div class="flow-list-block list-block" v-if="total>0">
+            <ul>
+                <li v-for="item in listData" :key="item.id" class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">{{item.remark}}</div>
+                        <div class="item-after">{{item.count}}</div>
+                    </div>
+                    <div class="footer">{{item.ctime}}</div>
+                </li>
+            </ul>
+        </div>
+        <div class="no-tmpl" v-else>
+            <span class="icon"><i class="icon-addtmpl"></i></span>
+            <span class="text">暂无数据</span>
         </div>
     </div>
+</div>
 </template>
 <script>
 let $ = window.$;
@@ -59,5 +59,4 @@ export default {
         });
     }
 };
-
 </script>
