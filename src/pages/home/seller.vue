@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="info">
                                     <span class="attr"><span class="money"><i>￥</i>{{item.goodsPrice}}</span></span>
-                                    <span class="attr">每笔佣金：3</span>
+                                    <span class="attr">每笔佣金：{{item.commission}}</span>
                                 </div>
                                 <div class="ctrl">
                                     <span class="stock">剩余单数：{{item.orderCount-item.finishScalpingCount}}</span>

@@ -6,140 +6,140 @@
 * @Last Modified time: 2018-07-16 23:42:45
 -->
 <template>
-    <div class="page page-current">
-        <header class="bar bar-nav">
-            <router-link to="/uc/default" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
-            <h1 class="title">刷手认证</h1>
-        </header>
-        <div class="content">
-            <div class="description">(1)本平台是基于亲友所搭建的一个互助平台，不以盈利为目的，不收取任何保证金！
-                <br> (2)在本平台做任务，每个月能赚300-400元，不像网络骗局所说的月入上万！
-                <br> (3)请确保信息真实有效，确保审核通过。
-            </div>
-            <div class="main-box">
-                <div class="box-bd">
-                    <div class="list-block">
-                        <ul class="thinForm">
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">性别</div>
-                                        <div class="item-input">
-                                            <el-radio-group v-model="form.sex" :disabled="modify">
-                                                <el-radio label="male">男</el-radio>
-                                                <el-radio label="female">女</el-radio>
-                                            </el-radio-group>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">IP地址</div>
-                                        <div class="item-input">
-                                            <el-input :disabled="modify" v-model="form.ip" maxlength="15" placeholder="请输入真实 IP" autofocus></el-input>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li v-if="!modify">
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">所在地区</div>
-                                        <div class="item-input">
-                                            <myCityPick v-model="cityArray" @change="setCityFun"></myCityPick>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">收货地址</div>
-                                        <div class="item-input">
-                                            <el-input :disabled="modify" v-model="form.address" maxlength="18" placeholder="请输入详细地址"></el-input>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">淘宝账号</div>
-                                        <div class="item-input">
-                                            <el-input :disabled="modify" v-model="form.taobaoAccount" maxlength="18" placeholder="请输入淘宝账号"></el-input>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="main-box" v-if="!modify">
-                <div class="box-bd">
-                    <ul class="seller-upload-list">
-                        <li class="upload-item">
-                            <div class="hd">IP地址查询截图</div>
-                            <div class="bd">
-                                <div class="left">
-                                    <div class="upload" @click="checkPhotoFun('ipUpload')">
-                                        <span v-if="ipUpload.uploadResult==='progress'" class="percent">{{ipUpload.progress}}<i>%</i></span>
-                                        <img :src="ipUpload.imageUrl" alt="">
-                                        <input type="file" ref="ipUpload" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('ipUpload')">
-                                    </div>
-                                    <span class="tips">*百度搜索 IP，就能搜索到你的 IP</span>
-                                </div>
-                                <div class="right">
-                                    <span>拍摄示例</span>
-                                    <div class="eg">
+<div class="page page-current">
+    <header class="bar bar-nav">
+        <router-link to="/uc/default" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
+        <h1 class="title">刷手认证</h1>
+    </header>
+    <div class="content">
+        <div class="description">(1)本平台是基于亲友所搭建的一个互助平台，不以盈利为目的，不收取任何保证金！
+            <br> (2)在本平台做任务，每个月能赚300-400元，不像网络骗局所说的月入上万！
+            <br> (3)请确保信息真实有效，确保审核通过。
+        </div>
+        <div class="main-box">
+            <div class="box-bd">
+                <div class="list-block">
+                    <ul class="thinForm">
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">性别</div>
+                                    <div class="item-input">
+                                        <el-radio-group v-model="form.sex" :disabled="modify">
+                                            <el-radio label="male">男</el-radio>
+                                            <el-radio label="female">女</el-radio>
+                                        </el-radio-group>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li class="upload-item">
-                            <div class="hd">我的淘宝页面截图</div>
-                            <div class="bd">
-                                <div class="left">
-                                    <div class="upload" @click="checkPhotoFun('tbUpload')">
-                                        <span v-if="tbUpload.uploadResult==='progress'" class="percent">{{tbUpload.progress}}<i>%</i></span>
-                                        <img :src="tbUpload.imageUrl" alt="">
-                                        <input type="file" ref="tbUpload" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tbUpload')">
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <span>拍摄示例</span>
-                                    <div class="eg">
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">IP地址</div>
+                                    <div class="item-input">
+                                        <el-input :disabled="modify" v-model="form.ip" maxlength="15" placeholder="请输入真实 IP" autofocus></el-input>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li class="upload-item">
-                            <div class="hd">支付宝页面截图</div>
-                            <div class="bd">
-                                <div class="left">
-                                    <div class="upload" @click="checkPhotoFun('zfbUpload')">
-                                        <span v-if="zfbUpload.uploadResult==='progress'" class="percent">{{zfbUpload.progress}}<i>%</i></span>
-                                        <img :src="zfbUpload.imageUrl" alt="">
-                                        <input type="file" ref="zfbUpload" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('zfbUpload')">
+                        <li v-if="!modify">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">所在地区</div>
+                                    <div class="item-input">
+                                        <myCityPick v-model="cityArray" @change="setCityFun"></myCityPick>
                                     </div>
                                 </div>
-                                <div class="right">
-                                    <span>拍摄示例</span>
-                                    <div class="eg">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">收货地址</div>
+                                    <div class="item-input">
+                                        <el-input :disabled="modify" v-model="form.address" maxlength="18" placeholder="请输入详细地址"></el-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">淘宝账号</div>
+                                    <div class="item-input">
+                                        <el-input :disabled="modify" v-model="form.taobaoAccount" maxlength="18" placeholder="请输入淘宝账号"></el-input>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="submit-wrap">
-                    <a href="javascript:;" @click.stop="submitFun" class="button button-big button-fill">提交刷手认证</a>
-                </div>
+            </div>
+        </div>
+        <div class="main-box">
+            <div class="box-bd">
+                <ul class="seller-upload-list">
+                    <li class="upload-item">
+                        <div class="hd">IP地址查询截图</div>
+                        <div class="bd">
+                            <div class="left">
+                                <div class="upload" @click="checkPhotoFun('ipUpload')">
+                                    <span v-if="ipUpload.uploadResult==='progress'" class="percent">{{ipUpload.progress}}<i>%</i></span>
+                                    <img :src="ipUpload.imageUrl" alt="">
+                                    <input type="file" ref="ipUpload" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('ipUpload')">
+                                </div>
+                                <span class="tips">*百度搜索 IP，就能搜索到你的 IP</span>
+                            </div>
+                            <div class="right">
+                                <span>拍摄示例</span>
+                                <div class="eg">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="upload-item">
+                        <div class="hd">我的淘宝页面截图</div>
+                        <div class="bd">
+                            <div class="left">
+                                <div class="upload" @click="checkPhotoFun('tbUpload')">
+                                    <span v-if="tbUpload.uploadResult==='progress'" class="percent">{{tbUpload.progress}}<i>%</i></span>
+                                    <img :src="tbUpload.imageUrl" alt="">
+                                    <input type="file" ref="tbUpload" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tbUpload')">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <span>拍摄示例</span>
+                                <div class="eg">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="upload-item">
+                        <div class="hd">支付宝页面截图</div>
+                        <div class="bd">
+                            <div class="left">
+                                <div class="upload" @click="checkPhotoFun('zfbUpload')">
+                                    <span v-if="zfbUpload.uploadResult==='progress'" class="percent">{{zfbUpload.progress}}<i>%</i></span>
+                                    <img :src="zfbUpload.imageUrl" alt="">
+                                    <input type="file" ref="zfbUpload" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('zfbUpload')">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <span>拍摄示例</span>
+                                <div class="eg">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="submit-wrap">
+                <a href="javascript:;" @click.stop="submitFun" class="button button-big button-fill" v-if="!modify">提交刷手认证</a>
             </div>
         </div>
     </div>
+</div>
 </template>
 <script>
 import upload from '@/javascript/upload';
@@ -199,6 +199,8 @@ export default {
          * @description 选择图片
          */
         checkPhotoFun(name) {
+            if (this.modify) return;
+
             if (this[name].uploadResult === 'wait') {
                 this.$refs[name].dispatchEvent(new MouseEvent('click'));
             } else if (this[name].uploadResult === 'success' || this[name].uploadResult === 'progress') {
@@ -288,5 +290,4 @@ export default {
         }
     }
 };
-
 </script>

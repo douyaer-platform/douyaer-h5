@@ -41,7 +41,7 @@
                             </span>
                             <span class="attr">
                                 <span class="name">佣金</span>
-                            <span class="val">3</span>
+                            <span class="val">{{item.commission}}</span>
                             </span>
                         </div>
                         <div class="ctrl">
