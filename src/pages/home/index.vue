@@ -26,6 +26,7 @@ export default {
         this.gotoFun();
     },
     methods: {
+        // 根据用户信息跳转到商家或者刷手
         gotoFun() {
             let userInfo = this.$store.state.userInfo;
             if (userInfo) {

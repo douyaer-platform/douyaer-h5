@@ -4,11 +4,14 @@
  * @Last Modified by:   weiberzeng
  * @Last Modified time: 2018-07-10 11:09:38
  */
+
+// 字符串去空格
 export function trim(v) {
     if (!v) return v;
     return v.replace(/^\s+/g, '').replace(/\s+$/g, '');
 };
 
+// 设置回购文本
 export function setBuyBackType(type) {
     let str = '';
     switch (type) {
@@ -24,6 +27,41 @@ export function setBuyBackType(type) {
     }
     return str;
 }
+
+// 格式化时间
+export function dateFormatter(date, format) {
+    if (date) {
+        let str = format || 'yyyy-MM-dd hh:mm:ss';
+        try {
+            let d = new Date(date);
+            let o = {
+                'M+': d.getMonth() + 1,
+                'd+': d.getDate(),
+                'h+': d.getHours(),
+                'm+': d.getMinutes(),
+                's+': d.getSeconds(),
+                'q+': Math.floor((d.getMonth() + 3) / 3),
+                'S': d.getMilliseconds()
+            };
+            if (/(y+)/.test(str)) {
+                str = str.replace(RegExp.$1, (d.getFullYear() + '').substr(4 -
+                    RegExp.$1.length));
+            }
+            for (let k in o) {
+                if (new RegExp('(' + k + ')').test(str)) {
+                    str = str.replace(RegExp.$1, (RegExp.$1.length ===
+                        1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+                }
+            }
+            return str;
+        } catch (e) {
+            return '';
+        }
+    } else {
+        return '';
+    }
+};
+
 // 加密手机号
 export function hidePhone(val) {
     if (val) {
@@ -64,10 +102,12 @@ export function hidePhone(val) {
         return '';
     }
 }
+
 // 正整数校验
 export function validateNumber(to, from) {
     return (/^[1-9]\d*$/).test(to);
 }
+
 // 非空校验
 export function validateRequire(to, from) {
     if (to || to === 0 || to === '0') {

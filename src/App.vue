@@ -8,6 +8,11 @@
 <script>
 export default {
     name: 'App',
+    data() {
+        return {
+            isLogin: false
+        };
+    },
     created() {
         // 获取用户是否登录
         this.$http.get('/user/loginStatus').then((response) => {

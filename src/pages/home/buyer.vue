@@ -25,7 +25,7 @@
     <div class="footer-submit">
         <div class="tips">
             <div class="one">
-                合计金额 <span class="money"> <span class="unit">￥</span> --</span>
+                合计金额 <span class="money"> <span class="unit">￥</span> {{templatePrice*form.orderCount}}</span>
             </div>
         </div>
         <div class="submit">
@@ -132,7 +132,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">订单数量</div>
                                     <div class="item-input">
-                                        <el-input v-model="form.orderCount" placeholder="请输入订单数量"></el-input>
+                                        <el-input type="number" v-model="form.orderCount" placeholder="请输入订单数量"></el-input>
                                     </div>
                                 </div>
                             </div>
@@ -176,9 +176,13 @@
 </div>
 </template>
 <script>
+import {
+    dateFormatter,
+    validateNumber,
+    validateRequire
+} from '@/javascript/utils';
 import bottomBar from '@/components/bottomBar';
 let $ = window.$;
-
 export default {
     name: 'homeBuyer',
     data() {
@@ -192,6 +196,8 @@ export default {
             radio2: 3,
             templateData: [],
             templateTotal: 0,
+            // 模板金币价格
+            templatePrice: 0,
             form: {
                 templateId: '',
                 brushhandSex: '',
@@ -200,8 +206,18 @@ export default {
                 remark: '',
                 startTime: '',
                 endTime: ''
+            },
+            validate: {
+                templateId: false,
+                orderCount: false
             }
         };
+    },
+    watch: {
+        'form.templateId': 'validateTemplateId',
+        'form.orderCount': 'validateOrderCount',
+        'form.startTime': 'validateStartTime',
+        'form.endTime': 'validateEndTime'
     },
     created() {
         this.getCitysFun();
@@ -221,6 +237,27 @@ export default {
         });
     },
     methods: {
+        // 校验是否选择模板
+        validateTemplateId(to, from) {
+            this.validate.templateId = validateRequire(to, from);
+        },
+
+        // 校验订单数量
+        validateOrderCount(to, from) {
+            this.validate.orderCount = validateNumber(to, from);
+        },
+
+        // 校验开始时间
+        validateStartTime(to, from) {
+            this.validate.startTime = validateRequire(to, from);
+        },
+
+        // 校验结束时间
+        validateEndTime(to, from) {
+            this.validate.endTime = validateRequire(to, from);
+        },
+
+        // 获取城市列表
         getCitysFun(id, type) {
             this.$http.get('/sys/listCitys').then((response) => {
                 if (response.data.success) {
@@ -305,6 +342,9 @@ export default {
          * @description 选择模板
          */
         checkedFun(item) {
+            // 设置模板价格为选中模板价格
+            this.templatePrice = item.templatePrice;
+
             for (let i in this.templateData) {
                 this.templateData[i].checked = false;
             }
@@ -354,9 +394,30 @@ export default {
          * @Author      weiberZeng
          * @DateTime    2018-06-27
          * @lastTime    2018-06-27
-         * @description 提交认证
+         * @description 添加任务
          */
         submitFun() {
+            if (!this.validate.templateId) {
+                $.toast('请选择模板！');
+                return;
+            }
+            if (!this.validate.orderCount) {
+                $.toast('请填写正确订单数量！');
+                return;
+            }
+            if (!this.validate.startTime) {
+                $.toast('请选择开始时间！');
+                return;
+            }
+            if (!this.validate.endTime) {
+                $.toast('请选择结束时间！');
+                return;
+            }
+            if (this.form.startTime >= this.form.endTime) {
+                $.toast('结束时间必须大于开始时间！');
+                return;
+            }
+
             $.showPreloader();
             this.$http.post('/task/add', this.form).then((response) => {
                 $.hidePreloader();
@@ -372,33 +433,6 @@ export default {
     },
     components: {
         bottomBar
-    }
-};
-
-let dateFormatter = function (date, format) {
-    if (date) {
-        let str = format || 'yyyy-MM-dd hh:mm:ss';
-        try {
-            let d = new Date(date);
-            let o = {
-                'M+': d.getMonth() + 1,
-                'd+': d.getDate(),
-                'h+': d.getHours(),
-                'm+': d.getMinutes(),
-                's+': d.getSeconds(),
-                'q+': Math.floor((d.getMonth() + 3) / 3),
-                'S': d.getMilliseconds()
-            };
-            if (/(y+)/.test(str)) str = str.replace(RegExp.$1, (d.getFullYear() + '').substr(4 - RegExp.$1.length));
-            for (let k in o) {
-                if (new RegExp('(' + k + ')').test(str)) str = str.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
-            }
-            return str;
-        } catch (e) {
-            return '';
-        }
-    } else {
-        return '';
     }
 };
 </script>
