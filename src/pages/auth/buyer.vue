@@ -121,6 +121,10 @@ export default {
         for (let i in this.form) {
             this.form[i] = this.userInfo[i] || '';
         }
+        if (this.form.identifyNoUrl) {
+            this.imageUrl = this.form.identifyNoUrl;
+        }
+
         if (this.form.realName) {
             this.isAudit = true;
         }

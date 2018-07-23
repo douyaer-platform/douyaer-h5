@@ -190,6 +190,15 @@ export default {
                 break;
             }
         }
+        if (this.form.ipScreenshotUrl) {
+            this.ipUpload.imageUrl = this.form.ipScreenshotUrl;
+        }
+        if (this.form.taobaoScreenshotUrl) {
+            this.tbUpload.imageUrl = this.form.taobaoScreenshotUrl;
+        }
+        if (this.form.alipayScreenshotUrl) {
+            this.zfbUpload.imageUrl = this.form.alipayScreenshotUrl;
+        }
     },
     methods: {
         /**
