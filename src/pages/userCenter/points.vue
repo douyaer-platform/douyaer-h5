@@ -15,14 +15,14 @@
         <div class="coin-card-wrap">
             <div class="coni-card-item single">
                 <div class="name">可用积分</div>
-                <div class="val">{{userInfo.coin}}</div>
+                <div class="val">{{userInfo.integral}}</div>
             </div>
         </div>
         <div class="flow-list-block list-block" v-if="total>0">
             <ul>
                 <li v-for="item in listData" :key="item.id" class="item-content">
                     <div class="item-inner">
-                        <div class="item-title">邀请好友</div>
+                        <div class="item-title">{{item.comment}}</div>
                         <div class="item-after">{{item.count}}</div>
                     </div>
                     <div class="footer">{{item.ctime}}</div>
@@ -49,14 +49,9 @@ export default {
         };
     },
     created() {
-        // 获取资金流水
+        // 获取积分流水
         $.showPreloader();
-        this.$http.get('/coin/list', {
-            params: {
-                pageIndex: 1,
-                pageSize: 1000
-            }
-        }).then((response) => {
+        this.$http.get('/integral/list').then((response) => {
             $.hidePreloader();
             if (response.data.success) {
                 this.listData = response.data.data.list;

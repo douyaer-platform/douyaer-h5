@@ -52,7 +52,7 @@
                         <li class="item-content" v-for="item in listData" :key="item.id">
                             <div class="item-inner">
                                 <div class="item-title">{{item.descUserName}}</div>
-                                <div class="item-after">+2000</div>
+                                <div class="item-after">{{item.integral||'--'}}</div>
                             </div>
                             <div class="footer">{{item.receiveCtime}}</div>
                         </li>
@@ -120,15 +120,9 @@ export default {
          * @description 获取邀请好友列表
          */
         getDataFun() {
-            this.$http.get('/userInvite/list', {
-                params: {
-                    pageIndex: 1,
-                    pageSize: 1000
-                }
-            }).then((response) => {
+            this.$http.get('/userInvite/list').then((response) => {
                 if (response.data.success) {
                     let data = response.data.data.list;
-
                     this.listData = data;
                     this.total = response.data.data.total;
                 }

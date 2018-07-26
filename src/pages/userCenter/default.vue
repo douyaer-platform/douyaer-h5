@@ -48,7 +48,7 @@
                         <div class="item-media"><i class="icon icon-points"></i></div>
                         <div class="item-inner">
                             <div class="item-title">我的积分</div>
-                            <div class="item-after">{{userInfo.coin}}</div>
+                            <div class="item-after">{{userInfo.integral}}</div>
                         </div>
                     </router-link>
                 </li>
@@ -82,7 +82,9 @@ export default {
             userInfo: this.$store.state.userInfo
         };
     },
+    created() {},
     methods: {
+        // 电话号码脱敏
         hidePhoneFun(val) {
             return hidePhone(val);
         }

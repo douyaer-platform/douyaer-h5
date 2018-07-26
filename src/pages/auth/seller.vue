@@ -186,8 +186,12 @@ export default {
         }
         for (let i in this.form) {
             switch (i) {
-                default: this.form[i] = this.userInfo[i] || '';
-                break;
+                case 'sex':
+                    if (this.userInfo[i]) this.form[i] = this.userInfo[i];
+                    break;
+                default:
+                    this.form[i] = this.userInfo[i] || '';
+                    break;
             }
         }
         if (this.form.ipScreenshotUrl) {

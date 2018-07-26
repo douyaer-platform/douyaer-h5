@@ -226,7 +226,10 @@ export default {
         }
     },
     watch: {
-        'form.goodsPrice': 'getFeeFun',
+        'form.goodsPrice': function (to, from) {
+            this.validateGoodsPrice(to, from);
+            this.getFeeFun(to, from);
+        },
         'form.buyBackType': 'getFeeFun',
         'form.needAlitm': 'getFeeFun',
         'form.storeName': 'validateStoreName',
@@ -363,7 +366,6 @@ export default {
          * @description 获取模板费用
          */
         getFeeFun(to, from) {
-            this.validateGoodsPrice(to, from);
             if (!this.validate.goodsPrice) return;
             this.$http.get('/tasktemplate/queryPrice', {
                 params: {
