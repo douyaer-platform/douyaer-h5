@@ -2,16 +2,26 @@
  * @Author: weiberzeng
  * @Date:   2018-06-04 19:44:48
  * @Last Modified by:   weiberzeng
- * @Last Modified time: 2018-07-10 11:09:38
+ * @Last Modified time: 2018-07-31 11:35:50
  */
 
-// 字符串去空格
+/**
+ * @Author      weiberZeng
+ * @DateTime    2018-07-31
+ * @lastTime    2018-07-31
+ * @description 字符串去空格
+ */
 export function trim(v) {
     if (!v) return v;
     return v.replace(/^\s+/g, '').replace(/\s+$/g, '');
 };
 
-// 设置回购文本
+/**
+ * @Author      weiberZeng
+ * @DateTime    2018-07-31
+ * @lastTime    2018-07-31
+ * @description 设置回购文本
+ */
 export function setBuyBackType(type) {
     let str = '';
     switch (type) {
@@ -28,7 +38,12 @@ export function setBuyBackType(type) {
     return str;
 }
 
-// 格式化时间
+/**
+ * @Author      weiberZeng
+ * @DateTime    2018-07-31
+ * @lastTime    2018-07-31
+ * @description 格式化时间
+ */
 export function dateFormatter(date, format) {
     if (date) {
         let str = format || 'yyyy-MM-dd hh:mm:ss';
@@ -62,7 +77,12 @@ export function dateFormatter(date, format) {
     }
 };
 
-// 加密手机号
+/**
+ * @Author      weiberZeng
+ * @DateTime    2018-07-31
+ * @lastTime    2018-07-31
+ * @description 加密手机号
+ */
 export function hidePhone(val) {
     if (val) {
         let arr = val.split('');
@@ -103,12 +123,22 @@ export function hidePhone(val) {
     }
 }
 
-// 正整数校验
+/**
+ * @Author      weiberZeng
+ * @DateTime    2018-07-31
+ * @lastTime    2018-07-31
+ * @description 正整数校验
+ */
 export function validateNumber(to, from) {
     return (/^[1-9]\d*$/).test(to);
 }
 
-// 非空校验
+/**
+ * @Author      weiberZeng
+ * @DateTime    2018-07-31
+ * @lastTime    2018-07-31
+ * @description 非空校验
+ */
 export function validateRequire(to, from) {
     if (to || to === 0 || to === '0') {
         return true;
