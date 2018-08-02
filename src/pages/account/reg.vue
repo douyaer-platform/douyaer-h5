@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-22 02:43:13
+* @Last Modified time: 2018-08-02 20:54:13
 -->
 <template>
     <div class="page page-current">
@@ -48,7 +48,7 @@
                     <a href="javascript:;" @click.stop="regFun('business')" class="button button-big button-fill">商家注册</a>
                     <a href="javascript:;" @click.stop="regFun('brushhand')" class="button button-big button-light">刷手注册</a>
                 </div>
-                <div class="description">豆芽网是一个专业的邀请亲友互助，让亲友赚取佣金的平台，注册后请严格遵守豆芽网的操作规则，恶意违规者一律封号处理</div>
+                <div class="description">{{text}}</div>
                 <div class="linkWrap bottom">
                     <router-link to="/account/login">已有账号，直接<span>登录</span></router-link>
                 </div>
@@ -76,7 +76,8 @@ export default {
                 phone: false,
                 password: false,
                 authCode: false
-            }
+            },
+            text: window.config.mark.reg.t1
         };
     },
     watch: {
@@ -93,7 +94,7 @@ export default {
         }).then((response) => {
             if (response.data.success) {
                 if (response.data.data.status !== 0) {
-                    $.alert('请联系商家或平台管理人员重新发', '注册链接已失效');
+                    $.alert(window.config.mark.reg.t2, window.config.mark.reg.t3);
                 }
             } else {
                 $.alert(response.data.message);
@@ -197,14 +198,14 @@ export default {
             let ok;
             let _that = this;
             if (type === 'brushhand') {
-                title = '确认注册成为刷手';
-                text = '选择注册为刷手后将无法更改';
-                ok = '注册刷手';
+                title = window.config.mark.reg.t4;
+                text = window.config.mark.reg.t5;
+                ok = window.config.mark.reg.t6;
             }
             if (type === 'business') {
-                title = '确认注册成为商家';
-                text = '选择注册为商家后将无法更改';
-                ok = '注册商家';
+                title = window.config.mark.reg.t7;
+                text = window.config.mark.reg.t8;
+                ok = window.config.mark.reg.t9;
             }
 
             $.confirm(text, title, function() {

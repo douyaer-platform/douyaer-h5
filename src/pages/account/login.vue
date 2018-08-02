@@ -9,7 +9,9 @@
 <div class="page page-current">
     <div class="content">
         <div class="accountWrap">
-            <div class="userPhoto"></div>
+            <div class="userPhoto">
+                <img src="/static/image/admin.png" alt="">
+            </div>
             <div class="list-block">
                 <ul>
                     <li>

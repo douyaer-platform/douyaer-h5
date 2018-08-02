@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-01 12:58:40
+* @Last Modified time: 2018-08-02 21:32:37
 -->
 <template>
 <div class="page page-current">
@@ -77,12 +77,7 @@ export default {
          */
         getOrderListFun() {
             $.showPreloader();
-            this.$http.get('/order/list', {
-                params: {
-                    pageIndex: 1,
-                    pageSize: 1000
-                }
-            }).then((response) => {
+            this.$http.get('/order/list').then((response) => {
                 $.hidePreloader();
                 if (response.data.success) {
                     let data = response.data.data.list;

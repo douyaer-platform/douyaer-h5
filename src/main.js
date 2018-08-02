@@ -27,9 +27,24 @@ Vue.use(Radio);
 Vue.use(RadioGroup);
 
 Vue.use(Vuex);
+
+let userInfo;
+let userCert;
+try {
+    userInfo = JSON.parse(localStorage.getItem('userInfo'));
+} catch (e) {
+    userInfo = {};
+}
+try {
+    userCert = JSON.parse(localStorage.getItem('userCert'));
+} catch (e) {
+    userCert = {};
+}
+
 const store = new Vuex.Store({
     state: {
-        userInfo: JSON.parse(localStorage.getItem('userInfo'))
+        userInfo: userInfo,
+        userCert: userCert
     },
     mutations: {},
     actions: {}

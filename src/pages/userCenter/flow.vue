@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-06-06 11:02:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-17 00:02:30
+* @Last Modified time: 2018-08-02 21:08:53
 -->
 <template>
 <div class="page page-current">
@@ -16,7 +16,7 @@
             <ul>
                 <li v-for="item in listData" :key="item.id" class="item-content">
                     <div class="item-inner">
-                        <div class="item-title">{{item.remark}}</div>
+                        <div class="item-title">{{item.comment}}</div>
                         <div class="item-after">{{item.count}}</div>
                     </div>
                     <div class="footer">{{item.ctime}}</div>
@@ -43,12 +43,7 @@ export default {
     created() {
         // 获取资金流水
         $.showPreloader();
-        this.$http.get('/coin/list', {
-            params: {
-                pageIndex: 1,
-                pageSize: 1000
-            }
-        }).then((response) => {
+        this.$http.get('/coin/list').then((response) => {
             $.hidePreloader();
             if (response.data.success) {
                 this.listData = response.data.data.list;

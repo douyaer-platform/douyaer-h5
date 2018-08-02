@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-10 11:13:16
+* @Last Modified time: 2018-08-02 22:16:52
 -->
 <template>
 <div class="page page-current">
@@ -14,8 +14,7 @@
     <bottomBar></bottomBar>
     <div class="content">
         <!-- 刷手首页 -->
-        <div class="description">接单规则说明
-            <br>豆芽网是一个专业的邀请亲友互助，让亲友赚取佣金的平台，注册后请严格遵守豆芽网的操作规则。</div>
+        <div class="description" v-html="text"></div>
         <div class="main-box">
             <div class="box-hd">
                 <span class="text">任务列表</span></div>
@@ -65,7 +64,8 @@ export default {
         return {
             taskList: [],
             taskTotal: 0,
-            loading: false
+            loading: false,
+            text: window.config.mark.home.t2
         };
     },
     created() {
@@ -79,12 +79,7 @@ export default {
          * @description 获取任务列表
          */
         getTaskFun() {
-            this.$http.get('/task/list', {
-                params: {
-                    pageIndex: 1,
-                    pageSize: 10000
-                }
-            }).then((response) => {
+            this.$http.get('/task/list').then((response) => {
                 if (response.data.success) {
                     let data = response.data.data.list;
                     for (let i = 0; i < data.length; i++) {

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 21:52:38
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-07-31 13:46:33
+* @Last Modified time: 2018-08-02 22:20:53
 -->
 <template>
     <div class="page page-current">
@@ -65,11 +65,9 @@
                             </div>
                         </router-link>
                     </li>
-                    <li style="margin-top: 2rem;">
-                        <div class="submitWrap"><a href="javascript:;" @click.stop="logoutFun" class="button button-big button-fill button-danger">退出登录</a></div>
-                    </li>
                 </ul>
             </div>
+            <div class="submitWrap"><a href="javascript:;" @click.stop="logoutFun" class="button button-big button-light button-danger">退出登录</a></div>
         </div>
     </div>
 </template>
@@ -106,19 +104,24 @@ export default {
          * @description 退出登录
          */
         logoutFun() {
-            this.$http.get('/user/logout').then((response) => {
-                if (response.data.success) {
-                    // 清空用户信息
-                    localStorage.setItem('userInfo', '');
-                    this.$store.state.userInfo = {};
-                    // 跳转至登录页面
-                    this.$router.replace({
-                        path: '/account/login'
-                    });
-                } else {
-                    $.alert(response.data.message);
-                }
-            });
+            let _that = this;
+            $.confirm('退出登录？', '', function() {
+                _that.$http.get('/user/logout').then((response) => {
+                    if (response.data.success) {
+                        // 清空用户信息
+                        localStorage.setItem('userInfo', '');
+                        _that.$store.state.userInfo = {};
+                        localStorage.setItem('userCert', '');
+                        _that.$store.state.userCert = {};
+                        // 跳转至登录页面
+                        _that.$router.replace({
+                            path: '/account/login'
+                        });
+                    } else {
+                        $.alert(response.data.message);
+                    }
+                });
+            }, function() {}, '确定', '取消');
         }
     },
     components: {

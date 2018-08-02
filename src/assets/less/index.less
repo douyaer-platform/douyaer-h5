@@ -49,7 +49,18 @@ header.bar-nav{ background-color: @primary-color;
 	&.bar .button-nav.pull-right{
 		margin-right: 0;
 	}
+
+	& ~ .sub-tab{ height: 2.2rem; border-bottom: 1px solid @border-color; background-color: #fff; position: fixed; left:0; right: 0; top: 2.2rem;
+		ul{ width: 100%; display: flex; }
+		li{ flex:1; line-height: 2.2rem; text-align: center; font-size: .75rem;
+			&.active{ color:@primary-color;  position: relative;
+				&:before{ width: 3rem; height: 3px; margin-left: -1.5rem; background-color: @primary-color; display: block; content:''; position: absolute; bottom: 0; left: 50%;}
+			}
+		 }
+		& ~ .content{ top: 4.5rem; }
+	}
 }
+
 
 // 底部导航条
 nav.bar-tab{ background-color: #fff;
@@ -177,7 +188,9 @@ nav.bar-tab{ background-color: #fff;
  * 账号模块
 -------------------------------------*/
 .accountWrap{ height: 100%; padding-top: 1rem; position: relative;
-	.userPhoto{ width: 4.5rem; height: 4.5rem; margin: 0 auto; background-color: @primary-color; border-radius: .75rem; }
+	.userPhoto{ width: 4.5rem; height: 4.5rem; margin: 0 auto; background-color: @primary-color; border-radius: .75rem; overflow: hidden;
+		img{ width: 100%;}
+	}
 	.list-block { margin: 0; overflow: hidden;
 		ul:before{ display: none; }
 		ul:after{ left:0.5rem; }

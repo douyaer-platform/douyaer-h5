@@ -1,9 +1,9 @@
 <template>
-<div class="page-group" id="app">
-    <transition>
-        <router-view></router-view>
-    </transition>
-</div>
+    <div class="page-group" id="app">
+        <transition>
+            <router-view></router-view>
+        </transition>
+    </div>
 </template>
 <script>
 export default {
@@ -27,10 +27,15 @@ export default {
                     if (response.data.success) {
                         localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
                         this.$store.state.userInfo = response.data.data.user;
+                        if (response.data.data.userCert) {
+                            localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
+                            this.$store.state.userCert = response.data.data.userCert;
+                        }
                     }
                 });
             };
         });
     }
 };
+
 </script>
