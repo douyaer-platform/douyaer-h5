@@ -1,27 +1,31 @@
 <!--
-* @moduleName: 商家订单
+* @moduleName:
 * @Author: weiberzeng
-* @Date:   2018-04-25 14:35:39
+* @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 23:08:16
+* @Last Modified time: 2018-08-02 23:31:55
 -->
 <template>
     <div class="page page-current">
         <header class="bar bar-nav">
-            <h1 class="title">我的任务</h1>
+            <router-link to="/order/buyer" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
+            <h1 class="title">我的订单</h1>
         </header>
         <bottomBar></bottomBar>
         <div class="sub-tab">
             <ul>
-                <li :class="{'active':status===0}" @click.stop="setTabFun(0)">进行中</li>
-                <li :class="{'active':status===1}" @click.stop="setTabFun(1)">已结束</li>
+                <li :class="{'active':status===0}" @click.stop="setTabFun(0)">待完成</li>
+                <li :class="{'active':status===1}" @click.stop="setTabFun(1)">待商家评价</li>
+                <li :class="{'active':status===2}" @click.stop="setTabFun(2)">待刷手评价</li>
+                <li :class="{'active':status===3}" @click.stop="setTabFun(3)">待放款</li>
+                <li :class="{'active':status===4}" @click.stop="setTabFun(4)">已结束</li>
             </ul>
         </div>
         <div class="content">
             <div class="main-box" v-if="total>0">
                 <div class="box-bd">
                     <ul class="order-list">
-                        <li v-for="item in listData" :key="item.taskId" class="item clearfix" @click.stop="getListFun(item.taskId)">
+                        <li v-for="item in listData" :key="item.taskId" class="item clearfix">
                             <div class="img-wrap">
                                 <img :src="item.goodsPicUrl" alt="">
                             </div>
@@ -52,10 +56,8 @@
                 </div>
             </div>
             <div class="no-tmpl" v-else>
-                <router-link to="/home">
-                    <span class="icon"><i class="icon-addtmpl"></i></span>
-                    <span class="text">尝试添加第一笔订单</span>
-                </router-link>
+                <span class="icon"><i class="icon-addtmpl"></i></span>
+                <span class="text">暂无数据</span>
             </div>
             <!-- 加载提示符 -->
             <!--  <div class="infinite-scroll-preloader">
@@ -74,6 +76,7 @@ export default {
     name: 'orderbuyer',
     data() {
         return {
+            id: this.$route.params.id,
             status: 0,
             listData: [],
             total: 0,
@@ -92,36 +95,24 @@ export default {
          */
         setTabFun(val) {
             if (this.loading) return;
-
             this.status = val;
             this.getOrderListFun();
         },
 
         /**
          * @Author      weiberZeng
-         * @DateTime    2018-08-02
-         * @lastTime    2018-08-02
-         * @description 获取任务下的订单列表
-         */
-        getListFun(taskId) {
-            this.$router.replace({
-                path: '/order/buyer/' + taskId
-            });
-        },
-
-        /**
-         * @Author      weiberZeng
          * @DateTime    2018-06-11
          * @lastTime    2018-06-11
-         * @description 获取任务列表
+         * @description 获取订单列表
          */
         getOrderListFun() {
             if (this.loading) return;
             this.loading = true;
 
             $.showPreloader();
-            this.$http.get('/task/list', {
+            this.$http.get('/order/taskOrders', {
                 params: {
+                    taskId: this.id,
                     status: this.status
                 }
             }).then((response) => {
@@ -141,6 +132,7 @@ export default {
                 this.loading = false;
             });
         }
+
     },
     components: {
         bottomBar

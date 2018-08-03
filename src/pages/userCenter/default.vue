@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 21:52:38
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 22:20:53
+* @Last Modified time: 2018-08-02 23:09:56
 -->
 <template>
     <div class="page page-current">
@@ -21,7 +21,7 @@
                         <span class="attr-val">{{userInfo.alitm||'--'}}</span>
                     </div>
                 </div>
-                <router-link to="/auth" class="authBtn">去认证 <i class="icon icon-right"></i></router-link>
+                <router-link to="/auth" class="authBtn">{{auditText}} <i class="icon icon-right"></i></router-link>
             </div>
             <div class="list-block">
                 <ul>
@@ -82,10 +82,27 @@ export default {
     name: 'userCenterIndex',
     data() {
         return {
-            userInfo: this.$store.state.userInfo
+            userInfo: this.$store.state.userInfo,
+            userCert: this.$store.state.userCert || {},
+            auditText: ''
         };
     },
-    created() {},
+    created() {
+        switch (this.userCert.status) {
+            case 0:
+                this.auditText = '认证中';
+                break;
+            case 1:
+                this.auditText = '认证不通过';
+                break;
+            case 2:
+                this.auditText = '认证通过';
+                break;
+            default:
+                this.auditText = '去认证';
+                break;
+        }
+    },
     methods: {
         /**
          * @Author      weiberZeng
