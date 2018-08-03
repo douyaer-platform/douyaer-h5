@@ -1,0 +1,65 @@
+/*-------------------------------------
+ * 个人中心
+-------------------------------------*/
+.pf-wrap{ padding: 1rem 0 1rem 4.2rem; background-color: @primary-color; position: relative;
+	.img-wrap{ width: 3.1rem; height: 3.1rem; overflow: hidden; position: absolute; left: .5rem; top: 1rem;
+		img{ width: 100%; }
+	}
+	.inner{ height: 3.1rem; padding: .3rem 0; line-height: 1.5; color: #fff;
+		p{ margin: 0; font-size: .8rem; }
+		.attr-item{ margin-top: .3rem; opacity: .7 }
+		.attr-name{}
+		.attr-val{}
+	}
+	.authBtn{ font-size: .8rem; color: #fff; position: absolute; right: .5rem; top: 1.9rem; }
+}
+
+// 提现充值成功
+.success-wrap{ padding-top: 1rem; background-color: #fff; text-align: center; color: #000;
+	.text{ font-size: .85rem; }
+	.money{ padding-right: 1rem;
+		.unit{ font-size: 1.4rem; }
+		.val{ font-size: 2rem; }
+	}
+	.detail{ padding: 0 .5rem; line-height: 2rem;
+		.name{ float: left; color: #bbb; }
+		.val{ float: right; }
+	}
+}
+// 二维码
+.concat-wrap{ background-color: #fff;
+	.pf-wrap{ background-color: #fff;
+		.inner{ color: #000;
+			.attr-item{ color: @text-color-normal; }
+		 }
+	}
+	.code-wrap{ padding: .5rem .5rem 1rem .5rem; text-align: center;
+		.code-img{ padding: .5rem; background-color: #f0f0f0; overflow: hidden;
+			img{ width: 100%; }
+		}
+		.sub{ margin-top: .5rem; }
+	}
+}
+// 资金流水列表
+.flow-list-block{
+	.item-content{ display: block;
+		.item-inner:after{ display: none;}
+		.item-title, .item-after{ color: #000; }
+		.footer{ padding-bottom: .4rem; font-size: .6rem; }
+		&:after{ content: '';  position: absolute; left: 0; bottom: 0; right: auto; top: auto; height: 1px; width: 100%; background-color: #e7e7e7; display: block; z-index: 15; -webkit-transform-origin: 50% 100%; transform-origin: 50% 100%; }
+
+		&.header{ min-height: 1.5rem; background-color: #fafafa;
+			.item-inner{ min-height: 1.5rem; padding-bottom: 0; padding-top: 0; line-height: 1.5rem;}
+			.item-title, .item-after{ font-size: .75rem; color: #8b8b8d; }
+		}
+	}
+}
+// 我的金币
+.coin-card-wrap{ padding: 1rem 0 0.5rem 0; background-color: @primary-color; color: #fff; display: flex;
+	.coni-card-item{ flex: 1; text-align: center;
+		&.single{ padding-left: 1rem; text-align: left;}
+	}
+	.name{ opacity: .8; }
+	.val{ font-size: 2rem; }
+}
+.coin-card-wrap + .list-block{ margin-top: 0; }

@@ -17,6 +17,13 @@
 	.item{
 		& > .main{ min-height: 7.25rem; padding: .5rem .75rem; position: relative;}
 		&:after{ display: inline-block; content: ''; width:100%; height: 1px; background-color: #e7e7e7; transform: scaleY(0.5); position: absolute; bottom: 0; left: 0;}
+		.remark{ display: none; padding: .5rem .75rem .5rem 3rem; line-height: 1.25rem; background-color: #e7eced; color:#000; position: relative;
+			span{ position: absolute; top: .5rem; left: .75rem; }
+			p{ margin: 0; padding: 0; }
+		 }
+		 &.active{
+		 	.remark{ display: block; }
+		 }
 	}
 	.img-wrap{ float: left; width: 6.25rem; height: 6.25rem; margin-right: .5rem; background-color: #ecf0f1; overflow: hidden;
 		img{ display: block; width: 100%;}
@@ -38,7 +45,7 @@
 		}
 		.ctrl{ line-height: 1.35rem; position: relative;
 			.stock{ font-size: .5rem;}
-			.button{ width: 3.25rem; padding: 0; border-color: #FA541C; background-color: #FA541C; font-size: .5rem; color: #fff; position: absolute; top:0; right: 0;}
+			.button{ width: 3.25rem; height: 1.1rem; padding: 0; border-color: #FA541C; border-radius: 3px; background-color: #FA541C; line-height: 1.1rem; font-size: .5rem; color: #fff; position: absolute; top:.15rem; right: 0;}
 		}
 	}
 }
@@ -89,6 +96,7 @@
 		.tips{ text-align: center;
 			.red{ color: #F5222D;}
 		}
+		& ~ .tmp-list{ margin-top: .5rem; }
 	}
 	.des{ padding-left: .25rem; line-height: 2;font-size: .5rem;}
 }

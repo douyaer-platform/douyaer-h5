@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 23:31:55
+* @Last Modified time: 2018-08-03 23:53:45
 -->
 <template>
     <div class="page page-current">
@@ -25,31 +25,15 @@
             <div class="main-box" v-if="total>0">
                 <div class="box-bd">
                     <ul class="order-list">
-                        <li v-for="item in listData" :key="item.taskId" class="item clearfix">
+                        <li v-for="item in listData" :key="item.orderId" class="item clearfix" @click.stop="getDetailFun(item.orderId)">
                             <div class="img-wrap">
                                 <img :src="item.goodsPicUrl" alt="">
                             </div>
                             <div class="inner">
-                                <div class="name">{{item.storeName}}</div>
+                                <div class="name">刷手账号：{{item.taobaoAccount}}</div>
                                 <div class="state">
-                                    <span v-if="item.buyBackText">{{item.buyBackText}}</span>
-                                    <span v-if="item.needAlitm==1">假聊</span>
-                                    <span class="right">垫付</span>
+                                    <span>接单时间：{{item.createTime}}</span>
                                 </div>
-                                <div class="money">
-                                    <span>￥</span>{{item.goodsPrice}}
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <span class="text">共计：</span>
-                                <span class="attr">
-                                <span class="name">放单量</span>
-                                <span class="val">{{item.orderCount}}</span>
-                                </span>
-                                <span class="attr">
-                                <span class="name">佣金</span>
-                                <span class="val">{{item.commission}}</span>
-                                </span>
                             </div>
                         </li>
                     </ul>
@@ -68,12 +52,9 @@
 </template>
 <script>
 import bottomBar from '@/components/bottomBar';
-import {
-    setBuyBackType
-} from '@/javascript/utils';
 let $ = window.$;
 export default {
-    name: 'orderbuyer',
+    name: 'orderbuyerList',
     data() {
         return {
             id: this.$route.params.id,
@@ -121,9 +102,6 @@ export default {
 
                 if (response.data.success) {
                     let data = response.data.data.list;
-                    for (let i = 0; i < data.length; i++) {
-                        data[i].buyBackText = setBuyBackType(data[i].buyBackType);
-                    }
                     this.listData = data;
                     this.total = response.data.data.total;
                 }
@@ -131,8 +109,28 @@ export default {
                 $.hidePreloader();
                 this.loading = false;
             });
-        }
+        },
 
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-08-03
+         * @lastTime    2018-08-03
+         * @description 查看订单详情
+         */
+        getDetailFun(id) {
+            switch (this.status) {
+                case 1:
+                    this.$router.replace({
+                        path: '/order/detail/' + id
+                    });
+                    break;
+                case 3:
+                    this.$router.replace({
+                        path: '/order/done/' + id
+                    });
+                    break;
+            }
+        }
     },
     components: {
         bottomBar

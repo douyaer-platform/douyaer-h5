@@ -12,7 +12,8 @@ import order from '@/pages/order';
 import orderSeller from '@/pages/order/seller';
 import orderBuyer from '@/pages/order/buyer';
 import orderBuyerList from '@/pages/order/buyerList';
-// import orderBuyerDetail from '@/pages/order/buyerDetail';
+import orderBuyerDetail from '@/pages/order/buyerDetail';
+import orderBuyerDone from '@/pages/order/buyerDone';
 import orderComplete from '@/pages/order/complete';
 import orderEvaluate from '@/pages/order/evaluate';
 // 账户中心
@@ -132,6 +133,16 @@ export default new Router({
             path: 'buyer/:id',
             name: 'orderBuyerList',
             component: orderBuyerList
+        }, {
+            // 商家任务对应订单详情
+            path: 'buyer/detail/:id',
+            name: 'orderBuyerDetail',
+            component: orderBuyerDetail
+        }, {
+            // 商家放款
+            path: 'buyer/done/:id',
+            name: 'orderBuyerDone',
+            component: orderBuyerDone
         }, {
             // 刷手完成订单
             path: 'complete/:id',
