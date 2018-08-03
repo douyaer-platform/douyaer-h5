@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-04 00:09:08
+* @Last Modified time: 2018-08-04 02:17:47
 -->
 <template>
     <div class="page page-current">
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="ctrl">
                                         <span class="stock">剩余单数：{{item.orderCount-item.finishScalpingCount}}</span>
-                                        <a href="javascipt:;" class="button" @click.stop="getOrderFun(item)" v-if="item.orderCount-item.finishScalpingCount>0">我要接单</a>
+                                        <a href="javascript:;" class="button" @click.stop="getOrderFun(item)" v-if="item.orderCount-item.finishScalpingCount>0">我要接单</a>
                                     </div>
                                 </div>
                             </div>

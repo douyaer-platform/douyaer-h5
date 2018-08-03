@@ -14,8 +14,8 @@ import orderBuyer from '@/pages/order/buyer';
 import orderBuyerList from '@/pages/order/buyerList';
 import orderBuyerDetail from '@/pages/order/buyerDetail';
 import orderBuyerDone from '@/pages/order/buyerDone';
-import orderComplete from '@/pages/order/complete';
-import orderEvaluate from '@/pages/order/evaluate';
+import orderSellerComplete from '@/pages/order/sellerComplete';
+import orderSellerEvaluate from '@/pages/order/sellerEvaluate';
 // 账户中心
 import account from '@/pages/account';
 import accountReg from '@/pages/account/reg';
@@ -145,14 +145,14 @@ export default new Router({
             component: orderBuyerDone
         }, {
             // 刷手完成订单
-            path: 'complete/:id',
-            name: 'orderComplete',
-            component: orderComplete
+            path: 'seller/complete/:id',
+            name: 'orderSellerComplete',
+            component: orderSellerComplete
         }, {
             // 刷手评价订单
-            path: 'evaluate/:id',
-            name: 'orderEvaluate',
-            component: orderEvaluate
+            path: 'seller/evaluate/:id',
+            name: 'orderSellerEvaluate',
+            component: orderSellerEvaluate
         }]
     }, {
         // 个人中心

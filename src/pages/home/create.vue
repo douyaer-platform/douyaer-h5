@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 22:22:43
+* @Last Modified time: 2018-08-04 02:17:47
 -->
 <template>
     <div class="page page-current">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="submit">
-                <a href="javascipt:;" @click.stop="submitFun">确定保存</a>
+                <a href="javascript:;" @click.stop="submitFun">确定保存</a>
             </div>
         </div>
         <div class="content">

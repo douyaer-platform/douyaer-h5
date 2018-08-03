@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 21:32:08
+* @Last Modified time: 2018-08-04 02:17:46
 -->
 <template>
     <div class="page page-current">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="submit">
-                <a href="javascipt:;" @click.stop="submitFun">确认放单</a>
+                <a href="javascript:;" @click.stop="submitFun">确认放单</a>
             </div>
         </div>
         <div class="content">
@@ -48,13 +48,13 @@
                                 <div class="name">{{item.storeName}}</div>
                                 <div class="ctrl">
                                     <span class="money"><i>￥</i>{{item.goodsPrice}}</span>
-                                    <a href="javascipt:;" @click.stop="showMoreFun(item)"><i class="icon-more"></i></a>
+                                    <a href="javascript:;" @click.stop="showMoreFun(item)"><i class="icon-more"></i></a>
                                 </div>
                                 <span class="checkbox" :class="{'is-checked':item.checked}"></span>
                             </div>
                             <div class="mask" @click.stop="item.showMore=false">
-                                <a href="javascipt:;" class="edit-btn" @click.stop="modifyTempFun(item)">编辑</a>
-                                <a href="javascipt:;" class="del-btn" @click.stop="delTempFun(item)">删除</a>
+                                <a href="javascript:;" class="edit-btn" @click.stop="modifyTempFun(item)">编辑</a>
+                                <a href="javascript:;" class="del-btn" @click.stop="delTempFun(item)">删除</a>
                             </div>
                         </li>
                     </ul>

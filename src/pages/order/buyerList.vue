@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-03 23:53:45
+* @Last Modified time: 2018-08-04 02:17:45
 -->
 <template>
     <div class="page page-current">
@@ -25,7 +25,7 @@
             <div class="main-box" v-if="total>0">
                 <div class="box-bd">
                     <ul class="order-list">
-                        <li v-for="item in listData" :key="item.orderId" class="item clearfix" @click.stop="getDetailFun(item.orderId)">
+                        <li v-for="item in listData" :key="item.orderId" class="item clearfix">
                             <div class="img-wrap">
                                 <img :src="item.goodsPicUrl" alt="">
                             </div>
@@ -34,6 +34,10 @@
                                 <div class="state">
                                     <span>接单时间：{{item.createTime}}</span>
                                 </div>
+                            </div>
+                            <div class="ctrl">
+                                <a href="javascript:;" class="button" @click.stop="evaluateOrderFun(item)" v-if="status===1">评价</a>
+                                <a href="javascript:;" class="button" @click.stop="doneFun(item)" v-if="status===3">去放款</a>
                             </div>
                         </li>
                     </ul>
@@ -113,23 +117,26 @@ export default {
 
         /**
          * @Author      weiberZeng
-         * @DateTime    2018-08-03
-         * @lastTime    2018-08-03
-         * @description 查看订单详情
+         * @DateTime    2018-08-04
+         * @lastTime    2018-08-04
+         * @description 去评价
          */
-        getDetailFun(id) {
-            switch (this.status) {
-                case 1:
-                    this.$router.replace({
-                        path: '/order/detail/' + id
-                    });
-                    break;
-                case 3:
-                    this.$router.replace({
-                        path: '/order/done/' + id
-                    });
-                    break;
-            }
+        evaluateOrderFun(item) {
+            this.$router.replace({
+                path: '/order/buyer/detail/' + item.orderId
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-08-04
+         * @lastTime    2018-08-04
+         * @description 去放款
+         */
+        doneFun(item) {
+            this.$router.replace({
+                path: '/order/buyer/done/' + item.orderId
+            });
         }
     },
     components: {

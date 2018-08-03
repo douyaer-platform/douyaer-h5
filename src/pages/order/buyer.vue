@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 23:08:16
+* @Last Modified time: 2018-08-04 00:45:13
 -->
 <template>
     <div class="page page-current">
@@ -39,11 +39,11 @@
                             <div class="detail">
                                 <span class="text">共计：</span>
                                 <span class="attr">
-                                <span class="name">放单量</span>
+                                    <span class="name">放单量</span>
                                 <span class="val">{{item.orderCount}}</span>
                                 </span>
                                 <span class="attr">
-                                <span class="name">佣金</span>
+                                    <span class="name">佣金</span>
                                 <span class="val">{{item.commission}}</span>
                                 </span>
                             </div>

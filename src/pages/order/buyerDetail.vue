@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-03 23:42:21
+* @Last Modified time: 2018-08-04 01:47:54
 -->
 <template>
     <div class="page page-current">
@@ -241,12 +241,22 @@ export default {
                     let data = response.data.data;
                     this.userOrder = data.userOrder;
 
+                    let photos = [];
+                    if (this.userOrder.ipScreenshotUrl) photos.push(this.userOrder.ipScreenshotUrl);
+                    if (this.userOrder.searchPicUrl) photos.push(this.userOrder.searchPicUrl);
+                    if (this.userOrder.comparePicUrl1) photos.push(this.userOrder.comparePicUrl1);
+                    if (this.userOrder.comparePicUrl2) photos.push(this.userOrder.comparePicUrl2);
+                    if (this.userOrder.comparePicUrl3) photos.push(this.userOrder.comparePicUrl3);
+                    if (this.userOrder.enterStoreUrl) photos.push(this.userOrder.enterStoreUrl);
+                    if (this.userOrder.viewRemarkUrl) photos.push(this.userOrder.viewRemarkUrl);
+                    if (this.userOrder.viewBuyershowUrl) photos.push(this.userOrder.viewBuyershowUrl);
+                    if (this.userOrder.detailPageUrl) photos.push(this.userOrder.detailPageUrl);
+                    if (this.userOrder.chatUrl) photos.push(this.userOrder.chatUrl);
+                    if (this.userOrder.favoriteAttentionUrl) photos.push(this.userOrder.favoriteAttentionUrl);
+                    if (this.userOrder.favoriteAttentionEntershopUrl) photos.push(this.userOrder.favoriteAttentionEntershopUrl);
+
                     myPhotoBrowserPopup = $.photoBrowser({
-                        photos: [
-                            '//img.alicdn.com/tps/i3/TB1kt4wHVXXXXb_XVXX0HY8HXXX-1024-1024.jpeg',
-                            '//img.alicdn.com/tps/i1/TB1SKhUHVXXXXb7XXXX0HY8HXXX-1024-1024.jpeg',
-                            '//img.alicdn.com/tps/i4/TB1AdxNHVXXXXasXpXX0HY8HXXX-1024-1024.jpeg',
-                        ],
+                        photos: photos,
                         type: 'popup'
                     });
                 }
