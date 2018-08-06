@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-06 09:45:57
+* @Last Modified time: 2018-08-06 13:49:35
 -->
 <template>
     <div class="page page-current">
@@ -466,17 +466,24 @@ export default {
                 $.toast('请上传详情页面图');
                 return;
             }
-            if (!this.form.chatUrl) {
-                $.toast('请上传咨询图');
-                return;
+
+            if (this.userOrder && this.userOrder.buyBackType === 1) {
+                if (!this.form.favoriteAttentionUrl) {
+                    $.toast('请上传我的收藏图');
+                    return;
+                }
             }
-            if (!this.form.favoriteAttentionUrl) {
-                $.toast('请上传我的收藏图');
-                return;
+            if (this.userOrder && this.userOrder.buyBackType === 2) {
+                if (!this.form.favoriteAttentionEntershopUrl) {
+                    $.toast('请上传关注店铺图');
+                    return;
+                }
             }
-            if (!this.form.favoriteAttentionEntershopUrl) {
-                $.toast('请上传关注店铺图');
-                return;
+            if (this.userOrder && this.userOrder.needAlitm === 1) {
+                if (!this.form.chatUrl) {
+                    $.toast('请上传咨询图');
+                    return;
+                }
             }
 
             $.showPreloader();
