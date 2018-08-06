@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 22:30:41
+* @Last Modified time: 2018-08-06 09:43:50
 -->
 <template>
     <div class="page page-current">
@@ -295,6 +295,12 @@ export default {
                 $.hidePreloader();
                 if (response.data.success) {
                     $.toast('保存成功！');
+                    let _that = this;
+                    setTimeout(() => {
+                        _that.$router.replace({
+                            path: '/uc'
+                        });
+                    }, 500);
                 } else {
                     $.alert(response.data.message);
                 }

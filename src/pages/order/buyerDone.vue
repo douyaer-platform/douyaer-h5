@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-03 23:18:59
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-04 00:11:16
+* @Last Modified time: 2018-08-06 09:45:41
 -->
 <template>
     <div class="page page-current">
@@ -124,9 +124,12 @@ export default {
                 $.hidePreloader();
                 if (response.data.success) {
                     $.toast('保存成功！');
-                    this.$router.replace({
-                        path: '/order/buyer'
-                    });
+                    let _that = this;
+                    setTimeout(() => {
+                        _that.$router.replace({
+                            path: '/order/buyer'
+                        });
+                    }, 500);
                 } else {
                     $.alert(response.data.message);
                 }

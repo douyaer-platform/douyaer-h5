@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 20:54:13
+* @Last Modified time: 2018-08-06 09:32:34
 -->
 <template>
     <div class="page page-current">
@@ -220,6 +220,10 @@ export default {
                 if (response.data.success) {
                     localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
                     this.$store.state.userInfo = response.data.data.user;
+                    if (response.data.data.userCert) {
+                        localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
+                        this.$store.state.userCert = response.data.data.userCert;
+                    }
                     // 刷手跳转到刷手页面
                     if (type === 'brushhand') {
                         this.$router.replace({

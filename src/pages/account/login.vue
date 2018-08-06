@@ -3,54 +3,54 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-11 17:16:28
+* @Last Modified time: 2018-08-06 09:32:25
 -->
 <template>
-<div class="page page-current">
-    <div class="content">
-        <div class="accountWrap">
-            <div class="userPhoto">
-                <img src="/static/image/admin.png" alt="">
-            </div>
-            <div class="list-block">
-                <ul>
-                    <li>
-                        <div class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title label">账号</div>
-                                <div class="item-input">
-                                    <el-input v-model="form.account" maxlength="11" placeholder="请输入账号" autofocus></el-input>
+    <div class="page page-current">
+        <div class="content">
+            <div class="accountWrap">
+                <div class="userPhoto">
+                    <img src="/static/image/admin.png" alt="">
+                </div>
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">账号</div>
+                                    <div class="item-input">
+                                        <el-input v-model="form.account" maxlength="11" placeholder="请输入账号" autofocus></el-input>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item-content">
-                            <div class="item-inner">
-                                <div class="item-title label">密码</div>
-                                <div class="item-input">
-                                    <el-input v-model="form.password" maxlength="12" :type="canSee?'text':'password'" placeholder="请输入密码"></el-input>
-                                </div>
-                                <a href="javascript:;" @click.stop="canSeeChangeFun" :class="canSee?'seeBtn active':'seeBtn'">
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">密码</div>
+                                    <div class="item-input">
+                                        <el-input v-model="form.password" maxlength="12" :type="canSee?'text':'password'" placeholder="请输入密码"></el-input>
+                                    </div>
+                                    <a href="javascript:;" @click.stop="canSeeChangeFun" :class="canSee?'seeBtn active':'seeBtn'">
                                         <i class="icon-see"></i>
                                     </a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="submitWrap">
-                <a href="javascript:;" @click.stop="loginFun" class="button button-big button-fill">登录</a>
-            </div>
-            <div class="linkWrap">
-                <router-link to="/account/forget">忘记密码？</router-link>
-            </div>
-            <div class="linkWrap bottom">
-                <router-link to="/account/reg">还没有账号？</router-link>
+                        </li>
+                    </ul>
+                </div>
+                <div class="submitWrap">
+                    <a href="javascript:;" @click.stop="loginFun" class="button button-big button-fill">登录</a>
+                </div>
+                <div class="linkWrap">
+                    <router-link to="/account/forget">忘记密码？</router-link>
+                </div>
+                <div class="linkWrap bottom">
+                    <router-link to="/account/reg">还没有账号？</router-link>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 <script>
 import {
@@ -131,6 +131,10 @@ export default {
                 if (response.data.success) {
                     localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
                     let userInfo = this.$store.state.userInfo = response.data.data.user;
+                    if (response.data.data.userCert) {
+                        localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
+                        this.$store.state.userCert = response.data.data.userCert;
+                    }
                     // 刷手跳转到刷手页面
                     if (userInfo && userInfo.userRole === 'brushhand') {
                         this.$router.replace({
@@ -152,4 +156,5 @@ export default {
         }
     }
 };
+
 </script>

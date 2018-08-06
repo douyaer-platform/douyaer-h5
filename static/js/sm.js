@@ -1539,7 +1539,7 @@ Device/OS Detection
         $.openModal($toast, function(){
             setTimeout(function() {
                 $.closeModal($toast);
-            }, duration || 2000);
+            }, duration || 1000);
         });
     };
     $.openModal = function (modal, cb) {
