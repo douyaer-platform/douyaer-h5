@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 20:10:04
+* @Last Modified time: 2018-08-13 22:20:39
 -->
 <template>
     <div class="page page-current">
@@ -316,6 +316,55 @@ export default {
                 if (response.data.success) {
                     let data = response.data.data;
                     this.userOrder = data.userOrder;
+
+                    if (this.userOrder.ipScreenshotUrl) {
+                        this.form.ipScreenshotUrl = this.userOrder.ipScreenshotUrl;
+                        this.tmp1.imageUrl = this.userOrder.ipScreenshotUrl;
+                    }
+                    if (this.userOrder.searchPicUrl) {
+                        this.form.searchPicUrl = this.userOrder.searchPicUrl;
+                        this.tmp2.imageUrl = this.userOrder.searchPicUrl;
+                    }
+                    if (this.userOrder.comparePicUrl1) {
+                        this.form.comparePicUrl1 = this.userOrder.comparePicUrl1;
+                        this.tmp3.imageUrl = this.userOrder.comparePicUrl1;
+                    }
+                    if (this.userOrder.comparePicUrl2) {
+                        this.form.comparePicUrl2 = this.userOrder.comparePicUrl2;
+                        this.tmp4.imageUrl = this.userOrder.comparePicUrl2;
+                    }
+                    if (this.userOrder.comparePicUrl3) {
+                        this.form.comparePicUrl3 = this.userOrder.comparePicUrl3;
+                        this.tmp5.imageUrl = this.userOrder.comparePicUrl3;
+                    }
+                    if (this.userOrder.enterStoreUrl) {
+                        this.form.enterStoreUrl = this.userOrder.enterStoreUrl;
+                        this.tmp6.imageUrl = this.userOrder.enterStoreUrl;
+                    }
+                    if (this.userOrder.viewRemarkUrl) {
+                        this.form.viewRemarkUrl = this.userOrder.viewRemarkUrl;
+                        this.tmp7.imageUrl = this.userOrder.viewRemarkUrl;
+                    }
+                    if (this.userOrder.viewBuyershowUrl) {
+                        this.form.viewBuyershowUrl = this.userOrder.viewBuyershowUrl;
+                        this.tmp8.imageUrl = this.userOrder.viewBuyershowUrl;
+                    }
+                    if (this.userOrder.detailPageUrl) {
+                        this.form.detailPageUrl = this.userOrder.detailPageUrl;
+                        this.tmp9.imageUrl = this.userOrder.detailPageUrl;
+                    }
+                    if (this.userOrder.chatUrl) {
+                        this.form.chatUrl = this.userOrder.chatUrl;
+                        this.tmp10.imageUrl = this.userOrder.chatUrl;
+                    }
+                    if (this.userOrder.favoriteAttentionUrl) {
+                        this.form.favoriteAttentionUrl = this.userOrder.favoriteAttentionUrl;
+                        this.tmp11.imageUrl = this.userOrder.favoriteAttentionUrl;
+                    }
+                    if (this.userOrder.favoriteAttentionEntershopUrl) {
+                        this.form.favoriteAttentionEntershopUrl = this.userOrder.favoriteAttentionEntershopUrl;
+                        this.tmp12.imageUrl = this.userOrder.favoriteAttentionEntershopUrl;
+                    }
 
                     let photos = [];
                     if (this.userOrder.goodsPicUrl) photos.push(this.userOrder.goodsPicUrl);
