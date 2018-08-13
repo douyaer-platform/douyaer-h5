@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-04 02:17:45
+* @Last Modified time: 2018-08-13 21:19:51
 -->
 <template>
     <div class="page page-current">
@@ -21,36 +21,38 @@
                 <li :class="{'active':status===4}" @click.stop="setTabFun(4)">已结束</li>
             </ul>
         </div>
-        <div class="content">
-            <div class="main-box" v-if="total>0">
-                <div class="box-bd">
-                    <ul class="order-list">
-                        <li v-for="item in listData" :key="item.orderId" class="item clearfix">
-                            <div class="img-wrap">
-                                <img :src="item.goodsPicUrl" alt="">
-                            </div>
-                            <div class="inner">
-                                <div class="name">刷手账号：{{item.taobaoAccount}}</div>
-                                <div class="state">
-                                    <span>接单时间：{{item.createTime}}</span>
+        <div class="content" v-on:scroll="onScroll">
+            <div class="scroll">
+                <div class="main-box" v-if="total>0">
+                    <div class="box-bd">
+                        <ul class="order-list">
+                            <li v-for="item in listData" :key="item.orderId" class="item clearfix">
+                                <div class="img-wrap">
+                                    <img :src="item.goodsPicUrl" alt="">
                                 </div>
-                            </div>
-                            <div class="ctrl">
-                                <a href="javascript:;" class="button" @click.stop="evaluateOrderFun(item)" v-if="status===1">评价</a>
-                                <a href="javascript:;" class="button" @click.stop="doneFun(item)" v-if="status===3">去放款</a>
-                            </div>
-                        </li>
-                    </ul>
+                                <div class="inner">
+                                    <div class="name">刷手账号：{{item.taobaoAccount}}</div>
+                                    <div class="state">
+                                        <span>接单时间：{{item.createTime}}</span>
+                                    </div>
+                                </div>
+                                <div class="ctrl">
+                                    <a href="javascript:;" class="button" @click.stop="evaluateOrderFun(item)" v-if="status===1">评价</a>
+                                    <a href="javascript:;" class="button" @click.stop="doneFun(item)" v-if="status===3">去放款</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="no-tmpl" v-else>
-                <span class="icon"><i class="icon-addtmpl"></i></span>
-                <span class="text">暂无数据</span>
-            </div>
-            <!-- 加载提示符 -->
-            <!--  <div class="infinite-scroll-preloader">
+                <div class="no-tmpl" v-else>
+                    <span class="icon"><i class="icon-addtmpl"></i></span>
+                    <span class="text">暂无数据</span>
+                </div>
+                <!-- 加载提示符 -->
+                <!--  <div class="infinite-scroll-preloader">
                 <div class="preloader"></div>
             </div> -->
+            </div>
         </div>
     </div>
 </template>
@@ -65,7 +67,11 @@ export default {
             status: 0,
             listData: [],
             total: 0,
-            loading: false
+            loading: false,
+            page: {
+                pageIndex: 1,
+                pageSize: 10
+            }
         };
     },
     created() {
@@ -81,6 +87,10 @@ export default {
         setTabFun(val) {
             if (this.loading) return;
             this.status = val;
+            this.page = {
+                pageIndex: 1,
+                pageSize: 10
+            };
             this.getOrderListFun();
         },
 
@@ -98,7 +108,9 @@ export default {
             this.$http.get('/order/taskOrders', {
                 params: {
                     taskId: this.id,
-                    status: this.status
+                    status: this.status,
+                    pageIndex: this.page.pageIndex,
+                    pageSize: this.page.pageSize
                 }
             }).then((response) => {
                 $.hidePreloader();
@@ -137,6 +149,26 @@ export default {
             this.$router.replace({
                 path: '/order/buyer/done/' + item.orderId
             });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-08-13
+         * @lastTime    2018-08-13
+         * @description 滚动
+         */
+        onScroll(event) {
+            // 监听滚动所在节点
+            let el = event.target;
+            // 滚动内容高度
+            let innerHeight = el.querySelector('.scroll').offsetHeight;
+            // 滚动判断
+            if (el.scrollTop + el.offsetHeight + 10 >= innerHeight) {
+                if (this.page.pageIndex * this.page.pageSize < this.total) {
+                    this.page.pageSize += 1;
+                    this.getOrderListFun();
+                }
+            }
         }
     },
     components: {
