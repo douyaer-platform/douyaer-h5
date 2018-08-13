@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-04 02:23:32
+* @Last Modified time: 2018-08-13 20:28:50
 -->
 <template>
     <div class="page page-current">
@@ -157,19 +157,20 @@ export default {
          * @description 刷手投诉订单
          */
         complainOrderFun(item) {
-            $.showPreloader();
-            this.$http.post('/order/complain', {
-                orderId: item.orderId
-            }).then((response) => {
-                $.hidePreloader();
-                if (response.data.success) {
-                    $.toast('投诉成功！');
-                } else {
-                    $.alert(response.data.message);
-                }
-            }).catch(() => {
-                $.hidePreloader();
-            });
+            $.alert('请联系在线客服进行投诉');
+            // $.showPreloader();
+            // this.$http.post('/order/complain', {
+            //     orderId: item.orderId
+            // }).then((response) => {
+            //     $.hidePreloader();
+            //     if (response.data.success) {
+            //         $.toast('投诉成功！');
+            //     } else {
+            //         $.alert(response.data.message);
+            //     }
+            // }).catch(() => {
+            //     $.hidePreloader();
+            // });
         },
 
         /**

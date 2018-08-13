@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-04 02:17:46
+* @Last Modified time: 2018-08-13 20:27:28
 -->
 <template>
     <div class="page page-current">
@@ -276,7 +276,6 @@ export default {
             }
             this.checkedCities = val ? allCitys : [];
             this.isIndeterminate = false;
-
             this.form.provinces = '';
         },
 
@@ -352,21 +351,17 @@ export default {
          * @description 删除模板
          */
         delTempFun(item) {
-            $.showPreloader();
             this.$http.get('/tasktemplate/delete', {
                 params: {
                     templateId: item.templateId
                 }
             }).then((response) => {
-                $.hidePreloader();
                 if (response.data.success) {
                     $.toast('删除成功！');
                     this.getTemplateFun();
                 } else {
                     $.alert(response.data.message);
                 }
-            }).catch(() => {
-                $.hidePreloader();
             });
         },
 
@@ -410,16 +405,20 @@ export default {
                 return;
             }
 
-            $.showPreloader();
             this.$http.post('/task/add', this.form).then((response) => {
-                $.hidePreloader();
                 if (response.data.success) {
                     $.toast('保存成功！');
+                    this.form = {
+                        brushhandSex: '',
+                        provinces: '',
+                        orderCount: '',
+                        remark: '',
+                        startTime: '',
+                        endTime: ''
+                    };
                 } else {
                     $.alert(response.data.message);
                 }
-            }).catch(() => {
-                $.hidePreloader();
             });
         }
     },

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-04 02:17:47
+* @Last Modified time: 2018-08-13 20:06:18
 -->
 <template>
     <div class="page page-current">
@@ -20,7 +20,7 @@
                     <span class="text">任务列表</span></div>
                 <div class="box-bd">
                     <ul class="pro-list" v-if="taskTotal>0">
-                        <li v-for="item in taskList" :key="item.taskId" class="item clearfix" :class="{'active':item.isActive}" @click.stop="itemClickFun(item)">
+                        <li v-for="item in taskList" :key="item.taskId" class="item clearfix" :class="{'active':item.isActive}" @click.stop="itemClickFun(item)" v-if="item.orderCount-item.finishScalpingCount>0">
                             <div class="main clearfix">
                                 <div class="img-wrap">
                                     <img :src="item.goodsPicUrl" alt="">
@@ -38,7 +38,9 @@
                                     </div>
                                     <div class="ctrl">
                                         <span class="stock">剩余单数：{{item.orderCount-item.finishScalpingCount}}</span>
-                                        <a href="javascript:;" class="button" @click.stop="getOrderFun(item)" v-if="item.orderCount-item.finishScalpingCount>0">我要接单</a>
+                                        <template v-if="userCert && userCert.status===2">
+                                            <a href="javascript:;" class="button" @click.stop="getOrderFun(item)" v-if="item.orderCount-item.finishScalpingCount>0">我要接单</a>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +72,8 @@ export default {
             taskList: [],
             taskTotal: 0,
             loading: false,
-            text: window.config.mark.home.t2
+            text: window.config.mark.home.t2,
+            userCert: this.$store.state.userCert || {}
         };
     },
     created() {

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-06 09:32:34
+* @Last Modified time: 2018-08-13 20:36:48
 -->
 <template>
     <div class="page page-current">
@@ -179,7 +179,6 @@ export default {
          * @description 注册
          */
         regFun(type) {
-            console.log(this.form);
             if (!this.validate.phone) {
                 $.toast('请输入正确手机号！');
                 return;
@@ -224,17 +223,22 @@ export default {
                         localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
                         this.$store.state.userCert = response.data.data.userCert;
                     }
+                    let _that = this;
                     // 刷手跳转到刷手页面
                     if (type === 'brushhand') {
-                        this.$router.replace({
-                            path: '/home/seller'
-                        });
+                        setTimeout(() => {
+                            _that.$router.replace({
+                                path: '/home/seller'
+                            });
+                        }, 500);
                     }
                     // 商家跳转到商家页面
                     if (type === 'business') {
-                        this.$router.replace({
-                            path: '/home/buyer'
-                        });
+                        setTimeout(() => {
+                            _that.$router.replace({
+                                path: '/home/buyer'
+                            });
+                        }, 500);
                     }
                 } else {
                     $.alert(response.data.message);

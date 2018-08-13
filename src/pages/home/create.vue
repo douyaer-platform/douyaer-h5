@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-06 09:49:18
+* @Last Modified time: 2018-08-13 20:36:52
 -->
 <template>
     <div class="page page-current">
@@ -36,9 +36,19 @@
                                     <div class="item-inner">
                                         <div class="item-title label">店铺名称</div>
                                         <div class="item-input">
-                                            <el-input v-model="form.storeName" placeholder="请输入店铺名称" autofocus></el-input>
+                                            {{userInfo.alitm||'--'}}
                                         </div>
                                         <!-- <div class="newUser">最近300000人成交</div> -->
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">宝贝名称</div>
+                                        <div class="item-input">
+                                            <el-input v-model="form.storeName" placeholder="请输入宝贝名称" autofocus></el-input>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -173,6 +183,8 @@ export default {
     name: 'homeCreate',
     data() {
         return {
+            userInfo: this.$store.state.userInfo,
+            userCert: this.$store.state.userCert || {},
             title: '创建模板',
             tags: [],
             templatePrice: 0,
@@ -344,7 +356,7 @@ export default {
                 },
                 onProgress(progress) {
                     _that[name].uploadResult = 'progress';
-                    _that[name].progress = progress.percent;
+                    _that[name].progress = parseInt(progress.percent);
                 },
                 onError(e) {
                     _that[name].uploadResult = 'fail';
@@ -418,9 +430,7 @@ export default {
                 url = '/tasktemplate/add';
             }
 
-            $.showPreloader();
             this.$http.post(url, this.form).then((response) => {
-                $.hidePreloader();
                 if (response.data.success) {
                     $.toast('保存成功！');
                     let _that = this;
@@ -432,8 +442,6 @@ export default {
                 } else {
                     $.alert(response.data.message);
                 }
-            }).catch(() => {
-                $.hidePreloader();
             });
         }
     },

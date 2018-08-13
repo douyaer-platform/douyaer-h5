@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-06-04 23:31:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-06 09:32:14
+* @Last Modified time: 2018-08-13 20:17:35
 -->
 <template>
     <div class="page page-current">
@@ -171,18 +171,19 @@ export default {
                 return;
             }
             $.showPreloader();
-            this.$http.post('/user/register', this.form).then((response) => {
+            this.$http.post('/user/resetPassword', this.form).then((response) => {
                 $.hidePreloader();
                 if (response.data.success) {
-                    localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
-                    this.$store.state.userInfo = response.data.data.user;
-                    if (response.data.data.userCert) {
-                        localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
-                        this.$store.state.userCert = response.data.data.userCert;
-                    }
-                    this.$router.replace({
-                        path: '/home'
-                    });
+                    localStorage.setItem('userInfo', '');
+                    this.$store.state.userInfo = {};
+                    localStorage.setItem('userCert', '');
+                    this.$store.state.userCert = {};
+                    let _that = this;
+                    setTimeout(() => {
+                        _that.$router.replace({
+                            path: '/account/login'
+                        });
+                    }, 500);
                 } else {
                     $.alert(response.data.message);
                 }

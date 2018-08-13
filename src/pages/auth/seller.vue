@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-06 09:43:50
+* @Last Modified time: 2018-08-13 20:09:57
 -->
 <template>
     <div class="page page-current">
@@ -263,7 +263,7 @@ export default {
                 },
                 onProgress(progress) {
                     _that[name].uploadResult = 'progress';
-                    _that[name].progress = progress.percent;
+                    _that[name].progress = parseInt(progress.percent);
                 },
                 onError(e) {
                     _that[name].uploadResult = 'fail';

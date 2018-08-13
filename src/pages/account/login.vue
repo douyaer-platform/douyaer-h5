@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-06 09:32:25
+* @Last Modified time: 2018-08-13 20:18:23
 -->
 <template>
     <div class="page page-current">
@@ -135,17 +135,22 @@ export default {
                         localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
                         this.$store.state.userCert = response.data.data.userCert;
                     }
+                    let _that = this;
                     // 刷手跳转到刷手页面
                     if (userInfo && userInfo.userRole === 'brushhand') {
-                        this.$router.replace({
-                            path: '/home/seller'
-                        });
+                        setTimeout(() => {
+                            _that.$router.replace({
+                                path: '/home/seller'
+                            });
+                        }, 500);
                     }
                     // 商家跳转到商家页面
                     if (userInfo && userInfo.userRole === 'business') {
-                        this.$router.replace({
-                            path: '/home/buyer'
-                        });
+                        setTimeout(() => {
+                            _that.$router.replace({
+                                path: '/home/buyer'
+                            });
+                        }, 500);
                     }
                 } else {
                     $.alert(response.data.message);
