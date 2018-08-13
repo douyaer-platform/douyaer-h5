@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 21:19:51
+* @Last Modified time: 2018-08-13 21:38:16
 -->
 <template>
     <div class="page page-current">
@@ -118,7 +118,13 @@ export default {
 
                 if (response.data.success) {
                     let data = response.data.data.list;
-                    this.listData = data;
+                    if (this.page.pageIndex === 1) {
+                        this.listData = data;
+                    } else {
+                        for (let j in data) {
+                            this.listData.push(data[j]);
+                        }
+                    }
                     this.total = response.data.data.total;
                 }
             }).catch(() => {

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 21:21:35
+* @Last Modified time: 2018-08-13 21:39:17
 -->
 <template>
     <div class="page page-current">
@@ -132,7 +132,13 @@ export default {
                     for (let i = 0; i < data.length; i++) {
                         data[i].buyBackText = setBuyBackType(data[i].buyBackType);
                     }
-                    this.listData = data;
+                    if (this.page.pageIndex === 1) {
+                        this.listData = data;
+                    } else {
+                        for (let j in data) {
+                            this.listData.push(data[j]);
+                        }
+                    }
                     this.total = response.data.data.total;
                 }
             }).catch(() => {
@@ -154,6 +160,11 @@ export default {
                 $.hidePreloader();
                 if (response.data.success) {
                     $.toast('取消成功！');
+                    this.page = {
+                        pageIndex: 1,
+                        pageSize: 10
+                    };
+                    this.getOrderListFun();
                 } else {
                     $.alert(response.data.message);
                 }

@@ -1,6 +1,6 @@
 <template>
     <div class="page-group" id="app">
-        <transition>
+        <transition name="fade">
             <router-view></router-view>
         </transition>
     </div>

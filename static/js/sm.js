@@ -1424,6 +1424,8 @@ Device/OS Detection
     };
     $.hidePreloader = function () {
         $.showPreloader.preloaderModal && $.closeModal($.showPreloader.preloaderModal);
+        $('.modal-overlay').remove();
+        $('.modal').remove();
     };
     $.showIndicator = function () {
         if ($('.preloader-indicator-modal')[0]) return;

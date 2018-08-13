@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 21:24:07
+* @Last Modified time: 2018-08-13 21:35:51
 -->
 <template>
     <div class="page page-current">
@@ -105,7 +105,13 @@ export default {
                         data[i].buyBackText = setBuyBackType(data[i].buyBackType);
                         data[i].isActive = false;
                     }
-                    this.taskList = data;
+                    if (this.page.pageIndex === 1) {
+                        this.taskList = data;
+                    } else {
+                        for (let j in data) {
+                            this.taskList.push(data[j]);
+                        }
+                    }
                     this.total = response.data.data.total;
                 }
             });
