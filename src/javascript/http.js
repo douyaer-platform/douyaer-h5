@@ -2,7 +2,7 @@
  * @Author: weiberzeng
  * @Date:   2018-06-04 19:21:25
  * @Last Modified by:   weiberzeng
- * @Last Modified time: 2018-08-06 09:47:26
+ * @Last Modified time: 2018-08-17 16:21:29
  */
 import Vue from 'vue';
 import VueResource from 'vue-resource';
@@ -21,7 +21,7 @@ Vue.http.interceptors.push((request, next) => {
         // 请求返回特殊状态的统一处理
         switch (response.status) {
             case 401:
-                $.alert('登录失效', function() {
+                $.alert('请重新登录', function() {
                     window.location.href = '/#/account/login';
                 });
                 break;

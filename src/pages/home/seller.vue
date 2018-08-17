@@ -3,14 +3,13 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 21:35:51
+* @Last Modified time: 2018-08-17 11:32:19
 -->
 <template>
     <div class="page page-current">
         <header class="bar bar-nav">
             <h1 class="title">首页</h1>
         </header>
-        <!-- <div class="topTips warning"><i class="icon-warning"></i>重要通知：关于对某某账户的违规操作处理。</div> -->
         <bottomBar></bottomBar>
         <div class="content" v-on:scroll="onScroll">
             <div class="scroll">

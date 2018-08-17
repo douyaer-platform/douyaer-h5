@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 21:37:27
+* @Last Modified time: 2018-08-17 14:31:50
 -->
 <template>
     <div class="page page-current">
@@ -48,6 +48,12 @@
                                     <span class="val">{{item.commission}}</span>
                                     </span>
                                 </div>
+                                <div class="detail">
+                                    <span class="attr">
+                                    <span class="name">发布时间：</span>
+                                    <span class="val">{{item.createTime}}</span>
+                                    </span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -55,13 +61,13 @@
                 <div class="no-tmpl" v-else>
                     <router-link to="/home">
                         <span class="icon"><i class="icon-addtmpl"></i></span>
-                        <span class="text">尝试添加第一笔订单</span>
+                        <span class="text">尝试添加第一个任务</span>
                     </router-link>
                 </div>
                 <!-- 加载提示符 -->
-                <!--  <div class="infinite-scroll-preloader">
-                <div class="preloader"></div>
-            </div> -->
+                <div class="infinite-scroll-preloader" v-if="loading">
+                    <div class="preloader"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -71,7 +77,6 @@ import bottomBar from '@/components/bottomBar';
 import {
     setBuyBackType
 } from '@/javascript/utils';
-let $ = window.$;
 export default {
     name: 'orderbuyer',
     data() {
@@ -128,7 +133,6 @@ export default {
             if (this.loading) return;
             this.loading = true;
 
-            $.showPreloader();
             this.$http.get('/task/list', {
                 params: {
                     status: this.status,
@@ -136,7 +140,6 @@ export default {
                     pageSize: this.page.pageSize
                 }
             }).then((response) => {
-                $.hidePreloader();
                 this.loading = false;
 
                 if (response.data.success) {
@@ -154,7 +157,6 @@ export default {
                     this.total = response.data.data.total;
                 }
             }).catch(() => {
-                $.hidePreloader();
                 this.loading = false;
             });
         },

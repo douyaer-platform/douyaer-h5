@@ -33,6 +33,11 @@ export default {
                         }
                     }
                 });
+                this.$http.get('/sys/listNotice').then((response) => {
+                    if (response.data.success) {
+                        this.$store.state.notices = response.data.data.notices || [];
+                    }
+                });
             };
         });
     }

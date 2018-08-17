@@ -44,7 +44,8 @@ try {
 const store = new Vuex.Store({
     state: {
         userInfo: userInfo,
-        userCert: userCert
+        userCert: userCert,
+        notices: []
     },
     mutations: {},
     actions: {}

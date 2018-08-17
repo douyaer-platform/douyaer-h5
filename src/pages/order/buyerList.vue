@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 21:38:16
+* @Last Modified time: 2018-08-17 14:25:49
 -->
 <template>
     <div class="page page-current">
@@ -14,7 +14,7 @@
         <bottomBar></bottomBar>
         <div class="sub-tab">
             <ul>
-                <li :class="{'active':status===0}" @click.stop="setTabFun(0)">待完成</li>
+                <li :class="{'active':status===0}" @click.stop="setTabFun(0)">已接单</li>
                 <li :class="{'active':status===1}" @click.stop="setTabFun(1)">待商家评价</li>
                 <li :class="{'active':status===2}" @click.stop="setTabFun(2)">待刷手评价</li>
                 <li :class="{'active':status===3}" @click.stop="setTabFun(3)">待放款</li>

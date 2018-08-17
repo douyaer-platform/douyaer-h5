@@ -104,7 +104,10 @@ nav.bar-tab{ background-color: #fff;
 .newUser{ height: 1.4rem; padding: 0 .3rem; border-radius: .2rem; border: 1px solid @text-color-orange; line-height: 1.4rem; white-space: nowrap; text-overflow:ellipsis; color: @text-color-orange; font-size: .6rem; background: url(../images/check.png) no-repeat right bottom; background-size:.7rem .7rem;}
 
 // 顶部警告提示
-.topTips{ padding: 0 .5rem; line-height: 1.4rem; font-size: .6rem; color: @text-color-gray; position: absolute; right: 0; left: 0; top:0;
+.topTips{ height: 1.4rem; padding: 0 .5rem 0 2rem; line-height: 1.4rem; position: absolute; right: 0; left: 0; top:0; 
+	.notices-hd{ position: absolute; left: .5rem; top: 0; }
+	.notices-wrap{ }
+	.notices-list{ /*transition: all 1s;*/ position: relative;}
 	i{ margin-right: .25rem;}
 	&.warning{ background-color: @warning-bg-color;
 		i{ color: @warning-color; }

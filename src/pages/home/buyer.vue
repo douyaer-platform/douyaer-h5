@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 20:27:28
+* @Last Modified time: 2018-08-17 15:53:43
 -->
 <template>
     <div class="page page-current">
@@ -20,7 +20,14 @@
                 <span class="tab-label">邀请好友</span>
             </router-link>
         </div>
-        <!-- <div class="topTips warning"><i class="icon-warning"></i>重要通知：关于对某某账户的违规操作处理。</div> -->
+        <div class="topTips warning">
+            <span class="notices-hd"><i class="icon-warning"></i></span>
+            <div class="notices-wrap">
+                <ul class="notices-list" ref="noticesList">
+                    <li v-for="item in notices" :key="item.noticeId">{{item.content}}</li>
+                </ul>
+            </div>
+        </div>
         <bottomBar></bottomBar>
         <div class="footer-submit">
             <div class="tips">
@@ -210,11 +217,21 @@ export default {
             text: window.config.mark.home.t1
         };
     },
+    computed: {
+        notices() {
+            return this.$store.state.notices || [];
+        }
+    },
     watch: {
         'form.templateId': 'validateTemplateId',
         'form.orderCount': 'validateOrderCount',
         'form.startTime': 'validateStartTime',
-        'form.endTime': 'validateEndTime'
+        'form.endTime': 'validateEndTime',
+        'notices': function(to, from) {
+            if (to && to.length > 0 && this.$refs.noticesList) {
+                this.showNoticesFun();
+            }
+        }
     },
     created() {
         this.getCitysFun();
@@ -232,8 +249,29 @@ export default {
                 _that.form.endTime = dateFormatter(picker.value[0]);
             }
         });
+        this.showNoticesFun();
     },
     methods: {
+        showNoticesFun() {
+            if (this.notices.length > 0) {
+                let max = this.notices.length;
+                let count = 0;
+                let _that = this;
+                let _setTopFun = function(count) {
+                    if (count >= max) {
+                        count = 0;
+                    }
+                    if (_that.$refs.noticesList) {
+                        _that.$refs.noticesList.style.top = -count * 1.4 + 'rem';
+                        count += 1;
+                        setTimeout(function() {
+                            _setTopFun(count);
+                        }, 2000);
+                    }
+                };
+                _setTopFun(count);
+            }
+        },
         // 校验是否选择模板
         validateTemplateId(to, from) {
             this.validate.templateId = validateRequire(to, from);
@@ -408,14 +446,15 @@ export default {
             this.$http.post('/task/add', this.form).then((response) => {
                 if (response.data.success) {
                     $.toast('保存成功！');
-                    this.form = {
-                        brushhandSex: '',
-                        provinces: '',
-                        orderCount: '',
-                        remark: '',
-                        startTime: '',
-                        endTime: ''
-                    };
+                    this.form.brushhandSex = '';
+                    this.form.provinces = '';
+                    this.form.orderCount = '';
+                    this.form.remark = '';
+                    this.form.startTime = '';
+                    this.form.endTime = '';
+
+                    $('#datetime-picker-start').val('');
+                    $('#datetime-picker-end').val('');
                 } else {
                     $.alert(response.data.message);
                 }
