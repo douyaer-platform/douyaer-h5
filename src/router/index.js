@@ -139,9 +139,19 @@ export default new Router({
             name: 'orderBuyerDetail',
             component: orderBuyerDetail
         }, {
+            // 商家任务对应订单详情
+            path: 'buyer/showDetail/:taskId/:id',
+            name: 'orderBuyerShowDetail',
+            component: orderBuyerDetail
+        }, {
             // 商家放款
             path: 'buyer/done/:taskId/:id',
             name: 'orderBuyerDone',
+            component: orderBuyerDone
+        }, {
+            // 评价详情
+            path: 'buyer/showDone/:taskId/:id',
+            name: 'orderBuyerShowDone',
             component: orderBuyerDone
         }, {
             // 刷手完成订单

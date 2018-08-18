@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 20:57:23
+* @Last Modified time: 2018-08-18 22:09:45
 -->
 <template>
     <div class="page page-current">
@@ -139,7 +139,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">评价</div>
                                         <div class="item-input">
-                                            <el-input v-model="form.businessRemarkDes" type="textarea" :rows="3" placeholder="请输入评价内容"></el-input>
+                                            <el-input v-model="form.businessRemarkDes" type="textarea" :rows="3" placeholder="请输入评价内容" :disabled="isShow"></el-input>
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@
                                 <div class="tips">上传买家秀图1</div>
                                 <div class="upload" @click="checkPhotoFun('tmp1')">
                                     <span v-if="tmp1.uploadResult==='progress'" class="percent">{{tmp1.progress}}<i>%</i></span>
-                                    <img :src="tmp1.imageUrl" alt="">
+                                    <img :src="this.userOrder.buyershowUrl1||tmp1.imageUrl" alt="">
                                     <input type="file" ref="tmp1" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp1')">
                                 </div>
                             </li>
@@ -160,7 +160,7 @@
                                 <div class="tips">上传买家秀图2</div>
                                 <div class="upload" @click="checkPhotoFun('tmp2')">
                                     <span v-if="tmp2.uploadResult==='progress'" class="percent">{{tmp2.progress}}<i>%</i></span>
-                                    <img :src="tmp2.imageUrl" alt="">
+                                    <img :src="this.userOrder.buyershowUrl2||tmp2.imageUrl" alt="">
                                     <input type="file" ref="tmp2" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp2')">
                                 </div>
                             </li>
@@ -168,14 +168,14 @@
                                 <div class="tips">上传买家秀图3</div>
                                 <div class="upload" @click="checkPhotoFun('tmp3')">
                                     <span v-if="tmp3.uploadResult==='progress'" class="percent">{{tmp3.progress}}<i>%</i></span>
-                                    <img :src="tmp3.imageUrl" alt="">
+                                    <img :src="this.userOrder.buyershowUrl3||tmp3.imageUrl" alt="">
                                     <input type="file" ref="tmp3" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp3')">
                                 </div>
                             </li>
                         </ul>
                         <div class="des">建议尺寸800*800</div>
                     </div>
-                    <div class="submit-wrap mt10">
+                    <div class="submit-wrap mt10" v-if="!isShow">
                         <a href="javascript:;" @click.stop="evaluateFun" class="button button-big button-fill">发送评价内容</a>
                     </div>
                 </div>
@@ -218,10 +218,14 @@ export default {
                 imageUrl: '/static/image/tmp-bg.png',
                 uploadResult: 'wait',
                 progress: '0'
-            }
+            },
+            isShow: false
         };
     },
     created() {
+        if (this.$route.name === 'orderBuyerShowDetail') {
+            this.isShow = true;
+        }
         this.getOrderDetailFun();
     },
     methods: {
@@ -242,7 +246,11 @@ export default {
                 if (response.data.success) {
                     let data = response.data.data;
                     this.userOrder = data.userOrder;
-
+                    // 回显数据
+                    if (this.userOrder.businessRemarkDes) {
+                        this.form.businessRemarkDes = this.userOrder.businessRemarkDes;
+                    }
+                    // 照片
                     let photos = [];
                     if (this.userOrder.ipScreenshotUrl) photos.push(this.userOrder.ipScreenshotUrl);
                     if (this.userOrder.searchPicUrl) photos.push(this.userOrder.searchPicUrl);
@@ -286,6 +294,7 @@ export default {
          * @description 选择图片
          */
         checkPhotoFun(name) {
+            if (this.isShow) return;
             if (this[name].uploadResult === 'wait') {
                 this.$refs[name].dispatchEvent(new MouseEvent('click'));
             } else if (this[name].uploadResult === 'success' || this[name].uploadResult === 'progress') {

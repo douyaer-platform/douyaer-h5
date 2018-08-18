@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-03 23:18:59
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 20:58:07
+* @Last Modified time: 2018-08-18 22:08:55
 -->
 <template>
     <div class="page page-current">
@@ -43,7 +43,7 @@
                             <li></li>
                         </ul>
                     </div>
-                    <div class="submit-wrap mt10">
+                    <div class="submit-wrap mt10" v-if="!isShow">
                         <a href="javascript:;" @click.stop="doneFun" class="button button-big button-fill">确认放款</a>
                     </div>
                 </div>
@@ -62,11 +62,14 @@ export default {
             id: this.$route.params.id,
             taskId: this.$route.params.taskId,
             defaultImg: '/static/image/tmp-bg.png',
-            userOrder: {}
-
+            userOrder: {},
+            isShow: false
         };
     },
     created() {
+        if (this.$route.name === 'orderBuyerShowDone') {
+            this.isShow = true;
+        }
         this.getOrderDetailFun();
     },
     methods: {

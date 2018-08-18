@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 21:14:43
+* @Last Modified time: 2018-08-18 22:07:34
 -->
 <template>
     <div class="page page-current">
@@ -42,7 +42,9 @@
                                 </div>
                                 <div class="ctrl">
                                     <a href="javascript:;" class="button" @click.stop="evaluateOrderFun(item)" v-if="status===1">评价</a>
+                                    <a href="javascript:;" class="button" @click.stop="showEvaluateOrderFun(item)" v-if="status!==0&&status!==1">订单详情</a>
                                     <a href="javascript:;" class="button" @click.stop="doneFun(item)" v-if="status===3">去放款</a>
+                                    <a href="javascript:;" class="button" @click.stop="showDoneFun(item)" v-if="status===4">评价详情</a>
                                 </div>
                             </li>
                         </ul>
@@ -170,6 +172,18 @@ export default {
 
         /**
          * @Author      weiberZeng
+         * @DateTime    2018-08-18
+         * @lastTime    2018-08-18
+         * @description 显示订单详情
+         */
+        showEvaluateOrderFun(item) {
+            this.$router.replace({
+                path: '/order/buyer/showDetail/' + this.id + '/' + item.orderId
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
          * @DateTime    2018-08-04
          * @lastTime    2018-08-04
          * @description 去放款
@@ -177,6 +191,19 @@ export default {
         doneFun(item) {
             this.$router.replace({
                 path: '/order/buyer/done/' + this.id + '/' + item.orderId
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-08-18
+         * @lastTime    2018-08-18
+         * @description 显示评价详情
+         * @return      {[type]}      [description]
+         */
+        showDoneFun(item) {
+            this.$router.replace({
+                path: '/order/buyer/showDone/' + this.id + '/' + item.orderId
             });
         },
 
