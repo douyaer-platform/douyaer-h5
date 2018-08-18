@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 21:58:14
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-11 17:17:36
+* @Last Modified time: 2018-08-18 19:32:22
 -->
 <template>
     <router-view></router-view>
@@ -12,9 +12,12 @@
 export default {
     name: 'auth',
     data() {
-        return {
-            userInfo: this.$store.state.userInfo
-        };
+        return {};
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        }
     },
     created() {
         if (this.userInfo.userRole === 'brushhand') {

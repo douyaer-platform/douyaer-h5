@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 22:26:00
+* @Last Modified time: 2018-08-18 19:31:05
 -->
 <template>
     <div class="page page-current" v-if="!success">
@@ -107,7 +107,6 @@ export default {
             workTime: window.config.text.workTime,
             success: false,
             applyId: '',
-            userInfo: this.$store.state.userInfo,
             form: {
                 exchangeType: 'withdraw',
                 totalFee: '',
@@ -120,6 +119,11 @@ export default {
             },
             text: window.config.mark.userCenter.t1
         };
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        }
     },
     watch: {
         'form.totalFee': 'validateTotalFee',

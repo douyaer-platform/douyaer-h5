@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 17:10:20
+* @Last Modified time: 2018-08-18 21:14:43
 -->
 <template>
     <div class="page page-current">
@@ -15,9 +15,13 @@
         <div class="sub-tab">
             <ul>
                 <li :class="{'active':status===0}" @click.stop="setTabFun(0)">已接单</li>
-                <li :class="{'active':status===1}" @click.stop="setTabFun(1)">待商家评价</li>
+                <li :class="{'active':status===1}" @click.stop="setTabFun(1)">
+                    <i class="sep" v-if="total1>0"></i> 待商家评价
+                </li>
                 <li :class="{'active':status===2}" @click.stop="setTabFun(2)">待刷手评价</li>
-                <li :class="{'active':status===3}" @click.stop="setTabFun(3)">待放款</li>
+                <li :class="{'active':status===3}" @click.stop="setTabFun(3)">
+                    <i class="sep" v-if="total3>0"></i> 待放款
+                </li>
                 <li :class="{'active':status===4}" @click.stop="setTabFun(4)">已结束</li>
             </ul>
         </div>
@@ -61,7 +65,6 @@ import bottomBar from '@/components/bottomBar';
 import {
     dateFormatter
 } from '@/javascript/utils';
-let $ = window.$;
 export default {
     name: 'orderbuyerList',
     data() {
@@ -70,6 +73,8 @@ export default {
             status: 0,
             listData: [],
             total: 0,
+            total1: 0,
+            total3: 0,
             loading: false,
             page: {
                 pageIndex: 1,
@@ -78,7 +83,12 @@ export default {
         };
     },
     created() {
-        this.getOrderListFun();
+        let _that = this;
+        this.getOrderListFun(false, 0, function() {
+            _that.getOrderListFun(true, 1, function() {
+                _that.getOrderListFun(true, 3);
+            });
+        });
     },
     methods: {
         /**
@@ -103,35 +113,45 @@ export default {
          * @lastTime    2018-06-11
          * @description 获取订单列表
          */
-        getOrderListFun() {
+        getOrderListFun(noData, status, cb) {
             if (this.loading) return;
             this.loading = true;
-
-            $.showPreloader();
             this.$http.get('/order/taskOrders', {
                 params: {
                     taskId: this.id,
-                    status: this.status,
+                    status: status ? status : this.status,
                     pageIndex: this.page.pageIndex,
                     pageSize: this.page.pageSize
                 }
             }).then((response) => {
-                $.hidePreloader();
                 this.loading = false;
 
                 if (response.data.success) {
-                    let data = response.data.data.list;
-                    if (this.page.pageIndex === 1) {
-                        this.listData = data;
+                    // 正常路径获取数据和总量
+                    if (!noData) {
+                        let data = response.data.data.list;
+                        if (this.page.pageIndex === 1) {
+                            this.listData = data;
+                        } else {
+                            for (let j in data) {
+                                this.listData.push(data[j]);
+                            }
+                        }
+                        this.total = response.data.data.total;
                     } else {
-                        for (let j in data) {
-                            this.listData.push(data[j]);
+                        if (status === 1) {
+                            this.total1 = response.data.data.total;
+                        }
+                        if (status === 3) {
+                            this.total3 = response.data.data.total;
                         }
                     }
-                    this.total = response.data.data.total;
+                    // 有回调函数，执行回调函数
+                    if (cb) {
+                        cb();
+                    }
                 }
             }).catch(() => {
-                $.hidePreloader();
                 this.loading = false;
             });
         },
@@ -144,7 +164,7 @@ export default {
          */
         evaluateOrderFun(item) {
             this.$router.replace({
-                path: '/order/buyer/detail/' + item.orderId
+                path: '/order/buyer/detail/' + this.id + '/' + item.orderId
             });
         },
 
@@ -156,7 +176,7 @@ export default {
          */
         doneFun(item) {
             this.$router.replace({
-                path: '/order/buyer/done/' + item.orderId
+                path: '/order/buyer/done/' + this.id + '/' + item.orderId
             });
         },
 

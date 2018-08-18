@@ -135,12 +135,12 @@ export default new Router({
             component: orderBuyerList
         }, {
             // 商家任务对应订单详情
-            path: 'buyer/detail/:id',
+            path: 'buyer/detail/:taskId/:id',
             name: 'orderBuyerDetail',
             component: orderBuyerDetail
         }, {
             // 商家放款
-            path: 'buyer/done/:id',
+            path: 'buyer/done/:taskId/:id',
             name: 'orderBuyerDone',
             component: orderBuyerDone
         }, {

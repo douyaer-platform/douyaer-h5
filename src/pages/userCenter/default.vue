@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 21:52:38
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 23:09:56
+* @Last Modified time: 2018-08-18 19:35:06
 -->
 <template>
     <div class="page page-current">
@@ -82,10 +82,16 @@ export default {
     name: 'userCenterIndex',
     data() {
         return {
-            userInfo: this.$store.state.userInfo,
-            userCert: this.$store.state.userCert || {},
             auditText: ''
         };
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        },
+        userCert() {
+            return this.$store.state.userCert || {};
+        }
     },
     created() {
         switch (this.userCert.status) {

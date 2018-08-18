@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 20:09:57
+* @Last Modified time: 2018-08-18 19:33:36
 -->
 <template>
     <div class="page page-current">
@@ -148,8 +148,6 @@ export default {
     name: 'authSeller',
     data() {
         return {
-            userInfo: this.$store.state.userInfo,
-            userCert: this.$store.state.userCert,
             cityArray: [],
             form: {
                 id: '',
@@ -180,6 +178,14 @@ export default {
             },
             isAudit: false
         };
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        },
+        userCert() {
+            return this.$store.state.userCert || {};
+        }
     },
     created() {
         if (this.userInfo.ip) {

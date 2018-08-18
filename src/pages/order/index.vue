@@ -3,21 +3,27 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 21:58:14
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-06-08 00:32:54
+* @Last Modified time: 2018-08-18 19:34:19
 -->
 <template>
-<router-view></router-view>
+    <router-view></router-view>
 </template>
 <script>
 export default {
     name: 'order',
     data() {
-        return {
-            userInfo: this.$store.state.userInfo
-        };
+        return {};
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        },
+        userCert() {
+            return this.$store.state.userCert || {};
+        }
     },
     watch: {
-        '$route': function (to) {
+        '$route': function(to) {
             if (to.path === '/order') {
                 this.gotoFun();
             }
@@ -42,4 +48,5 @@ export default {
         }
     }
 };
+
 </script>

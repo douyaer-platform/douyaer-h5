@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:30:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 17:11:32
+* @Last Modified time: 2018-08-18 19:35:24
 -->
 <template>
     <div class="page page-current">
@@ -45,10 +45,17 @@ export default {
     name: 'ucPoints',
     data() {
         return {
-            userInfo: this.$store.state.userInfo,
             listData: [],
             total: 0
         };
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        },
+        userCert() {
+            return this.$store.state.userCert || {};
+        }
     },
     created() {
         // 获取积分流水

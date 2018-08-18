@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 20:36:52
+* @Last Modified time: 2018-08-18 19:33:48
 -->
 <template>
     <div class="page page-current">
@@ -183,8 +183,6 @@ export default {
     name: 'homeCreate',
     data() {
         return {
-            userInfo: this.$store.state.userInfo,
-            userCert: this.$store.state.userCert || {},
             title: '创建模板',
             tags: [],
             templatePrice: 0,
@@ -223,6 +221,14 @@ export default {
             },
             text: window.config.mark.home.t3
         };
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        },
+        userCert() {
+            return this.$store.state.userCert || {};
+        }
     },
     created() {
         if (this.$route.name === 'homeModify') {

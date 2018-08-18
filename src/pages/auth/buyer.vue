@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 20:09:52
+* @Last Modified time: 2018-08-18 19:31:59
 -->
 <template>
     <div class="page page-current">
@@ -101,7 +101,6 @@ export default {
     name: 'authbuyer',
     data() {
         return {
-            userInfo: this.$store.state.userInfo,
             imageUrl: '/static/image/id-bg.png',
             uploadResult: 'wait',
             progress: '0',
@@ -116,6 +115,11 @@ export default {
             },
             isAudit: false
         };
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        }
     },
     created() {
         for (let i in this.form) {

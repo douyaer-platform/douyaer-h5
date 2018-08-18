@@ -3,11 +3,12 @@
 * @Author: weiberzeng
 * @Date:   2018-08-03 23:18:59
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-06 09:45:41
+* @Last Modified time: 2018-08-18 20:58:07
 -->
 <template>
     <div class="page page-current">
         <header class="bar bar-nav">
+            <router-link :to="'/order/buyer/'+taskId" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
             <h1 class="title">查看评价</h1>
         </header>
         <bottomBar></bottomBar>
@@ -59,6 +60,7 @@ export default {
     data() {
         return {
             id: this.$route.params.id,
+            taskId: this.$route.params.taskId,
             defaultImg: '/static/image/tmp-bg.png',
             userOrder: {}
 
