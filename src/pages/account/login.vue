@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 20:18:23
+* @Last Modified time: 2018-08-18 16:40:18
 -->
 <template>
     <div class="page page-current">
@@ -152,6 +152,12 @@ export default {
                             });
                         }, 500);
                     }
+                    // 获取公告信息
+                    this.$http.get('/sys/listNotice').then((response) => {
+                        if (response.data.success) {
+                            this.$store.state.notices = response.data.data.notices || [];
+                        }
+                    });
                 } else {
                     $.alert(response.data.message);
                 }

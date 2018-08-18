@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-17 15:53:43
+* @Last Modified time: 2018-08-18 16:41:46
 -->
 <template>
     <div class="page page-current">
@@ -20,7 +20,7 @@
                 <span class="tab-label">邀请好友</span>
             </router-link>
         </div>
-        <div class="topTips warning">
+        <div class="topTips warning" v-if="notices&&notices.length>0">
             <span class="notices-hd"><i class="icon-warning"></i></span>
             <div class="notices-wrap">
                 <ul class="notices-list" ref="noticesList">
@@ -252,6 +252,12 @@ export default {
         this.showNoticesFun();
     },
     methods: {
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-08-18
+         * @lastTime    2018-08-18
+         * @description 显示公告
+         */
         showNoticesFun() {
             if (this.notices.length > 0) {
                 let max = this.notices.length;
@@ -266,12 +272,13 @@ export default {
                         count += 1;
                         setTimeout(function() {
                             _setTopFun(count);
-                        }, 2000);
+                        }, 2500);
                     }
                 };
                 _setTopFun(count);
             }
         },
+
         // 校验是否选择模板
         validateTemplateId(to, from) {
             this.validate.templateId = validateRequire(to, from);

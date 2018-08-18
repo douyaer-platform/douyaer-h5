@@ -1274,7 +1274,7 @@ Device/OS Detection
         var buttonsHTML = '';
         if (params.buttons && params.buttons.length > 0) {
             for (var i = 0; i < params.buttons.length; i++) {
-                console.log(params.buttons[i].type);
+                // console.log(params.buttons[i].type);
                 if (params.buttons[i].type === 'cancel') {
                     buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold cancel' : ' cancel') + '">' + params.buttons[i].text + '</span>';
                 } else if (params.buttons[i].type === 'ok') {
@@ -6362,7 +6362,6 @@ Device/OS Detection
                     }
                 }
                 isTouched = false;
-                console.log(3);
                 isMoved = false;
                 return;
             }
