@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 21:39:17
+* @Last Modified time: 2018-08-17 18:22:56
 -->
 <template>
     <div class="page page-current">
@@ -30,7 +30,7 @@
                                     <img :src="item.goodsPicUrl" alt="">
                                 </div>
                                 <div class="inner">
-                                    <div class="name">{{item.storeName}}</div>
+                                    <div class="name">[{{item.orderId}}] {{item.storeName}}</div>
                                     <div class="state">
                                         <span>{{item.buyBackText}}</span>
                                         <span v-if="item.needAlitm==1">假聊</span>
@@ -44,6 +44,12 @@
                                     <span class="attr">
                                     <span class="name">佣金</span>
                                     <span class="val">{{item.commission}}</span>
+                                    </span>
+                                </div>
+                                <div class="detail">
+                                    <span class="attr">
+                                    <span class="name">创建时间</span>
+                                    <span class="val">{{item.createTime}}</span>
                                     </span>
                                 </div>
                                 <div class="ctrl">

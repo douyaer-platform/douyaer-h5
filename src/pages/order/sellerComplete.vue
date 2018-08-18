@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 22:20:39
+* @Last Modified time: 2018-08-17 18:21:50
 -->
 <template>
     <div class="page page-current">
@@ -44,6 +44,16 @@
                                             <input type="text" disabled :value="'1、' + userOrder.tags[0]">
                                             <input type="text" disabled :value="'2、' + userOrder.tags[1]">
                                             <input type="text" disabled :value="'3、' + userOrder.tags[2]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="multi">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务说明</div>
+                                        <div class="item-input">
+                                             <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="任务说明" disabled></el-input>
                                         </div>
                                     </div>
                                 </div>
