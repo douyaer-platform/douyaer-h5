@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-17 14:25:49
+* @Last Modified time: 2018-08-18 17:10:20
 -->
 <template>
     <div class="page page-current">
@@ -33,7 +33,7 @@
                                 <div class="inner">
                                     <div class="name">刷手账号：{{item.taobaoAccount}}</div>
                                     <div class="state">
-                                        <span>接单时间：{{item.createTime}}</span>
+                                        <span>接单时间：{{dateFormatter(item.createTime)}}</span>
                                     </div>
                                 </div>
                                 <div class="ctrl">
@@ -58,6 +58,9 @@
 </template>
 <script>
 import bottomBar from '@/components/bottomBar';
+import {
+    dateFormatter
+} from '@/javascript/utils';
 let $ = window.$;
 export default {
     name: 'orderbuyerList',
@@ -175,6 +178,10 @@ export default {
                     this.getOrderListFun();
                 }
             }
+        },
+
+        dateFormatter(val) {
+            return dateFormatter(val);
         }
     },
     components: {

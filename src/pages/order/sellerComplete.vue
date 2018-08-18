@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-17 18:21:50
+* @Last Modified time: 2018-08-18 16:56:20
 -->
 <template>
     <div class="page page-current">
@@ -73,7 +73,7 @@
                             <li>
                                 <div class="tips">大概搜索排名</div>
                                 <div class="upload">
-                                    <img @click.stop="showImgFun" :src="userOrder.searchPicUrl||defaultImg" alt="">
+                                    <img @click.stop="showImgFun" :src="userOrder.taskSearchPicUrl||defaultImg" alt="">
                                 </div>
                             </li>
                             <li>

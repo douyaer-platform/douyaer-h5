@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-17 14:31:50
+* @Last Modified time: 2018-08-18 17:06:58
 -->
 <template>
     <div class="page page-current">
@@ -51,7 +51,7 @@
                                 <div class="detail">
                                     <span class="attr">
                                     <span class="name">发布时间：</span>
-                                    <span class="val">{{item.createTime}}</span>
+                                    <span class="val">{{dateFormatter(item.createTime)}}</span>
                                     </span>
                                 </div>
                             </li>
@@ -75,6 +75,7 @@
 <script>
 import bottomBar from '@/components/bottomBar';
 import {
+    dateFormatter,
     setBuyBackType
 } from '@/javascript/utils';
 export default {
@@ -179,6 +180,10 @@ export default {
                     this.getOrderListFun();
                 }
             }
+        },
+
+        dateFormatter(val) {
+            return dateFormatter(val);
         }
     },
     components: {
