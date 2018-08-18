@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-06-06 11:02:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 17:11:46
+* @Last Modified time: 2018-08-18 18:45:07
 -->
 <template>
     <div class="page page-current">
@@ -16,7 +16,7 @@
                 <ul>
                     <li v-for="item in listData" :key="item.id" class="item-content">
                         <div class="item-inner">
-                            <div class="item-title">{{item.comment}}</div>
+                            <div class="item-title">{{item.comment}} <template v-if="item.wechatName">【{{item.wechatName}}】</template></div>
                             <div class="item-after">{{item.count}}</div>
                         </div>
                         <div class="footer">{{dateFormatter(item.ctime)}}</div>

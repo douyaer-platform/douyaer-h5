@@ -3,19 +3,16 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 20:10:06
--->
-<!--
-* @moduleName:
-* @Author: weiberzeng
-* @Date:   2018-08-03 23:18:59
-* @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-04 00:11:16
+* @Last Modified time: 2018-08-18 19:21:51
 -->
 <template>
     <div class="page page-current">
         <header class="bar bar-nav">
-            <h1 class="title">完成评价</h1>
+            <router-link to="/order" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
+            <h1 class="title">
+                <template v-if="isShow">评价详情</template>
+                <template v-else>完成评价</template>
+            </h1>
         </header>
         <div class="content gray">
             <div class="main-box white">
@@ -41,14 +38,14 @@
                                     <div class="item-inner">
                                         <div class="item-title label">评价</div>
                                         <div class="item-input">
-                                            <el-input id="target" v-model="userOrder.businessRemarkDes" type="textarea" :rows="3"></el-input>
+                                            <el-input id="target" v-model="userOrder.businessRemarkDes" type="textarea" :rows="3" readonly></el-input>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div class="rightBtnWrap">
+                    <div class="rightBtnWrap" v-if="!isShow">
                         <a href="javascript:;" id="copyBtn" data-clipboard-action="copy" data-clipboard-target="#target" class="button button-fill">一键复制评价</a>
                     </div>
                 </div>
@@ -91,7 +88,7 @@
                                 <div class="tips">完成评价截图</div>
                                 <div class="upload" @click="checkPhotoFun('tmp1')">
                                     <span v-if="tmp1.uploadResult==='progress'" class="percent">{{tmp1.progress}}<i>%</i></span>
-                                    <img :src="tmp1.imageUrl" alt="">
+                                    <img :src="userOrder.finishRemarkUrl||tmp1.imageUrl" alt="">
                                     <input type="file" ref="tmp1" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp1')">
                                 </div>
                             </li>
@@ -100,7 +97,7 @@
                         </ul>
                         <div class="des">建议尺寸800*800</div>
                     </div>
-                    <div class="submit-wrap">
+                    <div class="submit-wrap" v-if="!isShow">
                         <a href="javascript:;" @click.stop="doneFun" class="button button-big button-fill">确认评价完成</a>
                     </div>
                 </div>
@@ -124,10 +121,14 @@ export default {
                 imageUrl: '/static/image/tmp-bg.png',
                 uploadResult: 'wait',
                 progress: '0'
-            }
+            },
+            isShow: false
         };
     },
     created() {
+        if (this.$route.name === 'orderSellerShowEvaluate') {
+            this.isShow = true;
+        }
         this.getOrderDetailFun();
     },
     mounted() {
@@ -200,6 +201,7 @@ export default {
          * @description 选择图片
          */
         checkPhotoFun(name) {
+            if (this.isShow) return;
             if (this[name].uploadResult === 'wait') {
                 this.$refs[name].dispatchEvent(new MouseEvent('click'));
             } else if (this[name].uploadResult === 'success' || this[name].uploadResult === 'progress') {

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 17:05:24
+* @Last Modified time: 2018-08-18 19:16:07
 -->
 <template>
     <div class="page page-current">
@@ -30,7 +30,7 @@
                                     <img :src="item.goodsPicUrl" alt="">
                                 </div>
                                 <div class="inner">
-                                    <div class="name">[{{item.orderId}}] {{item.storeName}}</div>
+                                    <div class="name">【{{item.orderId}}】 {{item.storeName}}</div>
                                     <div class="state">
                                         <span>{{item.buyBackText}}</span>
                                         <span v-if="item.needAlitm==1">假聊</span>
@@ -56,7 +56,9 @@
                                     <a href="javascript:;" class="button" @click.stop="complainOrderFun(item)">立即投诉</a>
                                     <template v-if="!item.hasExpired">
                                         <a href="javascript:;" class="button" @click.stop="completeOrderFun(item)" v-if="status===0">去完成</a>
+                                        <a href="javascript:;" class="button" @click.stop="detailOrderFun(item)" v-if="status!==0">完成详情</a>
                                         <a href="javascript:;" class="button" @click.stop="evaluateOrderFun(item)" v-if="status===2">立即评价</a>
+                                        <a href="javascript:;" class="button" @click.stop="showEvaluateOrderFun(item)" v-if="status===3||status===4">评价详情</a>
                                         <a href="javascript:;" class="button" @click.stop="cancelOrderFun(item)" v-if="item.enableCancel">取消订单</a>
                                     </template>
                                 </div>
@@ -217,6 +219,18 @@ export default {
 
         /**
          * @Author      weiberZeng
+         * @DateTime    2018-08-18
+         * @lastTime    2018-08-18
+         * @description 显示评价详情
+         */
+        showEvaluateOrderFun(item) {
+            this.$router.replace({
+                path: '/order/seller/showevaluate/' + item.orderId
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
          * @DateTime    2018-07-01
          * @lastTime    2018-07-01
          * @description 刷手完成订单
@@ -224,6 +238,18 @@ export default {
         completeOrderFun(item) {
             this.$router.replace({
                 path: '/order/seller/complete/' + item.orderId
+            });
+        },
+
+        /**
+         * @Author      weiberZeng
+         * @DateTime    2018-08-18
+         * @lastTime    2018-08-18
+         * @description 查看订单
+         */
+        detailOrderFun(item) {
+            this.$router.replace({
+                path: '/order/seller/detail/' + item.orderId
             });
         },
 

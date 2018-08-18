@@ -3,13 +3,16 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 16:56:20
+* @Last Modified time: 2018-08-18 19:16:41
 -->
 <template>
     <div class="page page-current">
         <header class="bar bar-nav">
             <router-link to="/order" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
-            <h1 class="title">完成订单</h1>
+            <h1 class="title">
+                <template v-if="isShow">完成详情</template>
+                <template v-else>完成订单</template>
+            </h1>
         </header>
         <div class="content">
             <div class="main-box">
@@ -53,7 +56,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">任务说明</div>
                                         <div class="item-input">
-                                             <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="任务说明" disabled></el-input>
+                                            <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="任务说明" disabled></el-input>
                                         </div>
                                     </div>
                                 </div>
@@ -197,8 +200,11 @@
                         </ul>
                         <div class="des">建议尺寸800*800</div>
                     </div>
-                    <div class="submit-wrap">
-                        <a href="javascript:;" @click.stop="submitFun" class="button button-big button-fill">完成提交订单</a>
+                    <div class="submit-wrap" v-if="!isShow">
+                        <a href="javascript:;" @click.stop="submitFun" class="button button-big button-fill">
+                            <template v-if="form.hasSubmit===0">保存图片</template>
+                            <template v-if="form.hasSubmit===1">完成提交订单</template>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -218,6 +224,7 @@ export default {
             userOrder: {},
             form: {
                 orderId: this.$route.params.id,
+                hasSubmit: 0,
                 ipScreenshotUrl: '',
                 searchPicUrl: '',
                 comparePicUrl1: '',
@@ -290,10 +297,14 @@ export default {
                 imageUrl: '/static/image/tmp-bg.png',
                 uploadResult: 'wait',
                 progress: '0'
-            }
+            },
+            isShow: false
         };
     },
     created() {
+        if (this.$route.name === 'orderSellerDetail') {
+            this.isShow = true;
+        }
         this.getOrderDetailFun();
     },
     methods: {
@@ -398,6 +409,7 @@ export default {
          * @description 选择图片
          */
         checkPhotoFun(name) {
+            if (this.isShow) return;
             if (this[name].uploadResult === 'wait') {
                 this.$refs[name].dispatchEvent(new MouseEvent('click'));
             } else if (this[name].uploadResult === 'success' || this[name].uploadResult === 'progress') {
@@ -466,6 +478,10 @@ export default {
                                 break;
                         }
                         $.toast('上传成功！');
+                        // 设置上传状态为上传图片或者完成订单
+                        _that.setSubmitFun();
+                        // 提交保存图片到后台
+                        // _that.submitFun();
                     } else {
                         _that[name].uploadResult = 'fail';
                         $.toast(response.message);
@@ -484,78 +500,104 @@ export default {
 
         /**
          * @Author      weiberZeng
+         * @DateTime    2018-08-18
+         * @lastTime    2018-08-18
+         * @description 设置上传状态为上传图片或者完成订单
+         */
+        setSubmitFun() {
+            this.form.hasSubmit = 1;
+            if (!this.form.ipScreenshotUrl) {
+                // $.toast('请上传IP 地址图');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (!this.form.searchPicUrl) {
+                // $.toast('请上传搜索图');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (!this.form.comparePicUrl1) {
+                // $.toast('请上传对比图一');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (!this.form.comparePicUrl2) {
+                // $.toast('请上传对比图二');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (!this.form.comparePicUrl3) {
+                // $.toast('请上传对比图三');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (!this.form.enterStoreUrl) {
+                // $.toast('请上传入店图');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (!this.form.viewRemarkUrl) {
+                // $.toast('请上传查看评价图');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (!this.form.viewBuyershowUrl) {
+                // $.toast('请上传查看买家秀图');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (!this.form.detailPageUrl) {
+                // $.toast('请上传详情页面图');
+                // return;
+                this.form.hasSubmit = 0;
+            }
+            if (this.userOrder && this.userOrder.buyBackType === 1) {
+                if (!this.form.favoriteAttentionUrl) {
+                    // $.toast('请上传我的收藏图');
+                    // return;
+                    this.form.hasSubmit = 0;
+                }
+            }
+            if (this.userOrder && this.userOrder.buyBackType === 2) {
+                if (!this.form.favoriteAttentionEntershopUrl) {
+                    // $.toast('请上传关注店铺图');
+                    // return;
+                    this.form.hasSubmit = 0;
+                }
+            }
+            if (this.userOrder && this.userOrder.needAlitm === 1) {
+                if (!this.form.chatUrl) {
+                    // $.toast('请上传咨询图');
+                    // return;
+                    this.form.hasSubmit = 0;
+                }
+            }
+        },
+
+        /**
+         * @Author      weiberZeng
          * @DateTime    2018-08-04
          * @lastTime    2018-08-04
          * @description 提交订单
          */
         submitFun() {
-            if (!this.form.ipScreenshotUrl) {
-                $.toast('请上传IP 地址图');
-                return;
+            if (this.form.hasSubmit === 1) {
+                this.setSubmitFun();
+                $.showPreloader();
             }
-            if (!this.form.searchPicUrl) {
-                $.toast('请上传搜索图');
-                return;
-            }
-            if (!this.form.comparePicUrl1) {
-                $.toast('请上传对比图一');
-                return;
-            }
-            if (!this.form.comparePicUrl2) {
-                $.toast('请上传对比图二');
-                return;
-            }
-            if (!this.form.comparePicUrl3) {
-                $.toast('请上传对比图三');
-                return;
-            }
-            if (!this.form.enterStoreUrl) {
-                $.toast('请上传入店图');
-                return;
-            }
-            if (!this.form.viewRemarkUrl) {
-                $.toast('请上传查看评价图');
-                return;
-            }
-            if (!this.form.viewBuyershowUrl) {
-                $.toast('请上传查看买家秀图');
-                return;
-            }
-            if (!this.form.detailPageUrl) {
-                $.toast('请上传详情页面图');
-                return;
-            }
-
-            if (this.userOrder && this.userOrder.buyBackType === 1) {
-                if (!this.form.favoriteAttentionUrl) {
-                    $.toast('请上传我的收藏图');
-                    return;
-                }
-            }
-            if (this.userOrder && this.userOrder.buyBackType === 2) {
-                if (!this.form.favoriteAttentionEntershopUrl) {
-                    $.toast('请上传关注店铺图');
-                    return;
-                }
-            }
-            if (this.userOrder && this.userOrder.needAlitm === 1) {
-                if (!this.form.chatUrl) {
-                    $.toast('请上传咨询图');
-                    return;
-                }
-            }
-
-            $.showPreloader();
             this.$http.post('/order/submit', this.form).then((response) => {
                 $.hidePreloader();
                 if (response.data.success) {
-                    $.toast('保存成功！');
-                    let _that = this;
-                    setTimeout(() => {
-                        _that.$router.replace({
-                            path: '/order'
-                        });
-                    }, 500);
+                    // 只有在提交保存订单的时候，才跳转会订单列表页和提示保存成功
+                    if (this.form.hasSubmit === 1) {
+                        $.toast('保存成功！');
+                        let _that = this;
+                        setTimeout(() => {
+                            _that.$router.replace({
+                                path: '/order'
+                            });
+                        }, 500);
+                    }
                 } else {
                     $.alert(response.data.message);
                 }

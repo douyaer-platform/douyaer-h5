@@ -149,9 +149,19 @@ export default new Router({
             name: 'orderSellerComplete',
             component: orderSellerComplete
         }, {
+            // 刷手查看订单
+            path: 'seller/detail/:id',
+            name: 'orderSellerDetail',
+            component: orderSellerComplete
+        }, {
             // 刷手评价订单
             path: 'seller/evaluate/:id',
             name: 'orderSellerEvaluate',
+            component: orderSellerEvaluate
+        }, {
+            // 显示刷手评价订单
+            path: 'seller/showevaluate/:id',
+            name: 'orderSellerShowEvaluate',
             component: orderSellerEvaluate
         }]
     }, {
