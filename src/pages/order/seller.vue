@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 19:16:07
+* @Last Modified time: 2018-08-20 16:37:09
 -->
 <template>
     <div class="page page-current">
@@ -42,8 +42,8 @@
                                 </div>
                                 <div class="detail">
                                     <span class="attr">
-                                    <span class="name">佣金</span>
-                                    <span class="val">{{item.commission}}</span>
+                                    <span class="name">订单收益</span>
+                                    <span class="val">{{item.incomePrice||'--'}}</span>
                                     </span>
                                 </div>
                                 <div class="detail">

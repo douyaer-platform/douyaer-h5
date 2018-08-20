@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 22:23:57
+* @Last Modified time: 2018-08-20 17:26:34
 -->
 <template>
     <div class="page page-current">
@@ -51,7 +51,7 @@
                                     <div class="item-title">{{item.descUserName}}</div>
                                     <div class="item-after">{{item.integral||'--'}}</div>
                                 </div>
-                                <div class="footer">{{item.receiveCtime}}</div>
+                                <div class="footer">{{dateFormatter(item.receiveCtime)}}</div>
                             </li>
                             <!-- todo end -->
                         </ul>
@@ -62,8 +62,10 @@
     </div>
 </template>
 <script>
+import {
+    dateFormatter
+} from '@/javascript/utils';
 let $ = window.$;
-
 export default {
     name: 'homeFriend',
     data() {
@@ -125,6 +127,10 @@ export default {
                     this.total = response.data.data.total;
                 }
             });
+        },
+
+        dateFormatter(val) {
+            return dateFormatter(val);
         }
     }
 };

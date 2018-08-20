@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:19
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-02 22:26:57
+* @Last Modified time: 2018-08-20 17:18:45
 -->
 <template>
     <div class="page page-current" v-if="!success">
@@ -54,6 +54,26 @@
                         <a href="javascript:;" @click.stop="submitFun" class="button button-big button-fill">确认充值</a>
                     </div>
                 </div>
+                <div class="main-box">
+                    <div class="box-bd">
+                        <div class="concat-wrap">
+                            <div class="code-wrap">
+                                <div class="code-img">
+                                    <img src="/static/config/wxcash.png" alt="">
+                                </div>
+                                <div class="sub">微信收款</div>
+                            </div>
+                        </div>
+                        <div class="concat-wrap">
+                            <div class="code-wrap">
+                                <div class="code-img">
+                                    <img src="/static/config/zfbcash.png" alt="">
+                                </div>
+                                <div class="sub">支付宝收款</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -84,7 +104,7 @@
                 </div>
                 <div class="code-wrap">
                     <div class="code-img">
-                        <img src="/static/config/paycode.png" alt="">
+                        <img src="/static/config/admincode.png" alt="">
                     </div>
                     <div class="sub">扫码添加平台管理员微信</div>
                 </div>

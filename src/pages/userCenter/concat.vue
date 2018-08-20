@@ -13,7 +13,7 @@
                             <li :key="index" v-for="(item,index) in qqGroup">
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">客服群{{index + 1}}</div>
+                                        <div class="item-title label">{{t1}} {{index + 1}}</div>
                                         <div class="item-input">
                                             {{item}}
                                         </div>
@@ -57,7 +57,8 @@ export default {
         return {
             groupName: window.config.text.groupName,
             workTime: window.config.text.workTime,
-            qqGroup: window.config.qqGroup
+            qqGroup: window.config.qqGroup,
+            t1: window.config.text.qqText
         };
     },
     computed: {

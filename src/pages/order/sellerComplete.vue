@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 19:16:41
+* @Last Modified time: 2018-08-20 17:23:06
 -->
 <template>
     <div class="page page-current">
@@ -588,9 +588,9 @@ export default {
             this.$http.post('/order/submit', this.form).then((response) => {
                 $.hidePreloader();
                 if (response.data.success) {
-                    // 只有在提交保存订单的时候，才跳转会订单列表页和提示保存成功
+                    $.toast('保存成功！');
+                    // 只有在提交保存订单的时候，才跳转会订单列表页
                     if (this.form.hasSubmit === 1) {
-                        $.toast('保存成功！');
                         let _that = this;
                         setTimeout(() => {
                             _that.$router.replace({

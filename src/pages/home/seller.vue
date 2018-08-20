@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-17 11:32:19
+* @Last Modified time: 2018-08-20 16:36:23
 -->
 <template>
     <div class="page page-current">
@@ -34,7 +34,7 @@
                                         <div class="info">
                                             <span class="attr"><span class="money"><i>￥</i>{{item.goodsPrice}}</span></span>
                                             <span class="attr">垫付</span>
-                                            <span class="attr">每笔佣金：{{item.commission}}</span>
+                                            <span class="attr">订单收益：{{item.incomePrice||'--'}}</span>
                                         </div>
                                         <div class="ctrl">
                                             <span class="stock">剩余单数：{{item.orderCount-item.finishScalpingCount}}</span>

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 21:52:38
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 19:35:06
+* @Last Modified time: 2018-08-20 16:44:39
 -->
 <template>
     <div class="page page-current">
@@ -136,10 +136,12 @@ export default {
                         _that.$store.state.userInfo = {};
                         localStorage.setItem('userCert', '');
                         _that.$store.state.userCert = {};
-                        // 跳转至登录页面
-                        _that.$router.replace({
-                            path: '/account/login'
-                        });
+                        setTimeout(() => {
+                            // 跳转至登录页面
+                            _that.$router.replace({
+                                path: '/account/login'
+                            });
+                        }, 500);
                     } else {
                         $.alert(response.data.message);
                     }

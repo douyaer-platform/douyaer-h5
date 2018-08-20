@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 19:31:05
+* @Last Modified time: 2018-08-20 17:09:24
 -->
 <template>
     <div class="page page-current" v-if="!success">
@@ -55,6 +55,26 @@
                     </div>
                 </div>
             </div>
+            <div class="main-box">
+                <div class="box-bd">
+                    <div class="concat-wrap">
+                        <div class="code-wrap">
+                            <div class="code-img">
+                                <img src="/static/config/wxadd.png" alt="">
+                            </div>
+                            <div class="sub">微信加好友</div>
+                        </div>
+                    </div>
+                    <div class="concat-wrap">
+                        <div class="code-wrap">
+                            <div class="code-img">
+                                <img src="/static/config/zfbadd.png" alt="">
+                            </div>
+                            <div class="sub">支付宝加好友</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="page page-current" v-else>
@@ -84,7 +104,7 @@
                 </div>
                 <div class="code-wrap">
                     <div class="code-img">
-                        <img src="/static/config/cashcode.png" alt="">
+                        <img src="/static/config/admincode.png" alt="">
                     </div>
                     <div class="sub">扫码添加平台管理员微信</div>
                 </div>
