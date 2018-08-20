@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-20 16:36:23
+* @Last Modified time: 2018-08-20 17:36:00
 -->
 <template>
     <div class="page page-current">
@@ -74,12 +74,19 @@ export default {
             total: 0,
             loading: false,
             text: window.config.mark.home.t2,
-            userCert: this.$store.state.userCert || {},
             page: {
                 pageIndex: 1,
                 pageSize: 10
             }
         };
+    },
+    computed: {
+        userInfo() {
+            return this.$store.state.userInfo;
+        },
+        userCert() {
+            return this.$store.state.userCert || {};
+        }
     },
     created() {
         this.getTaskFun();
