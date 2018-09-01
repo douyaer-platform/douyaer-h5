@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-20 17:31:26
+* @Last Modified time: 2018-09-02 00:12:59
 -->
 <template>
     <div class="page page-current">
@@ -35,7 +35,7 @@
                                     <img :src="item.goodsPicUrl" alt="">
                                 </div>
                                 <div class="inner">
-                                    <div class="name">刷手账号：{{item.taobaoAccount}}</div>
+                                    <div class="name">【{{item.orderId}}】刷手账号：{{item.taobaoAccount}}</div>
                                     <div class="state">
                                         <span>接单时间：{{dateFormatter(item.createTime)}}</span>
                                     </div>

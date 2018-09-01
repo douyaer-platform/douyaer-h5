@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 16:40:18
+* @Last Modified time: 2018-09-02 00:46:46
 -->
 <template>
     <div class="page page-current">
@@ -129,29 +129,30 @@ export default {
             this.$http.post('/user/doLogin', this.form).then((response) => {
                 $.hidePreloader();
                 if (response.data.success) {
-                    localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
-                    let userInfo = this.$store.state.userInfo = response.data.data.user;
-                    if (response.data.data.userCert) {
-                        localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
-                        this.$store.state.userCert = response.data.data.userCert;
-                    }
-                    let _that = this;
-                    // 刷手跳转到刷手页面
-                    if (userInfo && userInfo.userRole === 'brushhand') {
-                        setTimeout(() => {
-                            _that.$router.replace({
-                                path: '/home/seller'
-                            });
-                        }, 500);
-                    }
-                    // 商家跳转到商家页面
-                    if (userInfo && userInfo.userRole === 'business') {
-                        setTimeout(() => {
-                            _that.$router.replace({
-                                path: '/home/buyer'
-                            });
-                        }, 500);
-                    }
+                    // 已登录，重新获取用户信息
+                    this.$http.get('/user/get').then((response) => {
+                        if (response.data.success) {
+                            localStorage.setItem('userInfo', JSON.stringify(response.data.data.user));
+                            this.$store.state.userInfo = response.data.data.user;
+                            if (response.data.data.userCert) {
+                                localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
+                                this.$store.state.userCert = response.data.data.userCert;
+                            }
+                            // 刷手跳转到刷手页面
+                            if (response.data.data.user.userRole === 'brushhand') {
+                                this.$router.replace({
+                                    path: '/home/seller'
+                                });
+                            }
+                            // 商家跳转到商家页面
+                            if (response.data.data.user.userRole === 'business') {
+                                this.$router.replace({
+                                    path: '/home/buyer'
+                                });
+                            }
+                        }
+                    });
+
                     // 获取公告信息
                     this.$http.get('/sys/listNotice').then((response) => {
                         if (response.data.success) {

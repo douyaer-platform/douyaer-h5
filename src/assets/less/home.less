@@ -92,10 +92,13 @@
 		li{ flex:1; padding:0 .25rem;
 			.upload{ max-height: 5.4rem; overflow: hidden;}
 		}
-		.tips{ text-align: center;
-			.red{ color: #F5222D;}
+		.tips{ text-align: center; position: relative;
+			.red{ color: #F5222D;
+				&.small{ line-height:1.05rem; font-size: .2rem; position: absolute; right: -.25rem;}
+			}
 		}
 		& ~ .tmp-list{ margin-top: .5rem; }
 	}
 	.des{ padding-left: .25rem; line-height: 2;font-size: .5rem;}
+	.bigtips{ margin-top: 1rem; padding: 0 .25rem; font-size: .75rem; color: #000; color: red;}
 }

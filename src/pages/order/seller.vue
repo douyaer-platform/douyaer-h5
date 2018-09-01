@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-20 16:37:09
+* @Last Modified time: 2018-09-02 00:24:39
 -->
 <template>
     <div class="page page-current">
@@ -15,7 +15,8 @@
             <ul>
                 <li :class="{'active':status===0}" @click.stop="setTabFun(0)">待完成</li>
                 <li :class="{'active':status===1}" @click.stop="setTabFun(1)">待发布评价</li>
-                <li :class="{'active':status===2}" @click.stop="setTabFun(2)">待完成评价</li>
+                <li :class="{'active':status===2}" @click.stop="setTabFun(2)">
+                    <i class="sep" v-if="total2>0"></i>待完成评价</li>
                 <li :class="{'active':status===3}" @click.stop="setTabFun(3)">待放款</li>
                 <li :class="{'active':status===4}" @click.stop="setTabFun(4)">已结束</li>
             </ul>
@@ -94,6 +95,8 @@ export default {
             status: 0,
             listData: [],
             total: 0,
+            total2: 0,
+            loading: false,
             page: {
                 pageIndex: 1,
                 pageSize: 10
@@ -101,7 +104,10 @@ export default {
         };
     },
     created() {
-        this.getOrderListFun();
+        let _that = this;
+        this.getOrderListFun(false, 0, function() {
+            _that.getOrderListFun(true, 2);
+        });
     },
     methods: {
         /**
@@ -126,32 +132,46 @@ export default {
          * @lastTime    2018-06-11
          * @description 获取订单列表
          */
-        getOrderListFun() {
-            $.showPreloader();
+        getOrderListFun(noData, status, cb) {
+            if (this.loading) return;
+            this.loading = true;
+
             this.$http.get('/order/list', {
                 params: {
-                    status: this.status,
+                    status: status ? status : this.status,
                     pageIndex: this.page.pageIndex,
                     pageSize: this.page.pageSize
                 }
             }).then((response) => {
-                $.hidePreloader();
+                this.loading = false;
+
                 if (response.data.success) {
-                    let data = response.data.data.list;
-                    for (let i = 0; i < data.length; i++) {
-                        data[i].buyBackText = setBuyBackType(data[i].buyBackType);
-                    }
-                    if (this.page.pageIndex === 1) {
-                        this.listData = data;
+                    // 正常路径获取数据和总量
+                    if (!noData) {
+                        let data = response.data.data.list;
+                        for (let i = 0; i < data.length; i++) {
+                            data[i].buyBackText = setBuyBackType(data[i].buyBackType);
+                        }
+                        if (this.page.pageIndex === 1) {
+                            this.listData = data;
+                        } else {
+                            for (let j in data) {
+                                this.listData.push(data[j]);
+                            }
+                        }
+                        this.total = response.data.data.total;
                     } else {
-                        for (let j in data) {
-                            this.listData.push(data[j]);
+                        if (status === 2) {
+                            this.total2 = response.data.data.total;
                         }
                     }
-                    this.total = response.data.data.total;
+                    // 有回调函数，执行回调函数
+                    if (cb) {
+                        cb();
+                    }
                 }
             }).catch(() => {
-                $.hidePreloader();
+                this.loading = false;
             });
         },
 

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 19:33:48
+* @Last Modified time: 2018-09-02 00:42:17
 -->
 <template>
     <div class="page page-current">
@@ -83,9 +83,7 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="tips">
-                                    <span class="red">*</span> 搜索截图
-                                </div>
+                                <div class="tips">搜索截图</div>
                                 <div class="upload" @click="checkPhotoFun('tmp2')">
                                     <span v-if="tmp2.uploadResult==='progress'" class="percent">{{tmp2.progress}}<i>%</i></span>
                                     <img :src="tmp2.imageUrl" alt="">
@@ -93,9 +91,7 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="tips">
-                                    <span class="red">*</span> 卡条件截图
-                                </div>
+                                <div class="tips"> 卡条件截图</div>
                                 <div class="upload" @click="checkPhotoFun('tmp3')">
                                     <span v-if="tmp3.uploadResult==='progress'" class="percent">{{tmp3.progress}}<i>%</i></span>
                                     <img :src="tmp3.imageUrl" alt="">
@@ -144,8 +140,8 @@
                                         <div class="item-input">
                                             <el-radio-group v-model="form.buyBackType">
                                                 <el-radio :label="0">无需回购</el-radio>
-                                                <el-radio :label="1">加收藏后3-5内回购，费用＋5</el-radio>
-                                                <el-radio :label="2">关注店铺后6-10内回购，费用＋6</el-radio>
+                                                <el-radio :label="1">加购物车后3-5内回购，费用＋2</el-radio>
+                                                <el-radio :label="2">手淘首页回购，费用＋6</el-radio>
                                             </el-radio-group>
                                         </div>
                                     </div>

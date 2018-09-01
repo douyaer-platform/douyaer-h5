@@ -2,7 +2,7 @@
  * @Author: weiberzeng
  * @Date:   2018-06-04 19:44:48
  * @Last Modified by:   weiberzeng
- * @Last Modified time: 2018-07-31 11:35:50
+ * @Last Modified time: 2018-09-02 00:34:36
  */
 
 /**
@@ -29,10 +29,10 @@ export function setBuyBackType(type) {
             str = '无需回购';
             break;
         case 1:
-            str = '加收藏后3-5天内回购';
+            str = '加购物车后3-5天内回购';
             break;
         case 2:
-            str = '关注店铺后6-10天内回购';
+            str = '手淘首页回购';
             break;
     }
     return str;

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 22:09:45
+* @Last Modified time: 2018-09-02 01:33:01
 -->
 <template>
     <div class="page page-current">
@@ -126,6 +126,46 @@
                                 </div>
                             </li>
                         </ul>
+                        <!-- TODO -->
+                        <template v-if="userOrder && userOrder.buyBackType === 1">
+                            <ul class="tmp-list">
+                                <li>
+                                    <div class="tips">猜你喜欢图1</div>
+                                    <div class="upload">
+                                        <img @click.stop="showImgFun" :src="userOrder.tmp13||defaultImg" alt="">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tips">猜你喜欢图2</div>
+                                    <div class="upload">
+                                        <img @click.stop="showImgFun" :src="userOrder.tmp14||defaultImg" alt="">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tips">详情页面图</div>
+                                    <div class="upload">
+                                        <img @click.stop="showImgFun" :src="userOrder.tmp15||defaultImg" alt="">
+                                    </div>
+                                </li>
+                            </ul>
+                        </template>
+                        <template v-if="userOrder && userOrder.buyBackType === 2">
+                            <ul class="tmp-list">
+                                <li>
+                                    <div class="tips">手淘首页入店</div>
+                                    <div class="upload">
+                                        <img @click.stop="showImgFun" :src="userOrder.tmp16||defaultImg" alt="">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="tips">详情页面图</div>
+                                    <div class="upload">
+                                        <img @click.stop="showImgFun" :src="userOrder.tmp17||defaultImg" alt="">
+                                    </div>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -264,6 +304,12 @@ export default {
                     if (this.userOrder.chatUrl) photos.push(this.userOrder.chatUrl);
                     if (this.userOrder.favoriteAttentionUrl) photos.push(this.userOrder.favoriteAttentionUrl);
                     if (this.userOrder.favoriteAttentionEntershopUrl) photos.push(this.userOrder.favoriteAttentionEntershopUrl);
+                    // TODO
+                    if (this.userOrder.tmp13) photos.push(this.userOrder.tmp13);
+                    if (this.userOrder.tmp14) photos.push(this.userOrder.tmp14);
+                    if (this.userOrder.tmp15) photos.push(this.userOrder.tmp15);
+                    if (this.userOrder.tmp16) photos.push(this.userOrder.tmp16);
+                    if (this.userOrder.tmp17) photos.push(this.userOrder.tmp17);
 
                     myPhotoBrowserPopup = $.photoBrowser({
                         photos: photos,
