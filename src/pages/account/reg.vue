@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-13 20:36:48
+* @Last Modified time: 2018-09-05 11:46:05
 -->
 <template>
     <div class="page page-current">
@@ -112,7 +112,7 @@ export default {
             if (to.length < 11) {
                 this.validate.phone = false;
             } else {
-                this.validate.phone = (to.length) > 0 && (/^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/).test(trim(to));
+                this.validate.phone = (to.length) > 0 && (/^(1[3-9][0-9])[0-9]{8}$/).test(trim(to));
             }
         },
         validateAuthCode(to, from) {

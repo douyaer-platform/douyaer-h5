@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-02 01:33:01
+* @Last Modified time: 2018-09-05 11:34:59
 -->
 <template>
     <div class="page page-current">
@@ -126,25 +126,24 @@
                                 </div>
                             </li>
                         </ul>
-                        <!-- TODO -->
                         <template v-if="userOrder && userOrder.buyBackType === 1">
                             <ul class="tmp-list">
                                 <li>
                                     <div class="tips">猜你喜欢图1</div>
                                     <div class="upload">
-                                        <img @click.stop="showImgFun" :src="userOrder.tmp13||defaultImg" alt="">
+                                        <img @click.stop="showImgFun" :src="userOrder.backBuyImg1||defaultImg" alt="">
                                     </div>
                                 </li>
                                 <li>
                                     <div class="tips">猜你喜欢图2</div>
                                     <div class="upload">
-                                        <img @click.stop="showImgFun" :src="userOrder.tmp14||defaultImg" alt="">
+                                        <img @click.stop="showImgFun" :src="userOrder.backBuyImg2||defaultImg" alt="">
                                     </div>
                                 </li>
                                 <li>
                                     <div class="tips">详情页面图</div>
                                     <div class="upload">
-                                        <img @click.stop="showImgFun" :src="userOrder.tmp15||defaultImg" alt="">
+                                        <img @click.stop="showImgFun" :src="userOrder.backBuyImg3||defaultImg" alt="">
                                     </div>
                                 </li>
                             </ul>
@@ -154,13 +153,13 @@
                                 <li>
                                     <div class="tips">手淘首页入店</div>
                                     <div class="upload">
-                                        <img @click.stop="showImgFun" :src="userOrder.tmp16||defaultImg" alt="">
+                                        <img @click.stop="showImgFun" :src="userOrder.backBuyImg4||defaultImg" alt="">
                                     </div>
                                 </li>
                                 <li>
                                     <div class="tips">详情页面图</div>
                                     <div class="upload">
-                                        <img @click.stop="showImgFun" :src="userOrder.tmp17||defaultImg" alt="">
+                                        <img @click.stop="showImgFun" :src="userOrder.backBuyImg5||defaultImg" alt="">
                                     </div>
                                 </li>
                                 <li></li>
@@ -304,12 +303,11 @@ export default {
                     if (this.userOrder.chatUrl) photos.push(this.userOrder.chatUrl);
                     if (this.userOrder.favoriteAttentionUrl) photos.push(this.userOrder.favoriteAttentionUrl);
                     if (this.userOrder.favoriteAttentionEntershopUrl) photos.push(this.userOrder.favoriteAttentionEntershopUrl);
-                    // TODO
-                    if (this.userOrder.tmp13) photos.push(this.userOrder.tmp13);
-                    if (this.userOrder.tmp14) photos.push(this.userOrder.tmp14);
-                    if (this.userOrder.tmp15) photos.push(this.userOrder.tmp15);
-                    if (this.userOrder.tmp16) photos.push(this.userOrder.tmp16);
-                    if (this.userOrder.tmp17) photos.push(this.userOrder.tmp17);
+                    if (this.userOrder.backBuyImg1) photos.push(this.userOrder.backBuyImg1);
+                    if (this.userOrder.backBuyImg2) photos.push(this.userOrder.backBuyImg2);
+                    if (this.userOrder.backBuyImg3) photos.push(this.userOrder.backBuyImg3);
+                    if (this.userOrder.backBuyImg4) photos.push(this.userOrder.backBuyImg4);
+                    if (this.userOrder.backBuyImg5) photos.push(this.userOrder.backBuyImg5);
 
                     myPhotoBrowserPopup = $.photoBrowser({
                         photos: photos,

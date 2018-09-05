@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-02 01:36:27
+* @Last Modified time: 2018-09-05 11:34:59
 -->
 <template>
     <div class="page page-current">
@@ -286,11 +286,11 @@ export default {
                 viewBuyershowUrl: '',
                 detailPageUrl: '',
                 chatUrl: '',
-                tmp13: '',
-                tmp14: '',
-                tmp15: '',
-                tmp16: '',
-                tmp17: '',
+                backBuyImg1: '',
+                backBuyImg2: '',
+                backBuyImg3: '',
+                backBuyImg4: '',
+                backBuyImg5: '',
                 favoriteAttentionUrl: '',
                 favoriteAttentionEntershopUrl: ''
             },
@@ -478,27 +478,25 @@ export default {
                         this.form.favoriteAttentionEntershopUrl = this.userOrder.favoriteAttentionEntershopUrl;
                         this.tmp12.imageUrl = this.userOrder.favoriteAttentionEntershopUrl;
                     }
-
-                    // TODO
-                    if (this.userOrder.tmp13) {
-                        this.form.tmp13 = this.userOrder.tmp13;
-                        this.tmp13.imageUrl = this.userOrder.tmp13;
+                    if (this.userOrder.backBuyImg1) {
+                        this.form.backBuyImg1 = this.userOrder.backBuyImg1;
+                        this.tmp13.imageUrl = this.userOrder.backBuyImg1;
                     }
-                    if (this.userOrder.tmp14) {
-                        this.form.tmp14 = this.userOrder.tmp14;
-                        this.tmp14.imageUrl = this.userOrder.tmp14;
+                    if (this.userOrder.backBuyImg2) {
+                        this.form.backBuyImg2 = this.userOrder.backBuyImg2;
+                        this.tmp14.imageUrl = this.userOrder.backBuyImg2;
                     }
-                    if (this.userOrder.tmp15) {
-                        this.form.tmp15 = this.userOrder.tmp15;
-                        this.tmp15.imageUrl = this.userOrder.tmp15;
+                    if (this.userOrder.backBuyImg3) {
+                        this.form.backBuyImg3 = this.userOrder.backBuyImg3;
+                        this.tmp15.imageUrl = this.userOrder.backBuyImg3;
                     }
-                    if (this.userOrder.tmp16) {
-                        this.form.tmp16 = this.userOrder.tmp16;
-                        this.tmp16.imageUrl = this.userOrder.tmp16;
+                    if (this.userOrder.backBuyImg4) {
+                        this.form.backBuyImg4 = this.userOrder.backBuyImg4;
+                        this.tmp16.imageUrl = this.userOrder.backBuyImg4;
                     }
-                    if (this.userOrder.tmp17) {
-                        this.form.tmp17 = this.userOrder.tmp17;
-                        this.tmp17.imageUrl = this.userOrder.tmp17;
+                    if (this.userOrder.backBuyImg5) {
+                        this.form.backBuyImg5 = this.userOrder.backBuyImg5;
+                        this.tmp17.imageUrl = this.userOrder.backBuyImg5;
                     }
 
                     let photos = [];
@@ -590,21 +588,20 @@ export default {
                             case 'tmp12':
                                 _that.form.favoriteAttentionEntershopUrl = response.data.visitUrls[0].fileUrl;
                                 break;
-                                // TODO
                             case 'tmp13':
-                                _that.form.tmp13 = response.data.visitUrls[0].fileUrl;
+                                _that.form.backBuyImg1 = response.data.visitUrls[0].fileUrl;
                                 break;
                             case 'tmp14':
-                                _that.form.tmp14 = response.data.visitUrls[0].fileUrl;
+                                _that.form.backBuyImg2 = response.data.visitUrls[0].fileUrl;
                                 break;
                             case 'tmp15':
-                                _that.form.tmp15 = response.data.visitUrls[0].fileUrl;
+                                _that.form.backBuyImg3 = response.data.visitUrls[0].fileUrl;
                                 break;
                             case 'tmp16':
-                                _that.form.tmp16 = response.data.visitUrls[0].fileUrl;
+                                _that.form.backBuyImg4 = response.data.visitUrls[0].fileUrl;
                                 break;
                             case 'tmp17':
-                                _that.form.tmp17 = response.data.visitUrls[0].fileUrl;
+                                _that.form.backBuyImg5 = response.data.visitUrls[0].fileUrl;
                                 break;
                         }
                         $.toast('上传成功！');
@@ -688,16 +685,15 @@ export default {
                     this.form.hasSubmit = 0;
                 }
             }
-            // TODO
             if (this.userOrder && this.userOrder.buyBackType === 1) {
-                if (!this.form.tmp13 || !this.form.tmp14 || !this.form.tmp15) {
+                if (!this.form.backBuyImg1 || !this.form.backBuyImg2 || !this.form.backBuyImg3) {
                     // $.toast('加购物车');
                     // return;
                     this.form.hasSubmit = 0;
                 }
             }
             if (this.userOrder && this.userOrder.buyBackType === 2) {
-                if (!this.form.tmp16 || !this.form.tmp17) {
+                if (!this.form.backBuyImg4 || !this.form.backBuyImg5) {
                     // $.toast('手淘首页');
                     // return;
                     this.form.hasSubmit = 0;

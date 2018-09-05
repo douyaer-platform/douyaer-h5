@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-02 00:46:46
+* @Last Modified time: 2018-09-05 13:40:33
 -->
 <template>
     <div class="page page-current">
@@ -76,6 +76,13 @@ export default {
         'form.account': 'validateAccount',
         'form.password': 'validatePassword'
     },
+    create() {
+        // 清空用户信息
+        localStorage.setItem('userInfo', '');
+        this.$store.state.userInfo = {};
+        localStorage.setItem('userCert', '');
+        this.$store.state.userCert = {};
+    },
     methods: {
         /**
          * @Author      weiberZeng
@@ -87,7 +94,7 @@ export default {
             if (to.length < 11) {
                 this.validate.account = false;
             } else {
-                this.validate.account = (to.length) > 0 && (/^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/).test(trim(to));
+                this.validate.account = (to.length) > 0 && (/^(1[3-9][0-9])[0-9]{8}$/).test(trim(to));
             }
         },
         validatePassword(to, from) {
