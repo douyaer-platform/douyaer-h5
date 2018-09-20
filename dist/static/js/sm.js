@@ -4,7 +4,8 @@
  *
  * =====================================================
  */
-;$.smVersion = "0.6.2";+function ($) {
+;
+$.smVersion = "0.6.2"; + function($) {
     "use strict";
 
     //全局配置
@@ -13,14 +14,15 @@
         showPageLoadingIndicator: true, //push.js加载页面的时候显示一个加载提示
         router: true, //默认使用router
         swipePanel: "left", //滑动打开侧栏
-        swipePanelOnlyClose: true  //只允许滑动关闭，不允许滑动打开侧栏
+        swipePanelOnlyClose: true //只允许滑动关闭，不允许滑动打开侧栏
     };
 
     $.smConfig = $.extend(defaults, $.config);
 
 }(Zepto);
 
-+ function($) {
++
+function($) {
     "use strict";
 
     //比较一个字符串版本号
@@ -53,7 +55,7 @@
 (function($) {
     "use strict";
     ['width', 'height'].forEach(function(dimension) {
-        var  Dimension = dimension.replace(/./, function(m) {
+        var Dimension = dimension.replace(/./, function(m) {
             return m[0].toUpperCase();
         });
         $.fn['outer' + Dimension] = function(margin) {
@@ -88,7 +90,7 @@
         end: $.support.touch ? 'touchend' : 'mouseup'
     };
 
-    $.getTranslate = function (el, axis) {
+    $.getTranslate = function(el, axis) {
         var matrix, curTransform, curStyle, transformMatrix;
 
         // automatic axis detection
@@ -101,8 +103,7 @@
             // Some old versions of Webkit choke when 'none' is passed; pass
             // empty string instead in this case
             transformMatrix = new WebKitCSSMatrix(curStyle.webkitTransform === 'none' ? '' : curStyle.webkitTransform);
-        }
-        else {
+        } else {
             transformMatrix = curStyle.MozTransform || curStyle.transform || curStyle.getPropertyValue('transform').replace('translate(', 'matrix(1, 0, 0, 1,');
             matrix = transformMatrix.toString().split(',');
         }
@@ -133,7 +134,7 @@
         return curTransform || 0;
     };
     /* jshint ignore:start */
-    $.requestAnimationFrame = function (callback) {
+    $.requestAnimationFrame = function(callback) {
         if (requestAnimationFrame) return requestAnimationFrame(callback);
         else if (webkitRequestAnimationFrame) return webkitRequestAnimationFrame(callback);
         else if (mozRequestAnimationFrame) return mozRequestAnimationFrame(callback);
@@ -141,7 +142,7 @@
             return setTimeout(callback, 1000 / 60);
         }
     };
-    $.cancelAnimationFrame = function (id) {
+    $.cancelAnimationFrame = function(id) {
         if (cancelAnimationFrame) return cancelAnimationFrame(id);
         else if (webkitCancelAnimationFrame) return webkitCancelAnimationFrame(id);
         else if (mozCancelAnimationFrame) return mozCancelAnimationFrame(id);
@@ -194,9 +195,10 @@
             return this;
         }
     };
+
     function __dealCssEvent(eventNameArr, callback) {
         var events = eventNameArr,
-            i, dom = this;// jshint ignore:line
+            i, dom = this; // jshint ignore:line
 
         function fireCallBack(e) {
             /*jshint validthis:true */
@@ -237,38 +239,37 @@
         }
         return this;
     };
-    $.fn.prevAll = function (selector) {
+    $.fn.prevAll = function(selector) {
         var prevEls = [];
         var el = this[0];
         if (!el) return $([]);
         while (el.previousElementSibling) {
             var prev = el.previousElementSibling;
             if (selector) {
-                if($(prev).is(selector)) prevEls.push(prev);
-            }
-            else prevEls.push(prev);
+                if ($(prev).is(selector)) prevEls.push(prev);
+            } else prevEls.push(prev);
             el = prev;
         }
         return $(prevEls);
     };
-    $.fn.nextAll = function (selector) {
+    $.fn.nextAll = function(selector) {
         var nextEls = [];
         var el = this[0];
         if (!el) return $([]);
         while (el.nextElementSibling) {
             var next = el.nextElementSibling;
             if (selector) {
-                if($(next).is(selector)) nextEls.push(next);
-            }
-            else nextEls.push(next);
+                if ($(next).is(selector)) nextEls.push(next);
+            } else nextEls.push(next);
             el = next;
         }
         return $(nextEls);
     };
 
     //重置zepto的show方法，防止有些人引用的版本中 show 方法操作 opacity 属性影响动画执行
-    $.fn.show = function(){
+    $.fn.show = function() {
         var elementDisplay = {};
+
         function defaultDisplay(nodeName) {
             var element, display;
             if (!elementDisplay[nodeName]) {
@@ -282,7 +283,7 @@
             return elementDisplay[nodeName];
         }
 
-        return this.each(function(){
+        return this.each(function() {
             this.style.display === "none" && (this.style.display = '');
             if (getComputedStyle(this, '').getPropertyValue("display") === "none");
             this.style.display = defaultDisplay(this.nodeName);
@@ -293,7 +294,8 @@
 /*===========================
 Device/OS Detection
 ===========================*/
-;(function ($) {
+;
+(function($) {
     "use strict";
     var device = {};
     var ua = navigator.userAgent;
@@ -354,8 +356,7 @@ Device/OS Detection
     device.statusBar = false;
     if (device.webView && (windowWidth * windowHeight === screen.width * screen.height)) {
         device.statusBar = true;
-    }
-    else {
+    } else {
         device.statusBar = false;
     }
 
@@ -383,8 +384,7 @@ Device/OS Detection
     // Status bar classes
     if (device.statusBar) {
         classNames.push('with-statusbar-overlay');
-    }
-    else {
+    } else {
         $('html').removeClass('with-statusbar-overlay');
     }
 
@@ -397,7 +397,8 @@ Device/OS Detection
     $.device = device;
 })(Zepto);
 
-;(function () {
+;
+(function() {
     'use strict';
 
     /**
@@ -634,7 +635,7 @@ Device/OS Detection
         // 修复bug: 如果父元素中有 label
         // 如果label上有needsclick这个类，则用原生的点击，否则，用模拟点击
         var parent = target;
-        while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
+        while (parent && (parent.tagName.toUpperCase() !== "BODY")) {
             if (parent.tagName.toUpperCase() === "LABEL") {
                 isCompositeLabel = true;
                 if ((/\bneedsclick\b/).test(parent.className)) return true;
@@ -858,10 +859,16 @@ Device/OS Detection
 
         this.touchStartX = touch.pageX;
         this.touchStartY = touch.pageY;
-
+        
         // Prevent phantom clicks on fast double-tap (issue #36)
         if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
-            event.preventDefault();
+            // event.preventDefault();
+            if (event.cancelable) {
+                // 判断默认行为是否已经被禁用
+                if (!event.defaultPrevented) {
+                    event.preventDefault();
+                }
+            }
         }
 
         return true;
@@ -875,7 +882,8 @@ Device/OS Detection
      * @returns {boolean}
      */
     FastClick.prototype.touchHasMoved = function(event) {
-        var touch = event.changedTouches[0], boundary = this.touchBoundary;
+        var touch = event.changedTouches[0],
+            boundary = this.touchBoundary;
 
         if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
             return true;
@@ -954,9 +962,7 @@ Device/OS Detection
         }
         //修复安卓微信下，input type="date" 的bug，经测试date,time,month已没问题
         var unsupportedType = ['date', 'time', 'month'];
-        if(unsupportedType.indexOf(event.target.type) !== -1){
-            　　　　return false;
-            　　}
+        if (unsupportedType.indexOf(event.target.type) !== -1) {　　　　 return false;　　 }
         // Reset to prevent wrong click cancel on input (issue #156).
         this.cancelNextClick = false;
 
@@ -1168,7 +1174,7 @@ Device/OS Detection
         }
 
         // Chrome version - zero for other browsers
-        chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+        chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [, 0])[1];
 
         if (chromeVersion) {
 
@@ -1219,7 +1225,7 @@ Device/OS Detection
         }
 
         // Firefox version - zero for other browsers
-        firefoxVersion = +(/Firefox\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+        firefoxVersion = +(/Firefox\/([0-9]+)/.exec(navigator.userAgent) || [, 0])[1];
 
         if (firefoxVersion >= 27) {
             // Firefox 27+ does not have tap delay if the content is not zoomable - https://bugzilla.mozilla.org/show_bug.cgi?id=922896
@@ -1257,18 +1263,19 @@ Device/OS Detection
 ************   Modals   ************
 ======================================================*/
 /*jshint unused: false*/
-+function ($) {
++
+function($) {
     "use strict";
     var _modalTemplateTempDiv = document.createElement('div');
 
     $.modalStack = [];
 
-    $.modalStackClearQueue = function () {
+    $.modalStackClearQueue = function() {
         if ($.modalStack.length) {
             ($.modalStack.shift())();
         }
     };
-    $.modal = function (params) {
+    $.modal = function(params) {
         params = params || {};
         var modalHTML = '';
         var buttonsHTML = '';
@@ -1278,8 +1285,8 @@ Device/OS Detection
                 if (params.buttons[i].type === 'cancel') {
                     buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold cancel' : ' cancel') + '">' + params.buttons[i].text + '</span>';
                 } else if (params.buttons[i].type === 'ok') {
-                    buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold ok'  : ' ok') + '">' + params.buttons[i].text + '</span>';
-                } else{
+                    buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold ok' : ' ok') + '">' + params.buttons[i].text + '</span>';
+                } else {
                     buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold' : '') + '">' + params.buttons[i].text + '</span>';
                 }
             }
@@ -1299,8 +1306,8 @@ Device/OS Detection
         $(defaults.modalContainer).append(modal[0]);
 
         // Add events on buttons
-        modal.find('.modal-button').each(function (index, el) {
-            $(el).on('click', function (e) {
+        modal.find('.modal-button').each(function(index, el) {
+            $(el).on('click', function(e) {
                 if (params.buttons[index].close !== false) $.closeModal(modal);
                 if (params.buttons[index].onClick) params.buttons[index].onClick(modal, e);
                 if (params.onClick) params.onClick(modal, index);
@@ -1309,7 +1316,7 @@ Device/OS Detection
         $.openModal(modal);
         return modal[0];
     };
-    $.alert = function (text, title, callbackOk) {
+    $.alert = function(text, title, callbackOk) {
         if (typeof title === 'function') {
             callbackOk = arguments[1];
             title = undefined;
@@ -1317,10 +1324,10 @@ Device/OS Detection
         return $.modal({
             text: text || '',
             title: typeof title === 'undefined' ? defaults.modalTitle : title,
-            buttons: [ {text: defaults.modalButtonOk, bold: true, onClick: callbackOk} ]
+            buttons: [{ text: defaults.modalButtonOk, bold: true, onClick: callbackOk }]
         });
     };
-    $.confirm = function (text, title, callbackOk, callbackCancel, okText, cancelText) {
+    $.confirm = function(text, title, callbackOk, callbackCancel, okText, cancelText) {
         if (typeof title === 'function') {
             callbackCancel = arguments[2];
             callbackOk = arguments[1];
@@ -1330,12 +1337,12 @@ Device/OS Detection
             text: text || '',
             title: typeof title === 'undefined' ? defaults.modalTitle : title,
             buttons: [
-                {text: cancelText || defaults.modalButtonCancel, onClick: callbackCancel, type: 'cancel'},
-                {text: okText || defaults.modalButtonOk, bold: true, onClick: callbackOk, type: 'ok'}
+                { text: cancelText || defaults.modalButtonCancel, onClick: callbackCancel, type: 'cancel' },
+                { text: okText || defaults.modalButtonOk, bold: true, onClick: callbackOk, type: 'ok' }
             ]
         });
     };
-    $.prompt = function (text, title, callbackOk, callbackCancel) {
+    $.prompt = function(text, title, callbackOk, callbackCancel) {
         if (typeof title === 'function') {
             callbackCancel = arguments[2];
             callbackOk = arguments[1];
@@ -1345,8 +1352,7 @@ Device/OS Detection
             text: text || '',
             title: typeof title === 'undefined' ? defaults.modalTitle : title,
             afterText: '<input type="text" class="modal-text-input">',
-            buttons: [
-                {
+            buttons: [{
                     text: defaults.modalButtonCancel
                 },
                 {
@@ -1354,13 +1360,13 @@ Device/OS Detection
                     bold: true
                 }
             ],
-            onClick: function (modal, index) {
+            onClick: function(modal, index) {
                 if (index === 0 && callbackCancel) callbackCancel($(modal).find('.modal-text-input').val());
                 if (index === 1 && callbackOk) callbackOk($(modal).find('.modal-text-input').val());
             }
         });
     };
-    $.modalLogin = function (text, title, callbackOk, callbackCancel) {
+    $.modalLogin = function(text, title, callbackOk, callbackCancel) {
         if (typeof title === 'function') {
             callbackCancel = arguments[2];
             callbackOk = arguments[1];
@@ -1370,8 +1376,7 @@ Device/OS Detection
             text: text || '',
             title: typeof title === 'undefined' ? defaults.modalTitle : title,
             afterText: '<input type="text" name="modal-username" placeholder="' + defaults.modalUsernamePlaceholder + '" class="modal-text-input modal-text-input-double"><input type="password" name="modal-password" placeholder="' + defaults.modalPasswordPlaceholder + '" class="modal-text-input modal-text-input-double">',
-            buttons: [
-                {
+            buttons: [{
                     text: defaults.modalButtonCancel
                 },
                 {
@@ -1379,7 +1384,7 @@ Device/OS Detection
                     bold: true
                 }
             ],
-            onClick: function (modal, index) {
+            onClick: function(modal, index) {
                 var username = $(modal).find('.modal-text-input[name="modal-username"]').val();
                 var password = $(modal).find('.modal-text-input[name="modal-password"]').val();
                 if (index === 0 && callbackCancel) callbackCancel(username, password);
@@ -1387,7 +1392,7 @@ Device/OS Detection
             }
         });
     };
-    $.modalPassword = function (text, title, callbackOk, callbackCancel) {
+    $.modalPassword = function(text, title, callbackOk, callbackCancel) {
         if (typeof title === 'function') {
             callbackCancel = arguments[2];
             callbackOk = arguments[1];
@@ -1397,8 +1402,7 @@ Device/OS Detection
             text: text || '',
             title: typeof title === 'undefined' ? defaults.modalTitle : title,
             afterText: '<input type="password" name="modal-password" placeholder="' + defaults.modalPasswordPlaceholder + '" class="modal-text-input">',
-            buttons: [
-                {
+            buttons: [{
                     text: defaults.modalButtonCancel
                 },
                 {
@@ -1406,14 +1410,14 @@ Device/OS Detection
                     bold: true
                 }
             ],
-            onClick: function (modal, index) {
+            onClick: function(modal, index) {
                 var password = $(modal).find('.modal-text-input[name="modal-password"]').val();
                 if (index === 0 && callbackCancel) callbackCancel(password);
                 if (index === 1 && callbackOk) callbackOk(password);
             }
         });
     };
-    $.showPreloader = function (title) {
+    $.showPreloader = function(title) {
         $.hidePreloader();
         $.showPreloader.preloaderModal = $.modal({
             title: title || defaults.modalPreloaderTitle,
@@ -1422,20 +1426,20 @@ Device/OS Detection
 
         return $.showPreloader.preloaderModal;
     };
-    $.hidePreloader = function () {
+    $.hidePreloader = function() {
         $.showPreloader.preloaderModal && $.closeModal($.showPreloader.preloaderModal);
         $('.modal-overlay').remove();
         $('.modal').remove();
     };
-    $.showIndicator = function () {
+    $.showIndicator = function() {
         if ($('.preloader-indicator-modal')[0]) return;
         $(defaults.modalContainer).append('<div class="preloader-indicator-overlay"></div><div class="preloader-indicator-modal"><span class="preloader preloader-white"></span></div>');
     };
-    $.hideIndicator = function () {
+    $.hideIndicator = function() {
         $('.preloader-indicator-overlay, .preloader-indicator-modal').remove();
     };
     // Action Sheet
-    $.actions = function (params) {
+    $.actions = function(params) {
         var modal, groupSelector, buttonSelector;
         params = params || [];
 
@@ -1465,9 +1469,9 @@ Device/OS Detection
         buttonSelector = '.actions-modal-button';
 
         var groups = modal.find(groupSelector);
-        groups.each(function (index, el) {
+        groups.each(function(index, el) {
             var groupIndex = index;
-            $(el).children().each(function (index, el) {
+            $(el).children().each(function(index, el) {
                 var buttonIndex = index;
                 var buttonParams = params[groupIndex][buttonIndex];
                 var clickTarget;
@@ -1475,7 +1479,7 @@ Device/OS Detection
                 // if (toPopover && $(el).find(buttonSelector).length > 0) clickTarget = $(el).find(buttonSelector);
 
                 if (clickTarget) {
-                    clickTarget.on('click', function (e) {
+                    clickTarget.on('click', function(e) {
                         if (buttonParams.close !== false) $.closeModal(modal);
                         if (buttonParams.onClick) buttonParams.onClick(modal, e);
                     });
@@ -1485,7 +1489,7 @@ Device/OS Detection
         $.openModal(modal);
         return modal[0];
     };
-    $.popup = function (modal, removeOnClose) {
+    $.popup = function(modal, removeOnClose) {
         if (typeof removeOnClose === 'undefined') removeOnClose = true;
         if (typeof modal === 'string' && modal.indexOf('<') >= 0) {
             var _modal = document.createElement('div');
@@ -1494,8 +1498,7 @@ Device/OS Detection
                 modal = _modal.childNodes[0];
                 if (removeOnClose) modal.classList.add('remove-on-close');
                 $(defaults.modalContainer).append(modal);
-            }
-            else return false; //nothing found
+            } else return false; //nothing found
         }
         modal = $(modal);
         if (modal.length === 0) return false;
@@ -1508,15 +1511,14 @@ Device/OS Detection
 
         return modal[0];
     };
-    $.pickerModal = function (pickerModal, removeOnClose) {
+    $.pickerModal = function(pickerModal, removeOnClose) {
         if (typeof removeOnClose === 'undefined') removeOnClose = true;
         if (typeof pickerModal === 'string' && pickerModal.indexOf('<') >= 0) {
             pickerModal = $(pickerModal);
             if (pickerModal.length > 0) {
                 if (removeOnClose) pickerModal.addClass('remove-on-close');
                 $(defaults.modalContainer).append(pickerModal[0]);
-            }
-            else return false; //nothing found
+            } else return false; //nothing found
         }
         pickerModal = $(pickerModal);
         if (pickerModal.length === 0) return false;
@@ -1524,7 +1526,7 @@ Device/OS Detection
         $.openModal(pickerModal);
         return pickerModal[0];
     };
-    $.loginScreen = function (modal) {
+    $.loginScreen = function(modal) {
         if (!modal) modal = '.login-screen';
         modal = $(modal);
         if (modal.length === 0) return false;
@@ -1538,18 +1540,18 @@ Device/OS Detection
     //显示一个消息，会在2秒钟后自动消失
     $.toast = function(msg, duration, extraclass) {
         var $toast = $('<div class="modal toast ' + (extraclass || '') + '">' + msg + '</div>').appendTo(document.body);
-        $.openModal($toast, function(){
+        $.openModal($toast, function() {
             setTimeout(function() {
                 $.closeModal($toast);
             }, duration || 1000);
         });
     };
-    $.openModal = function (modal, cb) {
+    $.openModal = function(modal, cb) {
         modal = $(modal);
         var isModal = modal.hasClass('modal'),
             isNotToast = !modal.hasClass('toast');
         if ($('.modal.modal-in:not(.modal-out)').length && defaults.modalStack && isModal && isNotToast) {
-            $.modalStack.push(function () {
+            $.modalStack.push(function() {
                 $.openModal(modal, cb);
             });
             return;
@@ -1561,12 +1563,12 @@ Device/OS Detection
         if (isModal) {
             modal.show();
             modal.css({
-                marginTop: - Math.round(modal.outerHeight() / 2) + 'px'
+                marginTop: -Math.round(modal.outerHeight() / 2) + 'px'
             });
         }
         if (isToast) {
             modal.css({
-                marginLeft: - Math.round(modal.outerWidth() / 2 / 1.185) + 'px' //1.185 是初始化时候的放大效果
+                marginLeft: -Math.round(modal.outerWidth() / 2 / 1.185) + 'px' //1.185 是初始化时候的放大效果
             });
         }
 
@@ -1594,17 +1596,17 @@ Device/OS Detection
 
         // Classes for transition in
         if (!isLoginScreen && !isPickerModal && !isToast) overlay.addClass('modal-overlay-visible');
-        modal.removeClass('modal-out').addClass('modal-in').transitionEnd(function (e) {
+        modal.removeClass('modal-out').addClass('modal-in').transitionEnd(function(e) {
             if (modal.hasClass('modal-out')) modal.trigger('closed');
             else modal.trigger('opened');
         });
         // excute callback
         if (typeof cb === 'function') {
-          cb.call(this);
+            cb.call(this);
         }
         return true;
     };
-    $.closeModal = function (modal) {
+    $.closeModal = function(modal) {
         modal = $(modal || '.modal-in');
         if (typeof modal !== 'undefined' && modal.length === 0) {
             return;
@@ -1616,12 +1618,11 @@ Device/OS Detection
             isPickerModal = modal.hasClass('picker-modal'),
             removeOnClose = modal.hasClass('remove-on-close'),
             overlay = isPopup ? $('.popup-overlay') : $('.modal-overlay');
-        if (isPopup){
+        if (isPopup) {
             if (modal.length === $('.popup.modal-in').length) {
                 overlay.removeClass('modal-overlay-visible');
             }
-        }
-        else if (!(isPickerModal || isToast)) {
+        } else if (!(isPickerModal || isToast)) {
             overlay.removeClass('modal-overlay-visible');
         }
 
@@ -1633,7 +1634,7 @@ Device/OS Detection
             $(defaults.modalContainer).addClass('picker-modal-closing');
         }
 
-        modal.removeClass('modal-in').addClass('modal-out').transitionEnd(function (e) {
+        modal.removeClass('modal-in').addClass('modal-out').transitionEnd(function(e) {
             if (modal.hasClass('modal-out')) modal.trigger('closed');
             else modal.trigger('opened');
 
@@ -1645,17 +1646,17 @@ Device/OS Detection
                 if (removeOnClose && modal.length > 0) {
                     modal.remove();
                 }
-            }
-            else {
+            } else {
                 modal.remove();
             }
         });
-        if (isModal &&  defaults.modalStack ) {
+        if (isModal && defaults.modalStack) {
             $.modalStackClearQueue();
         }
 
         return true;
     };
+
     function handleClicks(e) {
         /*jshint validthis:true */
         var clicked = $(this);
@@ -1670,15 +1671,13 @@ Device/OS Detection
         if (clicked.hasClass('open-popup')) {
             if (clickedData.popup) {
                 popup = clickedData.popup;
-            }
-            else popup = '.popup';
+            } else popup = '.popup';
             $.popup(popup);
         }
         if (clicked.hasClass('close-popup')) {
             if (clickedData.popup) {
                 popup = clickedData.popup;
-            }
-            else popup = '.popup.modal-in';
+            } else popup = '.popup.modal-in';
             $.closeModal(popup);
         }
 
@@ -1700,12 +1699,12 @@ Device/OS Detection
 
     }
     $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .close-picker', handleClicks);
-    var defaults =  $.modal.prototype.defaults  = {
+    var defaults = $.modal.prototype.defaults = {
         modalStack: true,
         modalButtonOk: '确定',
         modalButtonCancel: '取消',
         modalPreloaderTitle: '加载中',
-        modalContainer : document.body
+        modalContainer: document.body
     };
 }(Zepto);
 
@@ -1713,14 +1712,15 @@ Device/OS Detection
 ************   Calendar   ************
 ======================================================*/
 /*jshint unused: false*/
-+function ($) {
++
+function($) {
     "use strict";
     var rtl = false;
-    var Calendar = function (params) {
+    var Calendar = function(params) {
         var p = this;
         var defaults = {
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月' , '九月' , '十月', '十一月', '十二月'],
-            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月' , '九月' , '十月', '十一月', '十二月'],
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
             dayNames: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
             dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
             firstDay: 1, // First day of the week, Monday
@@ -1734,15 +1734,13 @@ Device/OS Detection
             animate: true,
             closeOnSelect: true,
             monthPicker: true,
-            monthPickerTemplate:
-                '<div class="picker-calendar-month-picker">' +
+            monthPickerTemplate: '<div class="picker-calendar-month-picker">' +
                 '<a href="#" class="link icon-only picker-calendar-prev-month"><i class="icon icon-prev"></i></a>' +
                 '<div class="current-month-value"></div>' +
                 '<a href="#" class="link icon-only picker-calendar-next-month"><i class="icon icon-next"></i></a>' +
                 '</div>',
             yearPicker: true,
-            yearPickerTemplate:
-                '<div class="picker-calendar-year-picker">' +
+            yearPickerTemplate: '<div class="picker-calendar-year-picker">' +
                 '<a href="#" class="link icon-only picker-calendar-prev-year"><i class="icon icon-prev"></i></a>' +
                 '<span class="current-year-value"></span>' +
                 '<a href="#" class="link icon-only picker-calendar-next-year"><i class="icon icon-next"></i></a>' +
@@ -1753,8 +1751,7 @@ Device/OS Detection
             inputReadOnly: true,
             toolbar: true,
             toolbarCloseText: 'Done',
-            toolbarTemplate:
-                '<div class="toolbar">' +
+            toolbarTemplate: '<div class="toolbar">' +
                 '<div class="toolbar-inner">' +
                 '{{monthPicker}}' +
                 '{{yearPicker}}' +
@@ -1815,7 +1812,7 @@ Device/OS Detection
 
 
         // Value
-        p.addValue = function (value) {
+        p.addValue = function(value) {
             if (p.params.multiple) {
                 if (!p.value) p.value = [];
                 var inValuesIndex;
@@ -1826,22 +1823,20 @@ Device/OS Detection
                 }
                 if (typeof inValuesIndex === 'undefined') {
                     p.value.push(value);
-                }
-                else {
+                } else {
                     p.value.splice(inValuesIndex, 1);
                 }
                 p.updateValue();
-            }
-            else {
+            } else {
                 p.value = [value];
                 p.updateValue();
             }
         };
-        p.setValue = function (arrValues) {
+        p.setValue = function(arrValues) {
             p.value = arrValues;
             p.updateValue();
         };
-        p.updateValue = function () {
+        p.updateValue = function() {
             p.wrapper.find('.picker-calendar-day-selected').removeClass('picker-calendar-day-selected');
             var i, inputValue;
             for (i = 0; i < p.value.length; i++) {
@@ -1866,11 +1861,12 @@ Device/OS Detection
         };
 
         // Columns Handlers
-        p.initCalendarEvents = function () {
+        p.initCalendarEvents = function() {
             var col;
             var allowItemClick = true;
             var isTouched, isMoved, touchStartX, touchStartY, touchCurrentX, touchCurrentY, touchStartTime, touchEndTime, startTranslate, currentTranslate, wrapperWidth, wrapperHeight, percentage, touchesDiff, isScrolling;
-            function handleTouchStart (e) {
+
+            function handleTouchStart(e) {
                 if (isMoved || isTouched) return;
                 // e.preventDefault();
                 isTouched = true;
@@ -1882,7 +1878,8 @@ Device/OS Detection
                 isScrolling = undefined;
                 startTranslate = currentTranslate = p.monthsTranslate;
             }
-            function handleTouchMove (e) {
+
+            function handleTouchMove(e) {
                 if (!isTouched) return;
 
                 touchCurrentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
@@ -1910,14 +1907,15 @@ Device/OS Detection
                 e.preventDefault();
 
                 touchesDiff = p.isH ? touchCurrentX - touchStartX : touchCurrentY - touchStartY;
-                percentage = touchesDiff/(p.isH ? wrapperWidth : wrapperHeight);
+                percentage = touchesDiff / (p.isH ? wrapperWidth : wrapperHeight);
                 currentTranslate = (p.monthsTranslate * inverter + percentage) * 100;
 
                 // Transform wrapper
                 p.wrapper.transform('translate3d(' + (p.isH ? currentTranslate : 0) + '%, ' + (p.isH ? 0 : currentTranslate) + '%, 0)');
 
             }
-            function handleTouchEnd (e) {
+
+            function handleTouchEnd(e) {
                 if (!isTouched || !isMoved) {
                     isTouched = isMoved = false;
                     return;
@@ -1928,32 +1926,27 @@ Device/OS Detection
                 if (touchEndTime - touchStartTime < 300) {
                     if (Math.abs(touchesDiff) < 10) {
                         p.resetMonth();
-                    }
-                    else if (touchesDiff >= 10) {
+                    } else if (touchesDiff >= 10) {
                         if (rtl) p.nextMonth();
                         else p.prevMonth();
-                    }
-                    else {
+                    } else {
                         if (rtl) p.prevMonth();
                         else p.nextMonth();
                     }
-                }
-                else {
+                } else {
                     if (percentage <= -0.5) {
                         if (rtl) p.prevMonth();
                         else p.nextMonth();
-                    }
-                    else if (percentage >= 0.5) {
+                    } else if (percentage >= 0.5) {
                         if (rtl) p.nextMonth();
                         else p.prevMonth();
-                    }
-                    else {
+                    } else {
                         p.resetMonth();
                     }
                 }
 
                 // Allow click
-                setTimeout(function () {
+                setTimeout(function() {
                     allowItemClick = true;
                 }, 100);
             }
@@ -1990,7 +1983,7 @@ Device/OS Detection
                 p.wrapper.on($.touchEvents.end, handleTouchEnd);
             }
 
-            p.container[0].f7DestroyCalendarEvents = function () {
+            p.container[0].f7DestroyCalendarEvents = function() {
                 p.container.find('.picker-calendar-prev-month').off('click', p.prevMonth);
                 p.container.find('.picker-calendar-next-month').off('click', p.nextMonth);
                 p.container.find('.picker-calendar-prev-year').off('click', p.prevYear);
@@ -2005,16 +1998,16 @@ Device/OS Detection
 
 
         };
-        p.destroyCalendarEvents = function (colContainer) {
+        p.destroyCalendarEvents = function(colContainer) {
             if ('f7DestroyCalendarEvents' in p.container[0]) p.container[0].f7DestroyCalendarEvents();
         };
 
         // Calendar Methods
-        p.daysInMonth = function (date) {
+        p.daysInMonth = function(date) {
             var d = new Date(date);
             return new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
         };
-        p.monthHTML = function (date, offset) {
+        p.monthHTML = function(date, offset) {
             date = new Date(date);
             var year = date.getFullYear(),
                 month = date.getMonth(),
@@ -2036,17 +2029,19 @@ Device/OS Detection
                 firstDayOfMonthIndex = new Date(date.getFullYear(), date.getMonth()).getDay();
             if (firstDayOfMonthIndex === 0) firstDayOfMonthIndex = 7;
 
-            var dayDate, currentValues = [], i, j,
-                rows = 6, cols = 7,
+            var dayDate, currentValues = [],
+                i, j,
+                rows = 6,
+                cols = 7,
                 monthHTML = '',
                 dayIndex = 0 + (p.params.firstDay - 1),
-                today = new Date().setHours(0,0,0,0),
+                today = new Date().setHours(0, 0, 0, 0),
                 minDate = p.params.minDate ? new Date(p.params.minDate).getTime() : null,
                 maxDate = p.params.maxDate ? new Date(p.params.maxDate).getTime() : null;
 
             if (p.value && p.value.length) {
                 for (i = 0; i < p.value.length; i++) {
-                    currentValues.push(new Date(p.value[i]).setHours(0,0,0,0));
+                    currentValues.push(new Date(p.value[i]).setHours(0, 0, 0, 0));
                 }
             }
 
@@ -2055,22 +2050,20 @@ Device/OS Detection
                 var row = i;
                 for (j = 1; j <= cols; j++) {
                     var col = j;
-                    dayIndex ++;
+                    dayIndex++;
                     var dayNumber = dayIndex - firstDayOfMonthIndex;
                     var addClass = '';
                     if (dayNumber < 0) {
                         dayNumber = daysInPrevMonth + dayNumber + 1;
                         addClass += ' picker-calendar-day-prev';
                         dayDate = new Date(month - 1 < 0 ? year - 1 : year, month - 1 < 0 ? 11 : month - 1, dayNumber).getTime();
-                    }
-                    else {
+                    } else {
                         dayNumber = dayNumber + 1;
                         if (dayNumber > daysInMonth) {
                             dayNumber = dayNumber - daysInMonth;
                             addClass += ' picker-calendar-day-next';
                             dayDate = new Date(month + 1 > 11 ? year + 1 : year, month + 1 > 11 ? 0 : month + 1, dayNumber).getTime();
-                        }
-                        else {
+                        } else {
                             dayDate = new Date(year, month, dayNumber).getTime();
                         }
                     }
@@ -2090,7 +2083,7 @@ Device/OS Detection
                     dayDate = new Date(dayDate);
                     var dayYear = dayDate.getFullYear();
                     var dayMonth = dayDate.getMonth();
-                    rowHTML += '<div data-year="' + dayYear + '" data-month="' + dayMonth + '" data-day="' + dayNumber + '" class="picker-calendar-day' + (addClass) + '" data-date="' + (dayYear + '-' + dayMonth + '-' + dayNumber) + '"><span>'+dayNumber+'</span></div>';
+                    rowHTML += '<div data-year="' + dayYear + '" data-month="' + dayMonth + '" data-day="' + dayNumber + '" class="picker-calendar-day' + (addClass) + '" data-date="' + (dayYear + '-' + dayMonth + '-' + dayNumber) + '"><span>' + dayNumber + '</span></div>';
                 }
                 monthHTML += '<div class="picker-calendar-row">' + rowHTML + '</div>';
             }
@@ -2098,12 +2091,11 @@ Device/OS Detection
             return monthHTML;
         };
         p.animating = false;
-        p.updateCurrentMonthYear = function (dir) {
+        p.updateCurrentMonthYear = function(dir) {
             if (typeof dir === 'undefined') {
                 p.currentMonth = parseInt(p.months.eq(1).attr('data-month'), 10);
                 p.currentYear = parseInt(p.months.eq(1).attr('data-year'), 10);
-            }
-            else {
+            } else {
                 p.currentMonth = parseInt(p.months.eq(dir === 'next' ? (p.months.length - 1) : 0).attr('data-month'), 10);
                 p.currentYear = parseInt(p.months.eq(dir === 'next' ? (p.months.length - 1) : 0).attr('data-year'), 10);
             }
@@ -2111,7 +2103,7 @@ Device/OS Detection
             p.container.find('.current-year-value').text(p.currentYear);
 
         };
-        p.onMonthChangeStart = function (dir) {
+        p.onMonthChangeStart = function(dir) {
             p.updateCurrentMonthYear(dir);
             p.months.removeClass('picker-calendar-month-current picker-calendar-month-prev picker-calendar-month-next');
             var currentIndex = dir === 'next' ? p.months.length - 1 : 0;
@@ -2123,7 +2115,7 @@ Device/OS Detection
                 p.params.onMonthYearChangeStart(p, p.currentYear, p.currentMonth);
             }
         };
-        p.onMonthChangeEnd = function (dir, rebuildBoth) {
+        p.onMonthChangeEnd = function(dir, rebuildBoth) {
             p.animating = false;
             var nextMonthHTML, prevMonthHTML, newMonthHTML;
             p.wrapper.find('.picker-calendar-month:not(.picker-calendar-month-prev):not(.picker-calendar-month-current):not(.picker-calendar-month-next)').remove();
@@ -2134,8 +2126,7 @@ Device/OS Detection
             }
             if (!rebuildBoth) {
                 newMonthHTML = p.monthHTML(new Date(p.currentYear, p.currentMonth), dir);
-            }
-            else {
+            } else {
                 p.wrapper.find('.picker-calendar-month-next, .picker-calendar-month-prev').remove();
                 prevMonthHTML = p.monthHTML(new Date(p.currentYear, p.currentMonth), 'prev');
                 nextMonthHTML = p.monthHTML(new Date(p.currentYear, p.currentMonth), 'next');
@@ -2155,7 +2146,7 @@ Device/OS Detection
                 p.params.onMonthYearChangeEnd(p, p.currentYear, p.currentMonth);
             }
         };
-        p.setMonthsTranslate = function (translate) {
+        p.setMonthsTranslate = function(translate) {
             translate = translate || p.monthsTranslate || 0;
             if (typeof p.monthsTranslate === 'undefined') p.monthsTranslate = translate;
             p.months.removeClass('picker-calendar-month-current picker-calendar-month-prev picker-calendar-month-next');
@@ -2166,7 +2157,7 @@ Device/OS Detection
             p.months.eq(1).transform('translate3d(' + (p.isH ? currentMonthTranslate : 0) + '%, ' + (p.isH ? 0 : currentMonthTranslate) + '%, 0)').addClass('picker-calendar-month-current');
             p.months.eq(2).transform('translate3d(' + (p.isH ? nextMonthTranslate : 0) + '%, ' + (p.isH ? 0 : nextMonthTranslate) + '%, 0)').addClass('picker-calendar-month-next');
         };
-        p.nextMonth = function (transition) {
+        p.nextMonth = function(transition) {
             if (typeof transition === 'undefined' || typeof transition === 'object') {
                 transition = '';
                 if (!p.params.animate) transition = 0;
@@ -2181,7 +2172,7 @@ Device/OS Detection
                     return p.resetMonth();
                 }
             }
-            p.monthsTranslate --;
+            p.monthsTranslate--;
             if (nextMonth === p.currentMonth) {
                 var nextMonthTranslate = -(p.monthsTranslate) * 100 * inverter;
                 var nextMonthHTML = $(p.monthHTML(nextDateTime, 'next')).transform('translate3d(' + (p.isH ? nextMonthTranslate : 0) + '%, ' + (p.isH ? 0 : nextMonthTranslate) + '%, 0)').addClass('picker-calendar-month-next');
@@ -2197,7 +2188,7 @@ Device/OS Detection
 
             p.wrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
             if (transitionEndCallback) {
-                p.wrapper.transitionEnd(function () {
+                p.wrapper.transitionEnd(function() {
                     p.onMonthChangeEnd('next');
                 });
             }
@@ -2205,7 +2196,7 @@ Device/OS Detection
                 p.onMonthChangeEnd('next');
             }
         };
-        p.prevMonth = function (transition) {
+        p.prevMonth = function(transition) {
             if (typeof transition === 'undefined' || typeof transition === 'object') {
                 transition = '';
                 if (!p.params.animate) transition = 0;
@@ -2220,7 +2211,7 @@ Device/OS Detection
                     return p.resetMonth();
                 }
             }
-            p.monthsTranslate ++;
+            p.monthsTranslate++;
             if (prevMonth === p.currentMonth) {
                 var prevMonthTranslate = -(p.monthsTranslate) * 100 * inverter;
                 var prevMonthHTML = $(p.monthHTML(prevDateTime, 'prev')).transform('translate3d(' + (p.isH ? prevMonthTranslate : 0) + '%, ' + (p.isH ? 0 : prevMonthTranslate) + '%, 0)').addClass('picker-calendar-month-prev');
@@ -2235,7 +2226,7 @@ Device/OS Detection
             var translate = (p.monthsTranslate * 100) * inverter;
             p.wrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
             if (transitionEndCallback) {
-                p.wrapper.transitionEnd(function () {
+                p.wrapper.transitionEnd(function() {
                     p.onMonthChangeEnd('prev');
                 });
             }
@@ -2243,12 +2234,12 @@ Device/OS Detection
                 p.onMonthChangeEnd('prev');
             }
         };
-        p.resetMonth = function (transition) {
+        p.resetMonth = function(transition) {
             if (typeof transition === 'undefined') transition = '';
             var translate = (p.monthsTranslate * 100) * inverter;
             p.wrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
         };
-        p.setYearMonth = function (year, month, transition) {
+        p.setYearMonth = function(year, month, transition) {
             if (typeof year === 'undefined') year = p.currentYear;
             if (typeof month === 'undefined') month = p.currentMonth;
             if (typeof transition === 'undefined' || typeof transition === 'object') {
@@ -2258,8 +2249,7 @@ Device/OS Detection
             var targetDate;
             if (year < p.currentYear) {
                 targetDate = new Date(year, month + 1, -1).getTime();
-            }
-            else {
+            } else {
                 targetDate = new Date(year, month).getTime();
             }
             if (p.params.maxDate && targetDate > new Date(p.params.maxDate).getTime()) {
@@ -2277,16 +2267,15 @@ Device/OS Detection
             var transitionEndCallback = p.animating ? false : true;
             if (targetDate > currentDate) {
                 // To next
-                p.monthsTranslate --;
+                p.monthsTranslate--;
                 if (!p.animating) p.months.eq(p.months.length - 1).remove();
                 p.wrapper.append(newMonthHTML);
                 p.months = p.wrapper.find('.picker-calendar-month');
                 monthTranslate = -(prevTranslate - 1) * 100 * inverter;
                 p.months.eq(p.months.length - 1).transform('translate3d(' + (p.isH ? monthTranslate : 0) + '%, ' + (p.isH ? 0 : monthTranslate) + '%, 0)').addClass('picker-calendar-month-next');
-            }
-            else {
+            } else {
                 // To prev
-                p.monthsTranslate ++;
+                p.monthsTranslate++;
                 if (!p.animating) p.months.eq(0).remove();
                 p.wrapper.prepend(newMonthHTML);
                 p.months = p.wrapper.find('.picker-calendar-month');
@@ -2301,7 +2290,7 @@ Device/OS Detection
             wrapperTranslate = (p.monthsTranslate * 100) * inverter;
             p.wrapper.transition(transition).transform('translate3d(' + (p.isH ? wrapperTranslate : 0) + '%, ' + (p.isH ? 0 : wrapperTranslate) + '%, 0)');
             if (transitionEndCallback) {
-                p.wrapper.transitionEnd(function () {
+                p.wrapper.transitionEnd(function() {
                     p.onMonthChangeEnd(dir, true);
                 });
             }
@@ -2309,21 +2298,21 @@ Device/OS Detection
                 p.onMonthChangeEnd(dir);
             }
         };
-        p.nextYear = function () {
+        p.nextYear = function() {
             p.setYearMonth(p.currentYear + 1);
         };
-        p.prevYear = function () {
+        p.prevYear = function() {
             p.setYearMonth(p.currentYear - 1);
         };
 
 
         // HTML Layout
-        p.layout = function () {
+        p.layout = function() {
             var pickerHTML = '';
             var pickerClass = '';
             var i;
 
-            var layoutDate = p.value && p.value.length ? p.value[0] : new Date().setHours(0,0,0,0);
+            var layoutDate = p.value && p.value.length ? p.value[0] : new Date().setHours(0, 0, 0, 0);
             var prevMonthHTML = p.monthHTML(layoutDate, 'prev');
             var currentMonthHTML = p.monthHTML(layoutDate);
             var nextMonthHTML = p.monthHTML(layoutDate, 'next');
@@ -2390,17 +2379,17 @@ Device/OS Detection
                         if (pageHeight === pageScrollHeight) {
                             newPaddingBottom = p.container.height();
                         }
-                        pageContent.css({'padding-bottom': (newPaddingBottom) + 'px'});
+                        pageContent.css({ 'padding-bottom': (newPaddingBottom) + 'px' });
                     }
                     pageContent.scrollTop(scrollTop, 300);
                 }
             }
         }
+
         function closeOnHTMLClick(e) {
             if (p.input && p.input.length > 0) {
                 if (e.target !== p.input[0] && $(e.target).parents('.picker-modal').length === 0) p.close();
-            }
-            else {
+            } else {
                 if ($(e.target).parents('.picker-modal').length === 0) p.close();
             }
         }
@@ -2421,7 +2410,7 @@ Device/OS Detection
         // Open
         function onPickerClose() {
             p.opened = false;
-            if (p.input && p.input.length > 0) p.input.parents('.content').css({'padding-bottom': ''});
+            if (p.input && p.input.length > 0) p.input.parents('.content').css({ 'padding-bottom': '' });
             if (p.params.onClose) p.params.onClose(p);
 
             // Destroy events
@@ -2429,7 +2418,7 @@ Device/OS Detection
         }
 
         p.opened = false;
-        p.open = function () {
+        p.open = function() {
             var updateValue = false;
             if (!p.opened) {
                 // Set date value
@@ -2448,11 +2437,10 @@ Device/OS Detection
                     p.container = $(p.pickerHTML);
                     p.container.addClass('picker-modal-inline');
                     $(p.params.container).append(p.container);
-                }
-                else {
+                } else {
                     p.container = $($.pickerModal(p.pickerHTML));
                     $(p.container)
-                        .on('close', function () {
+                        .on('close', function() {
                             onPickerClose();
                         });
                 }
@@ -2483,7 +2471,7 @@ Device/OS Detection
             p.opened = true;
             p.initialized = true;
             if (p.params.onMonthAdd) {
-                p.months.each(function () {
+                p.months.each(function() {
                     p.params.onMonthAdd(p, this);
                 });
             }
@@ -2491,14 +2479,14 @@ Device/OS Detection
         };
 
         // Close
-        p.close = function () {
+        p.close = function() {
             if (!p.opened || p.inline) return;
             $.closeModal(p.container);
             return;
         };
 
         // Destroy
-        p.destroy = function () {
+        p.destroy = function() {
             p.close();
             if (p.params.input && p.input.length > 0) {
                 p.input.off('click', openOnInput);
@@ -2512,12 +2500,12 @@ Device/OS Detection
 
         return p;
     };
-    $.fn.calendar = function (params) {
+    $.fn.calendar = function(params) {
         return this.each(function() {
             var $this = $(this);
-            if(!$this[0]) return;
+            if (!$this[0]) return;
             var p = {};
-            if($this[0].tagName.toUpperCase() === "INPUT") {
+            if ($this[0].tagName.toUpperCase() === "INPUT") {
                 p.input = $this;
             } else {
                 p.container = $this;
@@ -2539,9 +2527,10 @@ Device/OS Detection
 ======================================================*/
 /* jshint unused:false */
 /* jshint multistr:true */
-+ function($) {
++
+function($) {
     "use strict";
-    var Picker = function (params) {
+    var Picker = function(params) {
         var p = this;
         var defaults = {
             updateValuesOnMomentum: false,
@@ -2576,7 +2565,7 @@ Device/OS Detection
         var originBug = $.device.ios || (navigator.userAgent.toLowerCase().indexOf('safari') >= 0 && navigator.userAgent.toLowerCase().indexOf('chrome') < 0) && !$.device.android;
 
         // Value
-        p.setValue = function (arrValues, transition) {
+        p.setValue = function(arrValues, transition) {
             var valueIndex = 0;
             for (var i = 0; i < p.cols.length; i++) {
                 if (p.cols[i] && !p.cols[i].divider) {
@@ -2585,7 +2574,7 @@ Device/OS Detection
                 }
             }
         };
-        p.updateValue = function () {
+        p.updateValue = function() {
             var newValue = [];
             var newDisplayValue = [];
             for (var i = 0; i < p.cols.length; i++) {
@@ -2609,7 +2598,7 @@ Device/OS Detection
         };
 
         // Columns Handlers
-        p.initPickerCol = function (colElement, updateItems) {
+        p.initPickerCol = function(colElement, updateItems) {
             var colContainer = $(colElement);
             var colIndex = colContainer.index();
             var col = p.cols[colIndex];
@@ -2620,7 +2609,7 @@ Device/OS Detection
 
             var i, j;
             var wrapperHeight, itemHeight, itemsHeight, minTranslate, maxTranslate;
-            col.replaceValues = function (values, displayValues) {
+            col.replaceValues = function(values, displayValues) {
                 col.destroyEvents();
                 col.values = values;
                 col.displayValues = displayValues;
@@ -2631,10 +2620,10 @@ Device/OS Detection
                 col.setValue(col.values[0], 0, true);
                 col.initEvents();
             };
-            col.calcSize = function () {
+            col.calcSize = function() {
                 if (p.params.rotateEffect) {
                     col.container.removeClass('picker-items-col-absolute');
-                    if (!col.width) col.container.css({width:''});
+                    if (!col.width) col.container.css({ width: '' });
                 }
                 var colWidth, colHeight;
                 colWidth = 0;
@@ -2647,17 +2636,17 @@ Device/OS Detection
                 if (col.width) {
                     colWidth = col.width;
                     if (parseInt(colWidth, 10) === colWidth) colWidth = colWidth + 'px';
-                    col.container.css({width: colWidth});
+                    col.container.css({ width: colWidth });
                 }
                 if (p.params.rotateEffect) {
                     if (!col.width) {
-                        col.items.each(function () {
+                        col.items.each(function() {
                             var item = $(this);
-                            item.css({width:'auto'});
+                            item.css({ width: 'auto' });
                             colWidth = Math.max(colWidth, item[0].offsetWidth);
-                            item.css({width:''});
+                            item.css({ width: '' });
                         });
-                        col.container.css({width: (colWidth + 2) + 'px'});
+                        col.container.css({ width: (colWidth + 2) + 'px' });
                     }
                     col.container.addClass('picker-items-col-absolute');
                 }
@@ -2671,10 +2660,10 @@ Device/OS Detection
             var animationFrameId;
 
             // Set Value Function
-            col.setValue = function (newValue, transition, valueCallbacks) {
+            col.setValue = function(newValue, transition, valueCallbacks) {
                 if (typeof transition === 'undefined') transition = '';
                 var newActiveIndex = col.wrapper.find('.picker-item[data-picker-value="' + newValue + '"]').index();
-                if(typeof newActiveIndex === 'undefined' || newActiveIndex === -1) {
+                if (typeof newActiveIndex === 'undefined' || newActiveIndex === -1) {
                     return;
                 }
                 var newTranslate = -newActiveIndex * itemHeight + maxTranslate;
@@ -2683,9 +2672,9 @@ Device/OS Detection
                 col.wrapper.transform('translate3d(0,' + (newTranslate) + 'px,0)');
 
                 // Watch items
-                if (p.params.updateValuesOnMomentum && col.activeIndex && col.activeIndex !== newActiveIndex ) {
+                if (p.params.updateValuesOnMomentum && col.activeIndex && col.activeIndex !== newActiveIndex) {
                     $.cancelAnimationFrame(animationFrameId);
-                    col.wrapper.transitionEnd(function(){
+                    col.wrapper.transitionEnd(function() {
                         $.cancelAnimationFrame(animationFrameId);
                     });
                     updateDuringScroll();
@@ -2695,11 +2684,11 @@ Device/OS Detection
                 col.updateItems(newActiveIndex, newTranslate, transition, valueCallbacks);
             };
 
-            col.updateItems = function (activeIndex, translate, transition, valueCallbacks) {
+            col.updateItems = function(activeIndex, translate, transition, valueCallbacks) {
                 if (typeof translate === 'undefined') {
                     translate = $.getTranslate(col.wrapper[0], 'y');
                 }
-                if(typeof activeIndex === 'undefined') activeIndex = -Math.round((translate - maxTranslate)/itemHeight);
+                if (typeof activeIndex === 'undefined') activeIndex = -Math.round((translate - maxTranslate) / itemHeight);
                 if (activeIndex < 0) activeIndex = 0;
                 if (activeIndex >= col.items.length) activeIndex = col.items.length - 1;
                 var previousActiveIndex = col.activeIndex;
@@ -2736,9 +2725,9 @@ Device/OS Detection
                 if (!p.params.rotateEffect) {
                     return;
                 }
-                var percentage = (translate - (Math.floor((translate - maxTranslate)/itemHeight) * itemHeight + maxTranslate)) / itemHeight;
+                var percentage = (translate - (Math.floor((translate - maxTranslate) / itemHeight) * itemHeight + maxTranslate)) / itemHeight;
 
-                col.items.each(function () {
+                col.items.each(function() {
                     var item = $(this);
                     var itemOffsetTop = item.index() * itemHeight;
                     var translateOffset = maxTranslate - translate;
@@ -2747,7 +2736,7 @@ Device/OS Detection
 
                     var itemsFit = Math.ceil(col.height / itemHeight / 2) + 1;
 
-                    var angle = (-18*percentage);
+                    var angle = (-18 * percentage);
                     if (angle > 180) angle = 180;
                     if (angle < -180) angle = -180;
                     // Far class
@@ -2759,7 +2748,7 @@ Device/OS Detection
             };
 
             function updateDuringScroll() {
-                animationFrameId = $.requestAnimationFrame(function () {
+                animationFrameId = $.requestAnimationFrame(function() {
                     col.updateItems(undefined, undefined, 0);
                     updateDuringScroll();
                 });
@@ -2770,7 +2759,8 @@ Device/OS Detection
 
             var allowItemClick = true;
             var isTouched, isMoved, touchStartY, touchCurrentY, touchStartTime, touchEndTime, startTranslate, returnTo, currentTranslate, prevTranslate, velocityTranslate, velocityTime;
-            function handleTouchStart (e) {
+
+            function handleTouchStart(e) {
                 if (isMoved || isTouched) return;
                 e.preventDefault();
                 isTouched = true;
@@ -2780,7 +2770,8 @@ Device/OS Detection
                 allowItemClick = true;
                 startTranslate = currentTranslate = $.getTranslate(col.wrapper[0], 'y');
             }
-            function handleTouchMove (e) {
+
+            function handleTouchMove(e) {
                 if (!isTouched) return;
                 e.preventDefault();
                 allowItemClick = false;
@@ -2818,7 +2809,8 @@ Device/OS Detection
                 velocityTime = (new Date()).getTime();
                 prevTranslate = currentTranslate;
             }
-            function handleTouchEnd (e) {
+
+            function handleTouchEnd(e) {
                 if (!isTouched || !isMoved) {
                     isTouched = isMoved = false;
                     return;
@@ -2828,15 +2820,13 @@ Device/OS Detection
                 if (returnTo) {
                     if (returnTo === 'min') {
                         col.wrapper.transform('translate3d(0,' + minTranslate + 'px,0)');
-                    }
-                    else col.wrapper.transform('translate3d(0,' + maxTranslate + 'px,0)');
+                    } else col.wrapper.transform('translate3d(0,' + maxTranslate + 'px,0)');
                 }
                 touchEndTime = new Date().getTime();
                 var velocity, newTranslate;
                 if (touchEndTime - touchStartTime > 300) {
                     newTranslate = currentTranslate;
-                }
-                else {
+                } else {
                     velocity = Math.abs(velocityTranslate / (touchEndTime - velocityTime));
                     newTranslate = currentTranslate + velocityTranslate * p.params.momentumRatio;
                 }
@@ -2844,13 +2834,13 @@ Device/OS Detection
                 newTranslate = Math.max(Math.min(newTranslate, maxTranslate), minTranslate);
 
                 // Active Index
-                var activeIndex = -Math.floor((newTranslate - maxTranslate)/itemHeight);
+                var activeIndex = -Math.floor((newTranslate - maxTranslate) / itemHeight);
 
                 // Normalize translate
                 if (!p.params.freeMode) newTranslate = -activeIndex * itemHeight + maxTranslate;
 
                 // Transform wrapper
-                col.wrapper.transform('translate3d(0,' + (parseInt(newTranslate,10)) + 'px,0)');
+                col.wrapper.transform('translate3d(0,' + (parseInt(newTranslate, 10)) + 'px,0)');
 
                 // Update items
                 col.updateItems(activeIndex, newTranslate, '', true);
@@ -2858,13 +2848,13 @@ Device/OS Detection
                 // Watch items
                 if (p.params.updateValuesOnMomentum) {
                     updateDuringScroll();
-                    col.wrapper.transitionEnd(function(){
+                    col.wrapper.transitionEnd(function() {
                         $.cancelAnimationFrame(animationFrameId);
                     });
                 }
 
                 // Allow click
-                setTimeout(function () {
+                setTimeout(function() {
                     allowItemClick = true;
                 }, 100);
             }
@@ -2877,25 +2867,25 @@ Device/OS Detection
                 col.setValue(value);
             }
 
-            col.initEvents = function (detach) {
+            col.initEvents = function(detach) {
                 var method = detach ? 'off' : 'on';
                 col.container[method]($.touchEvents.start, handleTouchStart);
                 col.container[method]($.touchEvents.move, handleTouchMove);
                 col.container[method]($.touchEvents.end, handleTouchEnd);
                 col.items[method]('click', handleClick);
             };
-            col.destroyEvents = function () {
+            col.destroyEvents = function() {
                 col.initEvents(true);
             };
 
-            col.container[0].f7DestroyPickerCol = function () {
+            col.container[0].f7DestroyPickerCol = function() {
                 col.destroyEvents();
             };
 
             col.initEvents();
 
         };
-        p.destroyPickerCol = function (colContainer) {
+        p.destroyPickerCol = function(colContainer) {
             colContainer = $(colContainer);
             if ('f7DestroyPickerCol' in colContainer[0]) colContainer[0].f7DestroyPickerCol();
         };
@@ -2912,13 +2902,12 @@ Device/OS Detection
         $(window).on('resize', resizeCols);
 
         // HTML Layout
-        p.columnHTML = function (col, onlyItems) {
+        p.columnHTML = function(col, onlyItems) {
             var columnItemsHTML = '';
             var columnHTML = '';
             if (col.divider) {
                 columnHTML += '<div class="picker-items-col picker-items-col-divider ' + (col.textAlign ? 'picker-items-col-' + col.textAlign : '') + ' ' + (col.cssClass || '') + '">' + col.content + '</div>';
-            }
-            else {
+            } else {
                 for (var j = 0; j < col.values.length; j++) {
                     columnItemsHTML += '<div class="picker-item" data-picker-value="' + col.values[j] + '">' + (col.displayValues ? col.displayValues[j] : col.values[j]) + '</div>';
                 }
@@ -2927,7 +2916,7 @@ Device/OS Detection
             }
             return onlyItems ? columnItemsHTML : columnHTML;
         };
-        p.layout = function () {
+        p.layout = function() {
             var pickerHTML = '';
             var pickerClass = '';
             var i;
@@ -2979,18 +2968,18 @@ Device/OS Detection
                         if (pageHeight === pageScrollHeight) {
                             newPaddingBottom = p.container.height();
                         }
-                        pageContent.css({'padding-bottom': (newPaddingBottom) + 'px'});
+                        pageContent.css({ 'padding-bottom': (newPaddingBottom) + 'px' });
                     }
                     pageContent.scrollTop(scrollTop, 300);
                 }
             }
         }
+
         function closeOnHTMLClick(e) {
             if (!p.opened) return;
             if (p.input && p.input.length > 0) {
                 if (e.target !== p.input[0] && $(e.target).parents('.picker-modal').length === 0) p.close();
-            }
-            else {
+            } else {
                 if ($(e.target).parents('.picker-modal').length === 0) p.close();
             }
         }
@@ -3010,17 +2999,17 @@ Device/OS Detection
         // Open
         function onPickerClose() {
             p.opened = false;
-            if (p.input && p.input.length > 0) p.input.parents('.content').css({'padding-bottom': ''});
+            if (p.input && p.input.length > 0) p.input.parents('.content').css({ 'padding-bottom': '' });
             if (p.params.onClose) p.params.onClose(p);
 
             // Destroy events
-            p.container.find('.picker-items-col').each(function () {
+            p.container.find('.picker-items-col').each(function() {
                 p.destroyPickerCol(this);
             });
         }
 
         p.opened = false;
-        p.open = function () {
+        p.open = function() {
             if (!p.opened) {
 
                 // Layout
@@ -3032,14 +3021,13 @@ Device/OS Detection
                     p.container.addClass('picker-modal-inline');
                     $(p.params.container).append(p.container);
                     p.opened = true;
-                }
-                else {
+                } else {
                     p.container = $($.pickerModal(p.pickerHTML));
                     $(p.container)
                         .one('opened', function() {
                             p.opened = true;
                         })
-                        .on('close', function () {
+                        .on('close', function() {
                             onPickerClose();
                         });
                 }
@@ -3048,7 +3036,7 @@ Device/OS Detection
                 p.container[0].f7Picker = p;
 
                 // Init Events
-                p.container.find('.picker-items-col').each(function () {
+                p.container.find('.picker-items-col').each(function() {
                     var updateItems = true;
                     if ((!p.initialized && p.params.value) || (p.initialized && p.value)) updateItems = false;
                     p.initPickerCol(this, updateItems);
@@ -3059,8 +3047,7 @@ Device/OS Detection
                     if (p.params.value) {
                         p.setValue(p.params.value, 0);
                     }
-                }
-                else {
+                } else {
                     if (p.value) p.setValue(p.value, 0);
                 }
             }
@@ -3072,14 +3059,14 @@ Device/OS Detection
         };
 
         // Close
-        p.close = function () {
+        p.close = function() {
             if (!p.opened || p.inline) return;
             $.closeModal(p.container);
             return;
         };
 
         // Destroy
-        p.destroy = function () {
+        p.destroy = function() {
             p.close();
             if (p.params.input && p.input.length > 0) {
                 p.input.off('click', openOnInput);
@@ -3103,11 +3090,11 @@ Device/OS Detection
     $.fn.picker = function(params) {
         var args = arguments;
         return this.each(function() {
-            if(!this) return;
+            if (!this) return;
             var $this = $(this);
 
             var picker = $this.data("picker");
-            if(!picker) {
+            if (!picker) {
                 var p = $.extend({
                     input: this,
                     value: $this.val() ? $this.val().split(' ') : ''
@@ -3115,7 +3102,7 @@ Device/OS Detection
                 picker = new Picker(p);
                 $this.data("picker", picker);
             }
-            if(typeof params === typeof "a") {
+            if (typeof params === typeof "a") {
                 picker[params].apply(picker, Array.prototype.slice.call(args, 1));
             }
         });
@@ -3124,32 +3111,33 @@ Device/OS Detection
 
 /* jshint unused:false*/
 
-+ function($) {
++
+function($) {
     "use strict";
 
     var today = new Date();
 
     var getDays = function(max) {
         var days = [];
-        for(var i=1; i<= (max||31);i++) {
-            days.push(i < 10 ? "0"+i : i);
+        for (var i = 1; i <= (max || 31); i++) {
+            days.push(i < 10 ? "0" + i : i);
         }
         return days;
     };
 
     var getDaysByMonthAndYear = function(month, year) {
-        var int_d = new Date(year, parseInt(month)+1-1, 1);
+        var int_d = new Date(year, parseInt(month) + 1 - 1, 1);
         var d = new Date(int_d - 1);
         return getDays(d.getDate());
     };
 
-    var formatNumber = function (n) {
+    var formatNumber = function(n) {
         return n < 10 ? "0" + n : n;
     };
 
     var initMonthes = ('01 02 03 04 05 06 07 08 09 10 11 12').split(' ');
 
-    var initYears = (function () {
+    var initYears = (function() {
         var arr = [];
         for (var i = 1950; i <= 2030; i++) { arr.push(i); }
         return arr;
@@ -3158,67 +3146,67 @@ Device/OS Detection
 
     var defaults = {
 
-        rotateEffect: false,  //为了性能
+        rotateEffect: false, //为了性能
 
-        value: [today.getFullYear(), formatNumber(today.getMonth()+1), formatNumber(today.getDate()), today.getHours(), formatNumber(today.getMinutes())],
+        value: [today.getFullYear(), formatNumber(today.getMonth() + 1), formatNumber(today.getDate()), today.getHours(), formatNumber(today.getMinutes())],
 
-        onChange: function (picker, values, displayValues) {
+        onChange: function(picker, values, displayValues) {
             var days = getDaysByMonthAndYear(picker.cols[1].value, picker.cols[0].value);
             var currentValue = picker.cols[2].value;
-            if(currentValue > days.length) currentValue = days.length;
+            if (currentValue > days.length) currentValue = days.length;
             picker.cols[2].setValue(currentValue);
         },
 
-        formatValue: function (p, values, displayValues) {
+        formatValue: function(p, values, displayValues) {
             return displayValues[0] + '-' + values[1] + '-' + values[2] + ' ' + values[3] + ':' + values[4];
         },
 
         cols: [
             // Years
-        {
-            values: initYears
-        },
-        // Months
-        {
-            values: initMonthes
-        },
-        // Days
-        {
-            values: getDays()
-        },
+            {
+                values: initYears
+            },
+            // Months
+            {
+                values: initMonthes
+            },
+            // Days
+            {
+                values: getDays()
+            },
 
-        // Space divider
-        {
-            divider: true,
-            content: '  '
-        },
-        // Hours
-        {
-            values: (function () {
-                var arr = [];
-                for (var i = 0; i <= 23; i++) { arr.push(i); }
-                return arr;
-            })(),
-        },
-        // Divider
-        {
-            divider: true,
-            content: ':'
-        },
-        // Minutes
-        {
-            values: (function () {
-                var arr = [];
-                for (var i = 0; i <= 59; i++) { arr.push(i < 10 ? '0' + i : i); }
-                return arr;
-            })(),
-        }
+            // Space divider
+            {
+                divider: true,
+                content: '  '
+            },
+            // Hours
+            {
+                values: (function() {
+                    var arr = [];
+                    for (var i = 0; i <= 23; i++) { arr.push(i); }
+                    return arr;
+                })(),
+            },
+            // Divider
+            {
+                divider: true,
+                content: ':'
+            },
+            // Minutes
+            {
+                values: (function() {
+                    var arr = [];
+                    for (var i = 0; i <= 59; i++) { arr.push(i < 10 ? '0' + i : i); }
+                    return arr;
+                })(),
+            }
         ]
     };
 
     $.fn.datetimePicker = function(params) {
         return this.each(function() {
-            if(!this) return;
+            if (!this) return;
             var p = $.extend(defaults, params);
             $(this).picker(p);
             if (params.value) $(this).val(p.formatValue(p, p.value, p.value));
@@ -3227,7 +3215,8 @@ Device/OS Detection
 
 }(Zepto);
 
-+ function(window) {
++
+function(window) {
 
     "use strict";
 
@@ -3274,8 +3263,8 @@ Device/OS Detection
         };
 
         me.extend = function(target, obj) {
-            for (var i in obj) {  // jshint ignore:line
-                    target[i] = obj[i]; 
+            for (var i in obj) { // jshint ignore:line
+                target[i] = obj[i];
             }
         };
 
@@ -3512,7 +3501,7 @@ Device/OS Detection
         this.scroller = $(this.wrapper).find('.content-inner')[0]; // jshint ignore:line
 
 
-        this.scrollerStyle = this.scroller&&this.scroller.style; // cache style for better performance
+        this.scrollerStyle = this.scroller && this.scroller.style; // cache style for better performance
 
         this.options = {
 
@@ -3548,7 +3537,7 @@ Device/OS Detection
         };
 
         for (var i in options) {
-                this.options[i] = options[i];
+            this.options[i] = options[i];
         }
 
         // Normalize options
@@ -3932,7 +3921,7 @@ Device/OS Detection
                 return false;
             }
 
-            if (this.options.ptr && this.y > 44 && this.startY * -1 < $(window).height() && !this.ptrLock) {// jshint ignore:line
+            if (this.options.ptr && this.y > 44 && this.startY * -1 < $(window).height() && !this.ptrLock) { // jshint ignore:line
                 // not trigger ptr when user want to scroll to top
                 y = this.options.ptrOffset || 44;
                 this._execEvent('ptr');
@@ -4704,7 +4693,7 @@ Device/OS Detection
             }
 
             for (i in keys) { // jshint ignore:line
-                    this.options.keyBindings[i] = this.options.keyBindings[i] || keys[i];
+                this.options.keyBindings[i] = this.options.keyBindings[i] || keys[i];
             }
 
             utils.addEvent(window, 'keydown', this);
@@ -4951,7 +4940,7 @@ Device/OS Detection
         };
 
         for (var i in options) { // jshint ignore:line
-                this.options[i] = options[i];
+            this.options[i] = options[i];
 
         }
 
@@ -5334,7 +5323,8 @@ Device/OS Detection
 /* ===============================================================================
 ************   scroller   ************
 =============================================================================== */
-+ function($) {
++
+function($) {
     "use strict";
     //重置zepto自带的滚动条
     var _zeptoMethodCache = {
@@ -5438,7 +5428,7 @@ Device/OS Detection
 
             //如果页面本身已经进行了原生滚动，那么把这个滚动换成JS的滚动
             var nativeScrollTop = this.$pageContent[0].scrollTop;
-            if(nativeScrollTop) {
+            if (nativeScrollTop) {
                 this.$pageContent[0].scrollTop = 0;
                 this.scrollTop(nativeScrollTop);
             }
@@ -5549,7 +5539,7 @@ Device/OS Detection
             if (typeof option === 'string' && typeof data[option] === 'function') {
                 internal_return = data[option].apply(data, args);
                 if (internal_return !== undefined)
-            return false;
+                    return false;
             }
 
         });
@@ -5623,10 +5613,11 @@ Device/OS Detection
 /* ===============================================================================
 ************   Tabs   ************
 =============================================================================== */
-+function ($) {
++
+function($) {
     "use strict";
 
-    var showTab = function (tab, tabLink, force) {
+    var showTab = function(tab, tabLink, force) {
         var newTab = $(tab);
         if (arguments.length === 2) {
             if (typeof tabLink === 'boolean') {
@@ -5671,7 +5662,7 @@ Device/OS Detection
             else tabLink = $('.tab-link[href="#' + newTab.attr('id') + '"]');
             // Search by data-tab
             if (!tabLink || tabLink && tabLink.length === 0) {
-                $('[data-tab]').each(function () {
+                $('[data-tab]').each(function() {
                     if (newTab.is($(this).attr('data-tab'))) tabLink = $(this);
                 });
             }
@@ -5686,7 +5677,7 @@ Device/OS Detection
             if (oldTabId) oldTabLink = $('.tab-link[href="#' + oldTabId + '"]');
             // Search by data-tab
             if (!oldTabLink || oldTabLink && oldTabLink.length === 0) {
-                $('[data-tab]').each(function () {
+                $('[data-tab]').each(function() {
                     if (oldTab.is($(this).attr('data-tab'))) oldTabLink = $(this);
                 });
             }
@@ -5705,7 +5696,7 @@ Device/OS Detection
     var old = $.showTab;
     $.showTab = showTab;
 
-    $.showTab.noConflict = function () {
+    $.showTab.noConflict = function() {
         $.showTab = old;
         return this;
     };
@@ -5722,12 +5713,13 @@ Device/OS Detection
 /* ===============================================================================
 ************   Tabs   ************
 =============================================================================== */
-+function ($) {
++
+function($) {
     "use strict";
-    $.initFixedTab = function(){
+    $.initFixedTab = function() {
         var $fixedTab = $('.fixed-tab');
         if ($fixedTab.length === 0) return;
-        $('.fixed-tab').fixedTab();//默认{offset: 0}
+        $('.fixed-tab').fixedTab(); //默认{offset: 0}
     };
     var FixedTab = function(pageContent, _options) {
         var $pageContent = this.$pageContent = $(pageContent);
@@ -5798,7 +5790,7 @@ Device/OS Detection
     }
     $.fn.fixedTab = Plugin;
     $.fn.fixedTab.Constructor = FixedTab;
-    $(document).on('pageInit',function(){
+    $(document).on('pageInit', function() {
         $.initFixedTab();
     });
 
@@ -5806,7 +5798,8 @@ Device/OS Detection
 
 }(Zepto);
 
-+ function($) {
++
+function($) {
     "use strict";
     //这里实在js滚动时使用的下拉刷新代码。
 
@@ -5820,7 +5813,7 @@ Device/OS Detection
 
         var page = eventsTarget.hasClass('content') ? eventsTarget : eventsTarget.parents('.content');
         var scroller = $.getScroller(page[0]);
-        if(!scroller) return;
+        if (!scroller) return;
 
 
         var container = eventsTarget;
@@ -5893,7 +5886,8 @@ Device/OS Detection
     };
 }(Zepto); // jshint ignore:line
 
-+ function($) {
++
+function($) {
     'use strict';
     $.initPullToRefresh = function(pageContainer) {
         var eventsTarget = $(pageContainer);
@@ -6008,7 +6002,7 @@ Device/OS Detection
             container.transform('');
             if (refresh) {
                 //防止二次触发
-                if(container.hasClass('refreshing')) return;
+                if (container.hasClass('refreshing')) return;
                 container.addClass('refreshing');
                 container.trigger('refresh');
             } else {
@@ -6033,7 +6027,7 @@ Device/OS Detection
 
     };
     $.pullToRefreshDone = function(container) {
-        $(window).scrollTop(0);//解决微信下拉刷新顶部消失的问题
+        $(window).scrollTop(0); //解决微信下拉刷新顶部消失的问题
         container = $(container);
         if (container.length === 0) container = $('.pull-to-refresh-content.refreshing');
         container.removeClass('refreshing').addClass('transitioning');
@@ -6057,56 +6051,57 @@ Device/OS Detection
     };
 
     //这里是否需要写到 scroller 中去？
-/*    $.initPullToRefresh = function(pageContainer) {
-        var $pageContainer = $(pageContainer);
-        $pageContainer.each(function(index, item) {
-            if ($.detectScrollerType(item) === 'js') {
-                $._pullToRefreshJSScroll.initPullToRefresh(item);
-            } else {
-                initPullToRefresh(item);
-            }
-        });
-    };
+    /*    $.initPullToRefresh = function(pageContainer) {
+            var $pageContainer = $(pageContainer);
+            $pageContainer.each(function(index, item) {
+                if ($.detectScrollerType(item) === 'js') {
+                    $._pullToRefreshJSScroll.initPullToRefresh(item);
+                } else {
+                    initPullToRefresh(item);
+                }
+            });
+        };
 
 
-    $.pullToRefreshDone = function(pageContainer) {
-        var $pageContainer = $(pageContainer);
-        $pageContainer.each(function(index, item) {
-            if ($.detectScrollerType(item) === 'js') {
-                $._pullToRefreshJSScroll.pullToRefreshDone(item);
-            } else {
-                pullToRefreshDone(item);
-            }
-        });
-    };
+        $.pullToRefreshDone = function(pageContainer) {
+            var $pageContainer = $(pageContainer);
+            $pageContainer.each(function(index, item) {
+                if ($.detectScrollerType(item) === 'js') {
+                    $._pullToRefreshJSScroll.pullToRefreshDone(item);
+                } else {
+                    pullToRefreshDone(item);
+                }
+            });
+        };
 
 
-    $.pullToRefreshTrigger = function(pageContainer) {
-       var $pageContainer = $(pageContainer);
-        $pageContainer.each(function(index, item) {
-            if ($.detectScrollerType(item) === 'js') {
-                $._pullToRefreshJSScroll.pullToRefreshTrigger(item);
-            } else {
-                pullToRefreshTrigger(item);
-            }
-        });
-    };
+        $.pullToRefreshTrigger = function(pageContainer) {
+           var $pageContainer = $(pageContainer);
+            $pageContainer.each(function(index, item) {
+                if ($.detectScrollerType(item) === 'js') {
+                    $._pullToRefreshJSScroll.pullToRefreshTrigger(item);
+                } else {
+                    pullToRefreshTrigger(item);
+                }
+            });
+        };
 
-    $.destroyPullToRefresh = function(pageContainer) {
-        var $pageContainer = $(pageContainer);
-        $pageContainer.each(function(index, item) {
-            if ($.detectScrollerType(item) === 'js') {
-                $._pullToRefreshJSScroll.destroyPullToRefresh(item);
-            } else {
-                destroyPullToRefresh(item);
-            }
-        });
-    };
-*/
+        $.destroyPullToRefresh = function(pageContainer) {
+            var $pageContainer = $(pageContainer);
+            $pageContainer.each(function(index, item) {
+                if ($.detectScrollerType(item) === 'js') {
+                    $._pullToRefreshJSScroll.destroyPullToRefresh(item);
+                } else {
+                    destroyPullToRefresh(item);
+                }
+            });
+        };
+    */
 
 }(Zepto); //jshint ignore:line
 
-+ function($) {
++
+function($) {
     'use strict';
 
     function handleInfiniteScroll() {
@@ -6149,16 +6144,17 @@ Device/OS Detection
 
     $.initInfiniteScroll = function(pageContainer) {
         pageContainer = $(pageContainer);
-        var infiniteContent = pageContainer.hasClass('infinite-scroll')?pageContainer:pageContainer.find('.infinite-scroll');
+        var infiniteContent = pageContainer.hasClass('infinite-scroll') ? pageContainer : pageContainer.find('.infinite-scroll');
         if (infiniteContent.length === 0) return;
         $.attachInfiniteScroll(infiniteContent);
         //如果是顶部无限刷新，要将滚动条初始化于最下端
-        pageContainer.forEach(function(v){
-            if($(v).hasClass('infinite-scroll-top')){
+        pageContainer.forEach(function(v) {
+            if ($(v).hasClass('infinite-scroll-top')) {
                 var height = v.scrollHeight - v.clientHeight;
                 $(v).scrollTop(height);
             }
         });
+
         function detachEvents() {
             $.detachInfiniteScroll(infiniteContent);
             pageContainer.off('pageBeforeRemove', detachEvents);
@@ -6167,7 +6163,8 @@ Device/OS Detection
     };
 }(Zepto);
 
-+function ($) {
++
+function($) {
     "use strict";
     $(function() {
         $(document).on("focus", ".searchbar input", function(e) {
@@ -6189,19 +6186,20 @@ Device/OS Detection
 ************   Panels   ************
 ======================================================*/
 /*jshint unused: false*/
-+function ($) {
++
+function($) {
     "use strict";
     $.allowPanelOpen = true;
-    $.openPanel = function (panel) {
+    $.openPanel = function(panel) {
         if (!$.allowPanelOpen) return false;
-        if(panel === 'left' || panel === 'right') panel = ".panel-" + panel;  //可以传入一个方向
+        if (panel === 'left' || panel === 'right') panel = ".panel-" + panel; //可以传入一个方向
         panel = panel ? $(panel) : $(".panel").eq(0);
         var direction = panel.hasClass("panel-right") ? "right" : "left";
         if (panel.length === 0 || panel.hasClass('active')) return false;
         $.closePanel(); // Close if some panel is opened
         $.allowPanelOpen = false;
         var effect = panel.hasClass('panel-reveal') ? 'reveal' : 'cover';
-        panel.css({display: 'block'}).addClass('active');
+        panel.css({ display: 'block' }).addClass('active');
         panel.trigger('open');
 
         // Trigger reLayout
@@ -6212,17 +6210,15 @@ Device/OS Detection
         var openedTriggered = false;
 
         function panelTransitionEnd() {
-            transitionEndTarget.transitionEnd(function (e) {
+            transitionEndTarget.transitionEnd(function(e) {
                 if (e.target === transitionEndTarget[0]) {
                     if (panel.hasClass('active')) {
                         panel.trigger('opened');
-                    }
-                    else {
+                    } else {
                         panel.trigger('closed');
                     }
-            $.allowPanelOpen = true;
-                }
-                else panelTransitionEnd();
+                    $.allowPanelOpen = true;
+                } else panelTransitionEnd();
             });
         }
         panelTransitionEnd();
@@ -6230,7 +6226,7 @@ Device/OS Detection
         $(document.body).addClass('with-panel-' + direction + '-' + effect);
         return true;
     };
-    $.closePanel = function () {
+    $.closePanel = function() {
         var activePanel = $('.panel.active');
         if (activePanel.length === 0) return false;
         var effect = activePanel.hasClass('panel-reveal') ? 'reveal' : 'cover';
@@ -6240,9 +6236,9 @@ Device/OS Detection
         activePanel.trigger('close');
         $.allowPanelOpen = false;
 
-        transitionEndTarget.transitionEnd(function () {
+        transitionEndTarget.transitionEnd(function() {
             if (activePanel.hasClass('active')) return;
-            activePanel.css({display: ''});
+            activePanel.css({ display: '' });
             activePanel.trigger('closed');
             $('body').removeClass('panel-closing');
             $.allowPanelOpen = true;
@@ -6261,7 +6257,7 @@ Device/OS Detection
     /*======================================================
      ************   Swipe panels   ************
      ======================================================*/
-    $.initSwipePanels = function () {
+    $.initSwipePanels = function() {
         var panel, side;
         var swipePanel = $.smConfig.swipePanel;
         var swipePanelOnlyClose = $.smConfig.swipePanelOnlyClose;
@@ -6270,10 +6266,11 @@ Device/OS Detection
         var swipePanelThreshold = 2;
         var swipePanelNoFollow = false;
 
-        if(!(swipePanel || swipePanelOnlyClose)) return;
+        if (!(swipePanel || swipePanelOnlyClose)) return;
 
         var panelOverlay = $('.panel-overlay');
-        var isTouched, isMoved, isScrolling, touchesStart = {}, touchStartTime, touchesDiff, translate, opened, panelWidth, effect, direction;
+        var isTouched, isMoved, isScrolling, touchesStart = {},
+            touchStartTime, touchesDiff, translate, opened, panelWidth, effect, direction;
         var views = $('.page');
 
         function handleTouchStart(e) {
@@ -6287,15 +6284,14 @@ Device/OS Detection
             if (swipePanelCloseOpposite || swipePanelOnlyClose) {
                 if ($('.panel.active').length > 0) {
                     side = $('.panel.active').hasClass('panel-left') ? 'left' : 'right';
-                }
-                else {
+                } else {
                     if (swipePanelOnlyClose) return;
                     side = swipePanel;
                 }
                 if (!side) return;
             }
             panel = $('.panel.panel-' + side);
-            if(!panel[0]) return;
+            if (!panel[0]) return;
             opened = panel.hasClass('active');
             if (swipePanelActiveArea && !opened) {
                 if (side === 'left') {
@@ -6312,9 +6308,10 @@ Device/OS Detection
             touchStartTime = (new Date()).getTime();
             direction = undefined;
         }
+
         function handleTouchMove(e) {
             if (!isTouched) return;
-            if(!panel[0]) return;
+            if (!panel[0]) return;
             if (e.f7PreventPanelSwipe) return;
             var pageX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
             var pageY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
@@ -6328,22 +6325,20 @@ Device/OS Detection
             if (!direction) {
                 if (pageX > touchesStart.x) {
                     direction = 'to-right';
-                }
-                else {
+                } else {
                     direction = 'to-left';
                 }
 
                 if (
-                        side === 'left' &&
-                        (
-                         direction === 'to-left' && !panel.hasClass('active')
-                        ) ||
-                        side === 'right' &&
-                        (
-                         direction === 'to-right' && !panel.hasClass('active')
-                        )
-                   )
-                {
+                    side === 'left' &&
+                    (
+                        direction === 'to-left' && !panel.hasClass('active')
+                    ) ||
+                    side === 'right' &&
+                    (
+                        direction === 'to-right' && !panel.hasClass('active')
+                    )
+                ) {
                     isTouched = false;
                     return;
                 }
@@ -6390,14 +6385,13 @@ Device/OS Detection
             touchesDiff = pageX - touchesStart.x + threshold;
 
             if (side === 'right') {
-                translate = touchesDiff  - (opened ? panelWidth : 0);
+                translate = touchesDiff - (opened ? panelWidth : 0);
                 if (translate > 0) translate = 0;
                 if (translate < -panelWidth) {
                     translate = -panelWidth;
                 }
-            }
-            else {
-                translate = touchesDiff  + (opened ? panelWidth : 0);
+            } else {
+                translate = touchesDiff + (opened ? panelWidth : 0);
                 if (translate < 0) translate = 0;
                 if (translate > panelWidth) {
                     translate = panelWidth;
@@ -6407,12 +6401,12 @@ Device/OS Detection
                 views.transform('translate3d(' + translate + 'px,0,0)').transition(0);
                 panelOverlay.transform('translate3d(' + translate + 'px,0,0)');
                 //app.pluginHook('swipePanelSetTransform', views[0], panel[0], Math.abs(translate / panelWidth));
-            }
-            else {
+            } else {
                 panel.transform('translate3d(' + translate + 'px,0,0)').transition(0);
                 //app.pluginHook('swipePanelSetTransform', views[0], panel[0], Math.abs(translate / panelWidth));
             }
         }
+
         function handleTouchEnd(e) {
             if (!isTouched || !isMoved) {
                 isTouched = false;
@@ -6428,29 +6422,24 @@ Device/OS Detection
             if (!opened) {
                 if (translate === 0) {
                     action = 'reset';
-                }
-                else if (
-                        timeDiff < 300 && Math.abs(translate) > 0 ||
-                        timeDiff >= 300 && (Math.abs(translate) >= panelWidth / 2)
-                        ) {
-                            action = 'swap';
-                        }
-                else {
+                } else if (
+                    timeDiff < 300 && Math.abs(translate) > 0 ||
+                    timeDiff >= 300 && (Math.abs(translate) >= panelWidth / 2)
+                ) {
+                    action = 'swap';
+                } else {
                     action = 'reset';
                 }
-            }
-            else {
+            } else {
                 if (translate === -panelWidth) {
                     action = 'reset';
-                }
-                else if (
-                        timeDiff < 300 && Math.abs(translate) >= 0 ||
-                        timeDiff >= 300 && (Math.abs(translate) <= panelWidth / 2)
-                        ) {
-                            if (side === 'left' && translate === panelWidth) action = 'reset';
-                            else action = 'swap';
-                        }
-                else {
+                } else if (
+                    timeDiff < 300 && Math.abs(translate) >= 0 ||
+                    timeDiff >= 300 && (Math.abs(translate) <= panelWidth / 2)
+                ) {
+                    if (side === 'left' && translate === panelWidth) action = 'reset';
+                    else action = 'swap';
+                } else {
                     action = 'reset';
                 }
             }
@@ -6459,11 +6448,10 @@ Device/OS Detection
                 if (opened) {
                     $.closePanel();
                     if (edge) {
-                        panel.css({display: ''});
+                        panel.css({ display: '' });
                         $('body').removeClass('panel-closing');
                     }
-                }
-                else {
+                } else {
                     $.openPanel(side);
                 }
                 if (edge) $.allowPanelOpen = true;
@@ -6472,19 +6460,17 @@ Device/OS Detection
                 if (opened) {
                     $.allowPanelOpen = true;
                     $.openPanel(side);
-                }
-                else {
+                } else {
                     $.closePanel();
                     if (edge) {
                         $.allowPanelOpen = true;
-                        panel.css({display: ''});
-                    }
-                    else {
+                        panel.css({ display: '' });
+                    } else {
                         var target = effect === 'reveal' ? views : panel;
                         $('body').addClass('panel-closing');
-                        target.transitionEnd(function () {
+                        target.transitionEnd(function() {
                             $.allowPanelOpen = true;
-                            panel.css({display: ''});
+                            panel.css({ display: '' });
                             $('body').removeClass('panel-closing');
                         });
                     }
@@ -6495,7 +6481,7 @@ Device/OS Detection
                 views.transform('');
             }
             panel.transition('').transform('');
-            panelOverlay.css({display: ''}).transform('');
+            panelOverlay.css({ display: '' }).transform('');
         }
         $(document).on($.touchEvents.start, handleTouchStart);
         $(document).on($.touchEvents.move, handleTouchMove);
@@ -6567,12 +6553,13 @@ Device/OS Detection
  * 注: 以 _ 开头的函数标明用于此处内部使用，可根据需要随时重构变更，不对外确保兼容性。
  *
  */
-+function($) {
++
+function($) {
     'use strict';
 
     if (!window.CustomEvent) {
         window.CustomEvent = function(type, config) {
-            config = config || { bubbles: false, cancelable: false, detail: undefined};
+            config = config || { bubbles: false, cancelable: false, detail: undefined };
             var e = document.createEvent('CustomEvent');
             e.initCustomEvent(type, config.bubbles, config.cancelable, config.detail);
             return e;
@@ -6666,7 +6653,7 @@ Device/OS Detection
                 sessionStorage.setItem(mod, mod);
                 sessionStorage.removeItem(mod);
                 return true;
-            } catch(e) {
+            } catch (e) {
                 return false;
             }
         }
@@ -6980,8 +6967,7 @@ Device/OS Detection
      */
     Router.prototype._loadDocument = function(url, callback) {
         if (this.xhr && this.xhr.readyState < 4) {
-            this.xhr.onreadystatechange = function() {
-            };
+            this.xhr.onreadystatechange = function() {};
             this.xhr.abort();
             this.dispatch(EVENTS.pageLoadCancel);
         }
@@ -7058,7 +7044,7 @@ Device/OS Detection
         var currentState = sessionStorage.getItem(this.sessionNames.currentState);
         try {
             currentState = JSON.parse(currentState);
-        } catch(e) {
+        } catch (e) {
             currentState = null;
         }
 
@@ -7176,10 +7162,11 @@ Device/OS Detection
             'page-from-center-to-left',
             'page-from-center-to-right',
             'page-from-right-to-center',
-            'page-from-left-to-center'].join(' ');
+            'page-from-left-to-center'
+        ].join(' ');
 
         var classForFrom, classForTo;
-        switch(direction) {
+        switch (direction) {
             case DIRECTION.rightToLeft:
                 classForFrom = 'page-from-center-to-left';
                 classForTo = 'page-from-right-to-center';
@@ -7356,7 +7343,7 @@ Device/OS Detection
             'close-panel'
         ];
 
-        for (var i = classBlackList.length -1 ; i >= 0; i--) {
+        for (var i = classBlackList.length - 1; i >= 0; i--) {
             if ($link.hasClass(classBlackList[i])) {
                 return true;
             }
@@ -7479,54 +7466,56 @@ Device/OS Detection
 ************   Modals   ************
 ======================================================*/
 /*jshint unused: false*/
-+function ($) {
-  "use strict";
-  $.lastPosition =function(options) {
-    if ( !sessionStorage) {
-        return;
-    }
-    // 需要记忆模块的className
-    var needMemoryClass = options.needMemoryClass || [];
++
+function($) {
+    "use strict";
+    $.lastPosition = function(options) {
+        if (!sessionStorage) {
+            return;
+        }
+        // 需要记忆模块的className
+        var needMemoryClass = options.needMemoryClass || [];
 
-    $(window).off('beforePageSwitch').on('beforePageSwitch', function(event,id,arg) {
-      updateMemory(id,arg);
-    });
-    $(window).off('pageAnimationStart').on('pageAnimationStart', function(event,id,arg) {
-      getMemory(id,arg);
-    });
-    //让后退页面回到之前的高度
-    function getMemory(id,arg){
-      needMemoryClass.forEach(function(item, index) {
-          if ($(item).length === 0) {
-              return;
-          }
-          var positionName = id ;
-          // 遍历对应节点设置存储的高度
-          var memoryHeight = sessionStorage.getItem(positionName);
-          arg.find(item).scrollTop(parseInt(memoryHeight));
-
-      });
-    }
-    //记住即将离开的页面的高度
-    function updateMemory(id,arg) {
-        var positionName = id ;
-        // 存储需要记忆模块的高度
-        needMemoryClass.forEach(function(item, index) {
-            if ($(item).length === 0) {
-                return;
-            }
-            sessionStorage.setItem(
-                positionName,
-                arg.find(item).scrollTop()
-            );
-
+        $(window).off('beforePageSwitch').on('beforePageSwitch', function(event, id, arg) {
+            updateMemory(id, arg);
         });
-    }
-  };
+        $(window).off('pageAnimationStart').on('pageAnimationStart', function(event, id, arg) {
+            getMemory(id, arg);
+        });
+        //让后退页面回到之前的高度
+        function getMemory(id, arg) {
+            needMemoryClass.forEach(function(item, index) {
+                if ($(item).length === 0) {
+                    return;
+                }
+                var positionName = id;
+                // 遍历对应节点设置存储的高度
+                var memoryHeight = sessionStorage.getItem(positionName);
+                arg.find(item).scrollTop(parseInt(memoryHeight));
+
+            });
+        }
+        //记住即将离开的页面的高度
+        function updateMemory(id, arg) {
+            var positionName = id;
+            // 存储需要记忆模块的高度
+            needMemoryClass.forEach(function(item, index) {
+                if ($(item).length === 0) {
+                    return;
+                }
+                sessionStorage.setItem(
+                    positionName,
+                    arg.find(item).scrollTop()
+                );
+
+            });
+        }
+    };
 }(Zepto);
 
 /*jshint unused: false*/
-+function($) {
++
+function($) {
     'use strict';
 
     var getPage = function() {
@@ -7540,9 +7529,9 @@ Device/OS Detection
         var $page = getPage();
         if (!$page[0]) $page = $(document.body);
         var $content = $page.hasClass('content') ?
-                       $page :
-                       $page.find('.content');
-        $content.scroller();  //注意滚动条一定要最先初始化
+            $page :
+            $page.find('.content');
+        $content.scroller(); //注意滚动条一定要最先初始化
 
         $.initPullToRefresh($content);
         $.initInfiniteScroll($content);
@@ -7573,16 +7562,16 @@ Device/OS Detection
         });
     }
 
-    $(window).on('pageAnimationStart', function(event,id,page) {
+    $(window).on('pageAnimationStart', function(event, id, page) {
         // 在路由切换页面动画开始前,为了把位于 .page 之外的 popup 等隐藏,此处做些处理
         $.closeModal();
         $.closePanel();
         // 如果 panel 的 effect 是 reveal 时,似乎是 page 的动画或别的样式原因导致了 transitionEnd 时间不会触发
         // 这里暂且处理一下
         $('body').removeClass('panel-closing');
-        $.allowPanelOpen = true;  
+        $.allowPanelOpen = true;
     });
-   
+
     $(window).on('pageInit', function() {
         $.hideIndicator();
         $.lastPosition({
@@ -7640,11 +7629,12 @@ Device/OS Detection
 ************   ScrollFix   ************
 =============================================================================== */
 
-+ function($) {
++
+function($) {
     "use strict";
     //安卓微信中使用scrollfix会有问题，因此只在ios中使用，安卓机器按照原来的逻辑
 
-    if($.device.ios){
+    if ($.device.ios) {
         var ScrollFix = function(elem) {
 
             // Variables to track inputs
@@ -7654,38 +7644,38 @@ Device/OS Detection
             elem = elem || document.querySelector(elem);
 
             // If there is no element, then do nothing
-            if(!elem)
+            if (!elem)
                 return;
 
             // Handle the start of interactions
-            elem.addEventListener('touchstart', function(event){
+            elem.addEventListener('touchstart', function(event) {
                 startY = event.touches[0].pageY;
                 startTopScroll = elem.scrollTop;
 
-                if(startTopScroll <= 0)
-                elem.scrollTop = 1;
+                if (startTopScroll <= 0)
+                    elem.scrollTop = 1;
 
-            if(startTopScroll + elem.offsetHeight >= elem.scrollHeight)
-                elem.scrollTop = elem.scrollHeight - elem.offsetHeight - 1;
+                if (startTopScroll + elem.offsetHeight >= elem.scrollHeight)
+                    elem.scrollTop = elem.scrollHeight - elem.offsetHeight - 1;
             }, false);
         };
 
-        var initScrollFix = function(){
+        var initScrollFix = function() {
             var prefix = $('.page-current').length > 0 ? '.page-current ' : '';
             var scrollable = $(prefix + ".content");
             new ScrollFix(scrollable[0]);
         };
 
-        $(document).on($.touchEvents.move, ".page-current .bar",function(){
+        $(document).on($.touchEvents.move, ".page-current .bar", function() {
             event.preventDefault();
         });
         //监听ajax页面跳转
-        $(document).on("pageLoadComplete", function(){
-             initScrollFix();
+        $(document).on("pageLoadComplete", function() {
+            initScrollFix();
         });
         //监听内联页面跳转
-        $(document).on("pageAnimationEnd", function(){
-             initScrollFix();
+        $(document).on("pageAnimationEnd", function() {
+            initScrollFix();
         });
         initScrollFix();
     }

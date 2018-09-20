@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 19:31:59
+* @Last Modified time: 2018-09-20 14:37:37
 -->
 <template>
     <div class="page page-current">
@@ -42,9 +42,9 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">淘宝账号</div>
+                                        <div class="item-title label">旺旺名</div>
                                         <div class="item-input">
-                                            <el-input :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝账号"></el-input>
+                                            <el-input :disabled="isAudit" v-model="form.alitm" placeholder="请输入旺旺名"></el-input>
                                         </div>
                                     </div>
                                 </div>
@@ -52,9 +52,9 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">旺旺名</div>
+                                        <div class="item-title label">店铺名称</div>
                                         <div class="item-input">
-                                            <el-input :disabled="isAudit" v-model="form.alitm" placeholder="请输入旺旺名"></el-input>
+                                            <el-input :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝账号"></el-input>
                                         </div>
                                     </div>
                                 </div>

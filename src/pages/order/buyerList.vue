@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:57:40
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-02 00:12:59
+* @Last Modified time: 2018-09-20 15:02:23
 -->
 <template>
     <div class="page page-current">
@@ -101,6 +101,7 @@ export default {
          */
         setTabFun(val) {
             if (this.loading) return;
+            this.listData = [];
             this.status = val;
             this.page = {
                 pageIndex: 1,

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-20 17:09:24
+* @Last Modified time: 2018-09-20 14:49:33
 -->
 <template>
     <div class="page page-current" v-if="!success">
@@ -33,7 +33,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">微信名</div>
                                         <div class="item-input">
-                                            <el-input v-model="form.wechatName" placeholder="请输入微信名" autofocus></el-input>
+                                            <el-input v-model="form.wechatName" placeholder="请输入微信名"></el-input>
                                         </div>
                                     </div>
                                 </div>

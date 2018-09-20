@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-02 00:42:17
+* @Last Modified time: 2018-09-20 14:38:24
 -->
 <template>
     <div class="page page-current">
@@ -36,7 +36,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">店铺名称</div>
                                         <div class="item-input">
-                                            {{userInfo.alitm||'--'}}
+                                            {{userInfo.taobaoAccount||'--'}}
                                         </div>
                                         <!-- <div class="newUser">最近300000人成交</div> -->
                                     </div>

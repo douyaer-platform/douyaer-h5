@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-02 00:12:25
+* @Last Modified time: 2018-09-20 14:46:48
 -->
 <template>
     <div class="page page-current">
@@ -44,8 +44,8 @@
                                     <span class="val">{{item.orderCount}}</span>
                                     </span>
                                     <span class="attr">
-                                    <span class="name">佣金</span>
-                                    <span class="val">{{item.commission}}</span>
+                                    <span class="name">订单收益</span>
+                                    <span class="val">{{item.incomePrice ||'--'}}</span>
                                     </span>
                                 </div>
                                 <div class="detail">
