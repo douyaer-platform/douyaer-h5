@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-20 15:02:50
+* @Last Modified time: 2018-09-26 22:18:57
 -->
 <template>
     <div class="page page-current">
@@ -62,6 +62,7 @@
                                         <a href="javascript:;" class="button" @click.stop="showEvaluateOrderFun(item)" v-if="status===3||status===4">评价详情</a>
                                         <a href="javascript:;" class="button" @click.stop="cancelOrderFun(item)" v-if="item.enableCancel">取消订单</a>
                                     </template>
+                                    <span v-if="item.hasExpired&&status!=='4'" style="color: red; margin-left: 5px;">任务已过期</span>
                                 </div>
                             </li>
                         </ul>
