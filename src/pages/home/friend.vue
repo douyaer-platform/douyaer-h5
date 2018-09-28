@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-22 09:19:05
+* @Last Modified time: 2018-09-28 17:09:04
 -->
 <template>
     <div class="page page-current">
@@ -23,7 +23,7 @@
                                     <div class="item-inner lt">
                                         <div class="item-title label">邀请链接</div>
                                         <div class="item-input">
-                                            <el-input id="target" v-model="url" type="textarea" :rows="2" readonly></el-input>
+                                            <input id="target" v-model="url" type="textarea" :rows="2" readonly>
                                         </div>
                                     </div>
                                 </div>

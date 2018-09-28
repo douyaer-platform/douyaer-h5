@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-05 11:34:59
+* @Last Modified time: 2018-09-28 17:09:18
 -->
 <template>
     <div class="page page-current">
@@ -22,7 +22,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">买家账号</div>
                                         <div class="item-input">
-                                            <el-input disabled v-model="userOrder.taobaoAccount"></el-input>
+                                            <input disabled v-model="userOrder.taobaoAccount">
                                         </div>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">收货地址</div>
                                         <div class="item-input">
-                                            <el-input disabled v-model="userOrder.address"></el-input>
+                                            <input disabled v-model="userOrder.address">
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">评价</div>
                                         <div class="item-input">
-                                            <el-input v-model="form.businessRemarkDes" type="textarea" :rows="3" placeholder="请输入评价内容" :disabled="isShow"></el-input>
+                                            <input v-model="form.businessRemarkDes" type="textarea" :rows="3" placeholder="请输入评价内容" :disabled="isShow">
                                         </div>
                                     </div>
                                 </div>

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 19:21:51
+* @Last Modified time: 2018-09-28 17:09:52
 -->
 <template>
     <div class="page page-current">
@@ -38,7 +38,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">评价</div>
                                         <div class="item-input">
-                                            <el-input id="target" v-model="userOrder.businessRemarkDes" type="textarea" :rows="3" readonly></el-input>
+                                            <input id="target" v-model="userOrder.businessRemarkDes" type="textarea" :rows="3" readonly>
                                         </div>
                                     </div>
                                 </div>

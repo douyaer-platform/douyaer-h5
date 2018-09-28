@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-20 14:49:33
+* @Last Modified time: 2018-09-28 17:10:08
 -->
 <template>
     <div class="page page-current" v-if="!success">
@@ -23,7 +23,7 @@
                                         <div class="item-title label">提现金额</div>
                                         <span class="unit">￥</span>
                                         <div class="item-input">
-                                            <el-input type="number" v-model="form.totalFee" :placeholder="userInfo.coin" autofocus></el-input>
+                                            <input type="number" v-model="form.totalFee" :placeholder="userInfo.coin" autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">微信名</div>
                                         <div class="item-input">
-                                            <el-input v-model="form.wechatName" placeholder="请输入微信名"></el-input>
+                                            <input v-model="form.wechatName" placeholder="请输入微信名">
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">备注</div>
                                         <div class="item-input">
-                                            <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="备注"></el-input>
+                                            <input v-model="form.remark" type="textarea" :rows="3" placeholder="备注">
                                         </div>
                                     </div>
                                 </div>

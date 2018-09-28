@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-20 15:06:13
+* @Last Modified time: 2018-09-28 17:08:36
 -->
 <template>
     <div class="page page-current">
@@ -135,7 +135,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">订单数量</div>
                                         <div class="item-input">
-                                            <el-input type="number" v-model="form.orderCount" placeholder="请输入订单数量" autofocus></el-input>
+                                            <input type="number" v-model="form.orderCount" placeholder="请输入订单数量" autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                 <div class="item-content">
                                     <div class="item-inner">
                                         <div class="item-input">
-                                            <el-input v-model="form.remark" type="textarea" :rows="3" placeholder="任务说明"></el-input>
+                                            <input v-model="form.remark" type="textarea" :rows="3" placeholder="任务说明">
                                         </div>
                                     </div>
                                 </div>

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-18 19:33:36
+* @Last Modified time: 2018-09-28 17:08:18
 -->
 <template>
     <div class="page page-current">
@@ -38,7 +38,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">IP地址</div>
                                         <div class="item-input">
-                                            <el-input :disabled="isAudit" v-model="form.ip" maxlength="15" placeholder="请输入真实 IP" autofocus></el-input>
+                                            <input :disabled="isAudit" v-model="form.ip" maxlength="15" placeholder="请输入真实 IP" autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">收货地址</div>
                                         <div class="item-input">
-                                            <el-input :disabled="isAudit" v-model="form.address" maxlength="18" placeholder="请输入详细地址"></el-input>
+                                            <input :disabled="isAudit" v-model="form.address" maxlength="18" placeholder="请输入详细地址">
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">淘宝账号</div>
                                         <div class="item-input">
-                                            <el-input :disabled="isAudit" v-model="form.taobaoAccount" maxlength="18" placeholder="请输入淘宝账号"></el-input>
+                                            <input :disabled="isAudit" v-model="form.taobaoAccount" maxlength="18" placeholder="请输入淘宝账号">
                                         </div>
                                     </div>
                                 </div>
