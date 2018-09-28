@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-05 13:40:33
+* @Last Modified time: 2018-09-28 17:03:15
 -->
 <template>
     <div class="page page-current">
@@ -19,7 +19,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">账号</div>
                                     <div class="item-input">
-                                        <el-input v-model="form.account" maxlength="11" placeholder="请输入账号" autofocus></el-input>
+                                        <input type="text" v-model="form.account" placeholder="请输入账号" autofocus>
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">密码</div>
                                     <div class="item-input">
-                                        <el-input v-model="form.password" maxlength="12" :type="canSee?'text':'password'" placeholder="请输入密码"></el-input>
+                                        <input v-model="form.password" maxlength="12" :type="canSee?'text':'password'" placeholder="请输入密码">
                                     </div>
                                     <a href="javascript:;" @click.stop="canSeeChangeFun" :class="canSee?'seeBtn active':'seeBtn'">
                                         <i class="icon-see"></i>
@@ -76,7 +76,7 @@ export default {
         'form.account': 'validateAccount',
         'form.password': 'validatePassword'
     },
-    create() {
+    created() {
         // 清空用户信息
         localStorage.setItem('userInfo', '');
         this.$store.state.userInfo = {};
