@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-28 17:07:54
+* @Last Modified time: 2018-09-29 20:52:04
 -->
 <template>
     <div class="page page-current">
@@ -24,7 +24,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">姓名</div>
                                         <div class="item-input">
-                                            <input :disabled="isAudit" v-model="form.realName" placeholder="请输入真实姓名" autofocus>
+                                            <input type="text" :disabled="isAudit" v-model="form.realName" placeholder="请输入真实姓名" autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">身份证号</div>
                                         <div class="item-input">
-                                            <input :disabled="isAudit" v-model="form.identifyNo" maxlength="18" placeholder="请输入身份证号">
+                                            <input type="text" :disabled="isAudit" v-model="form.identifyNo" maxlength="18" placeholder="请输入身份证号">
                                         </div>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">旺旺名</div>
                                         <div class="item-input">
-                                            <input :disabled="isAudit" v-model="form.alitm" placeholder="请输入旺旺名">
+                                            <input type="text" :disabled="isAudit" v-model="form.alitm" placeholder="请输入旺旺名">
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">店铺名称</div>
                                         <div class="item-input">
-                                            <input :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝账号">
+                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝账号">
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">店铺链接</div>
                                         <div class="item-input">
-                                            <input :disabled="isAudit" v-model="form.storeUrl" placeholder="请输入店铺链接">
+                                            <input type="text" :disabled="isAudit" v-model="form.storeUrl" placeholder="请输入店铺链接">
                                         </div>
                                     </div>
                                 </div>

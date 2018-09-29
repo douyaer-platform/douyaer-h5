@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-28 17:09:38
+* @Last Modified time: 2018-09-29 20:53:52
 -->
 <template>
     <div class="page page-current">
@@ -24,7 +24,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">店铺名称</div>
                                         <div class="item-input">
-                                            <input disabled v-model="userOrder.storeName">
+                                            <input type="text" disabled v-model="userOrder.storeName">
                                         </div>
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">产品价格</div>
                                         <div class="item-input">
-                                            <input disabled v-model="userOrder.goodsPrice">
+                                            <input type="text" disabled v-model="userOrder.goodsPrice">
                                         </div>
                                     </div>
                                 </div>

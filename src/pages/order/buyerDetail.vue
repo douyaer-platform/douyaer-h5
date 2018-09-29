@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-28 17:09:18
+* @Last Modified time: 2018-09-29 20:53:28
 -->
 <template>
     <div class="page page-current">
@@ -22,7 +22,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">买家账号</div>
                                         <div class="item-input">
-                                            <input disabled v-model="userOrder.taobaoAccount">
+                                            <input type="text" disabled v-model="userOrder.taobaoAccount">
                                         </div>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">收货地址</div>
                                         <div class="item-input">
-                                            <input disabled v-model="userOrder.address">
+                                            <input type="text" disabled v-model="userOrder.address">
                                         </div>
                                     </div>
                                 </div>

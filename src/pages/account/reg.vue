@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-28 17:07:06
+* @Last Modified time: 2018-09-29 20:51:32
 -->
 <template>
     <div class="page page-current">
@@ -16,7 +16,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">手机号</div>
                                     <div class="item-input">
-                                        <input v-model="form.phone" maxlength="11" placeholder="请输入你的手机号" autofocus>
+                                        <input type="text" v-model="form.phone" maxlength="11" placeholder="请输入你的手机号" autofocus>
                                     </div>
                                 </div>
                             </div>
@@ -26,7 +26,7 @@
                                 <div class="item-inner">
                                     <div class="item-title label">验证码</div>
                                     <div class="item-input">
-                                        <input v-model="form.authCode" maxlength="6" placeholder="请输入验证码">
+                                        <input type="text" v-model="form.authCode" maxlength="6" placeholder="请输入验证码">
                                     </div>
                                     <span @click.stop="sendAuthCodeFun" :class="count===0?'codeBtn':'codeBtn done'">{{authCodeText}}</span>
                                 </div>

@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-28 17:08:52
+* @Last Modified time: 2018-09-29 20:50:01
 -->
 <template>
     <div class="page page-current">
@@ -47,7 +47,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">宝贝名称</div>
                                         <div class="item-input">
-                                            <input v-model="form.storeName" placeholder="请输入宝贝名称" autofocus>
+                                            <input type="text" v-model="form.storeName" placeholder="请输入宝贝名称" autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -122,13 +122,13 @@
                                     <div class="item-inner noflex">
                                         <div class="item-title label">搜索关键词<span class="red">*</span></div>
                                         <div class="item-input">
-                                            <input v-model="tags[0]" placeholder="请输入关键词1 如 女鞋">
+                                            <input type="text" v-model="tags[0]" placeholder="请输入关键词1 如 女鞋">
                                         </div>
                                         <div class="item-input">
-                                            <input v-model="tags[1]" placeholder="请输入关键词2 如 尖头鞋">
+                                            <input type="text" v-model="tags[1]" placeholder="请输入关键词2 如 尖头鞋">
                                         </div>
                                         <div class="item-input">
-                                            <input v-model="tags[2]" placeholder="请输入关键词3">
+                                            <input type="text" v-model="tags[2]" placeholder="请输入关键词3">
                                         </div>
                                     </div>
                                 </div>
