@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-29 20:54:10
+* @Last Modified time: 2018-09-30 15:08:29
 -->
 <template>
     <div class="page page-current" v-if="!success">
@@ -43,7 +43,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">备注</div>
                                         <div class="item-input">
-                                            <input v-model="form.remark" type="textarea" :rows="3" placeholder="备注">
+                                            <textarea v-model="form.remark" type="textarea" :rows="3" placeholder="备注"></textarea>
                                         </div>
                                     </div>
                                 </div>

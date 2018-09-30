@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-28 17:08:36
+* @Last Modified time: 2018-09-30 15:06:09
 -->
 <template>
     <div class="page page-current">
@@ -165,7 +165,7 @@
                                 <div class="item-content">
                                     <div class="item-inner">
                                         <div class="item-input">
-                                            <input v-model="form.remark" type="textarea" :rows="3" placeholder="任务说明">
+                                            <textarea v-model="form.remark" :rows="3" placeholder="任务说明"></textarea>
                                         </div>
                                     </div>
                                 </div>

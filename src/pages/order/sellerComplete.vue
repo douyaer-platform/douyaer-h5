@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-29 20:53:52
+* @Last Modified time: 2018-09-30 15:07:42
 -->
 <template>
     <div class="page page-current">
@@ -56,7 +56,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">任务说明</div>
                                         <div class="item-input">
-                                            <input v-model="userOrder.remark" type="textarea" :rows="3" placeholder="任务说明" disabled>
+                                            <textarea v-model="userOrder.remark" type="textarea" :rows="3" placeholder="任务说明" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>

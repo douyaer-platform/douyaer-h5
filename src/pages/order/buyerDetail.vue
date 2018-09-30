@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-29 20:53:28
+* @Last Modified time: 2018-09-30 15:07:19
 -->
 <template>
     <div class="page page-current">
@@ -178,7 +178,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">评价</div>
                                         <div class="item-input">
-                                            <input v-model="form.businessRemarkDes" type="textarea" :rows="3" placeholder="请输入评价内容" :disabled="isShow">
+                                            <textarea v-model="form.businessRemarkDes" type="textarea" :rows="3" placeholder="请输入评价内容" :disabled="isShow"></textarea>
                                         </div>
                                     </div>
                                 </div>
