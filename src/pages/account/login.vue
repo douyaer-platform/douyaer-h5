@@ -3,14 +3,14 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:17:20
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-28 17:03:15
+* @Last Modified time: 2018-10-11 09:08:53
 -->
 <template>
     <div class="page page-current">
         <div class="content">
             <div class="accountWrap">
                 <div class="userPhoto">
-                    <img src="/static/image/admin.png" alt="">
+                    <img src="/static/image/logo.png" alt="">
                 </div>
                 <div class="list-block">
                     <ul>

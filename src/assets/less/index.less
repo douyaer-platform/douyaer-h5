@@ -36,7 +36,7 @@ body{  background-color: #ffffff; color: @text-color-normal; font-size: .75rem;}
 .fade-enter-active, .fade-leave-active {
   transition: opacity 1s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 
@@ -210,8 +210,8 @@ nav.bar-tab{ background-color: #fff;
  * 账号模块
 -------------------------------------*/
 .accountWrap{ height: 100%; padding-top: 1rem; position: relative;
-	.userPhoto{ width: 4.5rem; height: 4.5rem; margin: 0 auto; background-color: @primary-color; border-radius: .75rem; overflow: hidden;
-		img{ width: 100%;}
+	.userPhoto{ width: 100%; height: 4.5rem; margin-top: 1rem; overflow: hidden;
+		img{ display: block; height: 100%; margin: 0 auto;}
 	}
 	.list-block { margin: 0; overflow: hidden;
 		ul:before{ display: none; }
@@ -224,7 +224,7 @@ nav.bar-tab{ background-color: #fff;
 	.codeBtn{ display: inline-block; height: 1.35rem; padding: 0 .5rem; border-radius: .25rem; background-color: @primary-color; line-height: 1.35rem; color: #fff; font-size: .75rem; position: absolute; right: .5rem; top: 0.45rem;
 		&.done{ background-color: transparent; color: #999; }
 	 }
-	.userPhoto ~ .list-block{ margin-top: 2rem; }
+	.userPhoto ~ .list-block{ margin-top: 1.5rem; }
 }
 
 .submitWrap{ margin-top: 1.5rem; padding: 0 .5rem;
