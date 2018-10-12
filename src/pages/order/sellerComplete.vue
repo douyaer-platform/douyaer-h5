@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-12 14:42:12
+* @Last Modified time: 2018-10-12 15:01:44
 -->
 <template>
     <div class="page page-current">
@@ -23,6 +23,16 @@
                                 <div class="item-content">
                                     <div class="item-inner">
                                         <div class="item-title label">店铺名称</div>
+                                        <div class="item-input">
+                                            <input type="text" disabled v-model="userOrder.taobaoAccount">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">宝贝名称</div>
                                         <div class="item-input">
                                             <input type="text" disabled v-model="userOrder.storeName">
                                         </div>
