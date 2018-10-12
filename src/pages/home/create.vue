@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-29 20:50:01
+* @Last Modified time: 2018-10-12 14:41:30
 -->
 <template>
     <div class="page page-current">
@@ -311,9 +311,9 @@ export default {
          * @description 选择图片
          */
         checkPhotoFun(name) {
-            if (this[name].uploadResult === 'wait') {
+            if (this[name].uploadResult === 'success' || this[name].uploadResult === 'wait') {
                 this.$refs[name].dispatchEvent(new MouseEvent('click'));
-            } else if (this[name].uploadResult === 'success' || this[name].uploadResult === 'progress') {
+            } else if (this[name].uploadResult === 'progress') {
                 // 不执行
             } else {
                 this.uploadPhotoFun(name);

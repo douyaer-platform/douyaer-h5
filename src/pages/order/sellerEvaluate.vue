@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-30 15:07:58
+* @Last Modified time: 2018-10-12 14:42:16
 -->
 <template>
     <div class="page page-current">
@@ -23,12 +23,12 @@
                             <div class="img-wrap">
                                 <img :src="userOrder.goodsPicUrl" alt="">
                             </div>
-                            <div class="inner">
-                                <div class="name">卖家店名：{{userOrder.storeName}}</div>
-                                <div class="state">
-                                    <span>注意：请认真核对好商品和对应的评价，避免发生错误遭到投诉！</span>
+                                <div class="inner">
+                                    <div class="name">卖家店名：{{userOrder.storeName}}</div>
+                                    <div class="state">
+                                        <span>注意：请认真核对好商品和对应的评价，避免发生错误遭到投诉！</span>
+                                    </div>
                                 </div>
-                            </div>
                         </li>
                     </ul>
                     <div class="list-block">
@@ -202,9 +202,10 @@ export default {
          */
         checkPhotoFun(name) {
             if (this.isShow) return;
-            if (this[name].uploadResult === 'wait') {
+
+            if (this[name].uploadResult === 'success' || this[name].uploadResult === 'wait') {
                 this.$refs[name].dispatchEvent(new MouseEvent('click'));
-            } else if (this[name].uploadResult === 'success' || this[name].uploadResult === 'progress') {
+            } else if (this[name].uploadResult === 'progress') {
                 // 不执行
             } else {
                 this.uploadPhotoFun(name);
