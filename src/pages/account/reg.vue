@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-23 20:41:10
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-29 20:51:32
+* @Last Modified time: 2018-10-13 23:29:02
 -->
 <template>
     <div class="page page-current">
@@ -222,6 +222,9 @@ export default {
                     if (response.data.data.userCert) {
                         localStorage.setItem('userCert', JSON.stringify(response.data.data.userCert));
                         this.$store.state.userCert = response.data.data.userCert;
+                    } else {
+                        localStorage.setItem('userCert', '');
+                        this.$store.state.userCert = '';
                     }
                     let _that = this;
                     // 刷手跳转到刷手页面

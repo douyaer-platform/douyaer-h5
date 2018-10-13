@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-13 23:07:45
+* @Last Modified time: 2018-10-13 23:32:43
 -->
 <template>
     <div class="page page-current">
@@ -54,7 +54,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">店铺名称</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝账号">
+                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入店铺名称">
                                         </div>
                                     </div>
                                 </div>
@@ -96,6 +96,9 @@
 </template>
 <script>
 import upload from '@/javascript/upload';
+import {
+    validateRequire
+} from '@/javascript/utils';
 let $ = window.$;
 export default {
     name: 'authbuyer',
@@ -113,6 +116,14 @@ export default {
                 storeUrl: '',
                 identifyNoUrl: ''
             },
+            validate: {
+                realName: false,
+                identifyNo: false,
+                taobaoAccount: false,
+                alitm: false,
+                storeUrl: false,
+                identifyNoUrl: false
+            },
             isAudit: false
         };
     },
@@ -120,6 +131,14 @@ export default {
         userInfo() {
             return this.$store.state.userInfo;
         }
+    },
+    watch: {
+        'form.realName': 'validateRealName',
+        'form.identifyNo': 'validateIdentifyNo',
+        'form.taobaoAccount': 'validateTaobaoAccount',
+        'form.alitm': 'validateAlitm',
+        'form.storeUrl': 'validateStoreUrl',
+        'form.identifyNoUrl': 'validateIdentifyNoUrl'
     },
     created() {
         for (let i in this.form) {
@@ -134,6 +153,24 @@ export default {
         }
     },
     methods: {
+        validateRealName(to, from) {
+            this.validate.realName = validateRequire(to, from);
+        },
+        validateIdentifyNo(to, from) {
+            this.validate.identifyNo = validateRequire(to, from);
+        },
+        validateTaobaoAccount(to, from) {
+            this.validate.taobaoAccount = validateRequire(to, from);
+        },
+        validateAlitm(to, from) {
+            this.validate.alitm = validateRequire(to, from);
+        },
+        validateStoreUrl(to, from) {
+            this.validate.storeUrl = validateRequire(to, from);
+        },
+        validateIdentifyNoUrl(to, from) {
+            this.validate.identifyNoUrl = validateRequire(to, from);
+        },
         /**
          * @Author      weiberZeng
          * @DateTime    2018-06-07
@@ -197,6 +234,30 @@ export default {
          * @description 提交商家认证
          */
         submitFun() {
+            if (!this.validate.realName) {
+                $.toast('请输入正确的姓名！');
+                return;
+            }
+            if (!this.validate.identifyNo) {
+                $.toast('请输入正确的身份证号！');
+                return;
+            }
+            if (!this.validate.taobaoAccount) {
+                $.toast('请输入正确的店铺名称！');
+                return;
+            }
+            if (!this.validate.alitm) {
+                $.toast('请输入正确的旺旺名！');
+                return;
+            }
+            if (!this.validate.storeUrl) {
+                $.toast('请输入正确的店铺链接！');
+                return;
+            }
+            if (!this.validate.identifyNoUrl) {
+                $.toast('请上传身份证照片！');
+                return;
+            }
             $.showPreloader();
             this.$http.post('/cert/businessAddOrUpdate', this.form).then((response) => {
                 $.hidePreloader();

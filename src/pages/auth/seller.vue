@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-13 22:34:56
+* @Last Modified time: 2018-10-13 23:35:00
 -->
 <template>
     <div class="page page-current">
@@ -143,6 +143,9 @@
 </template>
 <script>
 import upload from '@/javascript/upload';
+import {
+    validateRequire
+} from '@/javascript/utils';
 let $ = window.$;
 export default {
     name: 'authSeller',
@@ -176,7 +179,15 @@ export default {
                 uploadResult: 'wait',
                 progress: '0'
             },
-            isAudit: false
+            isAudit: false,
+            validate: {
+                ip: false,
+                address: false,
+                taobaoAccount: false,
+                ipScreenshotUrl: false,
+                taobaoScreenshotUrl: false,
+                alipayScreenshotUrl: false
+            }
         };
     },
     computed: {
@@ -186,6 +197,14 @@ export default {
         userCert() {
             return this.$store.state.userCert || {};
         }
+    },
+    watch: {
+        'form.ip': 'validateIp',
+        'form.address': 'validateAddress',
+        'form.taobaoAccount': 'validateTaobaoAccount',
+        'form.ipScreenshotUrl': 'validateIpScreenshotUrl',
+        'form.taobaoScreenshotUrl': 'validateTaobaoScreenshotUrl',
+        'form.alipayScreenshotUrl': 'validateAlipayScreenshotUrl'
     },
     created() {
         if (this.userInfo.ip) {
@@ -212,6 +231,24 @@ export default {
         }
     },
     methods: {
+        validateIp(to, from) {
+            this.validate.ip = validateRequire(to, from);
+        },
+        validateAddress(to, from) {
+            this.validate.address = validateRequire(to, from);
+        },
+        validateTaobaoAccount(to, from) {
+            this.validate.taobaoAccount = validateRequire(to, from);
+        },
+        validateIpScreenshotUrl(to, from) {
+            this.validate.ipScreenshotUrl = validateRequire(to, from);
+        },
+        validateTaobaoScreenshotUrl(to, from) {
+            this.validate.taobaoScreenshotUrl = validateRequire(to, from);
+        },
+        validateAlipayScreenshotUrl(to, from) {
+            this.validate.alipayScreenshotUrl = validateRequire(to, from);
+        },
         /**
          * @Author      weiberZeng
          * @DateTime    2018-06-07
@@ -296,6 +333,30 @@ export default {
          * @description 提交认证
          */
         submitFun() {
+            if (!this.validate.ip) {
+                $.toast('请输入正确的IP 地址！');
+                return;
+            }
+            if (!this.validate.address) {
+                $.toast('请输入正确的收货地址！');
+                return;
+            }
+            if (!this.validate.taobaoAccount) {
+                $.toast('请输入正确的淘宝账号！');
+                return;
+            }
+            if (!this.validate.ipScreenshotUrl) {
+                $.toast('请上传 IP 地址截图！');
+                return;
+            }
+            if (!this.validate.taobaoScreenshotUrl) {
+                $.toast('请上传我的淘宝页面截图！');
+                return;
+            }
+            if (!this.validate.alipayScreenshotUrl) {
+                $.toast('请上传支付宝截图！');
+                return;
+            }
             $.showPreloader();
             this.$http.post('/cert/brushhandAddOrUpdate', this.form).then((response) => {
                 $.hidePreloader();
