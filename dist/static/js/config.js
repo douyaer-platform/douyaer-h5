@@ -1,4 +1,6 @@
 window.config = {
+    // 是否显示支付宝二维码
+    showZfb: false,
     text: {
         groupName: '豆芽儿平台管理员',
         qqText: '客服 QQ',

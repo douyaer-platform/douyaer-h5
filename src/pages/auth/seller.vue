@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-12 14:40:02
+* @Last Modified time: 2018-10-13 22:34:56
 -->
 <template>
     <div class="page page-current">
@@ -58,7 +58,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">收货地址</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.address" maxlength="18" placeholder="请输入详细地址">
+                                            <input type="text" :disabled="isAudit" v-model="form.address" placeholder="请输入详细地址">
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">淘宝账号</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" maxlength="18" placeholder="请输入淘宝账号">
+                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝账号">
                                         </div>
                                     </div>
                                 </div>

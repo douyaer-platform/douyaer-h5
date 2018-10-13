@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:19
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-30 15:08:48
+* @Last Modified time: 2018-10-13 22:27:06
 -->
 <template>
     <div class="page page-current" v-if="!success">
@@ -58,18 +58,16 @@
                     <div class="box-bd">
                         <div class="concat-wrap">
                             <div class="code-wrap">
-                                <div class="code-img">
+                                <p class="code-img">
                                     <img src="/static/config/wxcash.png" alt="">
-                                </div>
-                                <div class="sub">微信收款</div>
+                                </p>
+                                    <div class="sub">微信收款</div>
                             </div>
                         </div>
-                        <div class="concat-wrap">
+                        <div class="concat-wrap" v-if="showZfb">
                             <div class="code-wrap">
-                                <div class="code-img">
-                                    <img src="/static/config/zfbcash.png" alt="">
-                                </div>
-                                <div class="sub">支付宝收款</div>
+                                <p class="code-img"><img src="/static/config/zfbcash.png" alt=""></p>
+                                    <div class="sub">支付宝收款</div>
                             </div>
                         </div>
                     </div>
@@ -93,20 +91,18 @@
             </div>
             <div class="concat-wrap mt10">
                 <div class="pf-wrap">
-                    <div class="img-wrap"> <img src="/static/image/admin.png" alt=""></div>
-                    <div class="inner">
-                        <p>{{groupName}}</p>
-                        <div class="attr-item">
-                            <span class="attr-name">工作时间</span>
-                            <span class="attr-val">{{workTime}}</span>
+                    <p class="img-wrap"><img src="/static/image/admin.png"></p>
+                        <div class="inner">
+                            <p>{{groupName}}</p>
+                            <div class="attr-item">
+                                <span class="attr-name">工作时间</span>
+                                <span class="attr-val">{{workTime}}</span>
+                            </div>
                         </div>
-                    </div>
                 </div>
                 <div class="code-wrap">
-                    <div class="code-img">
-                        <img src="/static/config/admincode.png" alt="">
-                    </div>
-                    <div class="sub">扫码添加平台管理员微信</div>
+                    <p class="code-img"><img src="/static/config/admincode.png"></p>
+                        <div class="sub">扫码添加平台管理员微信</div>
                 </div>
             </div>
         </div>
@@ -137,7 +133,8 @@ export default {
                 totalFee: false,
                 wechatName: false
             },
-            text: window.config.mark.userCenter.t2
+            text: window.config.mark.userCenter.t2,
+            showZfb: window.config.showZfb
         };
     },
     watch: {
