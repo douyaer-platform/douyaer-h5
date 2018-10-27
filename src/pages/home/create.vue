@@ -141,7 +141,7 @@
                                             <el-radio-group v-model="form.buyBackType">
                                                 <el-radio :label="0">无需回购</el-radio>
                                                 <el-radio :label="1">加购物车后3-5内回购，费用＋2</el-radio>
-                                                <el-radio :label="2">手淘首页回购，费用＋6</el-radio>
+                                                <el-radio :label="2">打标回购+2</el-radio>
                                             </el-radio-group>
                                         </div>
                                     </div>

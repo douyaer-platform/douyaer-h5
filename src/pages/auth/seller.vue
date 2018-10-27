@@ -116,7 +116,7 @@
                             </div>
                         </li>
                         <li class="upload-item">
-                            <div class="hd">支付宝页面截图</div>
+                            <div class="hd">淘宝个人资料截图</div>
                             <div class="bd">
                                 <div class="left">
                                     <div class="upload" @click="checkPhotoFun('zfbUpload')">

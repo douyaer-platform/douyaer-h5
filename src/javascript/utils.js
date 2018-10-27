@@ -32,7 +32,7 @@ export function setBuyBackType(type) {
             str = '加购物车后3-5天内回购';
             break;
         case 2:
-            str = '手淘首页回购';
+            str = '打标回购';
             break;
     }
     return str;
