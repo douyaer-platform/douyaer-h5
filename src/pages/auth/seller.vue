@@ -66,9 +66,9 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">淘宝账号</div>
+                                        <div class="item-title label">淘宝会员名</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝账号">
+                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝会员名">
                                         </div>
                                     </div>
                                 </div>
@@ -342,7 +342,7 @@ export default {
                 return;
             }
             if (!this.validate.taobaoAccount) {
-                $.toast('请输入正确的淘宝账号！');
+                $.toast('请输入正确的淘宝会员名！');
                 return;
             }
             if (!this.validate.ipScreenshotUrl) {
