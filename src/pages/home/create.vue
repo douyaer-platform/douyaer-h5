@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-12 14:41:30
+* @Last Modified time: 2018-10-28 14:03:00
 -->
 <template>
     <div class="page page-current">
@@ -16,9 +16,7 @@
                 <div class="main">
                     此模板将消耗金币 <span class="money"> <span class="unit">￥</span> {{templatePrice}}</span>
                 </div>
-                <div class="sub">
-                    另需平台服务费￥2
-                </div>
+                <div class="sub">{{key1}}</div>
             </div>
             <div class="submit">
                 <a href="javascript:;" @click.stop="submitFun">确定保存</a>
@@ -215,7 +213,8 @@ export default {
                 goodsPrice: false,
                 goodsPicUrl: false
             },
-            text: window.config.mark.home.t3
+            text: window.config.mark.home.t3,
+            key1: window.config.mark.home.key1
         };
     },
     computed: {
