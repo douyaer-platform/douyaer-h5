@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-09-30 15:06:09
+* @Last Modified time: 2018-10-28 16:31:16
 -->
 <template>
     <div class="page page-current">
@@ -39,7 +39,7 @@
                 <a href="javascript:;" @click.stop="submitFun">确认放单</a>
             </div>
         </div>
-        <div class="content">
+        <div class="content" ref="content">
             <!-- 商家首页 -->
             <div class="description" v-html="text"> </div>
             <div class="main-box">
@@ -52,17 +52,17 @@
                                 <div class="img-wrap">
                                     <img :src="item.goodsPicUrl" alt="">
                                 </div>
-                                <div class="name">{{item.storeName}}</div>
-                                <div class="ctrl">
-                                    <span class="money"><i>￥</i>{{item.goodsPrice}}</span>
-                                    <a href="javascript:;" @click.stop="showMoreFun(item)"><i class="icon-more"></i></a>
+                                    <div class="name">{{item.storeName}}</div>
+                                    <div class="ctrl">
+                                        <span class="money"><i>￥</i>{{item.goodsPrice}}</span>
+                                        <a href="javascript:;" @click.stop="showMoreFun(item)"><i class="icon-more"></i></a>
+                                    </div>
+                                    <span class="checkbox" :class="{'is-checked':item.checked}"></span>
                                 </div>
-                                <span class="checkbox" :class="{'is-checked':item.checked}"></span>
-                            </div>
-                            <div class="mask" @click.stop="item.showMore=false">
-                                <a href="javascript:;" class="edit-btn" @click.stop="modifyTempFun(item)">编辑</a>
-                                <a href="javascript:;" class="del-btn" @click.stop="delTempFun(item)">删除</a>
-                            </div>
+                                <div class="mask" @click.stop="item.showMore=false">
+                                    <a href="javascript:;" class="edit-btn" @click.stop="modifyTempFun(item)">编辑</a>
+                                    <a href="javascript:;" class="del-btn" @click.stop="delTempFun(item)">删除</a>
+                                </div>
                         </li>
                     </ul>
                     <div class="no-tmpl" v-else>
@@ -165,7 +165,7 @@
                                 <div class="item-content">
                                     <div class="item-inner">
                                         <div class="item-input">
-                                            <textarea v-model="form.remark" :rows="3" placeholder="任务说明"></textarea>
+                                            <textarea @input="inputHandleFun" v-model="form.remark" :rows="3" placeholder="任务说明"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -252,6 +252,12 @@ export default {
         this.showNoticesFun();
     },
     methods: {
+        inputHandleFun() {
+            this.$refs['content'].scrollTop = this.$refs['content'].scrollTop + 1;
+            this.$nextTick(() => {
+                this.$refs['content'].scrollTop = this.$refs['content'].scrollTop - 1;
+            });
+        },
         /**
          * @Author      weiberZeng
          * @DateTime    2018-08-18

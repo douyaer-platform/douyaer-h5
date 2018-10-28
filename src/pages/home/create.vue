@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-28 16:00:44
+* @Last Modified time: 2018-10-28 16:31:04
 -->
 <template>
     <div class="page page-current">
@@ -22,7 +22,7 @@
                 <a href="javascript:;" @click.stop="submitFun">确定保存</a>
             </div>
         </div>
-        <div class="content">
+        <div ref="content" class="content">
             <!-- 创建 -->
             <div class="description" v-html="text"></div>
             <div class="main-box mt10">
@@ -120,13 +120,13 @@
                                     <div class="item-inner noflex">
                                         <div class="item-title label">搜索关键词<span class="red">*</span></div>
                                         <div class="item-input">
-                                            <input type="text" v-model="tags[0]" placeholder="请输入关键词1 如 女鞋">
+                                            <input type="text" @input="inputHandleFun" v-model="tags[0]" placeholder="请输入关键词1 如 女鞋">
                                         </div>
                                         <div class="item-input">
-                                            <input type="text" v-model="tags[1]" placeholder="请输入关键词2 如 尖头鞋">
+                                            <input type="text" @input="inputHandleFun" v-model="tags[1]" placeholder="请输入关键词2 如 尖头鞋">
                                         </div>
                                         <div class="item-input">
-                                            <input type="text" v-model="tags[2]" placeholder="请输入关键词3">
+                                            <input type="text" @input="inputHandleFun" v-model="tags[2]" placeholder="请输入关键词3">
                                         </div>
                                     </div>
                                 </div>
@@ -247,6 +247,12 @@ export default {
         'form.goodsPicUrl': 'validateGoodsPicUrl'
     },
     methods: {
+        inputHandleFun() {
+            this.$refs['content'].scrollTop = this.$refs['content'].scrollTop + 1;
+            this.$nextTick(() => {
+                this.$refs['content'].scrollTop = this.$refs['content'].scrollTop - 1;
+            });
+        },
         // 校验店铺名称
         validateStoreName(to, from) {
             this.validate.storeName = validateRequire(to, from);

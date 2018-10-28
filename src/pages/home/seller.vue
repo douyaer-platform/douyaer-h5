@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:11
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-08-20 17:36:00
+* @Last Modified time: 2018-10-28 16:05:06
 -->
 <template>
     <div class="page page-current">
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="remark">
                                     <span>备注</span>
-                                    <p>{{item.remark}}</p>
+                                    <p>&ensp;{{item.remark}}</p>
                                 </div>
                             </li>
                         </ul>
