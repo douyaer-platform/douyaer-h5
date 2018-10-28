@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-12 14:41:53
+* @Last Modified time: 2018-10-28 15:44:58
 -->
 <template>
     <div class="page page-current">
@@ -47,26 +47,32 @@
                 <div class="box-bd">
                     <div class="tmp-upload">
                         <ul class="tmp-list">
-                            <li>
+                            <!-- <li>
                                 <div class="tips">IP 地址图</div>
                                 <div class="upload">
                                     <img @click.stop="showImgFun" :src="userOrder.ipScreenshotUrl||defaultImg" alt="">
                                 </div>
-                            </li>
+                            </li> -->
                             <li>
-                                <div class="tips">搜索图</div>
+                                <div class="tips">关键词搜索图</div>
                                 <div class="upload">
                                     <img @click.stop="showImgFun" :src="userOrder.searchPicUrl||defaultImg" alt="">
                                 </div>
                             </li>
                             <li>
+                                <div class="tips">足迹图</div>
+                                <div class="upload">
+                                    <img @click.stop="showImgFun" :src="userOrder.enterStoreUrl||defaultImg" alt="">
+                                </div>
+                            </li>
+                            <!--  <li>
                                 <div class="tips">对比图一</div>
                                 <div class="upload">
                                     <img @click.stop="showImgFun" :src="userOrder.comparePicUrl1||defaultImg" alt="">
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
-                        <ul class="tmp-list">
+                        <!-- <ul class="tmp-list">
                             <li>
                                 <div class="tips">对比图二</div>
                                 <div class="upload">
@@ -79,14 +85,8 @@
                                     <img @click.stop="showImgFun" :src="userOrder.comparePicUrl3||defaultImg" alt="">
                                 </div>
                             </li>
-                            <li>
-                                <div class="tips">入店图</div>
-                                <div class="upload">
-                                    <img @click.stop="showImgFun" :src="userOrder.enterStoreUrl||defaultImg" alt="">
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="tmp-list">
+                        </ul> -->
+                        <!--  <ul class="tmp-list">
                             <li>
                                 <div class="tips">查看评价图</div>
                                 <div class="upload">
@@ -105,14 +105,14 @@
                                     <img @click.stop="showImgFun" :src="userOrder.detailPageUrl||defaultImg" alt="">
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
                         <ul class="tmp-list">
-                            <li>
+                            <!-- <li>
                                 <div class="tips">咨询图</div>
                                 <div class="upload">
                                     <img @click.stop="showImgFun" :src="userOrder.chatUrl||defaultImg" alt="">
                                 </div>
-                            </li>
+                            </li> -->
                             <li>
                                 <div class="tips">我的收藏图</div>
                                 <div class="upload">
@@ -125,27 +125,29 @@
                                     <img @click.stop="showImgFun" :src="userOrder.favoriteAttentionEntershopUrl||defaultImg" alt="">
                                 </div>
                             </li>
+                            <li></li>
                         </ul>
                         <template v-if="userOrder && userOrder.buyBackType === 1">
                             <ul class="tmp-list">
                                 <li>
-                                    <div class="tips">猜你喜欢图1</div>
+                                    <div class="tips">猜你喜欢图</div>
                                     <div class="upload">
                                         <img @click.stop="showImgFun" :src="userOrder.backBuyImg1||defaultImg" alt="">
                                     </div>
                                 </li>
-                                <li>
+                                <!--  <li>
                                     <div class="tips">猜你喜欢图2</div>
                                     <div class="upload">
                                         <img @click.stop="showImgFun" :src="userOrder.backBuyImg2||defaultImg" alt="">
                                     </div>
-                                </li>
+                                </li> -->
                                 <li>
                                     <div class="tips">详情页面图</div>
                                     <div class="upload">
                                         <img @click.stop="showImgFun" :src="userOrder.backBuyImg3||defaultImg" alt="">
                                     </div>
                                 </li>
+                                <li></li>
                             </ul>
                         </template>
                         <template v-if="userOrder && userOrder.buyBackType === 2">

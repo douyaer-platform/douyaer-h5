@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-13 23:35:00
+* @Last Modified time: 2018-10-28 14:39:13
 -->
 <template>
     <div class="page page-current">
@@ -94,9 +94,10 @@
                                 <div class="right">
                                     <span>拍摄示例</span>
                                     <div class="eg">
+                                        <img src="/static/image/eg1.png" alt="">
+                                    </div>
                                     </div>
                                 </div>
-                            </div>
                         </li>
                         <li class="upload-item">
                             <div class="hd">我的淘宝页面截图</div>
@@ -111,9 +112,10 @@
                                 <div class="right">
                                     <span>拍摄示例</span>
                                     <div class="eg">
+                                        <img src="/static/image/eg2.png" alt="">
+                                    </div>
                                     </div>
                                 </div>
-                            </div>
                         </li>
                         <li class="upload-item">
                             <div class="hd">淘宝个人资料截图</div>
@@ -128,9 +130,10 @@
                                 <div class="right">
                                     <span>拍摄示例</span>
                                     <div class="eg">
+                                        <img src="/static/image/eg3.png" alt="">
+                                    </div>
                                     </div>
                                 </div>
-                            </div>
                         </li>
                     </ul>
                 </div>

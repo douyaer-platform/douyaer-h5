@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-12 15:01:44
+* @Last Modified time: 2018-10-28 15:43:35
 -->
 <template>
     <div class="page page-current">
@@ -102,19 +102,22 @@
             <div class="main-box">
                 <div class="box-hd">
                     <span class="text">上传图片</span></div>
+                <div class="description" v-if="userOrder.buyBackType === 0" v-html="d1"></div>
+                <div class="description" v-if="userOrder.buyBackType === 1" v-html="d2"></div>
+                <div class="description" v-if="userOrder.buyBackType === 2" v-html="d3"></div>
                 <div class="box-bd">
                     <div class="tmp-upload">
                         <ul class="tmp-list">
-                            <li>
+                            <!-- <li>
                                 <div class="tips"><span class="red">*</span>IP 地址图</div>
                                 <div class="upload" @click="checkPhotoFun('tmp1')">
                                     <span v-if="tmp1.uploadResult==='progress'" class="percent">{{tmp1.progress}}<i>%</i></span>
                                     <img :src="tmp1.imageUrl" alt="">
                                     <input type="file" ref="tmp1" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp1')">
                                 </div>
-                            </li>
+                            </li> -->
                             <li>
-                                <div class="tips"><span class="red">*</span>搜索图</div>
+                                <div class="tips"><span class="red">*</span>关键词搜索图</div>
                                 <div class="upload" @click="checkPhotoFun('tmp2')">
                                     <span v-if="tmp2.uploadResult==='progress'" class="percent">{{tmp2.progress}}<i>%</i></span>
                                     <img :src="tmp2.imageUrl" alt="">
@@ -122,15 +125,31 @@
                                 </div>
                             </li>
                             <li>
+                                <div class="tips"><span class="red">*</span>足迹图</div>
+                                <div class="upload" @click="checkPhotoFun('tmp6')">
+                                    <span v-if="tmp6.uploadResult==='progress'" class="percent">{{tmp6.progress}}<i>%</i></span>
+                                    <img :src="tmp6.imageUrl" alt="">
+                                    <input type="file" ref="tmp6" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp6')">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="tips">我的收藏图</div>
+                                <div class="upload" @click="checkPhotoFun('tmp11')">
+                                    <span v-if="tmp11.uploadResult==='progress'" class="percent">{{tmp11.progress}}<i>%</i></span>
+                                    <img :src="tmp11.imageUrl" alt="">
+                                    <input type="file" ref="tmp11" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp11')">
+                                </div>
+                            </li>
+                            <!-- <li>
                                 <div class="tips"><span class="red">*</span>对比图一</div>
                                 <div class="upload" @click="checkPhotoFun('tmp3')">
                                     <span v-if="tmp3.uploadResult==='progress'" class="percent">{{tmp3.progress}}<i>%</i></span>
                                     <img :src="tmp3.imageUrl" alt="">
                                     <input type="file" ref="tmp3" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp3')">
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
-                        <ul class="tmp-list">
+                        <!-- <ul class="tmp-list">
                             <li>
                                 <div class="tips"><span class="red">*</span>对比图二</div>
                                 <div class="upload" @click="checkPhotoFun('tmp4')">
@@ -145,14 +164,6 @@
                                     <span v-if="tmp5.uploadResult==='progress'" class="percent">{{tmp5.progress}}<i>%</i></span>
                                     <img :src="tmp5.imageUrl" alt="">
                                     <input type="file" ref="tmp5" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp5')">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="tips"><span class="red">*</span>入店图</div>
-                                <div class="upload" @click="checkPhotoFun('tmp6')">
-                                    <span v-if="tmp6.uploadResult==='progress'" class="percent">{{tmp6.progress}}<i>%</i></span>
-                                    <img :src="tmp6.imageUrl" alt="">
-                                    <input type="file" ref="tmp6" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp6')">
                                 </div>
                             </li>
                         </ul>
@@ -181,24 +192,16 @@
                                     <input type="file" ref="tmp9" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp9')">
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
                         <ul class="tmp-list">
-                            <li>
+                            <!-- <li>
                                 <div class="tips">咨询图</div>
                                 <div class="upload" @click="checkPhotoFun('tmp10')">
                                     <span v-if="tmp10.uploadResult==='progress'" class="percent">{{tmp10.progress}}<i>%</i></span>
                                     <img :src="tmp10.imageUrl" alt="">
                                     <input type="file" ref="tmp10" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp10')">
                                 </div>
-                            </li>
-                            <li>
-                                <div class="tips">我的收藏图</div>
-                                <div class="upload" @click="checkPhotoFun('tmp11')">
-                                    <span v-if="tmp11.uploadResult==='progress'" class="percent">{{tmp11.progress}}<i>%</i></span>
-                                    <img :src="tmp11.imageUrl" alt="">
-                                    <input type="file" ref="tmp11" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp11')">
-                                </div>
-                            </li>
+                            </li> -->
                             <li>
                                 <div class="tips">关注店铺图</div>
                                 <div class="upload" @click="checkPhotoFun('tmp12')">
@@ -207,41 +210,44 @@
                                     <input type="file" ref="tmp12" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp12')">
                                 </div>
                             </li>
+                            <li></li>
+                            <li></li>
                         </ul>
                         <template v-if="userOrder && userOrder.buyBackType === 1">
                             <div class="bigtips">提示：回购订单必须三天后回购下单，以下图片请三天后上传</div>
                             <ul class="tmp-list">
                                 <li>
-                                    <div class="tips"><span class="red">*</span>猜你喜欢图1</div>
+                                    <div class="tips"><span class="red">*</span>猜你喜欢图</div>
                                     <div class="upload" @click="checkPhotoFun('tmp13')">
                                         <span v-if="tmp13.uploadResult==='progress'" class="percent">{{tmp13.progress}}<i>%</i></span>
                                         <img :src="tmp13.imageUrl" alt="">
                                         <input type="file" ref="tmp13" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp13')">
                                     </div>
                                 </li>
-                                <li>
+                                <!--  <li>
                                     <div class="tips"><span class="red">*</span>猜你喜欢图2</div>
                                     <div class="upload" @click="checkPhotoFun('tmp14')">
                                         <span v-if="tmp14.uploadResult==='progress'" class="percent">{{tmp14.progress}}<i>%</i></span>
                                         <img :src="tmp14.imageUrl" alt="">
                                         <input type="file" ref="tmp14" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp14')">
                                     </div>
-                                </li>
+                                </li> -->
                                 <li>
-                                    <div class="tips"><span class="red">*</span>详情页面图</div>
+                                    <div class="tips"><span class="red">*</span>足迹图</div>
                                     <div class="upload" @click="checkPhotoFun('tmp15')">
                                         <span v-if="tmp15.uploadResult==='progress'" class="percent">{{tmp15.progress}}<i>%</i></span>
                                         <img :src="tmp15.imageUrl" alt="">
                                         <input type="file" ref="tmp15" name="multipartFiles" accept="image/*" @change="uploadPhotoFun('tmp15')">
                                     </div>
                                 </li>
+                                <li></li>
                             </ul>
                         </template>
                         <template v-if="userOrder && userOrder.buyBackType === 2">
                             <div class="bigtips">提示：以下图片请第二天后上传</div>
                             <ul class="tmp-list">
                                 <li>
-                                    <div class="tips"><span class="red">*</span>手淘首页入店</div>
+                                    <div class="tips"><span class="red">*</span>关键词搜索图</div>
                                     <div class="upload" @click="checkPhotoFun('tmp16')">
                                         <span v-if="tmp16.uploadResult==='progress'" class="percent">{{tmp16.progress}}<i>%</i></span>
                                         <img :src="tmp16.imageUrl" alt="">
@@ -249,7 +255,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="tips"><span class="red">*</span>详情页面图</div>
+                                    <div class="tips"><span class="red">*</span>足迹图</div>
                                     <div class="upload" @click="checkPhotoFun('tmp17')">
                                         <span v-if="tmp17.uploadResult==='progress'" class="percent">{{tmp17.progress}}<i>%</i></span>
                                         <img :src="tmp17.imageUrl" alt="">
@@ -389,7 +395,10 @@ export default {
                 uploadResult: 'wait',
                 progress: '0'
             },
-            isShow: false
+            isShow: false,
+            d1: window.config.mark.seller.d1,
+            d2: window.config.mark.seller.d2,
+            d3: window.config.mark.seller.d3
         };
     },
     computed: {
@@ -644,51 +653,51 @@ export default {
          */
         setSubmitFun() {
             this.form.hasSubmit = 1;
-            if (!this.form.ipScreenshotUrl) {
-                // $.toast('请上传IP 地址图');
-                // return;
-                this.form.hasSubmit = 0;
-            }
+            // if (!this.form.ipScreenshotUrl) {
+            //     // $.toast('请上传IP 地址图');
+            //     // return;
+            //     this.form.hasSubmit = 0;
+            // }
             if (!this.form.searchPicUrl) {
                 // $.toast('请上传搜索图');
                 // return;
                 this.form.hasSubmit = 0;
             }
-            if (!this.form.comparePicUrl1) {
-                // $.toast('请上传对比图一');
-                // return;
-                this.form.hasSubmit = 0;
-            }
-            if (!this.form.comparePicUrl2) {
-                // $.toast('请上传对比图二');
-                // return;
-                this.form.hasSubmit = 0;
-            }
-            if (!this.form.comparePicUrl3) {
-                // $.toast('请上传对比图三');
-                // return;
-                this.form.hasSubmit = 0;
-            }
+            // if (!this.form.comparePicUrl1) {
+            //     // $.toast('请上传对比图一');
+            //     // return;
+            //     this.form.hasSubmit = 0;
+            // }
+            // if (!this.form.comparePicUrl2) {
+            //     // $.toast('请上传对比图二');
+            //     // return;
+            //     this.form.hasSubmit = 0;
+            // }
+            // if (!this.form.comparePicUrl3) {
+            //     // $.toast('请上传对比图三');
+            //     // return;
+            //     this.form.hasSubmit = 0;
+            // }
             if (!this.form.enterStoreUrl) {
                 // $.toast('请上传入店图');
                 // return;
                 this.form.hasSubmit = 0;
             }
-            if (!this.form.viewRemarkUrl) {
-                // $.toast('请上传查看评价图');
-                // return;
-                this.form.hasSubmit = 0;
-            }
-            if (!this.form.viewBuyershowUrl) {
-                // $.toast('请上传查看买家秀图');
-                // return;
-                this.form.hasSubmit = 0;
-            }
-            if (!this.form.detailPageUrl) {
-                // $.toast('请上传详情页面图');
-                // return;
-                this.form.hasSubmit = 0;
-            }
+            // if (!this.form.viewRemarkUrl) {
+            //     // $.toast('请上传查看评价图');
+            //     // return;
+            //     this.form.hasSubmit = 0;
+            // }
+            // if (!this.form.viewBuyershowUrl) {
+            //     // $.toast('请上传查看买家秀图');
+            //     // return;
+            //     this.form.hasSubmit = 0;
+            // }
+            // if (!this.form.detailPageUrl) {
+            //     // $.toast('请上传详情页面图');
+            //     // return;
+            //     this.form.hasSubmit = 0;
+            // }
             if (this.userOrder && this.userOrder.needAlitm === 1) {
                 if (!this.form.chatUrl) {
                     // $.toast('请上传咨询图');
@@ -697,7 +706,7 @@ export default {
                 }
             }
             if (this.userOrder && this.userOrder.buyBackType === 1) {
-                if (!this.form.backBuyImg1 || !this.form.backBuyImg2 || !this.form.backBuyImg3) {
+                if (!this.form.backBuyImg1 || !this.form.backBuyImg3) {
                     // $.toast('加购物车');
                     // return;
                     this.form.hasSubmit = 0;
