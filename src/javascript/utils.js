@@ -2,7 +2,7 @@
  * @Author: weiberzeng
  * @Date:   2018-06-04 19:44:48
  * @Last Modified by:   weiberzeng
- * @Last Modified time: 2018-09-02 00:34:36
+ * @Last Modified time: 2018-10-28 16:01:59
  */
 
 /**
@@ -26,13 +26,13 @@ export function setBuyBackType(type) {
     let str = '';
     switch (type) {
         case 0:
-            str = '无需回购';
+            str = window.config.mark.seller.k1;
             break;
         case 1:
-            str = '加购物车后3-5天内回购';
+            str = window.config.mark.seller.k2;
             break;
         case 2:
-            str = '打标回购';
+            str = window.config.mark.seller.k3;
             break;
     }
     return str;

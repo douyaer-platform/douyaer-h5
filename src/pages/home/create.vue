@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-24 15:46:18
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-28 14:03:00
+* @Last Modified time: 2018-10-28 16:00:44
 -->
 <template>
     <div class="page page-current">
@@ -137,9 +137,9 @@
                                         <div class="item-title label">回购类型</div>
                                         <div class="item-input">
                                             <el-radio-group v-model="form.buyBackType">
-                                                <el-radio :label="0">无需回购</el-radio>
-                                                <el-radio :label="1">加购物车后3-5内回购，费用＋2</el-radio>
-                                                <el-radio :label="2">打标回购+2</el-radio>
+                                                <el-radio :label="0">{{k1}}</el-radio>
+                                                <el-radio :label="1">{{k2}}</el-radio>
+                                                <el-radio :label="2">{{k3}}</el-radio>
                                             </el-radio-group>
                                         </div>
                                     </div>
@@ -214,7 +214,10 @@ export default {
                 goodsPicUrl: false
             },
             text: window.config.mark.home.t3,
-            key1: window.config.mark.home.key1
+            key1: window.config.mark.home.key1,
+            k1: window.config.mark.buyer.k1,
+            k2: window.config.mark.buyer.k2,
+            k3: window.config.mark.buyer.k3
         };
     },
     computed: {

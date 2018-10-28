@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-08-02 22:50:50
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-28 15:44:58
+* @Last Modified time: 2018-10-28 15:50:49
 -->
 <template>
     <div class="page page-current">
@@ -142,7 +142,7 @@
                                     </div>
                                 </li> -->
                                 <li>
-                                    <div class="tips">详情页面图</div>
+                                    <div class="tips">足迹图</div>
                                     <div class="upload">
                                         <img @click.stop="showImgFun" :src="userOrder.backBuyImg3||defaultImg" alt="">
                                     </div>
@@ -153,13 +153,13 @@
                         <template v-if="userOrder && userOrder.buyBackType === 2">
                             <ul class="tmp-list">
                                 <li>
-                                    <div class="tips">手淘首页入店</div>
+                                    <div class="tips">关键词搜索图</div>
                                     <div class="upload">
                                         <img @click.stop="showImgFun" :src="userOrder.backBuyImg4||defaultImg" alt="">
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="tips">详情页面图</div>
+                                    <div class="tips">足迹图</div>
                                     <div class="upload">
                                         <img @click.stop="showImgFun" :src="userOrder.backBuyImg5||defaultImg" alt="">
                                     </div>
