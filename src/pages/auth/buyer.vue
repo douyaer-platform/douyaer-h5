@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:39
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-13 23:32:43
+* @Last Modified time: 2018-11-24 13:53:47
 -->
 <template>
     <div class="page page-current">
@@ -11,7 +11,7 @@
             <router-link to="/uc/default" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
             <h1 class="title">商家认证</h1>
         </header>
-        <div class="content">
+        <div class="content" ref="content">
             <div class="description">(1)本平台是基于亲友所搭建的一个互助平台，不以盈利为目的，不收取任何保证金！
                 <br>(2)每个人只能注册一个帐号，每个帐号智能绑定一个淘宝店铺，只能发布绑定淘宝店铺的宝贝，如有违反，一律封号处理。
                 <br>(3)请确保信息真实有效，确保审核通过。</div>
@@ -24,7 +24,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">姓名</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.realName" placeholder="请输入真实姓名" autofocus>
+                                            <input @input="inputHandleFun" type="text" :disabled="isAudit" v-model="form.realName" placeholder="请输入真实姓名" autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -34,7 +34,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">身份证号</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.identifyNo" maxlength="18" placeholder="请输入身份证号">
+                                            <input @input="inputHandleFun" type="text" :disabled="isAudit" v-model="form.identifyNo" maxlength="18" placeholder="请输入身份证号">
                                         </div>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">旺旺名</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.alitm" placeholder="请输入旺旺名">
+                                            <input @input="inputHandleFun" type="text" :disabled="isAudit" v-model="form.alitm" placeholder="请输入旺旺名">
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">店铺名称</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入店铺名称">
+                                            <input @input="inputHandleFun" type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入店铺名称">
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">店铺链接</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.storeUrl" placeholder="请输入店铺链接">
+                                            <input @input="inputHandleFun" type="text" :disabled="isAudit" v-model="form.storeUrl" placeholder="请输入店铺链接">
                                         </div>
                                     </div>
                                 </div>
@@ -153,6 +153,12 @@ export default {
         }
     },
     methods: {
+        inputHandleFun() {
+            this.$refs['content'].scrollTop = this.$refs['content'].scrollTop + 1;
+            this.$nextTick(() => {
+                this.$refs['content'].scrollTop = this.$refs['content'].scrollTop - 1;
+            });
+        },
         validateRealName(to, from) {
             this.validate.realName = validateRequire(to, from);
         },

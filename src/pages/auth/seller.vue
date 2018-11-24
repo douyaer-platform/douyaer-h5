@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 14:35:32
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-28 14:39:13
+* @Last Modified time: 2018-11-24 13:54:56
 -->
 <template>
     <div class="page page-current">
@@ -11,7 +11,7 @@
             <router-link to="/uc/default" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
             <h1 class="title">刷手认证</h1>
         </header>
-        <div class="content">
+        <div class="content" ref="content">
             <div class="description">(1)本平台是基于亲友所搭建的一个互助平台，不以盈利为目的，不收取任何保证金！
                 <br> (2)在本平台做任务，每个月能赚300-400元，不像网络骗局所说的月入上万！
                 <br> (3)请确保信息真实有效，确保审核通过。
@@ -38,7 +38,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">IP地址</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.ip" maxlength="15" placeholder="请输入真实 IP" autofocus>
+                                            <input @input="inputHandleFun" type="text" :disabled="isAudit" v-model="form.ip" maxlength="15" placeholder="请输入真实 IP" autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">收货地址</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.address" placeholder="请输入详细地址">
+                                            <input @input="inputHandleFun" type="text" :disabled="isAudit" v-model="form.address" placeholder="请输入详细地址">
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">淘宝会员名</div>
                                         <div class="item-input">
-                                            <input type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝会员名">
+                                            <input @input="inputHandleFun" type="text" :disabled="isAudit" v-model="form.taobaoAccount" placeholder="请输入淘宝会员名">
                                         </div>
                                     </div>
                                 </div>
@@ -251,6 +251,12 @@ export default {
         },
         validateAlipayScreenshotUrl(to, from) {
             this.validate.alipayScreenshotUrl = validateRequire(to, from);
+        },
+        inputHandleFun() {
+            this.$refs['content'].scrollTop = this.$refs['content'].scrollTop + 1;
+            this.$nextTick(() => {
+                this.$refs['content'].scrollTop = this.$refs['content'].scrollTop - 1;
+            });
         },
         /**
          * @Author      weiberZeng

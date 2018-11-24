@@ -3,7 +3,7 @@
 * @Author: weiberzeng
 * @Date:   2018-04-25 15:26:19
 * @Last Modified by:   weiberzeng
-* @Last Modified time: 2018-10-13 22:27:06
+* @Last Modified time: 2018-11-24 13:58:11
 -->
 <template>
     <div class="page page-current" v-if="!success">
@@ -11,7 +11,7 @@
             <router-link to="/uc/coin" class="button button-link button-nav pull-left"><span class="icon icon-left"></span></router-link>
             <h1 class="title">充值</h1>
         </header>
-        <div class="content gray">
+        <div class="content gray" ref="content">
             <div class="description wihte" v-html="text"></div>
             <div class="main-box mt10">
                 <div class="box-bd">
@@ -23,7 +23,7 @@
                                         <div class="item-title label">充值金额</div>
                                         <span class="unit">￥</span>
                                         <div class="item-input">
-                                            <input type="number" v-model="form.totalFee" placeholder="输入充值金额" autofocus>
+                                            <input @input="inputHandleFun" type="number" v-model="form.totalFee" placeholder="输入充值金额" autofocus>
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">微信名</div>
                                         <div class="item-input">
-                                            <input type="text" v-model="form.wechatName" placeholder="请输入微信名">
+                                            <input @input="inputHandleFun" type="text" v-model="form.wechatName" placeholder="请输入微信名">
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">备注</div>
                                         <div class="item-input">
-                                            <textarea v-model="form.remark" type="textarea" :rows="3" placeholder="备注"></textarea>
+                                            <textarea @input="inputHandleFun" v-model="form.remark" type="textarea" :rows="3" placeholder="备注"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -149,6 +149,12 @@ export default {
         // 校验微信名必填
         validateWechatName(to, from) {
             this.validate.wechatName = validateRequire(to, from);
+        },
+        inputHandleFun() {
+            this.$refs['content'].scrollTop = this.$refs['content'].scrollTop + 1;
+            this.$nextTick(() => {
+                this.$refs['content'].scrollTop = this.$refs['content'].scrollTop - 1;
+            });
         },
         /**
          * @Author      weiberZeng
